@@ -1,5 +1,8 @@
 package com.example.demo.dto;
 
+import lombok.Data;
+
+@Data
 public class CompanyToResumeBookmarkDto {
 	private int bookmarkNum; // 1. 북마크 고유 번호
 	private String companyId; // 2. 기업 ID (FK)
