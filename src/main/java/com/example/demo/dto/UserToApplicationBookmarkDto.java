@@ -1,5 +1,7 @@
 package com.example.demo.dto;
+import lombok.Data;
 
+@Data
 public class UserToApplicationBookmarkDto {
 	private int bookmarkNum; // 1. 북마크 고유 번호
 	private String userId; // 2. 사용자 ID (FK)
