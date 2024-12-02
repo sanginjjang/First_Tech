@@ -1,5 +1,7 @@
 package com.example.demo.dto;
+import lombok.Data;
 
+@Data
 public class BoardDto {
 	private int boardNum; // 1. 게시판 고유 번호
 	private String boardTitle; // 2. 제목
