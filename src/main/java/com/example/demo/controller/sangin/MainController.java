@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	@RequestMapping("/")
 	String main() {
-		return "sangin/main";
+		return "sangin/sum";
 	}
 	@RequestMapping("/applicationsListForm")
 	String applicationListForm(){

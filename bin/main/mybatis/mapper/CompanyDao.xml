@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ICompanyDao">
+	<select id="getCompanyList" resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys ORDER BY annualRevenue DESC;
+	</select>
+
+	<select id="getCompanyListPaging" resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys
+		ORDER BY annualRevenue DESC
+		LIMIT #{startNum}, #{amount};
+	</select>
+
+	<select id="getCount" resultType="_int">
+		SELECT COUNT(*) FROM companys
+	</select>
+	
+	<select id="getCompany" resultType="com.example.demo.dto.CompanyDto"> 
+		SELECT * FROM companys WHERE companyName = #{companyName};
+	</select>
+	
+	<select id="getCompanyRating" resultType="com.example.demo.dto.RatingDto">
+		SELECT * FROM ratings WHERE companyId = #{companyId}
+	</select>
+</mapper>
