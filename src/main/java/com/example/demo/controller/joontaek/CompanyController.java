@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.joontaek;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class CompanyController {
 		model.addAttribute("endPageNum",endPageNum);
 		
 		System.err.println(companys);
-		return "/taek/companyInfo";
+		return "taek/companyInfo";
 	}
 	
 	@RequestMapping("/companyDetail/{companyName}")
@@ -51,7 +51,7 @@ public class CompanyController {
 		model.addAttribute("rating",rating);
 		model.addAttribute("company",company);
 		
-		return "/taek/companyDetail";
+		return "taek/companyDetail";
 	}
 	
 	
