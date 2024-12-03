@@ -2,8 +2,73 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.example.demo.dao.sangin.IApplicationDao">
-  <select id="getApplicationList" resultType="com.example.demo.dto.ApplicationDto">
-  select * from Applications;
-  </select>
-  </mapper>
+<mapper namespace="com.example.demo.dao.sangin.IApplicationDao">
+	<select id="getApplicationList1"
+		resultType="com.example.demo.dto.ApplicationDto">
+		<!-- Just 전체 공고 리스트 -->
+		select * from Applications;
+	</select>
+	<select id="getApplicationList"
+		resultType="com.example.demo.dto.ApplicationDto">
+		<!-- 유저의 북마크 상태를 포함한 전체 공고 리스트 -->
+		SELECT
+		a.applicationNum,
+		a.applicationName,
+		a.companyId,
+		a.workingArea,
+		a.career,
+		a.education,
+		a.employmentType,
+		a.salary,
+		a.deadlineDate,
+		CASE
+		WHEN b.bookmarkNum IS NOT
+		NULL THEN 1 -- 북마크된 상태
+		ELSE 0 -- 북마크되지 않은 상태
+		END AS isBookmarked
+		FROM
+		applications a
+		LEFT JOIN
+		usertoapplicationbookmarks b
+		ON
+		a.applicationNum
+		= b.applicationNum AND
+		b.userId = #{userId};
+	</select>
+	<insert id="addHeart">
+		INSERT INTO
+		usertoapplicationbookmarks (userId,
+		applicationNum)
+		VALUES (#{userId},
+		#{applicationNum});
+	</insert>
+	<select id="getBookmarkedCompany" resultType="String">
+		SELECT companyId
+		FROM UserToCompanyBookmarks
+		WHERE userId = #{userId}
+	</select>
+	<select id="getApplication"
+		resultType="com.example.demo.dto.ApplicationDto">
+		select * from applications where applicationNum = ${applicationNum};
+	</select>
+	<delete id="removeHeart">
+		DELETE FROM usertoapplicationbookmarks
+		WHERE userId =
+		#{userId}
+		AND applicationNum = #{applicationNum};
+	</delete>
+	<insert id="addStar">
+		INSERT INTO
+		usertocompanybookmarks (userId,
+		companyId )
+		VALUES (#{userId},
+		#{companyId });
+	</insert>
+	<delete id="removeStar">
+		DELETE FROM usertocompanybookmarks
+		WHERE userId =
+		#{userId}
+		AND companyId = #{companyId };
+	</delete>
+
+</mapper>

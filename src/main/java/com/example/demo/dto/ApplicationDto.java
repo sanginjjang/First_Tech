@@ -16,4 +16,6 @@ public class ApplicationDto {
 	private String workingArea; // 10. 근무 지역
 	private String employmentType; // 11. 고용 형태
 	private int roleId; // 12. 직무 ID (FK)
+	private int isBookmarked; // 13. 북마크 상태 (1: 북마크됨, 0: 북마크되지 않음)
+	private String schedule = "9:00 ~ 18:00";
 }
