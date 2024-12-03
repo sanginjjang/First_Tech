@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.RatingDto;
@@ -34,6 +36,7 @@ public class CompanyController {
 		model.addAttribute("companys",companys);
 		model.addAttribute("currentPageNum",pageNum);
 		model.addAttribute("endPageNum",endPageNum);
+
 		
 		
 		return "taek/companyInfo";
@@ -54,7 +57,21 @@ public class CompanyController {
 		return "taek/companyDetail";
 	}
 	
-//	@RequestMapping("bookmark")
+	@PostMapping("bookmark")
+	public String bookMark(@RequestParam("userId")String userId, @RequestParam("companyId")String companyId) {
+		
+		System.out.println(userId);
+		System.out.println(companyId);
+		System.out.println(userId);
+		System.out.println(companyId);
+		System.out.println(userId);
+		System.out.println(companyId);
+		System.out.println(userId);
+		System.out.println(companyId);
+		System.out.println(userId);
+		System.out.println(companyId);
+		return "";
+	}
 	
 	
 }
