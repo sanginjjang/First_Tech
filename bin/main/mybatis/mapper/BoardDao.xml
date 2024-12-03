@@ -3,7 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.dao.IBoardDao">
+=======
+<mapper namespace="com.example.demo.dao.taek.IBoardDao">
+>>>>>>> dca8f9739ffc8c78a3a9b2925811873eb3bfb1ce
 
 
 	<select id="getBoardCount" resultType="_int">
