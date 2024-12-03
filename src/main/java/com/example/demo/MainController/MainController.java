@@ -8,7 +8,7 @@ public class MainController {
 	@RequestMapping("/")
 	String main() {
 		// 모두가 같이 쓰는 즐거운 메인 페이지 ^^
-		return "main";
+		return "/sangin/sum";
 	}
 
 }
