@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"> 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +55,8 @@
             padding: 20px;
             box-sizing: border-box;
             overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
+            position: relative;
+            flex-direction: column; /* 세로 방향으로 레이아웃 */
         }
 
         table {
@@ -94,16 +96,26 @@
             justify-content: center;
             align-items: center;
         }
-        
-        .heart {
-            cursor: pointer;
-            color: gray;
-            transition: color 0.3s;
+
+        /* 게시글 작성 버튼 스타일 */
+        .write-button {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            position: absolute;
+            top: 10px; /* 테이블 상단에 위치 */
+            right: 10px; /* 테이블 오른쪽에 위치 */
         }
 
-        
-        .heart.bookmarked {
-            color: red;
+        /* 테이블 상단 오른쪽에 버튼을 위치시키는 컨테이너 */
+        .button-container {
+            display: flex;
+            justify-content: flex-end; /* 오른쪽 정렬 */
+            width: 100%;
         }
     </style>
 </head>
@@ -132,88 +144,60 @@
             </div>
         </div>
     </nav>
-    
-    <section>		
+
+    <section>
+        <div class="button-container">
+            <a href="/b/boardWriteForm" class="write-button">게시글 작성</a>
+        </div>
+
         <table>
             <thead>
                 <tr>
-                    <th>기업 이름</th>
-                    <th>홈페이지 주소</th>
-                    <th>사원 수</th>
-                    <th>총 매출액</th>
-                    <th>♥</th>
+                    <th>제목</th>
+                    <th>댓글 수</th>
+                    <th>조회수</th>
+                    <th>작성자</th>
+                    <th>작성날짜</th>
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="companys : ${companys}">
+                <th:block th:each="board : ${boardList}">
                     <tr>
-                       <td><a th:href="@{/c/companyDetail/{companyName}(companyName=${companys.companyName})}"
-  						 th:text="${companys.companyName}"></a></td>
-                        <td th:text="${companys.companyEmail}"></td>
-                        <td th:text="${companys.employees}"></td>
-                        <td th:text="${companys.annualRevenue}"></td>
-                        <td>
-                        <span class="heart" 
-						          th:data-company-id="${companys.companyId}" 
-						          th:data-user-id="${session.logId}">♥</span>
-                        </td>
+                        <td><a th:href="@{/b/boardDetail/{boardNum}(boardNum=${board.boardNum})}"
+                               th:text="${board.boardTitle}"></a></td>
+                               
+                        <td th:text="${board.commentCount}"></td>
+                        <td th:text="${board.views}"></td>
+                        <td th:text="${board.boardWriter}"></td>
+                        <td th:text="${board.createdDate}"></td>
                     </tr>
                 </th:block>
                 <tr>
-					<td colspan="6">
-					<th:block th:if="${currentPageNum > 1}">
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
-						</th:block>
-						
-						<th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
-							<span th:if="${currentPageNum == pageNum}"> <a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"><b th:text="${pageNum}"></b></a>&nbsp;&nbsp;
-							</span>
-							<span th:if="${currentPageNum != pageNum}"> 
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a>&nbsp;&nbsp;
-							</span>
-						</th:block>
-						
-						
-						
-						<th:block th:if="${currentPageNum < endPageNum}">
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
-						</th:block>
-					</td>
-				</tr>
+                    <td colspan="6">
+                        <th:block th:if="${currentPageNum > 1}">
+                            <a th:href="@{/b/board/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+                        </th:block>
+
+                        <th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+                            <span th:if="${currentPageNum == pageNum}">
+                                <a th:href="@{/b/board/{pageNum}(pageNum=${pageNum})}">
+                                    <b th:text="${pageNum}"></b>
+                                </a>&nbsp;&nbsp;
+                            </span>
+                            <span th:if="${currentPageNum != pageNum}">
+                                <a th:href="@{/b/board/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a>&nbsp;&nbsp;
+                            </span>
+                        </th:block>
+
+                        <th:block th:if="${currentPageNum < endPageNum}">
+                            <a th:href="@{/b/board/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+                        </th:block>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </section>
-        
     <footer>Footer</footer>
 </body>
-
- <script>
- 
- $(document).ready(function() {
-     $('.heart').click(function() {
-         var companyId = $(this).data('company-id');
-         var userId = $(this).data('user-id');
-
-         // AJAX 요청
-         $.ajax({
-             url: '/c/bookmark', // 서버의 URL로 수정
-             method: 'POST',
-             data: {
-                 companyId: companyId,
-                 userId: userId
-             },
-             success: function(response) {
-                 console.log('북마크 저장 성공!');
-                 $(this).toggleClass('bookmarked');
-             },
-             error: function(xhr, status, error) {
-                 // 오류 처리
-                 console.log('에러 발생:', error);
-             }
-         });
-     });
- });
-</script>
 
 </html>
