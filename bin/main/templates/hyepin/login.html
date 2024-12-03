@@ -128,11 +128,12 @@
             <div><button class="memberBtn" id="companyMemberBtn">기업회원</button></div>
         </div>
 
-        <form id="loginForm" action="" method="POST">
+        <form id="loginForm">
             <div class="inputForm">
-                <input name="id" class="formStyle" type="text" th:value="${id}" placeholder="ID를 입력하세요"> <br>
-                <input name="pw" class="formStyle" type="text" placeholder="PW를 입력하세요"> <br>
-                <input class="formStyle" type="submit" value="로그인" onclick="check(event)">
+                <input name="userId" class="formStyle" type="text" th:value="${id}" placeholder="ID를 입력하세요"> <br>
+                <input name="userPassword" class="formStyle" type="text" placeholder="PW를 입력하세요"> <br>
+                
+                <input class="formStyle" type="button" value="로그인" onclick="userLogin()">
             </div>
         </form>
 
@@ -184,10 +185,51 @@
         selectedMember = "company";
     });
 
-	function check(event){
+    function check(event){
+    	if(selectedMember == null){
+    		event.preventDefault();
+    		alert('개인회원 또는 기업회원 중 하나를 선택하세요.');
+    		//const button = document.getElementById("myButton");  // 특정 버튼을 찾습니다.
+    	}
+    }
+    
+    function userLogin(){
+		const form = document.getElementById("loginForm");
+		const formData = new FormData(form);
+		
+		const loginAjax = document.getElementById("loginAjax");
+		
+		
 		if(selectedMember == null){
-			event.preventDefault();
 			alert('개인회원 또는 기업회원 중 하나를 선택하세요.');
+		}else if(selectedMember === "user"){
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				if(xhr.status === 200){
+            		const response = xhr.responseText;
+            		if(response === "fail"){
+            			alert("아이디 또는 비밀번호가 틀렸습니다.");
+            		}else if(response === "success"){
+            			window.location.href = "/";
+            		}else if(response === "ready"){
+            			alert("아이디와 비밀번호를 입력하세요");
+            		}
+            	}else{
+            		alert("서버오류 발생");
+            	}
+            }
+            
+            xhr.open("POST", "/hyepin/userLogin");  
+            //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(formData);
+			
+		}else if(selectedMember === "company"){
+			/*
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				
+			}	
+			*/
 		}
 	}
 

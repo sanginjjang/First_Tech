@@ -38,5 +38,18 @@ public class UserService implements IUserService {
 		return user;
 	}
 
+	@Override
+	public boolean idCheck(UserDto userDto) {
+		boolean idCheck = false;
+		
+		UserDto user = userDao.getUser(userDto.getUserId());
+		if(user != null) {
+			if(user.getUserPassword().equals(userDto.getUserPassword())) {
+				idCheck = true;
+			}
+		}
+		return idCheck;
+	}
+
 	
 }
