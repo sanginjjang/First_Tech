@@ -48,39 +48,74 @@
             width: 100%;
             height: 70%;
             background-color: lightgray;
-            font-size: 20px; /* 글자 크기를 줄여서 테이블 내용이 잘 보이도록 */
+            font-size: 20px;
+            padding: 20px;
+            box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
+            flex-direction: column; /* 세로로 배치 */
+            overflow-y: auto;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        /* 폼 스타일 */
+        .form-container {
             background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
-            padding: 15px;
+        .form-container h2 {
             text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 24px;
             color: #333;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        tr:hover {
-            background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* 버튼 스타일 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
         }
 
         footer {
@@ -102,7 +137,7 @@
     <nav>
         <div id="nav1">
             <div>
-                채용정보
+                <a href="/applicationsListForm">채용공고</a>
             </div>
             <div>
                 <a href="/c/companyInfo/1">기업 정보</a>
@@ -117,11 +152,31 @@
                 관심공고
             </div>
             <div>
-                커뮤니티
+                <a href="/b/board/1">커뮤니티</a>
             </div>
         </div>
     </nav>
-    <section>DashBoard</section>
+    
+    <section>
+        <div class="form-container">
+            <h2>게시글 작성</h2>
+            <form action="/b/boardWrite" method="POST">
+                <div class="form-group">
+                    <label for="boardTitle">제목</label>
+                    <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="boardContent">내용</label>
+                    <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요" required></textarea>
+                </div>
+
+                
+                <button type="submit" class="submit-btn">작성하기</button>
+            </form>
+        </div>
+    </section>
+        
     <footer>Footer</footer>
 </body>
 

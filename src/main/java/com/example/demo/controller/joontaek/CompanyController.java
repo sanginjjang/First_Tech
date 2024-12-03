@@ -35,7 +35,7 @@ public class CompanyController {
 		model.addAttribute("currentPageNum",pageNum);
 		model.addAttribute("endPageNum",endPageNum);
 		
-		System.err.println(companys);
+		
 		return "taek/companyInfo";
 	}
 	
@@ -53,6 +53,8 @@ public class CompanyController {
 		
 		return "taek/companyDetail";
 	}
+	
+//	@RequestMapping("bookmark")
 	
 	
 }
