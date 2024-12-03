@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.dao.taek;
 
 import java.util.List;
 
@@ -20,4 +20,5 @@ public interface IBoardDao {
 	public void boardViews(@Param("views")int views, @Param("boardNum")int boardNum);
 	
 	public void regBoard(BoardDto board);
+	
 }

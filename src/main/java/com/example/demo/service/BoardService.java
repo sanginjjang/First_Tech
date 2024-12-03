@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.IBoardDao;
+import com.example.demo.dao.taek.IBoardDao;
 import com.example.demo.dto.BoardDto;
 import com.example.demo.dto.BoardViewDto;
 

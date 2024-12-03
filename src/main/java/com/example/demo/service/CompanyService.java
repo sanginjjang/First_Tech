@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.ICompanyDao;
+import com.example.demo.dao.taek.ICompanyDao;
 import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.RatingDto;
 
