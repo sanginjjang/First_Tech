@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"> 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,6 +94,17 @@
             justify-content: center;
             align-items: center;
         }
+        
+        .heart {
+            cursor: pointer;
+            color: gray;
+            transition: color 0.3s;
+        }
+
+        
+        .heart.bookmarked {
+            color: red;
+        }
     </style>
 </head>
 
@@ -102,7 +113,7 @@
     <nav>
         <div id="nav1">
             <div>
-                채용정보
+                <a href="/sangin/applicationsForm">채용공고</a>
             </div>
             <div>
                 <a href="/c/companyInfo/1">기업 정보</a>
@@ -117,7 +128,7 @@
                 관심공고
             </div>
             <div>
-                커뮤니티
+                <a href="/b/board/1">커뮤니티</a>
             </div>
         </div>
     </nav>
@@ -141,7 +152,11 @@
                         <td th:text="${companys.companyEmail}"></td>
                         <td th:text="${companys.employees}"></td>
                         <td th:text="${companys.annualRevenue}"></td>
-                        <td>♡</td>
+                        <td>
+                        <span class="heart" 
+						          th:data-company-id="${companys.companyId}" 
+						          th:data-user-id="${session.logId}">♥</span>
+                        </td>
                     </tr>
                 </th:block>
                 <tr>
@@ -172,5 +187,33 @@
         
     <footer>Footer</footer>
 </body>
+
+ <script>
+ 
+ $(document).ready(function() {
+     $('.heart').click(function() {
+         var companyId = $(this).data('company-id');
+         var userId = $(this).data('user-id');
+
+         // AJAX 요청
+         $.ajax({
+             url: '/c/bookmark', // 서버의 URL로 수정
+             method: 'POST',
+             data: {
+                 companyId: companyId,
+                 userId: userId
+             },
+             success: function(response) {
+                 console.log('북마크 저장 성공!');
+                 $(this).toggleClass('bookmarked');
+             },
+             error: function(xhr, status, error) {
+                 // 오류 처리
+                 console.log('에러 발생:', error);
+             }
+         });
+     });
+ });
+</script>
 
 </html>

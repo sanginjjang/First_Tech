@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.IUserDao;
+import com.example.demo.dao.hyepin.IUserDao;
 import com.example.demo.dto.UserDto;
 
 @Service
