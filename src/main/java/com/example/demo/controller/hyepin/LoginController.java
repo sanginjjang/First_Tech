@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/hyepin")
 public class LoginController {
-	
-	//여기 아이디 찾기에서 선택해온 값 연동해서 보여줘야 하거든?
+
 	@RequestMapping("/login")
 	public void login() {
 	}
@@ -29,11 +28,7 @@ public class LoginController {
 		return "main";
 	}
 	
-	@PostMapping("/companyLogin")
-	public String companyLogin() {
-		System.out.println("companyLogin");
-		return "main";
-	}
+	
 	
 	
 }

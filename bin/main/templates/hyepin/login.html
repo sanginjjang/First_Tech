@@ -119,7 +119,7 @@
         <div id="logo"> 로고 </div>
         <div class="login">
             <span><a href="/">홈으로</a></span>
-            <span id="home"> <a href="/hyepin/companyMain"> 기업 홈</a></span>
+            <span id="home"> <a href=""> 기업 홈</a></span>
         </div>
     </header>
     <section>
@@ -170,9 +170,11 @@
     });
 
     companyMemberBtn.addEventListener('click', event =>{
-        loginForm.action = '/hyepin/companyLogin';
-        findId.href = '/hyepin/findCompanyId';
-        findPw.href = '/hyepin/findCompanyPw';
+       
+    	//언니 여기 수정요~!
+    	loginForm.action = '';
+        findId.href = '';
+        findPw.href = '';
         
         companyMemberBtn.style.transform = 'scale(1.1)';
         companyMemberBtn.style.color = 'black';
