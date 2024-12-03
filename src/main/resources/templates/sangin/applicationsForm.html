@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body {
+	margin: 0 auto;
+	width: 65vw;
+	height: 100vh;
+}
+
+header {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 15%;
+	background-color: aliceblue;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav {
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 35%;
+	background-color: ivory;
+	display: flex;
+	flex-direction: column;
+}
+
+#nav1 {
+	border: 1px black solid;
+	height: 20%;
+	width: 80%;
+	display: flex;
+}
+
+#nav1_img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px black solid;
+	background-color: white;
+	width: 8%;
+}
+
+#nav1_img img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+#nav1_text {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px black solid;
+	width: 25%;
+}
+
+.searchOption {
+	border: 0px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: ivory;
+}
+
+.searchOption:hover {
+	scale: 1.2;
+	font-weight: bold;
+}
+
+#nav2 {
+	border: 1px black solid;
+	height: 80%;
+	width: 80%;
+	display: flex;
+	font-size: 18px;
+}
+
+#nav2_1 {
+	border: 1px black solid;
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	padding: 30px;
+	width: 30%;
+}
+
+.workingAreaCheckBox {
+	display: flex;
+	flex-direction: column;
+}
+
+.roleCheckbox {
+	display: flex;
+	flex-direction: column;
+}
+
+.label-text {
+	padding: 7px;
+}
+
+.label-text:hover {
+	scale: 1.1;
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"]:checked+.label-text {
+	color: blue;
+	font-weight: bold;
+}
+
+#nav2_2 {
+	border: 1px black solid;
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#reset {
+	border: 1px black solid;
+	padding: 10px;
+}
+
+#reset:hover {
+	scale: 1.2;
+}
+
+section {
+	font-weight: bold;
+	width: 100%;
+	height: 100%;
+	background-color: lightgray;
+	display: flex;
+	flex-direction: row;
+}
+
+#section1 {
+	height: 100%;
+	flex: 3; /* 비율에 따라 크기 조정 */
+	border: black 1px solid;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤 */
+}
+
+.list {
+	width: calc(100% - 4%); /* 부모 요소에서 여백만큼 너비 감소 */
+	height: auto; /* 높이를 콘텐츠 크기에 맞게 자동 조정 */
+	border-bottom: black 1px solid;
+	padding-bottom: 4%;
+	display: flex;
+	margin: 0 2%;
+	display: flex;
+}
+
+#list1 {
+	width: 3%;
+	margin-top: 5%;
+	margin-left: 1%;
+}
+
+.colorHeart, .uncolorHeart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0px;
+	padding: 10%;
+	width: 100%;
+	background-color: lightgray;
+}
+
+.colorHeart {
+	color: red;
+	font-size: 30px;
+}
+
+.uncolorHeart {
+	color: black;
+	font-size: 20px;
+}
+
+.colorHeart:hover, .uncolorHeart:hover {
+	scale: 1.2;
+}
+
+#list2 {
+	margin-top: 3%;
+	margin-left: 3%;
+	width: 80%;
+}
+
+#list2_1 {
+	display: flex;
+}
+
+#list2_1 div {
+	border: 1px black solid;
+}
+
+#applicationName {
+	padding: 3%;
+	font-size: 20px;
+	font-weight: bold;
+	width: 70%;
+	overflow: hidden;
+}
+
+#deadlineDate {
+	display: flex;
+	font-size: 11px;
+	font-weight: bold;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	padding: 5px;
+	align-items: center;
+}
+
+#list2_2 {
+	display: flex;
+}
+
+#list2_2 div {
+	border: 1px black solid;
+	padding: 0 2%;
+	font-size: 15px;
+}
+
+#list3 {
+	margin-top: 3%;
+	display: flex;
+	height: 40%
+}
+
+#companyName {
+	border: 1px black solid;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.uncolorStar, .colorStar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px black solid;
+	font-size: 20px;
+	padding: 0px;
+	background-color: lightgray;
+}
+
+.uncolorStar {
+	color: black;
+}
+
+.colorStar {
+	color: yellow;
+}
+
+.colorStar:hover, .uncolorStar:hover {
+	scale: 1.2;
+}
+
+#section2 {
+	height: 100%;
+	flex: 1; /* 비율에 따라 크기 조정 */
+	border: black 1px solid;
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<header>
+		<a href="/">Main으로 가기</a>
+	</header>
+	<nav>
+		<div id="nav1">
+			<div id="nav1_img">
+				<img src="/uploads/regions.png" alt="regions">
+
+			</div>
+			<div id="nav1_text">
+				<input type="button" value="지역별" class="searchOption"
+					onclick="navButton(false)">
+			</div>
+			<div id="nav1_img">
+				<img src="/uploads/jobRole.webp" alt="jobRole">
+			</div>
+			<div id="nav1_text">
+				<input type="button" value="직무별" class="searchOption"
+					onclick="navButton(true)">
+			</div>
+			<div id="nav1_img">
+				<img src="/uploads/돋보기.webp" alt="돋보기">
+			</div>
+			<div id="nav1_text">
+				<input type="button" value="검색" class="searchOption">
+			</div>
+		</div>
+		<div id="nav2">
+			<div id="nav2_1">
+				<div class="workingAreaCheckBox hidden">
+					<input type="checkbox" value="all" id="selectAll"> <label
+						for="selectAll" class="label-text" onclick="toggleCheckboxes()">전체</label>
+					<input type="checkbox" value="seoul" id="areaCheckbox2"
+						class="areaCheckbox"> <label for="areaCheckbox2"
+						class="label-text">서울</label> <input type="checkbox"
+						value="gyeonggi" id="areaCheckbox3" class="areaCheckbox">
+					<label for="areaCheckbox3" class="label-text">경기</label> <input
+						type="checkbox" value="gwangju" id="areaCheckbox4"
+						class="areaCheckbox"> <label for="areaCheckbox4"
+						class="label-text">광주</label> <input type="checkbox" value="daegu"
+						id="areaCheckbox5" class="areaCheckbox"> <label
+						for="areaCheckbox5" class="label-text">대구</label>
+				</div>
+				<div class="workingAreaCheckBox hidden">
+					<input type="checkbox" value="daejeon" id="areaCheckbox6"
+						class="areaCheckbox"> <label for="areaCheckbox6"
+						class="label-text">대전</label> <input type="checkbox" value="busan"
+						id="areaCheckbox7" class="areaCheckbox"> <label
+						for="areaCheckbox7" class="label-text">부산</label> <input
+						type="checkbox" value="ulsan" id="areaCheckbox8"
+						class="areaCheckbox"> <label for="areaCheckbox8"
+						class="label-text">울산</label> <input type="checkbox"
+						value="incheon" id="areaCheckbox9" class="areaCheckbox"> <label
+						for="areaCheckbox9" class="label-text">인천</label> <input
+						type="checkbox" value="gangwon" id="areaCheckbox10"
+						class="areaCheckbox"> <label for="areaCheckbox10"
+						class="label-text">강원</label>
+				</div>
+				<div class="workingAreaCheckBox hidden">
+					<input type="checkbox" value="gyeongnam" id="areaCheckbox11"
+						class="areaCheckbox"> <label for="areaCheckbox11"
+						class="label-text">경남</label> <input type="checkbox" value="jeju"
+						id="areaCheckbox12" class="areaCheckbox"> <label
+						for="areaCheckbox12" class="label-text">제주</label>
+				</div>
+				<div class="roleCheckbox hidden">
+					<input type="checkbox" value="Developer" id="roleCheckbox1"
+						class="roleCheckbox"> <label for="roleCheckbox1"
+						class="label-text">개발자</label> <input type="checkbox"
+						value="TechnicalSupport" id="roleCheckbox2" class="roleCheckbox">
+					<label for="roleCheckbox2" class="label-text">기술지원</label> <input
+						type="checkbox" value="DataAnalyst" id="roleCheckbox3"
+						class="roleCheckbox"> <label for="roleCheckbox3"
+						class="label-text">데이터분석가</label> <input type="checkbox"
+						value="DataEngineer" id="roleCheckbox4" class="roleCheckbox">
+					<label for="roleCheckbox4" class="label-text">데이터엔지니어</label> <input
+						type="checkbox" value="BackendServerDeveloper" id="roleCheckbox5"
+						class="roleCheckbox"> <label for="roleCheckbox5"
+						class="label-text">백엔드/서버개발</label>
+				</div>
+				<div class="roleCheckbox hidden">
+					<input type="checkbox" value="SecurityConsultant"
+						id="roleCheckbox6" class="roleCheckbox"> <label
+						for="roleCheckbox6" class="label-text">보안컨설팅</label> <input
+						type="checkbox" value="AppDeveloper" id="roleCheckbox7"
+						class="roleCheckbox"> <label for="roleCheckbox7"
+						class="label-text">앱개발</label> <input type="checkbox"
+						value="WebDeveloper" id="roleCheckbox8" class="roleCheckbox">
+					<label for="roleCheckbox8" class="label-text">웹개발</label> <input
+						type="checkbox" value="Webmaster" id="roleCheckbox9"
+						class="roleCheckbox"> <label for="roleCheckbox9"
+						class="label-text">웹마스터</label> <input type="checkbox"
+						value="Maintenance" id="roleCheckbox10" class="roleCheckbox">
+					<label for="roleCheckbox10" class="label-text">유지보수</label>
+				</div>
+				<div class="roleCheckbox hidden">
+					<input type="checkbox" value="InformationSecurity"
+						id="roleCheckbox11" class="roleCheckbox"> <label
+						for="roleCheckbox11" class="label-text">정보보안</label> <input
+						type="checkbox" value="Frontend" id="roleCheckbox12"
+						class="roleCheckbox"> <label for="roleCheckbox12"
+						class="label-text">프론트엔드</label> <input type="checkbox"
+						value="Publisher" id="roleCheckbox13" class="roleCheckbox">
+					<label for="roleCheckbox13" class="label-text">퍼블리셔</label> <input
+						type="checkbox" value="BiEngineer" id="roleCheckbox14"
+						class="roleCheckbox"> <label for="roleCheckbox14"
+						class="label-text">BI엔지니어</label> <input type="checkbox"
+						value="Ciso" id="roleCheckbox15" class="roleCheckbox"> <label
+						for="roleCheckbox15" class="label-text">CISO</label>
+				</div>
+			</div>
+
+			<div id="nav2_2">
+				<b id="description"><= 체크박스를 선택해주세요~</b> <br>
+				<button id="reset" onclick="reset()">선택 초기화</button>
+			</div>
+	</nav>
+	<section>
+		<div id="section1">
+			<th:block th:each="jobApplication : ${applicationList}">
+				<div class="list">
+					<div id="list1">
+						<button class="colorHeart"
+							th:attr="data-application-num=${jobApplication.applicationNum}"
+							th:if="${jobApplication.isBookmarked == 1}">♥</button>
+						<button class="uncolorHeart"
+							th:attr="data-application-num=${jobApplication.applicationNum}"
+							th:if="${jobApplication.isBookmarked != 1}">♡</button>
+					</div>
+					<div id="list2">
+						<div id="list2_1">
+							<a
+								th:href="@{/sangin/applicationDetailForm/{applicationNum}(applicationNum=${jobApplication.applicationNum})}"
+								id="applicationName">[[${jobApplication.applicationName}]]</a>
+							<div id="deadlineDate"
+								th:text="${#dates.format(jobApplication.deadlineDate, 'yyyy-MM-dd')}"></div>
+
+						</div>
+						<div id="list2_2">
+							<div id="workingArea" th:text="${jobApplication.workingArea}"></div>
+							<div id="career" th:text="${jobApplication.career}">요구 경력</div>
+							<div id="education" th:text="${jobApplication.education}">요구
+								학력</div>
+							<div id="employmentType"
+								th:text="${jobApplication.employmentType}">근무 형태</div>
+							<div id="salary" th:text="${jobApplication.salary}">급여</div>
+						</div>
+					</div>
+					<div id="list3">
+						<div id="companyName" th:text="${jobApplication.companyId}">기업
+							이름</div>
+						<button class="colorStar"
+							th:attr="data-company-id=${jobApplication.companyId}"
+							th:if="${companyList.contains(jobApplication.companyId)}">⭐</button>
+						<button class="uncolorStar"
+							th:attr="data-company-id=${jobApplication.companyId}"
+							th:if="${!companyList.contains(jobApplication.companyId)}">☆</button>
+					</div>
+				</div>
+			</th:block>
+		</div>
+		<div id="section2">
+			<h2>section2 공사 중..</h2>
+			<hr>
+			최근 검색어..인기게시글..
+		</div>
+	</section>
+	<footer>Footer</footer>
+</body>
+<script>
+function toggleCheckboxes() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.areaCheckbox');
+
+    checkboxes.forEach(function (checkbox) {
+    	if(selectAll.checked == false){
+        	checkbox.checked = true;
+    	}else{
+        	checkbox.checked = false;
+    	}
+    });
+}
+
+</script>
+<script>
+    const roleCheckboxes = document.querySelectorAll(".roleCheckbox");
+    const workingAreaCheckBoxes = document.querySelectorAll(".workingAreaCheckBox");
+
+    function navButton(showOption) {
+        if (showOption) {
+            roleCheckboxes.forEach((checkbox) => {
+                checkbox.classList.remove('hidden');
+            });
+            workingAreaCheckBoxes.forEach((checkbox) => {
+                checkbox.classList.add('hidden');
+            });
+        } else {
+            workingAreaCheckBoxes.forEach((checkbox) => {
+                checkbox.classList.remove('hidden');
+            });
+            roleCheckboxes.forEach((checkbox) => {
+                checkbox.classList.add('hidden');
+            });
+        }
+    }
+    function reset(){
+    	const areaCheckboxes = document.querySelectorAll('.areaCheckbox');
+    	const roleCheckboxes = document.querySelectorAll('.roleCheckbox');
+    	
+        areaCheckboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+        roleCheckboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+        
+        // "전체" 체크박스도 해제
+        selectAll.checked = false;
+
+        // 설명 텍스트 초기화 (필요한 경우)
+        const description = document.getElementById('description');
+        description.innerHTML = "<= 체크박스를 선택해주세요~";
+    	
+    }
+</script>
+<script>
+document.querySelector("#section1").addEventListener("click", (event) => {
+    const userId = "user001";
+
+    if (event.target.classList.contains("colorHeart")) {
+        const applicationNum = event.target.dataset.applicationNum;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/removeHeart");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 취소되었습니다!");
+                event.target.classList.remove("colorHeart");
+                event.target.classList.add("uncolorHeart");
+                event.target.textContent = "♡";
+            }
+        };
+
+        const data = JSON.stringify({ userId, applicationNum });
+        xhr.send(data);
+    }
+
+    if (event.target.classList.contains("uncolorHeart")) {
+        const applicationNum = event.target.dataset.applicationNum;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/addHeart");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 추가되었습니다!");
+                event.target.classList.remove("uncolorHeart");
+                event.target.classList.add("colorHeart");
+                event.target.textContent = "♥";
+              
+            }
+        };
+
+        const data = JSON.stringify({ userId, applicationNum });
+        xhr.send(data);
+    }
+});
+</script>
+<script>
+document.querySelector("#section1").addEventListener("click", (event) => {
+    const userId = "user001";
+
+    if (event.target.classList.contains("colorStar")) {
+        const companyId = event.target.dataset.companyId;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/removeStar");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 취소되었습니다!");
+                event.target.classList.remove("colorStar");
+                event.target.classList.add("uncolorStar");
+                event.target.textContent = "☆";
+            }
+        };
+
+        const data = JSON.stringify({ userId, companyId });
+        xhr.send(data);
+    }
+
+    if (event.target.classList.contains("uncolorStar")) {
+        const companyId = event.target.dataset.companyId;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/addStar");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 추가되었습니다!");
+                event.target.classList.remove("uncolorStar");
+                event.target.classList.add("colorStar");
+                event.target.textContent = "★";
+            }
+        };
+
+        const data = JSON.stringify({ userId, companyId });
+        xhr.send(data);
+    }
+});
+</script>
+</html>
