@@ -153,7 +153,9 @@
                         <td th:text="${companys.employees}"></td>
                         <td th:text="${companys.annualRevenue}"></td>
                         <td>
-                        <span class="heart" th:data-company-id="${companys.companyId}">♥</span>
+                        <span class="heart" 
+						          th:data-company-id="${companys.companyId}" 
+						          th:data-user-id="${session.logId}">♥</span>
                         </td>
                     </tr>
                 </th:block>
@@ -191,18 +193,17 @@
  $(document).ready(function() {
      $('.heart').click(function() {
          var companyId = $(this).data('company-id');
-         var userId = $(this).data('user-id'); // 세션에 저장된 userId 가져오기
+         var userId = $(this).data('user-id');
 
          // AJAX 요청
          $.ajax({
-             url: '/bookmark', // 서버의 URL로 수정
+             url: '/c/bookmark', // 서버의 URL로 수정
              method: 'POST',
              data: {
                  companyId: companyId,
                  userId: userId
              },
              success: function(response) {
-                 // 서버에서 처리 후, 성공 시 실행할 코드
                  console.log('북마크 저장 성공!');
                  $(this).toggleClass('bookmarked');
              },
