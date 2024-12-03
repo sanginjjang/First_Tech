@@ -1,11 +1,10 @@
-package com.example.demo.dao;
+package com.example.demo.dao.taek;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.dto.BoardViewDto;
 import com.example.demo.dto.CommentDto;
 
 @Mapper
