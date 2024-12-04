@@ -165,7 +165,6 @@ public class SanginController {
 		dto.setFileName(fileName);//파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
 		System.out.println("파일 네임 테스트 합니다 15:37");
 		System.out.println(fileName);
-		System.out.println(fileName);
 		System.out.println("파일 네임 테스트 합니다 15:37");
 		int result = companyApplicationService.insertApplication(dto);
 		if(result == 1) {

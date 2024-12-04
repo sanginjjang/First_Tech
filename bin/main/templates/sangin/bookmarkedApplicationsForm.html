@@ -190,8 +190,7 @@ h2 {
 							<a
 								th:href="@{/sangin/applicationDetailForm/{applicationNum}(applicationNum=${jobApplication.applicationNum})}"
 								id="applicationName">[[${jobApplication.applicationName}]]</a>
-							<div id="deadlineDate"
-								th:text="${#dates.format(jobApplication.deadlineDate, 'yyyy-MM-dd')}"></div>
+							<div id="deadlineDate" th:text="${jobApplication.deadlineDate}"></div>
 						</div>
 						<div id="list2_2">
 							<div id="workingArea" th:text="${jobApplication.workingArea}"></div>
