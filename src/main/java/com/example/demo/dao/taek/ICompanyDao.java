@@ -26,6 +26,8 @@ public interface ICompanyDao {
 	
 	public void removeUserToCompanyBookmark(@Param("userId")String userId,@Param("companyId")String companyId);
 	
+	
+	
 	public List<UserToCompanyBookmarkDto> getUserToCompanyBookmark(String userId);
 	
 	public List<CompanyDto> testBookmark(@Param("startNum")int startNum,@Param("amount")int amount,@Param("userId")String userId);

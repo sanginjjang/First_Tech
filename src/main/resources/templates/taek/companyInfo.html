@@ -155,7 +155,7 @@
                         <td>
                         <span class="heart" 
 						          th:data-company-id="${companys.companyId}" 
-						          th:data-user-id="${session.logUser}"
+						          th:data-user-id="${session.user.userId}"
 						          th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span>
 						          
 						          
