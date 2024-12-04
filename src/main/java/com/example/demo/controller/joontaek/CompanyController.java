@@ -37,9 +37,6 @@ public class CompanyController {
 //		List<CompanyDto> companys = companyService.getCompanyListPaging(startNum, amount); //기업 전체 목록 조회
 		int totalCnt = companyService.getCount();
 		int endPageNum = Math.ceilDiv(totalCnt, amount);
-
-		
-		
 		
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(user.getUserId());
 		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());

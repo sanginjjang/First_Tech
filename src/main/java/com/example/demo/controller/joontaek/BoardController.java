@@ -76,15 +76,7 @@ public class BoardController {
 
 		return "/taek/boardWriteForm";
 	}
-<<<<<<< HEAD
 
-	@RequestMapping("boardWrite")
-	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
-		HttpSession session = request.getSession();
-		UserDto user =  (UserDto) session.getAttribute("user");
-		vo.setBoardWriter(user.getUserNickname());
-		
-=======
 	// ----------------------------파일업로드 vo용 테스트----------------------------------
 	@RequestMapping("boardWrite")
 	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
@@ -92,7 +84,6 @@ public class BoardController {
 		String userId = (String) session.getAttribute("boardUser");
 		vo.setBoardWriter(userId);
 	
->>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 		MultipartFile file = vo.getUploadFileName();
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(uploadPath + fileName);
