@@ -16,8 +16,6 @@ public class CompanyService implements ICompanyService{
 	@Autowired
 	ICompanyDao companyDao;
 
-
-
 	@Override
 	public List<CompanyDto> getCompanyList() {
 		
