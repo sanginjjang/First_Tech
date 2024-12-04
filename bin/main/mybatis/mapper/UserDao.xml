@@ -14,8 +14,16 @@
 		SELECT * FROM Users WHERE userNickname = #{userNickname};
 	</select>
 	<select id="findUserId" resultType="com.example.demo.dto.UserDto">
-		SELECT * FROM Users WHERE userName = #{userName} AND userPhone = #{userPhone} AND userEmail AND #{userEmail};
+		SELECT * FROM Users WHERE userName = #{userName} AND userPhone = #{userPhone} AND userEmail = #{userEmail};
 	</select>
+	<select id="findUserPw" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM Users WHERE userId = #{userId} AND userSsn = #{userSsn} AND userPhone = #{userPhone} AND userEmail = #{userEmail};
+	</select>
+	
+	<update id="updateUserPw">
+		UPDATE Users SET userPassword = #{userPassword} WHERE userId = #{userId};
+	</update>
+	
 	
 	<insert id="insertUser">
 		INSERT INTO Users
