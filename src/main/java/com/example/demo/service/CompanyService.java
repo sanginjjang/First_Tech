@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.taek.ICompanyDao;
 import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.RatingDto;
+import com.example.demo.dto.UserToCompanyBookmarkDto;
 
 @Service
 public class CompanyService implements ICompanyService{
@@ -58,6 +59,37 @@ public class CompanyService implements ICompanyService{
 		RatingDto rating = companyDao.getCompanyRating(companyId);
 		
 		return rating;
+	}
+
+
+
+	@Override
+	public void regUserToCompanyBookmark(String userId, String companyId) {
+		companyDao.regUserToCompanyBookmark(userId, companyId);
+	}
+
+
+
+	@Override
+	public List<UserToCompanyBookmarkDto> getUserToCompanyBookmark(String userId) {
+		List<UserToCompanyBookmarkDto> bookmarks = companyDao.getUserToCompanyBookmark(userId);
+		return bookmarks;
+	}
+
+
+
+	@Override
+	public List<CompanyDto> testBookmark(int startNum, int amount, String userId) {
+		List<CompanyDto> companys =companyDao.testBookmark(startNum, amount,userId);
+		return companys;
+	}
+
+
+
+	@Override
+	public void removeUserToCompanyBookmark(String userId, String companyId) {
+		companyDao.removeUserToCompanyBookmark(userId, companyId);
+		
 	}
 
 }

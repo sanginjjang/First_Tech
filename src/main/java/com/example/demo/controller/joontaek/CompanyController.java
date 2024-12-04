@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.RatingDto;
+import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.ICompanyService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/c")
@@ -26,17 +31,25 @@ public class CompanyController {
 	ICompanyService companyService;
 	
 	@RequestMapping("/companyInfo/{pageNum}")
-	public String companyInfo(@PathVariable("pageNum")int pageNum,Model model) {
+	public String companyInfo(@PathVariable("pageNum")int pageNum,Model model,HttpServletRequest request) {
 		int startNum = pageNum * amount - amount;
-		List<CompanyDto> companys = companyService.getCompanyListPaging(startNum, amount); //기업 전체 목록 조회
-		
+//		List<CompanyDto> companys = companyService.getCompanyListPaging(startNum, amount); //기업 전체 목록 조회
 		int totalCnt = companyService.getCount();
 		int endPageNum = Math.ceilDiv(totalCnt, amount);
 		
+		HttpSession session = request.getSession();
+		String userId=(String)session.getAttribute("logUser");
+		
+		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
+		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, userId);
+//		
+		model.addAttribute("bookmarks",bookmarks);
 		model.addAttribute("companys",companys);
 		model.addAttribute("currentPageNum",pageNum);
 		model.addAttribute("endPageNum",endPageNum);
-
+		
+		System.out.println(companys);
+		System.err.println(bookmarks);
 		
 		
 		return "taek/companyInfo";
@@ -57,20 +70,34 @@ public class CompanyController {
 		return "taek/companyDetail";
 	}
 	
-	@PostMapping("bookmark")
-	public String bookMark(@RequestParam("userId")String userId, @RequestParam("companyId")String companyId) {
+	@PostMapping("/addBookmark")
+	@ResponseBody
+	public List<UserToCompanyBookmarkDto> addBookMark(@RequestParam("userId")String userId, @RequestParam("companyId")String companyId) {
 		
-		System.out.println(userId);
-		System.out.println(companyId);
-		System.out.println(userId);
-		System.out.println(companyId);
-		System.out.println(userId);
-		System.out.println(companyId);
-		System.out.println(userId);
-		System.out.println(companyId);
-		System.out.println(userId);
-		System.out.println(companyId);
-		return "";
+		
+		companyService.regUserToCompanyBookmark(userId, companyId);
+		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
+		
+		System.out.println("북마크추가진행@@");
+		System.out.println("북마크추가진행@@");
+		System.out.println("북마크추가진행@@");
+		System.out.println("북마크추가진행@@");
+		
+		return bookmarks;
+	}
+	
+	@PostMapping("/removeBookmark")
+	@ResponseBody
+	public List<UserToCompanyBookmarkDto> removeBookmark(@RequestParam("userId")String userId,@RequestParam("companyId")String companyId){
+		companyService.removeUserToCompanyBookmark(userId, companyId);
+		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
+		
+		System.err.println("북마크삭제진행@@");
+		System.err.println("북마크삭제진행@@");
+		System.err.println("북마크삭제진행@@");
+		System.err.println("북마크삭제진행@@");
+		
+		return bookmarks;
 	}
 	
 	
