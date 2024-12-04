@@ -12,5 +12,7 @@ public interface IUserService {
 	public int insertUser(UserDto user);
 	public boolean idCheck(UserDto user);
 	public UserDto findUserId(UserDto user);
+	public UserDto findUserPw(UserDto user);
+	public int updateUserPw(UserDto user);
 	
 }

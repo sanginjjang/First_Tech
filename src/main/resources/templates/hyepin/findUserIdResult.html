@@ -110,13 +110,13 @@
         </div>
         <div id="result">
             <div>
-                <span>DB연동 ID 값.. [[${id}]]</span> <br>
-                <span>가입일: DB연동 가입일 값..</span>
+                <span>ID: [[${user.userId}]]</span> <br>
+                <span>가입일: [[${userRegistDate}]]</span>
             </div>
         </div>
         <div class="go">
-            <a th:href="@{/hyepin/findIdUserlogin/{id}(id=${id})}" class="formStyle">로그인</a> <br><br>
-            <a th:href="@{/hyepin/findIdFindUserPw/{id}(id=${id})}" class="formStyle">비밀번호 찾기</a>
+            <a th:href="@{/hyepin/findIdUserlogin/{id}(id=${user.userId})}" class="formStyle">로그인</a> <br><br>
+            <a th:href="@{/hyepin/findIdFindUserPw/{id}(id=${user.userId})}" class="formStyle">비밀번호 찾기</a>
         </div>
     </section>
     <footer>Footer</footer>
