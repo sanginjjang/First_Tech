@@ -42,7 +42,8 @@ public class BoardController {
 
 	@RequestMapping("/board/{pageNum}")
 	public String board(@PathVariable("pageNum") int pageNum, Model model) {
-
+		
+		
 		// 여기부터
 		int startNum = pageNum * amount - amount;
 		List<BoardViewDto> boardList = boardService.getBoardListPaging(startNum, amount);
@@ -65,7 +66,6 @@ public class BoardController {
 
 		model.addAttribute("board", board);
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
-
 		model.addAttribute("commentList", commentList);
 		return "/taek/boardDetail";
 	}
@@ -80,9 +80,7 @@ public class BoardController {
 	// ----------------------------파일업로드 vo용 테스트----------------------------------
 	@RequestMapping("boardWrite")
 	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("boardUser");
-		vo.setBoardWriter(userId);
+		
 	
 		MultipartFile file = vo.getUploadFileName();
 		String fileName = file.getOriginalFilename();
@@ -117,6 +115,7 @@ public class BoardController {
 	}
 
 
+
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓코멘트 관리↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 	@RequestMapping("addComment")
@@ -126,8 +125,6 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		
 		UserDto user = (UserDto) session.getAttribute("user");
-		// 임시로 세션에 아이디 저장
-
 		commentService.regComment(content, boardNum, user.getUserId());
 
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
