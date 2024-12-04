@@ -51,5 +51,11 @@ public class UserService implements IUserService {
 		return idCheck;
 	}
 
+	@Override
+	public UserDto findUserId(UserDto user) {
+		UserDto result = userDao.findUserId(user);
+		return result;
+	}
+
 	
 }

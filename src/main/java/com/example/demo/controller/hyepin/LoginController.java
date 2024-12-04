@@ -54,6 +54,13 @@ public class LoginController {
 		return result;
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 완료");
+		session.invalidate();
+		return "/sangin/sum";
+	}
+	
 	
 	
 	

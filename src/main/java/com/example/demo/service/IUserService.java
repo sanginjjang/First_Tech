@@ -11,4 +11,6 @@ public interface IUserService {
 	public UserDto getUserByNickname(String userNickname);
 	public int insertUser(UserDto user);
 	public boolean idCheck(UserDto user);
+	public UserDto findUserId(UserDto user);
+	
 }

@@ -13,7 +13,9 @@
 	<select id="getUserByNickname" resultType="com.example.demo.dto.UserDto">
 		SELECT * FROM Users WHERE userNickname = #{userNickname};
 	</select>
-	
+	<select id="findUserId" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM Users WHERE userName = #{userName} AND userPhone = #{userPhone} AND userEmail AND #{userEmail};
+	</select>
 	
 	<insert id="insertUser">
 		INSERT INTO Users
