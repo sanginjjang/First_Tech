@@ -15,4 +15,6 @@ public interface IUserService {
 	public UserDto findUserPw(UserDto user);
 	public int updateUserPw(UserDto user);
 	
+	public String updateUserInformation(UserDto user);
+	
 }
