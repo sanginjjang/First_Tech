@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.BoardDto;
 import com.example.demo.dto.BoardViewDto;
 import com.example.demo.dto.CommentDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.service.IBoardService;
 import com.example.demo.service.ICommentService;
 import com.example.demo.vo.joontaek.BoardVo;
@@ -66,109 +67,32 @@ public class BoardController {
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
 
 		model.addAttribute("commentList", commentList);
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		
 		return "/taek/boardDetail";
 	}
 
 	@RequestMapping("boardWriteForm")
-	public String boardWriteForm(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("boardUser", "텐타숑");// 나중에 삭제할거 임시 세션저장
+	public String boardWriteForm() {
+		
 
 		return "/taek/boardWriteForm";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// @RequestMapping("boardWrite")
-	public String boardWrite(Model model, HttpServletRequest request, BoardVo vo) {
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("boardUser");
-		vo.setBoardWriter(userId);
-
-//		
-//		MultipartFile file = board.getUploadFileName();
-//		String fileName = file.getOriginalFilename();
-//		File uploadFile = new File(uploadPath + fileName);
-//		
-//		try {
-//			file.transferTo(uploadFile);
-//		} catch (IllegalStateException | IOException e) {
-//			e.printStackTrace();
-//		}*/
-		BoardDto board = new BoardDto();
-
-		int pageNum = 1;
-		int startNum = pageNum * amount - amount;
-		List<BoardViewDto> boardList = boardService.getBoardListPaging(startNum, amount);
-		int totalCnt = boardService.getBoardCount();
-		int endPageNum = Math.ceilDiv(totalCnt, amount);
-
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("currentPageNum", pageNum);
-		model.addAttribute("endPageNum", endPageNum);
-
-		boardService.regBoard(board);
-
-		return "/taek/board";
-	}
-
-	// ----------------------------파일업로드 vo용 테스트----------------------------------
 	@RequestMapping("boardWrite")
-	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo,
-			@RequestParam("uploadFileName") MultipartFile uploadFileName) {
+	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
 		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("boardUser");
-		vo.setBoardWriter(userId);
-
-		
-		
-		
-		
-		
+		UserDto user =  (UserDto) session.getAttribute("user");
+		vo.setBoardWriter(user.getUserNickname());
 		
 		MultipartFile file = vo.getUploadFileName();
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(uploadPath + fileName);
-
-		
-		
-		
-		
-		
-		
-		
 		
 		try {
 			file.transferTo(uploadFile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-
-	    
-	    
+    
 		BoardDto board = new BoardDto();
 
 		board.setBoardTitle(vo.getBoardTitle());
@@ -191,7 +115,6 @@ public class BoardController {
 		return "/taek/board";
 	}
 
-	// -----------------------------------------------------------
 
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓코멘트 관리↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
@@ -200,11 +123,11 @@ public class BoardController {
 	public List<CommentDto> addComment(@RequestParam("content") String content, @RequestParam("boardNum") int boardNum,
 			HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", "박준택");
-		String userId = (String) session.getAttribute("userId");
+		
+		UserDto user = (UserDto) session.getAttribute("user");
 		// 임시로 세션에 아이디 저장
 
-		commentService.regComment(content, boardNum, userId);
+		commentService.regComment(content, boardNum, user.getUserId());
 
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
 		model.addAttribute("comment", commentList);
