@@ -200,8 +200,11 @@ header div {
 							id="applicationName">[[${item.applicationName}]]</a>
 					</div>
 					<div class="right">
+						<div>
+							<a href="">지원자 관리</a>
+						</div>
 						<div th:text="${item.roleId}">roleId</div>
-						<div th:text="${#dates.format(item.deadlineDate, 'yyyy-MM-dd')}">deadlineDate</div>
+						<div th:text="${item.deadlineDate}">deadlineDate</div>
 						<div th:text="${item.onBoard}">진행 중</div>
 					</div>
 				</div>
