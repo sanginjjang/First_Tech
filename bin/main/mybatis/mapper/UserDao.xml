@@ -14,6 +14,7 @@
 		SELECT * FROM Users WHERE userNickname = #{userNickname};
 	</select>
 	
+	
 	<insert id="insertUser">
 		INSERT INTO Users
 		VALUES(#{userId}, #{userPassword}, #{userEmail}, #{userName}, #{userNickname},#{userSsn}, 
