@@ -137,14 +137,26 @@ textarea {
 <body>
     <div class="container">
         <div class="form-container">
+<<<<<<< HEAD
+=======
             <form action="/sangin/insertApplications" method="POST" enctype="multipart/form-data">
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
             <span>
             	채용 공고 등록
             </span>
             <span style="color: gray;">* 는 필수 입력입니다.</span>
+<<<<<<< HEAD
+
+            <form id="form" th:action="@{/sangin/insertApplications}" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="companyId" th:value="${companyId}">
+                <label>* 공고명</label>
+                <input type="text" name="applicationName" placeholder="ex) 대쪽같은 사람 찾습니다..">
+=======
                 <input type="hidden" name="companyId" th:value="${companyId}">
                 <label>* 공고명</label>
                 <input type="text" name="applicationName" placeholder="ex) 대쪽같은 사람 찾습니다.." required="required">
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 
                 <label>공고 소개</label>
                 <textarea name="applicationIntro" placeholder="ex) 가족같은 회사입니다..최신 커피 머신기 있습니다.. 저희 회사로 오세요..야근을 대비한 침대 구비 완료..
@@ -155,12 +167,32 @@ textarea {
 
                 <label>* 공고 이미지</label>
                 <div class="file-upload">
+<<<<<<< HEAD
+                    <input type="file" name="fileName">
+=======
                     <input type="file" name="file">
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
                     <button type="button">파일 첨부</button>
                 </div>
 
                 <label>* 희망 경력</label>
                 <select name="career" id="career">
+<<<<<<< HEAD
+                	<option value="senior">신입</option>
+                	<option value="junior">경력</option>
+                </select>
+
+                <label>* 개발 직무</label>
+                <input type="text" name="roleId">
+
+                <label>* 희망 학력</label>
+                <select name="education" id="education">
+                	<option value="HighSchool">고등학교 졸업</option>
+                	<option value="AssociateDegree">전문대학 졸업 (준학사)</option>
+                	<option value="BachelorDegree">대학교 졸업 (학사)</option>
+                	<option value="MasterDegree">석사 학위</option>
+                	<option value="DoctoralDegree">박사 학위</option>
+=======
                 	<option value="신입">신입</option>
                 	<option value="경력">경력</option>
                 </select>
@@ -175,10 +207,23 @@ textarea {
                 	<option value="대학교 졸업 (학사)">대학교 졸업 (학사)</option>
                 	<option value="석사 학위">석사 학위</option>
                 	<option value="박사 학위">박사 학위</option>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
                 </select>
 
                 <label>* 급여</label>
 				<select name="salary" id="salary">
+<<<<<<< HEAD
+				    <option value="below2000">2000만 이하</option>
+				    <option value="below3000">3000만 이하</option>
+				    <option value="below4000">4000만 이하</option>
+				    <option value="below5000">5000만 이하</option>
+				    <option value="below6000">6000만 이하</option>
+				    <option value="below7000">7000만 이하</option>
+				    <option value="below8000">8000만 이하</option>
+				    <option value="below9000">9000만 이하</option>
+				    <option value="below10000">1억 이하</option>
+				    <option value="companyRules">회사내 규율 따름</option>
+=======
 				    <option value="2000만 이하">2000만 이하</option>
 				    <option value="3000만 이하">3000만 이하</option>
 				    <option value="4000만 이하">4000만 이하</option>
@@ -189,11 +234,25 @@ textarea {
 				    <option value="9000만 이하">9000만 이하</option>
 				    <option value="1억 이하">1억 이하</option>
 				    <option value="회사내 규율 따름">회사내 규율 따름</option>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 				</select>
 
 
                 <label>* 근무 지역</label>
                 <select name="workingArea" id="workingArea">
+<<<<<<< HEAD
+				    <option value="seoul">서울</option>
+				    <option value="gyeonggi">경기</option>
+				    <option value="gwangju">광주</option>
+				    <option value="daegu">대구</option>
+				    <option value="daejeon">대전</option>
+				    <option value="busan">부산</option>
+				    <option value="ulsan">울산</option>
+				    <option value="incheon">인천</option>
+				    <option value="gangwon">강원</option>
+				    <option value="gyeongnam">경남</option>
+				    <option value="jeju">제주</option>
+=======
 				    <option value="서울">서울</option>
 				    <option value="경기">경기</option>
 				    <option value="광주">광주</option>
@@ -205,13 +264,19 @@ textarea {
 				    <option value="강원">강원</option>
 				    <option value="경남">경남</option>
 				    <option value="제주">제주</option>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 				</select>
 
 
                 <label>* 고용 형태</label>
                 <select name="employmentType" id="employmentType">
+<<<<<<< HEAD
+                	<option value="fullTime">정규직</option>
+                	<option value="partTime">계약직</option>
+=======
                 	<option value="정규직">정규직</option>
                 	<option value="계약직">계약직</option>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
                 </select>
 
                 <label>* 마감일 설정</label>

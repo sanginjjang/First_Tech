@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.RatingDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.ICompanyService;
 
@@ -36,20 +37,19 @@ public class CompanyController {
 //		List<CompanyDto> companys = companyService.getCompanyListPaging(startNum, amount); //기업 전체 목록 조회
 		int totalCnt = companyService.getCount();
 		int endPageNum = Math.ceilDiv(totalCnt, amount);
+
 		
-		HttpSession session = request.getSession();
-		String userId=(String)session.getAttribute("logUser");
 		
-		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
-		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, userId);
+		
+		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(user.getUserId());
+		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());
 //		
 		model.addAttribute("bookmarks",bookmarks);
 		model.addAttribute("companys",companys);
 		model.addAttribute("currentPageNum",pageNum);
 		model.addAttribute("endPageNum",endPageNum);
+	
 		
-		System.out.println(companys);
-		System.err.println(bookmarks);
 		
 		
 		return "taek/companyInfo";
@@ -78,10 +78,7 @@ public class CompanyController {
 		companyService.regUserToCompanyBookmark(userId, companyId);
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
 		
-		System.out.println("북마크추가진행@@");
-		System.out.println("북마크추가진행@@");
-		System.out.println("북마크추가진행@@");
-		System.out.println("북마크추가진행@@");
+
 		
 		return bookmarks;
 	}
@@ -92,10 +89,7 @@ public class CompanyController {
 		companyService.removeUserToCompanyBookmark(userId, companyId);
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
 		
-		System.err.println("북마크삭제진행@@");
-		System.err.println("북마크삭제진행@@");
-		System.err.println("북마크삭제진행@@");
-		System.err.println("북마크삭제진행@@");
+
 		
 		return bookmarks;
 	}
