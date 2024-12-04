@@ -20,7 +20,8 @@
 		a.education,
 		a.employmentType,
 		a.salary,
-		a.deadlineDate,
+		a.roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate,
 		CASE
 		WHEN b.bookmarkNum IS NOT
 		NULL THEN 1 -- 북마크된 상태
@@ -49,7 +50,7 @@
 	</select>
 	<select id="getApplication"
 		resultType="com.example.demo.dto.ApplicationDto">
-		select * from applications where applicationNum = ${applicationNum};
+		select * from applications where applicationNum = #{applicationNum};
 	</select>
 	<delete id="removeHeart">
 		DELETE FROM usertoapplicationbookmarks

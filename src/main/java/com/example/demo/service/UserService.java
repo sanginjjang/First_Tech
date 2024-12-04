@@ -57,5 +57,17 @@ public class UserService implements IUserService {
 		return result;
 	}
 
+	@Override
+	public UserDto findUserPw(UserDto user) {
+		UserDto result = userDao.findUserPw(user);
+		return result;
+	}
+
+	@Override
+	public int updateUserPw(UserDto user) {
+		int result = userDao.updateUserPw(user);
+		return result;
+	}
+
 	
 }
