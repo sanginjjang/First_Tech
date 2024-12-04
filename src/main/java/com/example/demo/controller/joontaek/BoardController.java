@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.BoardDto;
 import com.example.demo.dto.BoardViewDto;
 import com.example.demo.dto.CommentDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.service.IBoardService;
 import com.example.demo.service.ICommentService;
 import com.example.demo.vo.joontaek.BoardVo;
@@ -66,23 +67,24 @@ public class BoardController {
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
 
 		model.addAttribute("commentList", commentList);
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		System.out.println(board.getFileName());
-		
 		return "/taek/boardDetail";
 	}
 
 	@RequestMapping("boardWriteForm")
-	public String boardWriteForm(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("boardUser", "텐타숑");// 나중에 삭제할거 임시 세션저장
+	public String boardWriteForm() {
+		
 
 		return "/taek/boardWriteForm";
 	}
+<<<<<<< HEAD
+
+	@RequestMapping("boardWrite")
+	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
+		HttpSession session = request.getSession();
+		UserDto user =  (UserDto) session.getAttribute("user");
+		vo.setBoardWriter(user.getUserNickname());
+		
+=======
 	// ----------------------------파일업로드 vo용 테스트----------------------------------
 	@RequestMapping("boardWrite")
 	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
@@ -90,6 +92,7 @@ public class BoardController {
 		String userId = (String) session.getAttribute("boardUser");
 		vo.setBoardWriter(userId);
 	
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 		MultipartFile file = vo.getUploadFileName();
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(uploadPath + fileName);
@@ -122,7 +125,6 @@ public class BoardController {
 		return "/taek/board";
 	}
 
-	// -----------------------------------------------------------
 
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓코멘트 관리↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
@@ -131,11 +133,11 @@ public class BoardController {
 	public List<CommentDto> addComment(@RequestParam("content") String content, @RequestParam("boardNum") int boardNum,
 			HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", "박준택");
-		String userId = (String) session.getAttribute("userId");
+		
+		UserDto user = (UserDto) session.getAttribute("user");
 		// 임시로 세션에 아이디 저장
 
-		commentService.regComment(content, boardNum, userId);
+		commentService.regComment(content, boardNum, user.getUserId());
 
 		List<CommentDto> commentList = commentService.getCommentList(boardNum);
 		model.addAttribute("comment", commentList);
