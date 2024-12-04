@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+            width: 80vw;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 15%;
+            background-color: aliceblue;
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 5%;
+            background-color: ivory;
+            display: flex;
+            justify-content: center;
+        }
+
+        #nav1 {
+            font-weight: bold;
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: auto;
+            background-color: lightgray;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .company-info {
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .company-info .company-name {
+            margin-left: 300px;
+            font-size: 32px;
+            font-weight: bold;
+            flex-basis: 45%;
+            margin-right: 30px;
+        }
+
+        .company-info .center-info {
+            font-size: 14px;
+            flex-basis: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .company-info .center-info div {
+            margin-bottom: 10px;
+        }
+
+        .company-info .right-info {
+            font-size: 14px;
+            flex-basis: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .company-info .right-info div {
+            margin-bottom: 10px;
+        }
+
+        .company-info .right-info b {
+            font-weight: bold;
+        }
+
+        .reviewList {
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .reviewList div {
+            margin-bottom: 15px;
+        }
+
+        .reviewList span {
+            display: block;
+            font-size: 14px;
+        }
+
+        .review-form {
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .review-form textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .review-form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 10%;
+            background-color: aliceblue;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header><a href="/">Header</a></header>
+    <nav>
+        <div id="nav1">
+            <div><a href="/applicationsListForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업 정보</a></div>
+            <div>이력서관리</div>
+            <div>지원현황</div>
+            <div>관심공고</div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="company-info">
+            <div class="company-name" th:text="${company.companyName}"></div>
+
+            <div class="center-info">
+                <div><b>대표자:</b><span th:text="${company.ceo}"></span></div>
+                <div><b>이메일:</b><span th:text="${company.companyEmail}"></span></div>
+            </div>
+
+            <div class="right-info">
+                <div><b>설립일:</b><span th:text="${company.establishmentDate}"></span></div>
+                <div><b>주소:</b><span th:text="${company.companyAddress}"></span></div>
+                <div><b>사원 수:</b><span th:text="${company.employees}"></span></div>
+            </div>
+        </div>
+
+        <!-- Review List -->
+        <div class="reviewList" th:if="${rating != null}">
+            <div><span th:text="${rating.createdDate}"></span></div>
+            <div><span th:text="${rating.review}"></span></div>
+            <div><span th:if="${rating.rating==1}">★☆☆☆☆</span></div>
+            <div><span th:if="${rating.rating==2}">★★☆☆☆</span></div>
+            <div><span th:if="${rating.rating==3}">★★★☆☆</span></div>
+            <div><span th:if="${rating.rating==4}">★★★★☆</span></div>
+            <div><span th:if="${rating.rating==5}">★★★★★</span></div>
+        </div>
+        <div class="review-form" th:if="${user != null}">
+            <h3>리뷰 작성</h3>
+            <textarea placeholder="리뷰를 작성해 주세요..."></textarea>
+            <button type="submit">리뷰 제출</button>
+        </div>
+        
+    </section>
+
+    <footer>Footer</footer>
+</body>
+
+</html>

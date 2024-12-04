@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.taek.ICompanyDao">
+
+	<select id="getCompanyList"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys ORDER BY annualRevenue DESC;
+	</select>
+
+	<select id="getCompanyListPaging"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys
+		ORDER BY annualRevenue DESC
+		LIMIT
+		#{startNum}, #{amount};
+	</select>
+
+	<select id="getCount" resultType="_int">
+		SELECT COUNT(*) FROM companys
+	</select>
+	<!-- 기업상세보기 -->
+	<select id="getCompany"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys WHERE companyName = #{companyName};
+	</select>
+	<!-- 평점 -->
+	<select id="getCompanyRating"
+		resultType="com.example.demo.dto.RatingDto">
+		SELECT * FROM ratings WHERE companyId = #{companyId}
+	</select>
+
+	<!-- 북마크 -->
+	<insert id="regUserToCompanyBookmark">
+		insert into usertocompanybookmarks
+		values(NULL,#{userId},#{companyId},NOW())
+	</insert>
+	
+	<delete id="removeUserToCompanyBookmark">
+		DELETE FROM usertocompanybookmarks 
+		WHERE userId=#{userId} AND companyId= #{companyId}
+	</delete>
+
+	<select id="getUserToCompanyBookmark"
+		resultType="com.example.demo.dto.UserToCompanyBookmarkDto">
+		SELECT * FROM usertocompanybookmarks WHERE userId =
+		#{userId}
+	</select>
+	
+	
+
+	<select id="testBookmark"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT
+		c.companyId,
+		c.companyPassword,
+		c.companyName,
+		c.companyEmail,
+		c.businessRegistrationCertificate,
+		c.companyAddress,
+		c.companyPostalCode,
+		c.companyTel,
+		c.establishmentDate,
+		c.webSite,
+		c.ceo,
+		c.employees,
+		c.annualRevenue,
+		c.companyRegistDate,
+		CASE
+		WHEN b.bookmarkNum IS NOT NULL THEN 1 -- 북마크된 상태
+		ELSE 0 -- 북마크되지 않은 상태
+		END AS isBookmarked
+		FROM
+		companys c
+		LEFT JOIN
+		usertocompanybookmarks b
+		ON c.companyId = b.companyId
+		AND b.userId = #{userId}
+		ORDER BY annualRevenue DESC
+		LIMIT #{startNum} , #{amount};
+	</select>
+
+</mapper>

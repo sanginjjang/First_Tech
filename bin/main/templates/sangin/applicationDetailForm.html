@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0 auto;
+	width: 65vw;
+	/* 폭 설정 */
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.companySection {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.jobTitleSection {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+header div {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.icon {
+	font-size: 24px;
+	cursor: pointer;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#nav1 {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	width: 20%;
+}
+
+#nav2 {
+	display: flex;
+	justify-content: space-evenly;
+	gap: 10px;
+	padding: 20px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.infoColumn {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.infoGroup {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.infoGroup div {
+	width: 120px;
+	padding: 3px 5px;
+	margin: 0;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+section {
+	padding: 20px 0;
+}
+
+.warningSection {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+
+.warningSection button {
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	background-color: #f5f5f5;
+}
+
+.warningSection button:hover {
+	background-color: #ddd;
+}
+
+.imageSection {
+	text-align: center;
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+
+.imageSection img {
+	max-width: 80%;
+	max-height: 80%;
+	object-fit: contain;
+}
+
+footer {
+	padding: 20px;
+	border-top: 1px solid #ccc;
+}
+
+footer .location {
+	margin-bottom: 20px;
+}
+
+footer .jobTimer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+footer .jobTimer div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+footer input[type="button"] {
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	background-color: #f5f5f5;
+	cursor: pointer;
+}
+
+footer input[type="button"]:hover {
+	background-color: #ddd;
+}
+
+#map {
+	border: 1px #ddd solid;
+	height: 180px;
+	margin: 0 auto;
+}
+
+.colorHeart, .uncolorHeart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0px;
+	padding: 0px;
+	width: 100%;
+	background-color: white;
+}
+
+.uncolorStar, .colorStar {
+	font-size: 24px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0px;
+	font-size: 20px;
+	padding: 0px;
+	background-color: white;
+	font-size: 20px
+}
+
+.colorHeart {
+	cursor: pointer;
+	color: red;
+	font-size: 30px;
+}
+
+.uncolorHeart {
+	cursor: pointer;
+	color: black;
+	font-size: 20px;
+}
+
+.colorHeart:hover, .uncolorHeart:hover {
+	scale: 1.2;
+}
+
+.uncolorStar {
+	color: black;
+}
+
+.colorStar {
+	color: yellow;
+}
+
+.colorStar:hover, .uncolorStar:hover {
+	scale: 1.2;
+}
+</style>
+</head>
+<body>
+	<!-- 헤더 -->
+	<header>
+		<!-- 기업명 및 별표 -->
+		<div class="companySection">
+			<button class="colorStar"
+				th:attr="data-company-id=${jobApplication.companyId}"
+				th:if="${companyList.contains(jobApplication.companyId)}">⭐</button>
+			<button class="uncolorStar"
+				th:attr="data-company-id=${jobApplication.companyId}"
+				th:if="${!companyList.contains(jobApplication.companyId)}">☆</button>
+			<div id="companyName" th:text="${jobApplication.companyId}">기업명</div>
+		</div>
+	</header>
+
+	<!-- 네비게이션 -->
+	<nav>
+		<!-- 공고명 및 하트 -->
+		<div id="nav1">
+			<div class="jobTitleSection">
+				<button class="colorHeart"
+					th:attr="data-application-num=${jobApplication.applicationNum}"
+					th:if="${jobApplication.isBookmarked == 1}">♥</button>
+				<button class="uncolorHeart"
+					th:attr="data-application-num=${jobApplication.applicationNum}"
+					th:if="${jobApplication.isBookmarked != 1}">♡</button>
+				<div id="applicationName">[[${jobApplication.applicationName}]]</div>
+			</div>
+			<button>입사지원 (리쥬메 되야 가능)</button>
+		</div>
+		<div id="nav2">
+			<!-- 첫 번째 열 -->
+			<div class="infoColumn">
+				<div class="infoGroup">
+					<div>지역</div>
+					<div th:text="${jobApplication.workingArea}">서울</div>
+				</div>
+				<div class="infoGroup">
+					<div>학력</div>
+					<div th:if="${jobApplication.education == 'HighSchool'}">고등학교
+						졸업</div>
+					<div th:if="${jobApplication.education == 'AssociateDegree'}">전문대
+						졸업</div>
+					<div th:if="${jobApplication.education == 'BachelorDegree'}">대학교
+						졸업</div>
+					<div th:if="${jobApplication.education == 'MasterDegree'}">석사
+						학위</div>
+					<div th:if="${jobApplication.education == 'DoctoralDegree'}">박사
+						학위</div>
+				</div>
+				<div class="infoGroup">
+					<div>경력</div>
+					<div th:if="${jobApplication.career == 'senior'}">경력</div>
+					<div th:if="${jobApplication.career == 'junior'}">신입</div>
+				</div>
+			</div>
+
+			<!-- 두 번째 열 -->
+			<div class="infoColumn">
+				<div class="infoGroup">
+					<div>급여</div>
+					<div th:text="${jobApplication.salary}">4000만원</div>
+				</div>
+				<div class="infoGroup">
+					<div>근무일시</div>
+					<div th:text="${jobApplication.schedule}">9:00~18:00</div>
+				</div>
+				<div class="infoGroup">
+					<div>고용형태</div>
+					<div th:text="${jobApplication.employmentType}">정규직</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- 경고 및 이미지 섹션 -->
+	<section>
+		<!-- 경고 -->
+		<div class="warningSection">
+			<button>조회수(공사중..)</button>
+			<button>공유하기(공사중..)</button>
+			<button>신고하기(공사중..)</button>
+		</div>
+
+		<!-- 이미지 -->
+		<div class="imageSection">
+			<h2>공고이미지..</h2>
+			<br>
+			<hr>
+			<br> <br> <img alt="1"
+				th:src="@{/uploads/{fileName}(fileName=${jobApplication.fileName})}">
+
+		</div>
+	</section>
+
+	<!-- 푸터 -->
+	<footer>
+		<div class="location">
+			<div style="border: 1px #ddd solid;">근무지 위치</div>
+			<div id="map">지도 (공사중..)</div>
+		</div>
+		<div class="jobTimer">
+			<div>
+				<div style="border: 1px #ddd solid;">남은 기간</div>
+				<div style="border: 1px #ddd solid;">10일</div>
+			</div>
+			<div>
+				<div style="border: 1px #ddd solid;">시작일</div>
+				<div th:text="${jobApplication.createdDate}"
+					style="border: 1px #ddd solid;">2024-12-01</div>
+			</div>
+			<div>
+				<div style="border: 1px #ddd solid;">마감일</div>
+				<div th:text="${jobApplication.deadlineDate}"
+					style="border: 1px #ddd solid;">2024-12-15</div>
+			</div>
+			<input type="button" value="입사지원(리쥬메 끝나야 가능)">
+		</div>
+	</footer>
+</body>
+<!-- 공고 스크립트 -->
+<script>
+document.querySelector("body").addEventListener("click", (event) => {
+    const userId = "user001";
+
+    if (event.target.classList.contains("colorHeart")) {
+        const applicationNum = event.target.dataset.applicationNum;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/removeHeart");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 취소되었습니다!");
+                event.target.classList.remove("colorHeart");
+                event.target.classList.add("uncolorHeart");
+                event.target.textContent = "♡";
+            }
+        };
+
+        const data = JSON.stringify({ userId, applicationNum });
+        xhr.send(data);
+    }
+
+    if (event.target.classList.contains("uncolorHeart")) {
+        const applicationNum = event.target.dataset.applicationNum;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/addHeart");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 추가되었습니다!");
+                event.target.classList.remove("uncolorHeart");
+                event.target.classList.add("colorHeart");
+                event.target.textContent = "♥";
+            }
+        };
+        const data = JSON.stringify({ userId, applicationNum });
+        xhr.send(data);
+    }
+});
+</script>
+<!-- 기업 스크립트 -->
+<script>
+document.querySelector("body").addEventListener("click", (event) => {
+    const userId = "user001";
+
+    if (event.target.classList.contains("colorStar")) {
+        const companyId = event.target.dataset.companyId;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/removeStar");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 취소되었습니다!");
+                event.target.classList.remove("colorStar");
+                event.target.classList.add("uncolorStar");
+                event.target.textContent = "☆";
+            }
+        };
+
+        const data = JSON.stringify({ userId, companyId });
+        xhr.send(data);
+    }
+
+    if (event.target.classList.contains("uncolorStar")) {
+        const companyId = event.target.dataset.companyId;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/sangin/addStar");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("북마크가 추가되었습니다!");
+                event.target.classList.remove("uncolorStar");
+                event.target.classList.add("colorStar");
+                event.target.textContent = "★";
+            }
+        };
+
+        const data = JSON.stringify({ userId, companyId });
+        xhr.send(data);
+    }
+});
+</script>
+</html>

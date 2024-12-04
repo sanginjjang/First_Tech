@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+            width: 80vw; /* 너비를 좀 더 넓게 */
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 15%;
+            background-color: aliceblue;
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 5%;
+            background-color: ivory;
+            display: flex;
+            justify-content: center;
+        }
+
+        #nav1 {
+            font-weight: bold;
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 70%;
+            background-color: lightgray;
+            font-size: 20px; /* 글자 크기를 줄여서 테이블 내용이 잘 보이도록 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
+        }
+
+        footer {
+            font-weight: bold;
+            border: lightgray solid 1px;
+            width: 100%;
+            height: 10%;
+            background-color: aliceblue;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .heart {
+            cursor: pointer;
+            color: gray;
+            transition: color 0.3s;
+        }
+
+        
+        .heart.bookmarked {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header><a href="/">Header</a></header>
+    <nav>
+        <div id="nav1">
+            <div>
+                <a href="/sangin/applicationsForm">채용공고</a>
+            </div>
+            <div>
+                <a href="/c/companyInfo/1">기업 정보</a>
+            </div>
+            <div>
+                이력서관리
+            </div>
+            <div>
+                지원현황
+            </div>
+            <div>
+                관심공고
+            </div>
+            <div>
+                <a href="/b/board/1">커뮤니티</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section>		
+        <table>
+            <thead>
+                <tr>
+                    <th>기업 이름</th>
+                    <th>홈페이지 주소</th>
+                    <th>사원 수</th>
+                    <th>총 매출액</th>
+                    <th>♥</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="companys : ${companys}">
+                    <tr>
+                       <td><a th:href="@{/c/companyDetail/{companyName}(companyName=${companys.companyName})}"
+  						 th:text="${companys.companyName}"></a></td>
+                        <td th:text="${companys.companyEmail}"></td>
+                        <td th:text="${companys.employees}"></td>
+                        <td th:text="${companys.annualRevenue}"></td>
+                        <td>
+                        <span class="heart" 
+						          th:data-company-id="${companys.companyId}" 
+						          th:data-user-id="${session.user.userId}"
+						          th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span>
+						          
+						          
+                        </td>
+                    </tr>
+                </th:block>
+                <tr>
+					<td colspan="6">
+					<th:block th:if="${currentPageNum > 1}">
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+						</th:block>
+						
+						<th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+							<span th:if="${currentPageNum == pageNum}"> <a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"><b th:text="${pageNum}"></b></a>&nbsp;&nbsp;
+							</span>
+							<span th:if="${currentPageNum != pageNum}"> 
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a>&nbsp;&nbsp;
+							</span>
+						</th:block>
+						
+						
+						
+						<th:block th:if="${currentPageNum < endPageNum}">
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+						</th:block>
+					</td>
+				</tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <footer>Footer</footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+ <script>
+ $(document).ready(function() {
+	    $('.heart').click(function() {
+	        var companyId = $(this).data('company-id');
+	        var userId = $(this).data('user-id');
+	        var heartElement = $(this); 
+	        
+	        console.log("123123123123");
+	        // 현재 하트가 북마크 상태인지를 확인
+	        var isBookmarked = heartElement.hasClass('bookmarked');
+	        
+	        // Ajax 요청을 보낼 URL 및 메서드 설정
+	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark'; // 상태에 따라 추가/삭제 URL 변경
+	        
+	        // Ajax 요청
+	        $.ajax({
+	            url: url, // 북마크 추가 또는 삭제 URL
+	            method: 'POST',
+	            data: {
+	                companyId: companyId,
+	                userId: userId
+	            },
+	            contentType: 'application/x-www-form-urlencoded',
+	            success: function(response) {
+	                console.log(isBookmarked ? '북마크 삭제 성공!' : '북마크 추가 성공!');
+	                // 상태에 따라 하트의 클래스를 토글
+	                heartElement.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('에러 발생:', error);
+	            }
+	        });
+	    });
+	});
+
+
+</script>
+
+</html>

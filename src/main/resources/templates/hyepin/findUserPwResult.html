@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    header {
+        font-weight: bold;
+        border: lightgray solid 1px;
+        width: 100%;
+        height: 15%;
+        background-color: aliceblue;
+        font-size: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    footer {
+        font-weight: bold;
+        border: lightgray solid 1px;
+        width: 100%;
+        height: 10%;
+        background-color: Faliceblue;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        /* 링크 기본 스타일 */
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .login {
+        font-size: 20px;
+    }
+
+    #home {
+        margin: 0px 30px 0px 30px;
+    }
+
+
+    #logo {
+        margin-left: 30px;
+    }
+
+    section {
+        width: 100%;
+        height: 70%;
+        border: lightgray solid 1px;
+        text-align: center;
+        padding: 50px 0px 50px 0px;
+    }
+
+    /*여기까지 공통*/
+
+    .text{
+        font-size: 30px;
+    }
+
+    .formStyle {
+        width: 40%;
+        height: 50px;
+        font-size: 20px;
+    }
+    .formStyle1{
+        height: 40px;
+        width: 12%;
+    }
+    #userPhone{
+        width: 8%;
+    }
+    #textArea{
+        color: red;
+    }
+
+</style>
+
+<body>
+    <header>
+        <div id="logo"> 로고 </div>
+        <div class="login">
+            <span><a href="/">홈으로</a></span>
+            <span id="home"> <a href=""> 기업 홈</a></span>
+        </div>
+    </header>
+    <section>
+       
+        <div>
+            <span class="text">비밀번호 찾기</span>
+            <p>비밀번호를 재설정하세요.</p> <br>
+        </div>
+        <form id="findForm">
+            <input type="hidden" name="userId" id="userId" th:value="${userId}">
+            <div>
+                <input type="text" name="userPassword" id="userPassword" class="formStyle"> <br><br>
+                <input type="text" name="userPwCheck" id="userPwCheck" class="formStyle" placeholder="비밀번호 확인"> <br>
+            </div>
+            <div id="textArea"></div>
+            <br>
+            <input type="button" onclick="update()" class="formStyle" value="변경">
+
+        </form>
+    </section>
+    <footer>Footer</footer>
+</body>
+
+<script>
+
+    function update(){
+    	
+        const userPassword = document.getElementById("userPassword").value;
+        const userPwCheck = document.getElementById("userPwCheck").value;
+        const textArea = document.getElementById("textArea");
+       	
+        console.log("userPassword"+userPassword);
+        console.log("userPwCheck"+userPwCheck);
+
+        if(!userPassword.trim()){
+            textArea.innerHTML = "새 비밀번호를 입력하세요.";
+            return;
+        }
+
+        if(!userPwCheck.trim()){
+            textArea.innerHTML = "비밀번호를 한번 더 입력하세요.";
+            return;
+        }
+        
+        if(userPassword != userPwCheck){
+            textArea.innerHTML = "비밀번호가 일치하지 않습니다. 다시 시도해 보세요.";
+            return;
+        }
+        
+        
+	    const form = document.querySelector("form");
+		const formData = new FormData(form);
+		
+		const userId = document.getElementById("userId").value;
+		
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+        	if(xhr.status === 200){
+        		const response = xhr.responseText;
+        		if(response === "success"){
+					alert("비밀번호가 변경되었습니다!");
+					window.location.href = `/hyepin/findIdUserlogin/${userId}`;
+        		}else if(response === "fail"){
+        			alert("비밀번호 변경 실패.");
+        		}
+        	}else{
+        		alert("서버오류 발생");
+        	}
+        }
+        
+        xhr.open("POST", "/hyepin/findPwUpdate");  
+        //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(formData);
+		//document.getElementById("findForm").submit();
+    }
+    
+
+
+</script>
+
+
+
+</html>
