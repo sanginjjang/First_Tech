@@ -10,4 +10,5 @@ import com.example.demo.dto.ApplicationDto;
 @Mapper
 public interface ICompanyApplicationManagementDao {
     List<ApplicationDto> companyApplicationList(@Param("companyId") String companyId);
+    int insertApplication(@Param("dto") ApplicationDto dto);
 }

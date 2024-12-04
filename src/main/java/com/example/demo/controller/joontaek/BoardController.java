@@ -83,92 +83,23 @@ public class BoardController {
 
 		return "/taek/boardWriteForm";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// @RequestMapping("boardWrite")
-	public String boardWrite(Model model, HttpServletRequest request, BoardVo vo) {
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("boardUser");
-		vo.setBoardWriter(userId);
-
-//		
-//		MultipartFile file = board.getUploadFileName();
-//		String fileName = file.getOriginalFilename();
-//		File uploadFile = new File(uploadPath + fileName);
-//		
-//		try {
-//			file.transferTo(uploadFile);
-//		} catch (IllegalStateException | IOException e) {
-//			e.printStackTrace();
-//		}*/
-		BoardDto board = new BoardDto();
-
-		int pageNum = 1;
-		int startNum = pageNum * amount - amount;
-		List<BoardViewDto> boardList = boardService.getBoardListPaging(startNum, amount);
-		int totalCnt = boardService.getBoardCount();
-		int endPageNum = Math.ceilDiv(totalCnt, amount);
-
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("currentPageNum", pageNum);
-		model.addAttribute("endPageNum", endPageNum);
-
-		boardService.regBoard(board);
-
-		return "/taek/board";
-	}
-
 	// ----------------------------파일업로드 vo용 테스트----------------------------------
 	@RequestMapping("boardWrite")
-	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo,
-			@RequestParam("uploadFileName") MultipartFile uploadFileName) {
+	public String boardWriteTest(Model model, HttpServletRequest request, BoardVo vo) {
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("boardUser");
 		vo.setBoardWriter(userId);
-
-		
-		
-		
-		
-		
-		
+	
 		MultipartFile file = vo.getUploadFileName();
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(uploadPath + fileName);
-
-		
-		
-		
-		
-		
-		
-		
 		
 		try {
 			file.transferTo(uploadFile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-
-	    
-	    
+    
 		BoardDto board = new BoardDto();
 
 		board.setBoardTitle(vo.getBoardTitle());

@@ -174,7 +174,8 @@ footer input[type="button"]:hover {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 0px; font-size : 20px;
+	border: 0px;
+	font-size: 20px;
 	padding: 0px;
 	background-color: white;
 	font-size: 20px
@@ -248,11 +249,21 @@ footer input[type="button"]:hover {
 				</div>
 				<div class="infoGroup">
 					<div>학력</div>
-					<div th:text="${jobApplication.education}">대졸</div>
+					<div th:if="${jobApplication.education == 'HighSchool'}">고등학교
+						졸업</div>
+					<div th:if="${jobApplication.education == 'AssociateDegree'}">전문대
+						졸업</div>
+					<div th:if="${jobApplication.education == 'BachelorDegree'}">대학교
+						졸업</div>
+					<div th:if="${jobApplication.education == 'MasterDegree'}">석사
+						학위</div>
+					<div th:if="${jobApplication.education == 'DoctoralDegree'}">박사
+						학위</div>
 				</div>
 				<div class="infoGroup">
 					<div>경력</div>
-					<div th:text="${jobApplication.career}">3년</div>
+					<div th:if="${jobApplication.career == 'senior'}">경력</div>
+					<div th:if="${jobApplication.career == 'junior'}">신입</div>
 				</div>
 			</div>
 
@@ -289,12 +300,9 @@ footer input[type="button"]:hover {
 			<h2>공고이미지..</h2>
 			<br>
 			<hr>
-			<br> <br> <img alt="공고 이미지..1"
-				src="/uploads/applicationImg1.png"> <img alt="공고 이미지..2"
-				src="/uploads/applicationImg2.png"> <img alt="공고 이미지..3"
-				src="/uploads/applicationImg3.png"> <img alt="공고 이미지..6"
-				src="/uploads/applicationImg6.png"> <img alt="공고 이미지..7"
-				src="/uploads/applicationImg7.png">
+			<br> <br> <img alt="1"
+				th:src="@{/uploads/{fileName}(fileName=${jobApplication.fileName})}">
+
 		</div>
 	</section>
 

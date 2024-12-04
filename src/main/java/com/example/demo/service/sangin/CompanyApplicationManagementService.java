@@ -16,5 +16,10 @@ public class CompanyApplicationManagementService implements ICompanyApplicationM
 	public List<ApplicationDto> companyApplicationList(String companyId) {
 		return dao.companyApplicationList(companyId);
 	}
+	@Override
+	public int insertApplication(ApplicationDto dto) {
+		int result = dao.insertApplication(dto);
+		return result;
+	}
 
 }
