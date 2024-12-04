@@ -116,12 +116,18 @@ public class SanginController {
 		applicationService.removeStar(dto);
 		return "기업 북마크 제거 성공";
 	}
-	// 기업 공고 관리
+	// 기업 공고 관리 폼
 	@RequestMapping("/companyApplicationManagementForm")
 	String companyApplicationManagementForm(Model model) {
 		String companyId = "comp001";
 		List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(companyId);
 		model.addAttribute("companyApplication", companyApplication);
 		return "sangin/companyApplicationManagementForm";
+	}
+	// 기업 공고 작성 폼
+	@RequestMapping("/insertApplicationForm")
+	String insertApplicationForm() {
+		// 기업 번호를 받아와야 할 것이에요
+		return "sangin/insertApplicationForm";
 	}
 }
