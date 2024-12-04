@@ -57,5 +57,55 @@ public class UserService implements IUserService {
 		return result;
 	}
 
+	@Override
+	public UserDto findUserPw(UserDto user) {
+		UserDto result = userDao.findUserPw(user);
+		return result;
+	}
+
+	@Override
+	public int updateUserPw(UserDto user) {
+		int result = userDao.updateUserPw(user);
+		return result;
+	}
+
+
+	@Override
+	public String updateUserInformation(UserDto user) {
+		
+		String msg = "fail";
+		
+		boolean check1 = false;
+		boolean check2 = false;
+		
+		//전화번호로 찾기 
+		UserDto phoneCheck = userDao.getUserByPhone(user.getUserPhone());
+		if(phoneCheck != null) {
+			if(user.getUserId().equals(phoneCheck.getUserId())) {
+				check1 = true;
+			}
+			msg = "exists";
+		}else {
+			check1 = true;
+		}
+		
+		//이메일로 찾기
+		UserDto emailCheck = userDao.getUserByEmail(user.getUserEmail());
+		if(emailCheck != null) {
+			if(user.getUserId().equals(emailCheck.getUserId())) {
+				check2 = true;
+			}
+			msg = "exists";
+		}else {
+			check2 = true;
+		}
+		
+		if(check1 && check2) {
+			msg = "success";
+			userDao.updateUserInfomation(user);
+		}
+		return msg;
+	}
+
 	
 }

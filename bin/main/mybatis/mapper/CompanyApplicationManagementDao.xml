@@ -2,8 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.dao.sangin.ICompanyApplicationManagementDao">
     <select id="companyApplicationList" resultType="com.example.demo.dto.ApplicationDto">
         SELECT * FROM applications WHERE companyId = #{companyId}
     </select>
+=======
+<mapper
+	namespace="com.example.demo.dao.sangin.ICompanyApplicationManagementDao">
+	<select id="companyApplicationList"
+		resultType="com.example.demo.dto.ApplicationDto">
+		SELECT
+		applicationNum,
+		applicationName,
+		companyId,
+		workingArea,
+		career,
+		education,
+		employmentType,
+		salary,
+		roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS
+		deadlineDate
+		FROM applications WHERE companyId = #{companyId}
+	</select>
+	<insert id="insertApplication">
+		INSERT INTO Applications (applicationName, companyId,
+		career,
+		education,
+		salary, workingArea, employmentType, roleId,
+		filename)
+		VALUES
+		(#{dto.applicationName}, #{dto.companyId},
+		#{dto.career}, #{dto.education}, #{dto.salary},
+		#{dto.workingArea},
+		#{dto.employmentType}, 1 ,#{dto.fileName})
+	</insert>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 </mapper>

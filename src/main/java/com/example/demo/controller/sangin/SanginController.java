@@ -1,11 +1,13 @@
 package com.example.demo.controller.sangin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,13 @@ import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.sangin.ApplicationService;
 import com.example.demo.service.sangin.BookmarkedApplicationService;
 import com.example.demo.service.sangin.CompanyApplicationManagementService;
+import com.example.demo.vo.joontaek.BoardVo;
 
 @Controller
 @RequestMapping("/sangin")
 public class SanginController {
+	@Value("${spring.servlet.multipart.location:./uploads}")
+	private String uploadPath;
 	@Autowired
 	ApplicationService applicationService;
 	@Autowired
@@ -54,7 +59,6 @@ public class SanginController {
 		System.out.println("디테일 들어오는 것엔 문제가 없습니다");//확인 완료
 		System.out.println("Application Number: " + applicationNum);
 		ApplicationDto application = applicationService.getApplication(applicationNum);
-		application.toString();
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
 		model.addAttribute("jobApplication", application);
 		model.addAttribute("companyList", companyList);
@@ -132,19 +136,44 @@ public class SanginController {
 	@RequestMapping("/insertApplicationForm/{companyId}")
 	String insertApplicationForm(@PathVariable("companyId") String companyId, Model model) {
 		// 기업 번호를 받아왔어요~
-		System.out.println("@@@@@@");
+		System.out.println("기업공고 작성 함수 시랭...");
 		System.out.println(companyId);
-		System.out.println("@@@@@@");
 		model.addAttribute("companyId", companyId);
 		return "sangin/insertApplicationForm";
 	}
 	@RequestMapping("/insertApplications")
-	public String insertApplication(@RequestParam("fileName") MultipartFile file, ApplicationDto application) {
-		System.out.println("14:12");
-		System.out.println("14:12");
-		System.out.println("14:12");
-		System.out.println("@@@@@@@지금 어디가 잘못된거야 잠이와");
-	    System.out.println("Uploaded file: " + file.getOriginalFilename());
+	public String insertApplication(@RequestParam("file") MultipartFile paramFile, ApplicationDto dto) {
+		System.out.println("Uploaded file: " + paramFile.getOriginalFilename());
+		//1. multipart 파일 객체 받고
+		//2. 파일 네임 따로 뽑고
+		//3. file 객체에 경로랑 이름 저장
+		//4. 이동하는데 오류 처리
+		MultipartFile file = paramFile;
+		String fileName = file.getOriginalFilename();
+		File uploadFile = new File(uploadPath + fileName);
+		
+		try {
+			file.transferTo(uploadFile);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("12:40 시작");
+		System.out.println("14:40");
+		System.out.println("14:50 시작");
+		System.out.println(dto.toString());
+		dto.setFileName(fileName);//파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
+		System.out.println("파일 네임 테스트 합니다 15:37");
+		System.out.println(fileName);
+		System.out.println(fileName);
+		System.out.println("파일 네임 테스트 합니다 15:37");
+		int result = companyApplicationService.insertApplication(dto);
+		if(result == 1) {
+			System.out.println("공고 등록 성공");
+			System.out.println("15:?? 해결");
+		}else {
+			System.out.println("공고 등록 실패");
+		}
 	    return "sangin/sum";
 	}
 

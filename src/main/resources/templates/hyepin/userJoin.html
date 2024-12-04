@@ -70,14 +70,26 @@
         font-size: 20px;
     }
 
-    #userId, #userNickname{
+    #userId, #userNickname {
         width: 30%;
         height: 50px;
         font-size: 20px;
     }
+    
+    #userPostalCode{
+    	width: 25%;
+        height: 50px;
+        font-size: 20px;
+    }
 
-    #userIdCheck, #userNicknameCheck{
+    #userIdCheck, #userNicknameCheck {
         width: 10%;
+        height: 55px;
+        font-size: 15px;
+    }
+    
+    #userPostalCodeCheck{
+    	width: 15%;
         height: 55px;
         font-size: 15px;
     }
@@ -194,19 +206,18 @@
                 <input type="text" name="userPhoneLast" id="userPhoneLast" class="formStyle2" maxlength="4">
                 <br>
                 <span class="ajax" id="phoneAjax"></span>
-
-
-                <p>주소</p>
-                <span>여기에 우편번호 찾는 코드가 들어갑니다.</span>
+				
+				<p>우편번호</p>
+				<input type="text"  class="formStyle" name="userPostalCode" id="userPostalCode" placeholder="우편번호" readonly>
+				<input type="button" id="userPostalCodeCheck" onclick="findPostcode()" value="우편번호 찾기"><br>
+				
+				<p>주소</p>
+				<input type="text" name="addressFirst" id="addressFirst" placeholder="도로명주소" class="formStyle" readonly>
+				<span id="guide" style="color:#999;display:none"></span><br><br>
+				<input type="text" name="addressSecond" id="addressSecond" class="formStyle"  placeholder="상세주소">
                 <br><br>
-                <span class="ajax" id="addrAjax"></span> <br>
-               	<p>우편번호</p>
-                <input type="text" name="userPostalCode" id="userPostalCode" class="formStyle" maxlength="5"> <br>
                 <span class="ajax" id="postalCodeAjax"></span>
-                <p>주소</p>
-                <input type="text" name="userAddress" id="userAddress" class="formStyle" maxlength="3" placeholder="예시) 부산시"> <br>
-                <span class="ajax" id="addressAjax"></span>
-                
+               
                 <p>약관</p>
                 <div class="container">
                     <div class="terms-row">
@@ -252,12 +263,14 @@
         </form>
     </section>
     <footer>Footer</footer>
-</body>
 
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     const form = document.querySelector("form");
     let check = false;
     let nickNameCheck = false;
+    let checkPostcode = false;
     
     //ID 중복체크
     function idCheck(){
@@ -335,11 +348,9 @@
         const nameAjax = document.getElementById("nameAjax");
         const ssnAjax = document.getElementById("ssnAjax");
         const phoneAjax = document.getElementById("phoneAjax");
-        const addrAjax = document.getElementById("addrAjax");
         const agreeAjax = document.getElementById("agreeAjax");
-        const postalCodeAjax = document.getElementById("postalCodeAjax");
-        const addressAjax = document.getElementById("addressAjax");
-
+		const postalCodeAjax = document.getElementById("postalCodeAjax");
+      
         //시작될 때 ajax 모두 초기화
         idAjax.innerHTML = "";
         nicknameAjax.innerHTML = "";
@@ -348,10 +359,8 @@
         nameAjax.innerHTML = "";
         ssnAjax.innerHTML = "";
         phoneAjax.innerHTML = "";
-        addrAjax.innerHTML = "";
         agreeAjax.innerHTML = "";
-        postalCodeAjax.innerHTML = "";
-        addressAjax.innerHTML = "";
+       
 
         //모두 다 됐는지 확인하기
         let isValid = true;
@@ -365,7 +374,7 @@
             isValid = false;
         }
         
-        
+        /*
         //주소 확인
         const addrRegex = /^[가-힣]+$/;
         const address = document.getElementById("userAddress").value;
@@ -381,8 +390,9 @@
         	document.getElementById("userAddress").focus();
             isValid = false;
         }
+        */
         
-        
+        /*
         //우편번호 확인
         const postalCodeRegex = /^\d*$/;
         const postalCode = document.getElementById("userPostalCode").value;
@@ -398,7 +408,7 @@
         	postalCodeAjax.innerHTML = "우편번호에 공백이 포함될 수 없습니다.";
         	isValid = false;
         }
-        
+        */
         
       	//전화번호 확인
         const phoneFirst = document.getElementById("userPhoneFirst").value;
@@ -439,7 +449,6 @@
             isValid = false;
         }
         
-        
         // 비밀번호 확인
         const userPassword = document.getElementById("userPassword").value;
         const userPwCheck = document.getElementById("userPwCheck").value;
@@ -458,7 +467,7 @@
         	isValid = false;
         }
         
-      //닉네임 확인
+      	//닉네임 확인
         if(!nickNameCheck){
         	nicknameAjax.innerHTML = "닉네임 중복 확인 후 가입을 진행해 주세요."
             document.getElementById("userNickname").focus();
@@ -472,17 +481,30 @@
             isValid = false;
         }
         
+        //우편번호 확인
+        if(!checkPostcode){
+        	postalCodeAjax.innerHTML = "주소 입력 후 가입을 진행해 주세요."
+        	document.getElementById("userPostcode").focus();
+            isValid = false;
+        }
+        
         
 
         // ------------------------------------------------------------
         //여기서부터 AJax
         if(isValid){
         	
-      
-     		const form = document.getElementById("joinForm");
+      		const form = document.getElementById("joinForm");
         	const formData = new FormData(form);
 			//const formData = new URLSearchParams(new FormData(form)).toString();
         	
+			//주소 연결
+			const addressFirst = document.getElementById("addressFirst").value;
+			const addressSecond = document.getElementById("addressSecond").value;
+			const fullAddress = `${addressFirst} ${addressSecond}`;
+			console.log(fullAddress);
+			formData.append("userAddress", fullAddress);
+			
     		// 전화번호 DB 확인
             const fullPhone = `${phoneFirst}-${phoneMiddle}-${phoneLast}`;
             //document.getElementById("userPhone").value = fullPhone;
@@ -492,8 +514,7 @@
 			console.log(fullPhone);
 			formData.append("userPhone", fullPhone);
 			
-			
-            // 이메일 DB 확인
+			// 이메일 DB 확인
 
             //주민등록번호 DB확인
             const fullSsn = `${ssnFirst}-${ssnLast}`;
@@ -537,10 +558,53 @@
         });
     }
     
+    function findPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('userPostalCode').value = data.zonecode;
+                document.getElementById("addressFirst").value = roadAddr;
+                checkPostcode = true;
+                
+				var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+	
 
 </script>
-
+</body>
 
 
 </html>

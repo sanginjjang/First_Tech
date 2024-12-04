@@ -70,7 +70,7 @@
         font-size: 20px;
     }
 
-    #userId, #userNickname {
+    #userNickname {
         width: 30%;
         height: 50px;
         font-size: 20px;
@@ -82,7 +82,7 @@
         font-size: 20px;
     }
 
-    #userIdCheck, #userNicknameCheck {
+    #userNicknameCheck {
         width: 10%;
         height: 55px;
         font-size: 15px;
@@ -141,12 +141,12 @@
 
 
 <body>
-    <h1>개인 회원가입 Page</h1>
+    <h1>회원정보 수정 Page</h1>
     <header>
         <div id="logo"> 로고 </div>
         <div class="login">
             <span><a href="/">홈으로</a></span>
-            <span id="home"> <a href=""> 기업 홈</a></span>
+            <span id="home"> <a href="/hyepin/logout">로그아웃</a></span>
         </div>
     </header>
     <section>
@@ -157,13 +157,11 @@
         <form id="joinForm">
             <div>
                 <p>아이디</p>
-                <input type="text" name="userId" id="userId" >
-                <input type="button" value="중복확인" onclick="idCheck()" id="userIdCheck">
+                <input type="text" class="formStyle" name="userId" id="userId" th:value="${user.userId}" readonly>
                 <br>
-                <span class="ajax" id="idAjax"></span>
                 
                 <p>닉네임</p>
-                <input type="text" name="userNickname" id="userNickname" maxlength="10">
+                <input type="text" name="userNickname" id="userNickname" th:value="${user.userNickname}" maxlength="10">
                 <input type="button" value="중복확인" onclick="nicknameCheck()" id="userNicknameCheck">
                 <br>
                 <span class="ajax" id="nicknameAjax"></span>
@@ -174,20 +172,22 @@
                 <span class="ajax" id="pwAjax"></span>
                 
                 <p>이메일</p>
-                <input type="text" name="userEmail" id="userEmail" class="formStyle" > <br>
+                <input type="text" name="userEmail" id="userEmail" th:value="${user.userEmail}" class="formStyle" > <br>
                 <span class="ajax" id="emailAjax"></span>
                 
                 <p>이름</p>
-                <input type="text" name="userName" id="userName" class="formStyle" > <br>
+                <input type="text" name="userName" id="userName" th:value="${user.userName}" class="formStyle" > <br>
                 <span class="ajax" id="nameAjax"></span>
 
                 <p>주민등록번호</p>
-                <input type="text" name="userSsnFirst" id="userSsnFirst" class="formStyle1" maxlength="6">
+                <input type="hidden" id="ssn" th:value="${user.userSsn}">
+                <input type="text" name="userSsnFirst" id="userSsnFirst" class="formStyle1" maxlength="6" readonly>
                 -
-                <input type="text" name="userSsnLast" id="userSsnLast" class="formStyle1" maxlength="7"> <br>
+                <input type="text" name="userSsnLast" id="userSsnLast" class="formStyle1" maxlength="7" readonly> <br>
                 <span class="ajax" id="ssnAjax"></span>
                 
                 <p>휴대전화</p>
+                <input type="hidden" id="phone" th:value="${user.userPhone}">
                 <select name="userPhoneFirst" class="formStyle2" id="userPhoneFirst">
                     <option value="010">010</option>
                     <option value="011">011</option>
@@ -208,57 +208,19 @@
                 <span class="ajax" id="phoneAjax"></span>
 				
 				<p>우편번호</p>
-				<input type="text"  class="formStyle" name="userPostalCode" id="userPostalCode" placeholder="우편번호" readonly>
+				<input type="text"  class="formStyle" name="userPostalCode" id="userPostalCode" placeholder="우편번호" th:value="${user.userPostalCode}" readonly>
 				<input type="button" id="userPostalCodeCheck" onclick="findPostcode()" value="우편번호 찾기"><br>
 				
 				<p>주소</p>
-				<input type="text" name="addressFirst" id="addressFirst" placeholder="도로명주소" class="formStyle" readonly>
+				<input type="text" name="addressFirst" id="addressFirst" placeholder="도로명주소" class="formStyle" th:value="${user.userAddress}" readonly>
 				<span id="guide" style="color:#999;display:none"></span><br><br>
 				<input type="text" name="addressSecond" id="addressSecond" class="formStyle"  placeholder="상세주소">
                 <br><br>
                 <span class="ajax" id="postalCodeAjax"></span>
                
-                <p>약관</p>
-                <div class="container">
-                    <div class="terms-row">
-                        <input type="checkbox" class="terms" id="selectAll" onclick="toggleCheckboxes()"> 
-                        <span>전체동의</span><br>
-                    </div>
-                    <span>마케팅 정보 수신 동의(이메일, SMS/MMS)(선택) 동의를 포함합니다.</span>
-                    
-                    <div class="terms-row">
-                        <input type="checkbox" class="terms" id="terms1"> 
-                        <span>(필수) 개인회원 약관에 동의</span> 
-                        <span class="arrow">></span>
-                    </div>
-                    <div class="terms-row">
-                        <input type="checkbox" class="terms" id="terms2"> 
-                        <span>(필수) 개인정보 수집 및 이용에 동의</span> 
-                        <span class="arrow">></span>
-                    </div>
-                    <div class="terms-row">
-                        <input type="checkbox" class="terms" id="terms3"> 
-                        <span>(선택) 마케팅 정보 수신 동의 - 이메일</span>
-                        <span class="arrow">></span>
-                    </div>
-                    <div class="terms-row">
-                        <input type="checkbox" class="terms" id="terms4"> 
-                        <span>(선택) 마케팅 정보 수신 동의 - SMS/MMS</span>
-                        <span class="arrow">></span>
-                    </div>
-                </div>
-                
-                <span class="ajax" id="agreeAjax"></span>
-                
-                <p>안내</p>
-                <div class="container">
-                    <p>퍼스트테크 회원으로 가입하시면 하나의 ID로 퍼스트테크가 제공하는 모든 서비스를 이용하실 수 있습니다.</p>
-                </div>
-                
-            
             </div>
             <br>
-            <input type="button" onclick="find()" class="formStyle" value="회원가입 완료">
+            <input type="button" onclick="find()" class="formStyle" value="회원정보 수정">
 
         </form>
     </section>
@@ -267,46 +229,39 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    const form = document.querySelector("form");
-    let check = false;
-    let nickNameCheck = false;
-    let checkPostcode = false;
-    
-    //ID 중복체크
-    function idCheck(){
-        const userId = document.getElementById("userId").value;
-        const idAjax = document.getElementById("idAjax");
-        
-        const idRegex = /^[a-z0-9]{5,20}$/;
-		if(userId == ""){
-        	idAjax.innerHTML = "아이디를 입력하세요.";
-        }else if (/\s/.test(userId)) {  // 공백이 포함되어 있는지 검사
-            idAjax.innerHTML = "아이디에 공백이 포함될 수 없습니다.";
-        }else if(!idRegex.test(userId)){
-        	idAjax.innerHTML = "아이디는 5~20자의 영문 소문자와 숫자만 가능합니다.";
-        }else{
-        	const xhr = new XMLHttpRequest();
-            xhr.onload = function(){
-                if(xhr.status === 200){
-                    const response = xhr.responseText;
-                    if(response === "exists"){
-                        idAjax.innerHTML = "이미 사용 중인 아이디입니다.";
-                        check = false;
-                    }else if(response === "available"){
-                        idAjax.innerHTML = "사용 가능한 아이디입니다!";
-                        check = true;
-                    }
-                }else{
-                	 idAjax.innerHTML = "컨트롤러 오류";
-                }
-            }
-            xhr.open("POST", "/hyepin/idCheck");
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("userId=" + encodeURIComponent(userId));
-        }
-	};
+
+	const phone = document.getElementById("phone").value;
 	
-	function nicknameCheck(){
+	const phoneParts = phone.split('-');  // '-'를 기준으로 나눔
+
+	const userPhoneFirst = document.getElementById("userPhoneFirst");
+	userPhoneFirst.value = phoneParts[0];
+	console.log(userPhoneFirst.value);
+	
+	const userPhoneMiddle = document.getElementById("userPhoneMiddle");
+	userPhoneMiddle.value = phoneParts[1];
+	console.log(userPhoneMiddle.value);
+	
+	const userPhoneLast = document.getElementById("userPhoneLast");
+	userPhoneLast.value = phoneParts[2];
+	console.log(userPhoneLast.value);
+
+	const ssn = document.getElementById("ssn").value;
+	const ssnParts = ssn.split('-');  // '-'를 기준으로 나눔
+	
+	const userSsnFirst = document.getElementById("userSsnFirst");
+	userSsnFirst.value = ssnParts[0];
+	console.log(userSsnFirst.value);
+	
+	const userSsnLast = document.getElementById("userSsnLast");
+	userSsnLast.value = ssnParts[1];
+	console.log(userSsnLast.value);
+	
+    const form = document.querySelector("form");
+    let nickNameCheck = true;
+    let checkPostcode = true;
+    
+    function nicknameCheck(){
 		const userNickname = document.getElementById("userNickname").value;
         const nicknameAjax = document.getElementById("nicknameAjax");
         
@@ -341,74 +296,24 @@
     function find(){
     	
         // ajax 모음
-    	const idAjax = document.getElementById("idAjax");
     	const nicknameAjax = document.getElementById("nicknameAjax");
 		const pwAjax = document.getElementById("pwAjax");
         const emailAjax = document.getElementById("emailAjax");
         const nameAjax = document.getElementById("nameAjax");
         const ssnAjax = document.getElementById("ssnAjax");
         const phoneAjax = document.getElementById("phoneAjax");
-        const agreeAjax = document.getElementById("agreeAjax");
 		const postalCodeAjax = document.getElementById("postalCodeAjax");
       
         //시작될 때 ajax 모두 초기화
-        idAjax.innerHTML = "";
         nicknameAjax.innerHTML = "";
         pwAjax.innerHTML = "";
         emailAjax.innerHTML = "";
         nameAjax.innerHTML = "";
         ssnAjax.innerHTML = "";
         phoneAjax.innerHTML = "";
-        agreeAjax.innerHTML = "";
        
-
-        //모두 다 됐는지 확인하기
+		//모두 다 됐는지 확인하기
         let isValid = true;
-        
-		//약관동의 확인
-        const terms1 = document.getElementById("terms1");
-        const terms2 = document.getElementById("terms2");
-        if(!terms1.checked || !terms2.checked){
-            agreeAjax.innerHTML = "서비스 이용을 위해 약관에 동의해 주세요. "
-			document.getElementById("selectAll").focus();
-            isValid = false;
-        }
-        
-        /*
-        //주소 확인
-        const addrRegex = /^[가-힣]+$/;
-        const address = document.getElementById("userAddress").value;
-        if(!address.trim()){
-        	addressAjax.innerHTML = "주소를 입력하세요.";
-            document.getElementById("userAddress").focus();
-            isValid = false;	
-        }else if (/\s/.test(address)) {  // 공백이 포함되어 있는지 검사
-        	addressAjax.innerHTML = "주소에 공백이 포함될 수 없습니다.";
-        	isValid = false;
-        }else if (!addrRegex.test(address)) {
-        	addressAjax.innerHTML = "한글만 입력하세요.";
-        	document.getElementById("userAddress").focus();
-            isValid = false;
-        }
-        */
-        
-        /*
-        //우편번호 확인
-        const postalCodeRegex = /^\d*$/;
-        const postalCode = document.getElementById("userPostalCode").value;
-        if (!postalCodeRegex.test(postalCode)) {
-        	postalCodeAjax.innerHTML = "숫자만 입력 가능합니다.";
-        	document.getElementById("userPostalCode").focus();
-            isValid = false;
-        }else if(!postalCode.trim()){
-        	postalCodeAjax.innerHTML = "우편번호를 입력하세요.";
-            document.getElementById("userPostalCode").focus();
-            isValid = false;	
-        }else if (/\s/.test(postalCode)) {  // 공백이 포함되어 있는지 검사
-        	postalCodeAjax.innerHTML = "우편번호에 공백이 포함될 수 없습니다.";
-        	isValid = false;
-        }
-        */
         
       	//전화번호 확인
         const phoneFirst = document.getElementById("userPhoneFirst").value;
@@ -474,13 +379,6 @@
             isValid = false;
         }
         
-        //id 확인
-        if(!check){
-            idAjax.innerHTML = "아이디 중복 확인 후 가입을 진행해 주세요."
-            document.getElementById("userId").focus();
-            isValid = false;
-        }
-        
         //우편번호 확인
         if(!checkPostcode){
         	postalCodeAjax.innerHTML = "주소 입력 후 가입을 진행해 주세요."
@@ -488,8 +386,6 @@
             isValid = false;
         }
         
-        
-
         // ------------------------------------------------------------
         //여기서부터 AJax
         if(isValid){
@@ -528,19 +424,17 @@
             		const response = xhr.responseText;
             		if(response === "exists"){
             			alert("이미 가입된 정보가 있습니다.");
-            			window.location.href = "/hyepin/login";
-            		}else if(response === "ready"){
-            			alert("회원가입 실패!");
-            		}else if(response === "available"){
-            			alert("회원가입이 완료되었습니다.");
-            			window.location.href = "/hyepin/login";
+            		}else if(response === "fail"){
+            			alert("회원수정 실패!");
+            		}else if(response === "success"){
+            			alert("회원 수정이 완료되었습니다!");
             		}
             	}else{
             		alert("서버오류 발생");
             	}
             }
             
-            xhr.open("POST", "/hyepin/userJoinResult");  
+            xhr.open("POST", "/hyepin/updateUser");  
             //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send(formData);
         	

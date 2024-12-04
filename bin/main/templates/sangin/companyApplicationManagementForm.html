@@ -201,11 +201,18 @@ header div {
 					</div>
 					<div class="right">
 						<div>
+<<<<<<< HEAD
 							<a href="/applicant/applicantManage">지원자관리</a>
 							
 						</div>
 						<div th:text="${item.roleId}">roleId</div>
 						<div th:text="${#dates.format(item.deadlineDate, 'yyyy-MM-dd')}">deadlineDate</div>
+=======
+							<a href="">지원자 관리</a>
+						</div>
+						<div th:text="${item.roleId}">roleId</div>
+						<div th:text="${item.deadlineDate}">deadlineDate</div>
+>>>>>>> 6e66a530be85eed8d641574e10e1f919e7d23784
 						<div th:text="${item.onBoard}">진행 중</div>
 					</div>
 				</div>

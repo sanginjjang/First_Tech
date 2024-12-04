@@ -60,6 +60,10 @@ public class JoinController {
 		List<UserDto> users = userService.getUserList();
 		for(UserDto u : users) {
 			if(user.getUserPhone().equals(u.getUserPhone()) || user.getUserEmail().equals(u.getUserEmail()) || user.getUserSsn().equals(u.getUserSsn())){
+				System.out.println("들어온 정보:");
+				System.out.println(user.toString());
+				System.out.println("리스트에서 찾은 정보");
+				System.out.println(u.toString());
 				state = "exists";
 			}
 		}
