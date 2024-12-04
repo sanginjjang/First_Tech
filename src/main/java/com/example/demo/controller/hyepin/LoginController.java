@@ -44,8 +44,9 @@ public class LoginController {
 		}else {
 			if(userService.idCheck(user)) {
 				result = "success";
+				UserDto u = userService.getUser(user.getUserId());
 				HttpSession session = request.getSession();
-				session.setAttribute("user", user);
+				session.setAttribute("user", u);
 			}else {
 				result = "fail";
 			}
