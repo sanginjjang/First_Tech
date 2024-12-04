@@ -35,7 +35,7 @@
     <header><a href="/">Header</a></header>
     <nav>
         <div id="nav1">
-            <div><a href="/applicationsListForm">채용공고</a></div>
+            <div><a href="/sangin/applicationsListForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업 정보</a></div>
             <div>이력서관리</div>
             <div>지원현황</div>
@@ -52,6 +52,11 @@
                 <span th:text="'작성날짜: ' + ${board.createdDate}"></span> |
                 <span th:text="'조회수: ' + ${board.views}"></span>
             </div>
+            
+            <div class="board-image">
+        <img th:src="@{'/uploads/' + ${board.fileName}}" alt="첨부 이미지" style="max-width: 100%; height: auto; margin-top: 15px;">
+   		 </div>
+
             <div class="board-content" th:text="${board.boardContent}">게시글 내용</div>
         </div>
 

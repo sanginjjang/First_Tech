@@ -21,5 +21,8 @@ public class CompanyDto {
     private String ceo;                          // 대표자명
     private int employees;                       // 사원수
     private int annualRevenue;                   // 매출액
+    
+    private int isBookmarked;
+    
     private Timestamp companyRegistDate;        // 계정 생성일 (가입 일자)
 }
