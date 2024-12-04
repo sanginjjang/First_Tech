@@ -171,7 +171,7 @@ header div {
 </head>
 <body>
 	<header>
-		<div th:text="${companyApplication.get(0).companyId}">기업 이름</div>
+		<div th:text="${companyId}">기업 이름</div>
 		<div>
 			<span>공고 전체</span> <span>임시 저장</span> <span>채용 중</span>
 		</div>
@@ -180,7 +180,9 @@ header div {
 	<div class="main-container">
 		<div class="sidebar">
 			<h2>사이드바</h2>
-			<form action="/sangin/insertApplicationForm" method="POST">
+			<form
+				th:action="@{/sangin/insertApplicationForm/{companyId}(companyId=${companyId})}"
+				method="POST">
 				<button type="submit">+ 채용 공고 등록</button>
 			</form>
 		</div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>채용 공고 등록</title>
@@ -15,7 +15,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 20px auto;
-    width: 90%;
+    width: 80%;
 }
 
 .container {
@@ -32,10 +32,11 @@ body {
     border-radius: 5px;
 }
 
-.form-container h2 {
+.form-container span:nth-child(1) {
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: bold;
+    margin-right:20px;
 }
 
 .form-container label {
@@ -46,7 +47,12 @@ body {
 
 .form-container input[type="text"],
 .form-container input[type="date"],
-.form-container textarea {
+.form-container textarea,
+#employmentType,
+#career,
+#education,
+#workingArea,
+#salary{
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -131,47 +137,91 @@ textarea {
 <body>
     <div class="container">
         <div class="form-container">
-            <h2>채용 공고 등록</h2>
-            <form>
-                <label>공고명</label>
-                <input type="text" name="applicationName">
+            <span>
+            	채용 공고 등록
+            </span>
+            <span style="color: gray;">* 는 필수 입력입니다.</span>
+
+            <form id="form" th:action="@{/sangin/insertApplications}" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="companyId" th:value="${companyId}">
+                <label>* 공고명</label>
+                <input type="text" name="applicationName" placeholder="ex) 대쪽같은 사람 찾습니다..">
 
                 <label>공고 소개</label>
-                <textarea name="applicationIntro"></textarea>
+                <textarea name="applicationIntro" placeholder="ex) 가족같은 회사입니다..최신 커피 머신기 있습니다.. 저희 회사로 오세요..야근을 대비한 침대 구비 완료..
+                "></textarea>
 
                 <label>주요 업무</label>
-                <textarea name="keyTasks"></textarea>
+                <textarea name="keyTasks" placeholder="ex) 커피 타기.. 야근 하기.."></textarea>
 
-                <label>광고 파일</label>
+                <label>* 공고 이미지</label>
                 <div class="file-upload">
-                    <input type="file" name="adFile">
+                    <input type="file" name="fileName">
                     <button type="button">파일 첨부</button>
                 </div>
 
-                <label>요구 경력</label>
-                <input type="text" name="experience">
+                <label>* 희망 경력</label>
+                <select name="career" id="career">
+                	<option value="senior">신입</option>
+                	<option value="junior">경력</option>
+                </select>
 
-                <label>개발 직무</label>
-                <input type="text" name="jobRole">
+                <label>* 개발 직무</label>
+                <input type="text" name="roleId">
 
-                <label>요구 학력</label>
-                <input type="text" name="education">
+                <label>* 희망 학력</label>
+                <select name="education" id="education">
+                	<option value="HighSchool">고등학교 졸업</option>
+                	<option value="AssociateDegree">전문대학 졸업 (준학사)</option>
+                	<option value="BachelorDegree">대학교 졸업 (학사)</option>
+                	<option value="MasterDegree">석사 학위</option>
+                	<option value="DoctoralDegree">박사 학위</option>
+                </select>
 
-                <label>근무 지역</label>
-                <input type="text" name="location">
+                <label>* 급여</label>
+				<select name="salary" id="salary">
+				    <option value="below2000">2000만 이하</option>
+				    <option value="below3000">3000만 이하</option>
+				    <option value="below4000">4000만 이하</option>
+				    <option value="below5000">5000만 이하</option>
+				    <option value="below6000">6000만 이하</option>
+				    <option value="below7000">7000만 이하</option>
+				    <option value="below8000">8000만 이하</option>
+				    <option value="below9000">9000만 이하</option>
+				    <option value="below10000">1억 이하</option>
+				    <option value="companyRules">회사내 규율 따름</option>
+				</select>
 
-                <label>급여</label>
-                <input type="text" name="salary">
 
-                <label>근무 형태</label>
-                <input type="text" name="jobType">
+                <label>* 근무 지역</label>
+                <select name="workingArea" id="workingArea">
+				    <option value="seoul">서울</option>
+				    <option value="gyeonggi">경기</option>
+				    <option value="gwangju">광주</option>
+				    <option value="daegu">대구</option>
+				    <option value="daejeon">대전</option>
+				    <option value="busan">부산</option>
+				    <option value="ulsan">울산</option>
+				    <option value="incheon">인천</option>
+				    <option value="gangwon">강원</option>
+				    <option value="gyeongnam">경남</option>
+				    <option value="jeju">제주</option>
+				</select>
 
-                <label>마감일 설정</label>
-                <input type="date" name="deadline">
+
+                <label>* 고용 형태</label>
+                <select name="employmentType" id="employmentType">
+                	<option value="fullTime">정규직</option>
+                	<option value="partTime">계약직</option>
+                </select>
+
+                <label>* 마감일 설정</label>
+                <input type="date" name="deadlineDate">
 
                 <div class="button-container">
-                    <button type="button">공고 임시 저장</button>
-                    <button type="submit">공고 작성 완료</button>
+                    <button type="button">공고 임시 저장(ajax)</button>
+	                <button type="submit">공고 작성 완료</button>
                 </div>
             </form>
         </div>

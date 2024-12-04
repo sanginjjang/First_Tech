@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ApplicationDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
@@ -122,12 +125,27 @@ public class SanginController {
 		String companyId = "comp001";
 		List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(companyId);
 		model.addAttribute("companyApplication", companyApplication);
+		model.addAttribute("companyId", companyId);
 		return "sangin/companyApplicationManagementForm";
 	}
 	// 기업 공고 작성 폼
-	@RequestMapping("/insertApplicationForm")
-	String insertApplicationForm() {
-		// 기업 번호를 받아와야 할 것이에요
+	@RequestMapping("/insertApplicationForm/{companyId}")
+	String insertApplicationForm(@PathVariable("companyId") String companyId, Model model) {
+		// 기업 번호를 받아왔어요~
+		System.out.println("@@@@@@");
+		System.out.println(companyId);
+		System.out.println("@@@@@@");
+		model.addAttribute("companyId", companyId);
 		return "sangin/insertApplicationForm";
 	}
+	@RequestMapping("/insertApplications")
+	public String insertApplication(@RequestParam("fileName") MultipartFile file, ApplicationDto application) {
+		System.out.println("14:12");
+		System.out.println("14:12");
+		System.out.println("14:12");
+		System.out.println("@@@@@@@지금 어디가 잘못된거야 잠이와");
+	    System.out.println("Uploaded file: " + file.getOriginalFilename());
+	    return "sangin/sum";
+	}
+
 }
