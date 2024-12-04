@@ -26,7 +26,7 @@ nav {
 	border: lightgray solid 1px;
 	width: 100%;
 	height: 35%;
-	background-color: ivory;
+	background-color:ivory;
 	display: flex;
 	flex-direction: column;
 }
@@ -440,7 +440,7 @@ section {
 							이름</div>
 						<button class="colorStar"
 							th:attr="data-company-id=${jobApplication.companyId}"
-							th:if="${companyList.contains(jobApplication.companyId)}">⭐</button>
+							th:if="${companyList.contains(jobApplication.companyId)}">★</button>
 						<button class="uncolorStar"
 							th:attr="data-company-id=${jobApplication.companyId}"
 							th:if="${!companyList.contains(jobApplication.companyId)}">☆</button>

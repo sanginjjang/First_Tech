@@ -94,13 +94,12 @@
             <span class="text">아이디 찾기</span>
             <p>회원정보에 등록한 정보로 인증하세요.</p> <br>
         </div>
-        <form id="findForm" action="/hyepin/findUserIdResult" method="POST">
+        <form id="findForm">
             <div>
                 <p>이름 입력</p>
                 <input type="text" name="userName" id="userName" class="formStyle" placeholder="이름을 입력하세요">
                 <p>휴대전화 입력</p>
                 
-                <input type="hidden" name="userPhone" id="userPhone">
                 <select name="userPhoneFirst" class="formStyle1" id="userPhoneFirst">
                     <option value="010">010</option>
                     <option value="011">011</option>
@@ -131,10 +130,13 @@
 </body>
 
 <script>
-    const form = document.querySelector("form");
+    
 
     function find(){
-    	
+
+        const form = document.querySelector("form");
+        const formData = new FormData(form);
+        
     	const phoneFirst = document.getElementById("userPhoneFirst").value;
         const phoneMiddle = document.getElementById("userPhoneMiddle").value;
         const phoneLast = document.getElementById("userPhoneLast").value;
@@ -158,9 +160,28 @@
         }
 
         const fullPhone = `${phoneFirst}-${phoneMiddle}-${phoneLast}`;
-        document.getElementById("userPhone").value = fullPhone;
+        formData.append("userPhone", fullPhone);
         
-        document.getElementById("findForm").submit();
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+        	if(xhr.status === 200){
+        		const response = xhr.responseText;
+        		if(response.startsWith("find:")){
+        			const userId = response.split(":")[1];
+        			console.log(userId);
+        			window.location.href = `/hyepin/findUserIdResult?userId=${userId}`;
+        		}else if(response === "empty"){
+        			alert("회원정보와 일치하는 ID가 없습니다!");
+        		}
+        	}else{
+        		alert("서버오류 발생");
+        	}
+        }
+        
+        xhr.open("POST", "/hyepin/goFindUserIdResult");  
+        //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(formData);
+        //document.getElementById("findForm").submit();
     }
     
 

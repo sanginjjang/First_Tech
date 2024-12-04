@@ -14,4 +14,6 @@ public interface IUserDao {
 	public UserDto getUserByNickname(String userNickname);
 	public int insertUser(UserDto user);
 	public UserDto userLogin(String userId, String userPassword);
+	public UserDto findUserId(UserDto user);
+
 }
