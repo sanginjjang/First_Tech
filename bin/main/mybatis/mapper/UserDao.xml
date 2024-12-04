@@ -20,8 +20,25 @@
 		SELECT * FROM Users WHERE userId = #{userId} AND userSsn = #{userSsn} AND userPhone = #{userPhone} AND userEmail = #{userEmail};
 	</select>
 	
+	<select id="getUserByPhone" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM Users WHERE userPhone = #{userPhone};
+	</select>
+	<select id="getUserByEmail" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM Users WHERE userEmail = #{userEmail};
+	</select>
+	<select id="getUserBySsn" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM Users WHERE userSsn = #{userSsn};
+	</select>
+	
 	<update id="updateUserPw">
 		UPDATE Users SET userPassword = #{userPassword} WHERE userId = #{userId};
+	</update>
+	
+	<update id="updateUserInfomation">
+		UPDATE Users SET userPassword = #{userPassword}, userEmail = #{userEmail}, 
+		userName = #{userName}, userNickname =  #{userNickname}, userPhone= #{userPhone}, 
+		userAddress = #{userAddress}, userPostalCode = #{userPostalCode} 
+		WHERE userId = #{userId};
 	</update>
 	
 	

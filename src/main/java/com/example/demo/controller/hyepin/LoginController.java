@@ -22,7 +22,6 @@ public class LoginController {
 	@Autowired
 	IUserService userService;
 
-
 	@RequestMapping("/login")
 	public void login() {
 	}

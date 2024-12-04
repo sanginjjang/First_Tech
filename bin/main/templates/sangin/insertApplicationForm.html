@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>채용 공고 등록</title>
+<style>
+    /* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* 폼 섹션 */
+.form-container {
+    flex: 3;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-container span:nth-child(1) {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right:20px;
+}
+
+.form-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container textarea,
+#employmentType,
+#career,
+#education,
+#workingArea,
+#salary{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.file-upload button {
+    padding: 5px 10px;
+    border: 1px solid #d9d9d9;
+    background-color: #1a73e8;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-upload button:hover {
+    background-color: #105cbf;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #1a73e8;
+    transition: 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #105cbf;
+}
+
+/* 공고 완성도 섹션 */
+.completion-container {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.completion-container h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.completion-list div {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f5f5f5;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <span>
+            	채용 공고 등록
+            </span>
+            <span style="color: gray;">* 는 필수 입력입니다.</span>
+
+            <form id="form" th:action="@{/sangin/insertApplications}" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="companyId" th:value="${companyId}">
+                <label>* 공고명</label>
+                <input type="text" name="applicationName" placeholder="ex) 대쪽같은 사람 찾습니다..">
+
+                <label>공고 소개</label>
+                <textarea name="applicationIntro" placeholder="ex) 가족같은 회사입니다..최신 커피 머신기 있습니다.. 저희 회사로 오세요..야근을 대비한 침대 구비 완료..
+                "></textarea>
+
+                <label>주요 업무</label>
+                <textarea name="keyTasks" placeholder="ex) 커피 타기.. 야근 하기.."></textarea>
+
+                <label>* 공고 이미지</label>
+                <div class="file-upload">
+                    <input type="file" name="fileName">
+                    <button type="button">파일 첨부</button>
+                </div>
+
+                <label>* 희망 경력</label>
+                <select name="career" id="career">
+                	<option value="senior">신입</option>
+                	<option value="junior">경력</option>
+                </select>
+
+                <label>* 개발 직무</label>
+                <input type="text" name="roleId">
+
+                <label>* 희망 학력</label>
+                <select name="education" id="education">
+                	<option value="HighSchool">고등학교 졸업</option>
+                	<option value="AssociateDegree">전문대학 졸업 (준학사)</option>
+                	<option value="BachelorDegree">대학교 졸업 (학사)</option>
+                	<option value="MasterDegree">석사 학위</option>
+                	<option value="DoctoralDegree">박사 학위</option>
+                </select>
+
+                <label>* 급여</label>
+				<select name="salary" id="salary">
+				    <option value="below2000">2000만 이하</option>
+				    <option value="below3000">3000만 이하</option>
+				    <option value="below4000">4000만 이하</option>
+				    <option value="below5000">5000만 이하</option>
+				    <option value="below6000">6000만 이하</option>
+				    <option value="below7000">7000만 이하</option>
+				    <option value="below8000">8000만 이하</option>
+				    <option value="below9000">9000만 이하</option>
+				    <option value="below10000">1억 이하</option>
+				    <option value="companyRules">회사내 규율 따름</option>
+				</select>
+
+
+                <label>* 근무 지역</label>
+                <select name="workingArea" id="workingArea">
+				    <option value="seoul">서울</option>
+				    <option value="gyeonggi">경기</option>
+				    <option value="gwangju">광주</option>
+				    <option value="daegu">대구</option>
+				    <option value="daejeon">대전</option>
+				    <option value="busan">부산</option>
+				    <option value="ulsan">울산</option>
+				    <option value="incheon">인천</option>
+				    <option value="gangwon">강원</option>
+				    <option value="gyeongnam">경남</option>
+				    <option value="jeju">제주</option>
+				</select>
+
+
+                <label>* 고용 형태</label>
+                <select name="employmentType" id="employmentType">
+                	<option value="fullTime">정규직</option>
+                	<option value="partTime">계약직</option>
+                </select>
+
+                <label>* 마감일 설정</label>
+                <input type="date" name="deadlineDate">
+
+                <div class="button-container">
+                    <button type="button">공고 임시 저장(ajax)</button>
+	                <button type="submit">공고 작성 완료</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="completion-container">
+            <h2>공고 완성도</h2>
+            <div class="completion-list">
+                <div>공고명 완료</div>
+                <div>공고 소개 완료</div>
+                <div>주요 업무 완료</div>
+                <div>광고 파일 완료</div>
+                <div>요구 경력 완료</div>
+                <div>개발 직무 완료</div>
+                <div>요구 학력 완료</div>
+                <div>근무 지역 완료</div>
+                <div>급여 완료</div>
+                <div>근무 형태 완료</div>
+                <div>마감일 설정 완료</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

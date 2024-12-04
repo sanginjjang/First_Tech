@@ -17,5 +17,8 @@ public interface IUserDao {
 	public UserDto findUserId(UserDto user);
 	public UserDto findUserPw(UserDto user);
 	public int updateUserPw(UserDto user);
+	public UserDto getUserByPhone(String userPhone);
+	public UserDto getUserByEmail(String userEmail);
+	public int updateUserInfomation(UserDto user);
 
 }
