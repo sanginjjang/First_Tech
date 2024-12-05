@@ -186,15 +186,17 @@ public class SanginController {
 	// 검색어로 검색하기
 	@RequestMapping("/searchingByKeyword")
 	@ResponseBody
-	List<ApplicationDto> searchingByKeyword(@RequestBody String keyword) {
-		System.out.println("이건 실행됐나요 09 : 57");
-		System.out.println("이건 실행됐나요 09 : 57");
-		System.out.println("이건 실행됐나요 09 : 57");
+	Map<String, Object> searchingByKeyword(@RequestBody String keyword) {
+		// 14 : 21 테스트 시작
+		System.out.println("여기는 됐나요?");
 		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword("user001",keyword);
-		// 09 : 55 테스트 시작
-		//완료
 		System.out.println("키워드는 .. " + keyword + "입니다.." + listByKeyword);
-		return listByKeyword;
+		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		Map<String, Object> response = new HashMap<>();
+		response.put("listByKeyword", listByKeyword);
+		response.put("companyList", companyList);
+		//완료
+		return response;
 	}
 	
 
