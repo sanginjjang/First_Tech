@@ -20,4 +20,10 @@ public interface IApplicationService {
 	List<String> getBookmarkedCompany(String userId);
 	
 	ApplicationDto getApplication(int applicationNum);
+	
+	List<ApplicationDto> getApplicationByWorkingArea(String workingArea);
+	
+	List<ApplicationDto> getApplicationByRoleId(String roleId);
+	
+	List<ApplicationDto> getApplicationByKeyword(String keyword);
 }
