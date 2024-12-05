@@ -35,7 +35,7 @@ public class ResumeController {
 	private ResumeService resumeservice;
 
 	// 업로드 디렉토리 경로
-	@Value("${file.upload-dir}")
+	@Value("${spring.servlet.multipart.location:./uploads}")
 	private String uploadPath;
 
 	
