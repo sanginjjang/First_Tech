@@ -32,11 +32,14 @@ public class CompanyController {
 	ICompanyService companyService;
 	
 	@RequestMapping("/companyInfo/{pageNum}")
-	public String companyInfo(@PathVariable("pageNum")int pageNum,Model model,HttpServletRequest request) {
+	public String companyInfo(@PathVariable("pageNum")int pageNum,Model model, HttpServletRequest request) {
 		int startNum = pageNum * amount - amount;
 //		List<CompanyDto> companys = companyService.getCompanyListPaging(startNum, amount); //기업 전체 목록 조회
 		int totalCnt = companyService.getCount();
 		int endPageNum = Math.ceilDiv(totalCnt, amount);
+		
+		HttpSession session = request.getSession();
+		UserDto user = (UserDto) session.getAttribute("user");
 		
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(user.getUserId());
 		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());
