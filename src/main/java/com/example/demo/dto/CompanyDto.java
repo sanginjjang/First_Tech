@@ -3,9 +3,13 @@ package com.example.demo.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompanyDto {
 
     private String companyId;                    // 기업 ID / 사업자번호

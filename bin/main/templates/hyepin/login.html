@@ -130,8 +130,8 @@
 
         <form id="loginForm">
             <div class="inputForm">
-                <input name="userId" class="formStyle" type="text" th:value="${id}" placeholder="ID를 입력하세요"> <br>
-                <input name="userPassword" class="formStyle" type="text" placeholder="PW를 입력하세요"> <br>
+                <input name="id" id="id" class="formStyle" type="text" th:value="${id}" placeholder="ID를 입력하세요"> <br>
+                <input name="pw" id="pw" class="formStyle" type="text" placeholder="PW를 입력하세요"> <br>
                 
                 <input class="formStyle" type="button" value="로그인" onclick="userLogin()">
             </div>
@@ -155,12 +155,18 @@
     const loginForm = document.getElementById('loginForm');
     const findId = document.getElementById('findId');
     const findPw = document.getElementById('findPw');
+    const id = document.getElementById('id');
+    const pw = document.getElementById('pw');
+    
     let selectedMember = null;
     
     userMemberBtn.addEventListener('click', event => {
-        loginForm.action = '/hyepin/userLogin';
+    	
+    	//loginForm.action = '/hyepin/userLogin';
         findId.href = '/hyepin/findUserId';
         findPw.href = '/hyepin/findUserPw';
+        id.name = "userId";
+        pw.name= "userPassword";
         
         userMemberBtn.style.color = 'black';
         userMemberBtn.style.transform = 'scale(1.1)';
@@ -172,10 +178,12 @@
 
     companyMemberBtn.addEventListener('click', event =>{
        
-    	//언니 여기 수정요~!
-    	loginForm.action = '';
+    	//여기 수정
+    	//loginForm.action = '/hyepin/companyLogin';
         findId.href = '';
         findPw.href = '';
+        id.name = "companyId";
+        pw.name= "companyPassword";
         
         companyMemberBtn.style.transform = 'scale(1.1)';
         companyMemberBtn.style.color = 'black';
@@ -209,7 +217,9 @@
             		const response = xhr.responseText;
             		if(response === "fail"){
             			alert("아이디 또는 비밀번호가 틀렸습니다.");
-            		}else if(response === "success"){
+            		}else if(response === "userSuccess"){
+            			window.location.href = "/hyepin/myPage";
+            		}else if(response === "companySuccess"){
             			window.location.href = "/";
             		}else if(response === "ready"){
             			alert("아이디와 비밀번호를 입력하세요");
@@ -218,18 +228,28 @@
             		alert("서버오류 발생");
             	}
             }
-            
             xhr.open("POST", "/hyepin/userLogin");  
             //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send(formData);
-			
 		}else if(selectedMember === "company"){
-			/*
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
-				
+				if(xhr.status === 200){
+            		const response = xhr.responseText;
+            		if(response === "fail"){
+            			alert("아이디 또는 비밀번호가 틀렸습니다.");
+            		}else if(response === "comnpanySuccess"){
+            			window.location.href = "/";
+            		}else if(response === "ready"){
+            			alert("아이디와 비밀번호를 입력하세요");
+            		}
+            	}else{
+            		alert("서버오류 발생");
+            	}
 			}	
-			*/
+			xhr.open("POST", "/hyepin/companyLogin");  
+			xhr.send(formData);
+			
 		}
 	}
 

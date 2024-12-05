@@ -249,21 +249,11 @@ footer input[type="button"]:hover {
 				</div>
 				<div class="infoGroup">
 					<div>학력</div>
-					<div th:if="${jobApplication.education == 'HighSchool'}">고등학교
-						졸업</div>
-					<div th:if="${jobApplication.education == 'AssociateDegree'}">전문대
-						졸업</div>
-					<div th:if="${jobApplication.education == 'BachelorDegree'}">대학교
-						졸업</div>
-					<div th:if="${jobApplication.education == 'MasterDegree'}">석사
-						학위</div>
-					<div th:if="${jobApplication.education == 'DoctoralDegree'}">박사
-						학위</div>
+					<div th:text="${jobApplication.education}"></div>
 				</div>
 				<div class="infoGroup">
 					<div>경력</div>
-					<div th:if="${jobApplication.career == 'senior'}">경력</div>
-					<div th:if="${jobApplication.career == 'junior'}">신입</div>
+					<div th:text="${jobApplication.career}"></div>
 				</div>
 			</div>
 
@@ -300,7 +290,7 @@ footer input[type="button"]:hover {
 			<h2>공고이미지..</h2>
 			<br>
 			<hr>
-			<br> <br> <img alt="1"
+			<br> <br> <img th:alt="${jobApplication.fileName}"
 				th:src="@{/uploads/{fileName}(fileName=${jobApplication.fileName})}">
 
 		</div>

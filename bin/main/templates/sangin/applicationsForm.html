@@ -4,10 +4,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
+	font-family: Arial, sans-serif;
 	margin: 0 auto;
 	width: 65vw;
 	height: 100vh;
+	background-color: #f9f9f9;
 }
 
 header {
@@ -15,7 +23,7 @@ header {
 	border: lightgray solid 1px;
 	width: 100%;
 	height: 15%;
-	background-color: aliceblue;
+	background-color: #f9f9f9;
 	font-size: 50px;
 	display: flex;
 	justify-content: center;
@@ -26,7 +34,7 @@ nav {
 	border: lightgray solid 1px;
 	width: 100%;
 	height: 35%;
-	background-color:ivory;
+	background-color: #f9f9f9;
 	display: flex;
 	flex-direction: column;
 }
@@ -39,12 +47,12 @@ nav {
 }
 
 #nav1_img {
-	display: flex;
+	flex: 2;
 	align-items: center;
 	justify-content: center;
 	border: 1px black solid;
-	background-color: white;
-	width: 8%;
+	background-color: #f9f9f9;
+	width: 65px;
 }
 
 #nav1_img img {
@@ -53,20 +61,42 @@ nav {
 	object-fit: contain;
 }
 
-#nav1_text {
-	flex-grow: 1;
+#checkSearching {
+	flex: 6;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px black solid;
-	width: 25%;
+}
+
+#searchingForm {
+	flex: 12;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+#searchingForm input[type="button"] {
+	margin-right: 10px;
+}
+
+#searching {
+	border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	font-size: 15px;
+	margin-left: 10px;
 }
 
 .searchOption {
 	border: 0px;
+	border-radius: 5px;
 	font-size: 20px;
 	font-weight: bold;
-	background-color: ivory;
+	background-color: blue;
+	color: white;
+	padding: 7px 14px;
 }
 
 .searchOption:hover {
@@ -86,7 +116,8 @@ nav {
 	border: 1px black solid;
 	flex-grow: 1;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	gap: 50px;
 	padding: 30px;
 	width: 30%;
 }
@@ -102,10 +133,15 @@ nav {
 }
 
 .label-text {
+	border: 1px solid lightgray;
+	border-radius: 5px;
 	padding: 7px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .label-text:hover {
+	background-color: lightgray;
 	scale: 1.1;
 }
 
@@ -116,6 +152,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked+.label-text {
 	color: blue;
 	font-weight: bold;
+	background-color: lightgray;
 }
 
 #nav2_2 {
@@ -140,7 +177,7 @@ section {
 	font-weight: bold;
 	width: 100%;
 	height: 100%;
-	background-color: lightgray;
+	background-color: #f9f9f9;
 	display: flex;
 	flex-direction: row;
 }
@@ -178,7 +215,7 @@ section {
 	border: 0px;
 	padding: 10%;
 	width: 100%;
-	background-color: lightgray;
+	background-color: #f9f9f9;
 }
 
 .colorHeart {
@@ -259,7 +296,7 @@ section {
 	border: 1px black solid;
 	font-size: 20px;
 	padding: 0px;
-	background-color: lightgray;
+	background-color: #f9f9f9;
 }
 
 .uncolorStar {
@@ -294,61 +331,61 @@ section {
 		<div id="nav1">
 			<div id="nav1_img">
 				<img src="/uploads/regions.png" alt="regions">
-
 			</div>
-			<div id="nav1_text">
+			<div id="checkSearching">
 				<input type="button" value="지역별" class="searchOption"
 					onclick="navButton(false)">
 			</div>
 			<div id="nav1_img">
-				<img src="/uploads/jobRole.webp" alt="jobRole">
+				<img src="/uploads/직무.jpg" alt="jobRole">
 			</div>
-			<div id="nav1_text">
+			<div id="checkSearching">
 				<input type="button" value="직무별" class="searchOption"
 					onclick="navButton(true)">
 			</div>
 			<div id="nav1_img">
-				<img src="/uploads/돋보기.webp" alt="돋보기">
+				<img src="/uploads/돋보기.png" alt="돋보기">
 			</div>
-			<div id="nav1_text">
-				<input type="button" value="검색" class="searchOption">
-			</div>
+			<form id="searchingForm">
+				<input type="text" id="searching" name="searching"
+					placeholder="회사이름, 경력, 학력, 근무지, 고용형태"> <input
+					type="button" value="검색" class="searchOption">
+			</form>
 		</div>
+
 		<div id="nav2">
 			<div id="nav2_1">
 				<div class="workingAreaCheckBox hidden">
-					<input type="checkbox" value="all" id="selectAll"> <label
-						for="selectAll" class="label-text" onclick="toggleCheckboxes()">전체</label>
-					<input type="checkbox" value="seoul" id="areaCheckbox2"
+					<input type="checkbox" value="all" id="all" class="areaCheckbox">
+					<label for="all" class="label-text" onclick="toggleCheckboxes()">전체</label>
+					<input type="checkbox" value="서울" id="areaCheckbox2"
 						class="areaCheckbox"> <label for="areaCheckbox2"
-						class="label-text">서울</label> <input type="checkbox"
-						value="gyeonggi" id="areaCheckbox3" class="areaCheckbox">
-					<label for="areaCheckbox3" class="label-text">경기</label> <input
-						type="checkbox" value="gwangju" id="areaCheckbox4"
-						class="areaCheckbox"> <label for="areaCheckbox4"
-						class="label-text">광주</label> <input type="checkbox" value="daegu"
-						id="areaCheckbox5" class="areaCheckbox"> <label
-						for="areaCheckbox5" class="label-text">대구</label>
+						class="label-text">서울</label> <input type="checkbox" value="경기"
+						id="areaCheckbox3" class="areaCheckbox"> <label
+						for="areaCheckbox3" class="label-text">경기</label> <input
+						type="checkbox" value="광주" id="areaCheckbox4" class="areaCheckbox">
+					<label for="areaCheckbox4" class="label-text">광주</label> <input
+						type="checkbox" value="대구" id="areaCheckbox5" class="areaCheckbox">
+					<label for="areaCheckbox5" class="label-text">대구</label>
 				</div>
 				<div class="workingAreaCheckBox hidden">
-					<input type="checkbox" value="daejeon" id="areaCheckbox6"
+					<input type="checkbox" value="대전" id="areaCheckbox6"
 						class="areaCheckbox"> <label for="areaCheckbox6"
-						class="label-text">대전</label> <input type="checkbox" value="busan"
+						class="label-text">대전</label> <input type="checkbox" value="부산"
 						id="areaCheckbox7" class="areaCheckbox"> <label
 						for="areaCheckbox7" class="label-text">부산</label> <input
-						type="checkbox" value="ulsan" id="areaCheckbox8"
-						class="areaCheckbox"> <label for="areaCheckbox8"
-						class="label-text">울산</label> <input type="checkbox"
-						value="incheon" id="areaCheckbox9" class="areaCheckbox"> <label
-						for="areaCheckbox9" class="label-text">인천</label> <input
-						type="checkbox" value="gangwon" id="areaCheckbox10"
+						type="checkbox" value="울산" id="areaCheckbox8" class="areaCheckbox">
+					<label for="areaCheckbox8" class="label-text">울산</label> <input
+						type="checkbox" value="인천" id="areaCheckbox9" class="areaCheckbox">
+					<label for="areaCheckbox9" class="label-text">인천</label> <input
+						type="checkbox" value="강원" id="areaCheckbox10"
 						class="areaCheckbox"> <label for="areaCheckbox10"
 						class="label-text">강원</label>
 				</div>
 				<div class="workingAreaCheckBox hidden">
-					<input type="checkbox" value="gyeongnam" id="areaCheckbox11"
+					<input type="checkbox" value="경남" id="areaCheckbox11"
 						class="areaCheckbox"> <label for="areaCheckbox11"
-						class="label-text">경남</label> <input type="checkbox" value="jeju"
+						class="label-text">경남</label> <input type="checkbox" value="제주"
 						id="areaCheckbox12" class="areaCheckbox"> <label
 						for="areaCheckbox12" class="label-text">제주</label>
 				</div>
@@ -400,8 +437,10 @@ section {
 			</div>
 
 			<div id="nav2_2">
-				<b id="description"><= 체크박스를 선택해주세요~</b> <br>
-				<button id="reset" onclick="reset()">선택 초기화</button>
+				<b id="description" style="font-size: 22px;"><= 선택해주세요.</b> <br>
+				<!--
+				<button id="reset" onclick="reset()">선택 초기화</button>  
+				 -->
 			</div>
 	</nav>
 	<section>
@@ -421,8 +460,7 @@ section {
 							<a
 								th:href="@{/sangin/applicationDetailForm/{applicationNum}(applicationNum=${jobApplication.applicationNum})}"
 								id="applicationName">[[${jobApplication.applicationName}]]</a>
-							<div id="deadlineDate"
-								th:text="${jobApplication.deadlineDate}"></div>
+							<div id="deadlineDate" th:text="${jobApplication.deadlineDate}"></div>
 
 						</div>
 						<div id="list2_2">
@@ -457,21 +495,6 @@ section {
 	<footer>Footer</footer>
 </body>
 <script>
-function toggleCheckboxes() {
-    const selectAll = document.getElementById('selectAll');
-    const checkboxes = document.querySelectorAll('.areaCheckbox');
-
-    checkboxes.forEach(function (checkbox) {
-    	if(selectAll.checked == false){
-        	checkbox.checked = true;
-    	}else{
-        	checkbox.checked = false;
-    	}
-    });
-}
-
-</script>
-<script>
     const roleCheckboxes = document.querySelectorAll(".roleCheckbox");
     const workingAreaCheckBoxes = document.querySelectorAll(".workingAreaCheckBox");
 
@@ -492,25 +515,170 @@ function toggleCheckboxes() {
             });
         }
     }
-    function reset(){
-    	const areaCheckboxes = document.querySelectorAll('.areaCheckbox');
-    	const roleCheckboxes = document.querySelectorAll('.roleCheckbox');
+    //function reset(){
+    	//const areaCheckboxes = document.querySelectorAll('.areaCheckbox');
+    	//const roleCheckboxes = document.querySelectorAll('.roleCheckbox');
     	
-        areaCheckboxes.forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-        roleCheckboxes.forEach((checkbox) => {
-            checkbox.checked = false;
-        });
+        //areaCheckboxes.forEach((checkbox) => {
+        //    checkbox.checked = false;
+        //});
+        //roleCheckboxes.forEach((checkbox) => {
+        //    checkbox.checked = false;
+        //});
         
         // "전체" 체크박스도 해제
-        selectAll.checked = false;
+        //all.checked = false;
 
         // 설명 텍스트 초기화 (필요한 경우)
-        const description = document.getElementById('description');
-        description.innerHTML = "<= 체크박스를 선택해주세요~";
+        //const description = document.getElementById('description');
+        //description.innerHTML = "<= 체크박스를 선택해주세요~";
     	
+   // }
+</script>
+<script>
+document.querySelector("nav").addEventListener("click", (event) => {
+    var value = event.target.value;
+    let url, listKey;
+    if (event.target.classList.contains("areaCheckbox")) {
+        url = "/sangin/searchingByArea";
+        listKey = "listByArea";
+
+        // 모든 체크박스 초기화 및 선택한 항목 체크
+        const checkboxes = document.querySelectorAll('.areaCheckbox');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        event.target.checked = true;
+    } else if (event.target.classList.contains("roleCheckbox")) {
+        url = "/sangin/searchingByRoleId";
+        listKey = "listByRoleId";
+
+        // 모든 체크박스 초기화 및 선택한 항목 체크
+        const checkboxes = document.querySelectorAll('.roleCheckbox');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        event.target.checked = true;
+    } else if (event.target.type === "button" && event.target.value === "검색"){
+    	url = "/sangin/searchingByKeyword";
+    	listKey = "listByKeyword";
+    	const form = document.querySelector("#searchingForm");
+    	value = form.searching.value;
+    } else {
+        return; // 클릭한 대상이 체크박스가 아니라면 함수 종료
     }
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // 서버 응답 처리
+            const response = JSON.parse(xhr.responseText);
+            const list = response[listKey]; // 리스트 데이터
+            const companyList = response.companyList; // 북마크된 회사 리스트
+
+            // 기존 리스트 초기화
+            const section1 = document.querySelector("#section1");
+            section1.innerHTML = "";
+
+            // 새 데이터 렌더링
+            list.forEach((jobApplication) => {
+                const listDiv = document.createElement("div");
+                listDiv.className = "list";
+
+                const list1Div = document.createElement("div");
+                list1Div.id = "list1";
+
+                const bookmarkButton = document.createElement("button");
+                if (jobApplication.isBookmarked === 1) {
+                    bookmarkButton.className = "colorHeart";
+                    bookmarkButton.textContent = "♥";
+                } else {
+                    bookmarkButton.className = "uncolorHeart";
+                    bookmarkButton.textContent = "♡";
+                }
+                bookmarkButton.dataset.applicationNum = jobApplication.applicationNum;
+                list1Div.appendChild(bookmarkButton);
+
+                const list2Div = document.createElement("div");
+                list2Div.id = "list2";
+
+                const list2_1Div = document.createElement("div");
+                list2_1Div.id = "list2_1";
+
+                const applicationNameLink = document.createElement("a");
+                applicationNameLink.id = "applicationName";
+                applicationNameLink.href = `/sangin/applicationDetailForm/${jobApplication.applicationNum}`;
+                applicationNameLink.textContent = jobApplication.applicationName;
+
+                const deadlineDateDiv = document.createElement("div");
+                deadlineDateDiv.id = "deadlineDate";
+                deadlineDateDiv.textContent = jobApplication.deadlineDate;
+
+                list2_1Div.appendChild(applicationNameLink);
+                list2_1Div.appendChild(deadlineDateDiv);
+
+                const list2_2Div = document.createElement("div");
+                list2_2Div.id = "list2_2";
+
+                const workingAreaDiv = document.createElement("div");
+                workingAreaDiv.id = "workingArea";
+                workingAreaDiv.textContent = jobApplication.workingArea;
+
+                const careerDiv = document.createElement("div");
+                careerDiv.id = "career";
+                careerDiv.textContent = jobApplication.career;
+
+                const educationDiv = document.createElement("div");
+                educationDiv.id = "education";
+                educationDiv.textContent = jobApplication.education;
+
+                const employmentTypeDiv = document.createElement("div");
+                employmentTypeDiv.id = "employmentType";
+                employmentTypeDiv.textContent = jobApplication.employmentType;
+
+                const salaryDiv = document.createElement("div");
+                salaryDiv.id = "salary";
+                salaryDiv.textContent = jobApplication.salary;
+
+                list2_2Div.appendChild(workingAreaDiv);
+                list2_2Div.appendChild(careerDiv);
+                list2_2Div.appendChild(educationDiv);
+                list2_2Div.appendChild(employmentTypeDiv);
+                list2_2Div.appendChild(salaryDiv);
+
+                list2Div.appendChild(list2_1Div);
+                list2Div.appendChild(list2_2Div);
+
+                const list3Div = document.createElement("div");
+                list3Div.id = "list3";
+
+                const companyNameDiv = document.createElement("div");
+                companyNameDiv.id = "companyName";
+                companyNameDiv.textContent = jobApplication.companyId;
+
+                const starButton = document.createElement("button");
+                if (companyList.includes(jobApplication.companyId)) {
+                    starButton.className = "colorStar";
+                    starButton.textContent = "★";
+                } else {
+                    starButton.className = "uncolorStar";
+                    starButton.textContent = "☆";
+                }
+                starButton.dataset.companyId = jobApplication.companyId;
+
+                list3Div.appendChild(companyNameDiv);
+                list3Div.appendChild(starButton);
+
+                listDiv.appendChild(list1Div);
+                listDiv.appendChild(list2Div);
+                listDiv.appendChild(list3Div);
+
+                section1.appendChild(listDiv);
+            });
+        }
+    };
+
+    xhr.open("POST", url);
+    xhr.send(value);
+});
+
+
 </script>
 <script>
 document.querySelector("#section1").addEventListener("click", (event) => {
@@ -547,7 +715,6 @@ document.querySelector("#section1").addEventListener("click", (event) => {
                 event.target.classList.remove("uncolorHeart");
                 event.target.classList.add("colorHeart");
                 event.target.textContent = "♥";
-              
             }
         };
 
