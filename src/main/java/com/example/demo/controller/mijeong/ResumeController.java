@@ -26,6 +26,8 @@ import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserTechStackDto;
 import com.example.demo.service.mijeong.ResumeService;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 @RequestMapping("/resume")
@@ -192,9 +194,9 @@ public class ResumeController {
 		CertificateDto certificate	=resumeservice.getCertificateByName(SerchCertificateName);
 		
 		if (certificate != null) {
-	        return certificate;  // 자격증 정보가 있으면 반환
+	        return certificate; 
 	    } else {
-	        return null;  // 정보가 없으면 null 반환
+	        return null;  
 	    }
     }
 		
@@ -213,7 +215,21 @@ public class ResumeController {
         return "redirect:/resume/MyResumeList"; 
     }
     
-
+    
+    @RequestMapping("/resumeApplyList")
+    public String resumeApplyList() {
+        return "resume/getResumeApplyList";
+    }
+    
+    @RequestMapping("/getResumeApplyList")
+    public String getResumeApplyList(@PathVariable("resumeNum") String resumeNum) {
+        
+    	
+    	
+    	return "redirect:/resume/resumeApplyList";
+    }
+    
+    
 		
 
 }
