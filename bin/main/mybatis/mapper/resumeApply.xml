@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.mijeong.IResumeDao">
+    <!-- 자격증 이름에 해당하는 자격증 정보를 가져오는 쿼리 -->
+    <select id="getCertificateByName" resultType="com.example.demo.dto.CertificateDto">
+        SELECT certificateNum, certificateName, certificateBy
+        FROM certificates
+        WHERE certificateName = #{certificateName}
+    </select>
+  
+
+</mapper>
