@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.hyepin.IAToRBookmarksDaoHyepin">
+	
+	<select id="getBookmarkAToRList"
+		resultType="com.example.demo.dto.ResumeDto">
+		SELECT 
+			r.resumeNum, r.userId, r.resumeTitle, r.resumePhone, r.resumeContent, r.portfolioName, 
+			r.personalPhotoName, r.education, r.school, r.address, r.roleId, r.militaryService,
+			r.createdDate, r.updatedDate 
+		FROM Resumes r 
+		JOIN ApplicationToResumeBookmarks ator ON r.resumeNum = ator.resumeNum 
+		WHERE ator.applicationNum = #{applicationNum};
+	</select>
+	
+	<insert id="insertBookmark">
+		INSERT INTO ApplicationToResumeBookmarks (applicationNum, resumeNum) VALUES(#{applicationNum}, #{resumeNum});
+	</insert>
+	
+	<delete id="deleteBookmark">
+		DELETE FROM ApplicationToResumeBookmarks 
+		WHERE applicationNum = #{applicationNum} and resumeNum = #{resumeNum};
+	</delete>
+
+</mapper>
+
