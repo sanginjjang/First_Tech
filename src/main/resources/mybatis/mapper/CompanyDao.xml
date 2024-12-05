@@ -37,9 +37,9 @@
 		insert into usertocompanybookmarks
 		values(NULL,#{userId},#{companyId},NOW())
 	</insert>
-	
+
 	<delete id="removeUserToCompanyBookmark">
-		DELETE FROM usertocompanybookmarks 
+		DELETE FROM usertocompanybookmarks
 		WHERE userId=#{userId} AND companyId= #{companyId}
 	</delete>
 
@@ -48,8 +48,8 @@
 		SELECT * FROM usertocompanybookmarks WHERE userId =
 		#{userId}
 	</select>
-	
-	
+
+
 
 	<select id="testBookmark"
 		resultType="com.example.demo.dto.CompanyDto">
@@ -69,17 +69,113 @@
 		c.annualRevenue,
 		c.companyRegistDate,
 		CASE
-		WHEN b.bookmarkNum IS NOT NULL THEN 1 -- 북마크된 상태
+		WHEN b.bookmarkNum
+		IS NOT NULL THEN 1 -- 북마크된 상태
 		ELSE 0 -- 북마크되지 않은 상태
 		END AS isBookmarked
 		FROM
 		companys c
 		LEFT JOIN
 		usertocompanybookmarks b
-		ON c.companyId = b.companyId
+		ON c.companyId =
+		b.companyId
 		AND b.userId = #{userId}
 		ORDER BY annualRevenue DESC
-		LIMIT #{startNum} , #{amount};
+		LIMIT
+		#{startNum} , #{amount};
 	</select>
+
+	<!-- ↓↓↓ 검색로직 구현...너무 힘드네요 여러분.. 만약에 보신다면 힘내라고 한마디만 해주세요..↓↓↓ -->
+	<select id="searchCompanyByCompanyName"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys
+		WHERE companyName LIKE CONCAT('%',#{searchInput} , '%')
+		<if test="sortPart == 'employees'">
+			ORDER BY employees DESC
+		</if>
+		<if test="sortPart == 'annualRevenue'">
+			ORDER BY annualRevenue DESC
+		</if>
+		<if test="sortPart == null">
+			ORDER BY annualRevenue DESC
+		</if>
+		LIMIT #{startNum} , #{amount}
+	</select>
+	<select id="searchCompanyByCompanyNameCount" resultType="_int">
+		SELECT
+		COUNT(*) FROM companys
+		WHERE companyName LIKE CONCAT('%',#{searchInput} , '%')
+	</select>
+	
+	
+	<!-- 검색창에 아무것도 없고, 정렬만 선택했을때 전체 목록에서 정렬만 수행...아 죽고싷ㅍ다.. -->
+	<select id="searchCompanyWithSort" resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM companys
+		<if test="sortPart == 'employees'">
+			ORDER BY employees DESC
+		</if>
+		<if test="sortPart == 'annualRevenue'">
+			ORDER BY annualRevenue DESC
+		</if>
+		<if test="sortPart == null">
+			ORDER BY annualRevenue DESC
+		</if>
+		LIMIT #{startNum} , #{amount}
+	</select>
+	
+	
+	
+	<select id="searchCompanyWithBookmark"
+        resultType="com.example.demo.dto.CompanyDto">
+    SELECT
+        c.companyId,
+        c.companyPassword,
+        c.companyName,
+        c.companyEmail,
+        c.businessRegistrationCertificate,
+        c.companyAddress,
+        c.companyPostalCode,
+        c.companyTel,
+        c.establishmentDate,
+        c.webSite,
+        c.ceo,
+        c.employees,
+        c.annualRevenue,
+        c.companyRegistDate,
+        CASE
+            WHEN b.bookmarkNum IS NOT NULL THEN 1 -- 북마크된 상태
+            ELSE 0 -- 북마크되지 않은 상태
+        END AS isBookmarked
+    FROM
+        companys c
+    LEFT JOIN
+        usertocompanybookmarks b ON c.companyId = b.companyId
+    AND b.userId = #{userId}
+    WHERE
+        c.companyName LIKE CONCAT('%', #{searchInput}, '%')
+    <if test="sortPart == 'employees'">
+        ORDER BY c.employees DESC
+    </if>
+    <if test="sortPart == 'annualRevenue'">
+        ORDER BY c.annualRevenue DESC
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </if>
+    <if test="sortPart == null">
+        ORDER BY c.annualRevenue DESC
+    </if>
+    LIMIT #{startNum}, #{amount}
+    
+</select>
+
+
 
 </mapper>

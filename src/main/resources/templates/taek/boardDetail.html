@@ -52,11 +52,13 @@
                 <span th:text="'작성날짜: ' + ${board.createdDate}"></span> |
                 <span th:text="'조회수: ' + ${board.views}"></span>
             </div>
-            
-            <div class="board-image">
-        <img th:src="@{'/uploads/' + ${board.fileName}}" alt="첨부 이미지" style="max-width: 100%; height: auto; margin-top: 15px;">
-   		 </div>
 
+            <div class="board-image">
+                <!-- 이미지가 있을 경우에만 출력 -->
+                <img th:if="${board.fileName != null}" th:src="'/uploads/' + ${board.fileName}" alt="첨부 이미지" style="max-width: 100%; height: auto; margin-top: 15px;">
+            </div>
+
+            <!-- 게시글 내용 -->
             <div class="board-content" th:text="${board.boardContent}">게시글 내용</div>
         </div>
 
@@ -81,15 +83,19 @@
     <footer>Footer</footer>
 
     <script>
-        var boardNum = [[${board.boardNum}]];
+  	  var boardNum = [[${board.boardNum}]];  // Thymeleaf에서 boardNum 값을 JavaScript로 전달
 
         // 댓글 추가 함수
         $('#regComment').click(function() {
+            console.log(boardNum);  // boardNum 값이 제대로 출력되는지 확인
             var content = $('#commentContent').val();
             $.ajax({
-                url: '/b/addComment', // 댓글 추가 요청 URL
+                url: '/b/addComment',  // 댓글 추가 요청 URL
                 method: 'POST',
-                data: { content: content, boardNum: boardNum },
+                data: {
+                    content: content, 
+                    boardNum: boardNum
+                },
                 success: function(response) {
                     if (response && Array.isArray(response)) {
                         $('#commentContent').val(''); // 텍스트박스 초기화
@@ -127,7 +133,7 @@
         // 페이지 로드 시 댓글 목록 불러오기
         $(document).ready(function() {
             $.ajax({
-                url: '/b/getCommentList', // 댓글 목록을 불러오는 요청 URL
+                url: '/b/getCommentList',  // 댓글 목록을 불러오는 요청 URL
                 method: 'POST',
                 data: { boardNum: boardNum },
                 success: function(comments) {
@@ -139,5 +145,6 @@
             });
         });
     </script>
+
 </body>
 </html>

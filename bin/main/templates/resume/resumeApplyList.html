@@ -16,22 +16,24 @@
 
 <div class="resumeApplyList">
 <h2>이력서 관리</h2>
-   <!--   <table border="1">
+      <table border="1">
          <thead>
             <tr>
                <th>번호</th>
                <th>지원날짜</th>
                <th>이력서 제목</th>
+               <th>공고 넘버</th>
                <th>지원 현황</th>
                <th>이력서 지원 관리</th>
             </tr>
          </thead>
          <tbody>
   
-            <tr th:each="list, iterStat : ${resumeApplylist}">
+            <tr th:each="list, iterStat : ${resumeApplyList}">
                <td th:text="${iterStat.index + 1}"></td> 
                 <td><a th:href="@{/resume/detailResume/{resumeNum}(resumeNum=${list.resumeNum})}" th:text="${list.resumeTitle}"></a></td>
                 <td th:text="${list.updatedDate}"></td>
+                <td th:text="${list.applicationName}"></td>
                 <td th:text="${list.applyStatus}"></td>
                 <td><form th:action="@{/resume/deleteResume}" method="post">
                         <input type="hidden" name="resumeNum" th:value="${list.resumeNum}">
@@ -42,7 +44,7 @@
    
          </tbody>
       </table>
-      -->
+      
 </div>
 </body>
 </html>

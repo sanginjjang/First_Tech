@@ -18,7 +18,25 @@
 		roleId,
 		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS
 		deadlineDate
-		FROM applications WHERE companyId = #{companyId}
+		FROM applications
+		WHERE companyId = #{companyId}
+	</select>
+	<select id="companyApplicationListLimit"
+		resultType="com.example.demo.dto.ApplicationDto">
+		SELECT
+		applicationNum,
+		applicationName,
+		companyId,
+		workingArea,
+		career,
+		education,
+		employmentType,
+		salary,
+		roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate
+		FROM applications
+		WHERE companyId = #{companyId}
+		LIMIT #{offset}, #{limit};
 	</select>
 	<insert id="insertApplication">
 		INSERT INTO Applications (applicationName, companyId,
