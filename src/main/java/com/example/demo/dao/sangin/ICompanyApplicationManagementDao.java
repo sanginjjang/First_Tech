@@ -9,6 +9,11 @@ import com.example.demo.dto.ApplicationDto;
 
 @Mapper
 public interface ICompanyApplicationManagementDao {
-    List<ApplicationDto> companyApplicationList(@Param("companyId") String companyId);
-    int insertApplication(@Param("dto") ApplicationDto dto);
+	List<ApplicationDto> companyApplicationList(@Param("companyId") String companyId);
+
+	List<ApplicationDto> companyApplicationListLimit(@Param("companyId") String companyId,
+			@Param("offset") int offset,
+			@Param("limit") int limit);
+
+	int insertApplication(@Param("dto") ApplicationDto dto);
 }

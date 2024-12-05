@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ApplicationDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.sangin.ApplicationService;
 import com.example.demo.service.sangin.BookmarkedApplicationService;
 import com.example.demo.service.sangin.CompanyApplicationManagementService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/sangin")
@@ -35,18 +38,20 @@ public class SanginController {
 	BookmarkedApplicationService bookmarkedApplicationService;
 	@Autowired
 	CompanyApplicationManagementService companyApplicationService;
+
 	// 메인은 상인 템플릿의 sum으로 갑니다
 	@RequestMapping("/")
 	String main() {
 		return "sangin/sum";
 	}
+
 	// 공고 리스트 페이지
 	@RequestMapping("/applicationsForm")
 	String applicationsForm(Model model) {
 		System.out.println("공고 페이지로 들어갑니다~~");
-		//전체 공고랑 북마크 된 공고
+		// 전체 공고랑 북마크 된 공고
 		List<ApplicationDto> applicationList = applicationService.getApplicationList("user001");
-		//기업 북마크
+		// 기업 북마크
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
 		System.out.println("공고 페이지 전체 리스트 = " + applicationList);
 		model.addAttribute("applicationList", applicationList);
@@ -54,10 +59,11 @@ public class SanginController {
 
 		return "sangin/applicationsForm";
 	}
+
 	// 공고 상세 정보 페이지
 	@RequestMapping("/applicationDetailForm/{applicationNum}")
 	public String applicationDetailForm(@PathVariable("applicationNum") int applicationNum, Model model) {
-		System.out.println("디테일 들어오는 것엔 문제가 없습니다");//확인 완료
+		System.out.println("디테일 들어오는 것엔 문제가 없습니다");// 확인 완료
 		System.out.println("Application Number: " + applicationNum);
 		ApplicationDto application = applicationService.getApplication(applicationNum);
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
@@ -65,11 +71,12 @@ public class SanginController {
 		model.addAttribute("companyList", companyList);
 		return "sangin/applicationDetailForm";
 	}
-	//관심 공고 페이지
+
+	// 관심 공고 페이지
 	@RequestMapping("/bookmarkedApplicationsForm")
 	public String bookmarkedApplicationsForm(Model model) {
-		//세션에서 유저 정보를 받아와야합니다 //일단은 여기서 유저 번호를 임의로 지정합니다
-		System.out.println("관심 공고 들어오는 것엔 문제가 없습니다");//확인 완료
+		// 세션에서 유저 정보를 받아와야합니다 //일단은 여기서 유저 번호를 임의로 지정합니다
+		System.out.println("관심 공고 들어오는 것엔 문제가 없습니다");// 확인 완료
 		String userId = "user001";
 		List<ApplicationDto> applicationList = bookmarkedApplicationService.getBookmarkedApplicationList(userId);
 		List<String> companyList = applicationService.getBookmarkedCompany(userId);
@@ -77,7 +84,8 @@ public class SanginController {
 		model.addAttribute("companyList", companyList);
 		return "/sangin/bookmarkedApplicationsForm";
 	}
-	//인재풀
+
+	// 인재풀
 	@RequestMapping("/resumePoolForm")
 	String resumePoolForm() {
 		return "sangin/resumePoolForm";
@@ -94,6 +102,7 @@ public class SanginController {
 		applicationService.addHeart(dto);
 		return "공고 북마크 추가 성공";
 	}
+
 	// 공고 북마크 제거
 	@RequestMapping("/removeHeart")
 	@ResponseBody
@@ -104,6 +113,7 @@ public class SanginController {
 		applicationService.removeHeart(dto);
 		return "공고 북마크 제거 성공";
 	}
+
 	// 기업 북마크 추가
 	@RequestMapping("/addStar")
 	@ResponseBody
@@ -114,6 +124,7 @@ public class SanginController {
 		applicationService.addStar(dto);
 		return "기업 북마크 추가 성공";
 	}
+
 	// 기업 북마크 제거
 	@RequestMapping("/removeStar")
 	@ResponseBody
@@ -124,21 +135,61 @@ public class SanginController {
 		applicationService.removeStar(dto);
 		return "기업 북마크 제거 성공";
 	}
+
 	// 기업 공고 관리 폼
-	@RequestMapping("/companyApplicationManagementForm")
-	String companyApplicationManagementForm(Model model) {
+	@RequestMapping("/companyApplicationManagementForm/{pageNum}")
+	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model) {
+		System.out.println("페이지 네이션 테스트 중");
 		String companyId = "comp001";
-		List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(companyId);
-		model.addAttribute("companyApplication", companyApplication);
+		int offset = 0;
+		int limit = 5;
+		List<ApplicationDto> companyApplicationList = companyApplicationService.companyApplicationListLimit(companyId,
+				offset, limit);
+		
+		//페이지 갯수 정해줘야지
+		//전체 이력서 개수
+		//int totalApplication = resumeService.getResumeListCount(applicationNum); // 전체 이력서 개수
+
+		// 한 페이지에 보여줄 항목 수
+		//int itemsPerPage = 10;
+		
+		//총 페이지 수 계산
+		//int totalPages = (int) Math.ceil((double) totalResumes / itemsPerPage)
+		
+		// 해당 페이지의 시작 인덱스
+//		int startIdx = (pageNum - 1) * itemsPerPage;
+		
+//		// 페이지네이션 관련 데이터
+//		model.addAttribute("currentPage", pageNum); // 현재 페이지
+//		model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+//
+//		System.out.println("============");
+//		System.out.println("currentPage: " + pageNum);
+//		System.out.println("totalPages: " + totalPages);
+//
+//		// 공고 번호로 북마크 리스트 추출
+//		List<ResumeDto> bookmarksResumeList = bookmarksAToRServiceHyepin.getBookmarkAToRList(applicationNum);
+//		model.addAttribute("bookmarksResumeList", bookmarksResumeList);
+//		System.out.println("============================");
+//		System.out.println("공고번호로 북마크 리스트 추출합니다...");
+//		for (ResumeDto l : bookmarksResumeList) {
+//			System.out.println(l);
+//		}
+//
+//		return "/hyepin/applicantManage";
+		/////////////////////////
+		model.addAttribute("companyApplicationList", companyApplicationList);
 		model.addAttribute("companyId", companyId);
 		return "sangin/companyApplicationManagementForm";
 	}
+
 	// 기업 공고 작성 폼
 	@RequestMapping("/insertApplicationForm/{companyId}")
 	String insertApplicationForm(@PathVariable("companyId") String companyId, Model model) {
 		model.addAttribute("companyId", companyId);
 		return "sangin/insertApplicationForm";
 	}
+
 	// 공고 작성 완료 누름 시 db랑 연동되게끔 한 함수
 	@RequestMapping("/insertApplications")
 	public String insertApplication(@RequestParam("file") MultipartFile paramFile, ApplicationDto dto) {
@@ -150,54 +201,58 @@ public class SanginController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		dto.setFileName(fileName);//파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
+		dto.setFileName(fileName);// 파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
 		int result = companyApplicationService.insertApplication(dto);
-	    return "sangin/sum";
+		return "sangin/sum";
 	}
+
 	// 지역 체크 시 지역에 해당하는 공고 리스트 반환
 	@RequestMapping("/searchingByArea")
 	@ResponseBody
 	Map<String, Object> searchingByArea(@RequestBody String value) {
 		List<ApplicationDto> listByArea;
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
-		if(value.equals("all")) {
-			listByArea = applicationService.getApplicationList("user001"); 
-		}else {
-			listByArea = applicationService.getApplicationByWorkingArea("user001",value);
+		if (value.equals("all")) {
+			listByArea = applicationService.getApplicationList("user001");
+		} else {
+			listByArea = applicationService.getApplicationByWorkingArea("user001", value);
 		}
 		Map<String, Object> response = new HashMap<>();
-	    response.put("listByArea", listByArea);
-	    response.put("companyList", companyList);
+		response.put("listByArea", listByArea);
+		response.put("companyList", companyList);
 
-	    return response;
+		return response;
 	}
+
 	// 직무 체크 시 지역에 해당하는 공고 리스트 반환
 	@RequestMapping("/searchingByRoleId")
 	@ResponseBody
 	Map<String, Object> searchingByRoleId(@RequestBody String value) {
-		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId("user001",value);
+		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId("user001", value);
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
 		Map<String, Object> response = new HashMap<>();
-	    response.put("listByRoleId", listByRoleId);
-	    response.put("companyList", companyList);
+		response.put("listByRoleId", listByRoleId);
+		response.put("companyList", companyList);
 
-	    return response;
+		return response;
 	}
+
 	// 검색어로 검색하기
 	@RequestMapping("/searchingByKeyword")
 	@ResponseBody
 	Map<String, Object> searchingByKeyword(@RequestBody String keyword) {
 		// 14 : 21 테스트 시작
 		System.out.println("여기는 됐나요?");
-		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword("user001",keyword);
+		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword("user001", keyword);
 		System.out.println("키워드는 .. " + keyword + "입니다.." + listByKeyword);
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
 		Map<String, Object> response = new HashMap<>();
 		response.put("listByKeyword", listByKeyword);
 		response.put("companyList", companyList);
-		//완료
+		// 완료
 		return response;
 	}
-	
+
+
 
 }

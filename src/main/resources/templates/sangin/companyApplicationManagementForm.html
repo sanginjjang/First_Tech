@@ -201,7 +201,8 @@ header div {
 					</div>
 					<div class="right">
 						<div>
-							<a th:href="@{/hyepin/applicantManage/{applicationNum}/1(applicationNum=${item.applicationNum})}">지원자관리</a>
+							<a
+								th:href="@{/hyepin/applicantManage/{applicationNum}/1(applicationNum=${item.applicationNum})}">지원자관리</a>
 						</div>
 						<div th:text="${item.roleId}">roleId</div>
 						<div th:text="${item.deadlineDate}">deadlineDate</div>
@@ -210,13 +211,25 @@ header div {
 				</div>
 			</th:block>
 
+			<!-- <input type="hidden" id="pageNum" th:value="${currentPage}">
 			<div class="pagination">
-				<button>이전</button>
-				<button>1</button>
-				<button>2</button>
-				<button>3</button>
-				<button>다음</button>
-			</div>
+				<span th:if="${currentPage > 1}"><a
+					th:href="@{/hyepin/applicantManage/{applicationNum}/{pageNum}
+							(applicationNum=${applicationResult.applicationNum}, pageNum=${pageNum-1})}"
+					class="pagination-link">이전</a></span>
+				마지막 페이지까지 숫자 뜨게
+				<span th:each="page : ${#numbers.sequence(1, totalPages)}"> <span>
+						<a
+						th:href="@{/hyepin/applicantManage/{applicationNum}/{pageNum}
+							(applicationNum=${applicationResult.applicationNum}, pageNum=${page})}"
+						th:style="${page == pageNum} ? 'font-weight: bold; color: #1a73e8;' : ''"
+						class="pagination-link">[[${page}]]</a>
+				</span>
+				</span> <span th:if="${currentPage < totalPages}"><a
+					th:href="@{/hyepin/applicantManage/{applicationNum}/{pageNum}
+							(applicationNum=${applicationResult.applicationNum}, pageNum=${pageNum+1})}"
+					class="pagination-link">다음</a></span>
+			</div> -->
 		</div>
 	</div>
 </body>
