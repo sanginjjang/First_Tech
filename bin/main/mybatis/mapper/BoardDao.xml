@@ -25,8 +25,16 @@
 		(boardNum,boardTitle,boardContent,boardWriter,fileName,views,createdDate)
 		VALUES(null,#{boardTitle},#{boardContent},#{boardWriter},#{fileName},#{views},NOW());
 	</insert>
-	
-		<select id="getBoardListPaging" resultType="com.example.demo.dto.BoardViewDto">
+
+	<!-- <select id="getBoardListPaging" resultType="com.example.demo.dto.BoardViewDto"> 
+		SELECT b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, 
+		b.views, b.createdDate, b.modifyDate, COALESCE(COUNT(c.commentNum), 0) AS 
+		commentCount FROM boards b LEFT JOIN comments c ON b.boardNum = c.boardNum 
+		GROUP BY b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, 
+		b.views, b.createdDate, b.modifyDate ORDER BY b.createdDate DESC LIMIT #{startNum},#{amount}; 
+		</select> -->
+	<select id="getBoardListPaging"
+		resultType="com.example.demo.dto.BoardViewDto">
 		SELECT
 		b.boardNum,
 		b.boardTitle,
@@ -47,7 +55,57 @@
 		ORDER BY
 		b.createdDate DESC
 		LIMIT
-    	#{startNum},#{amount};
+		#{startNum}, #{amount};
+	</select>
+
+	<!-- ↓↓↓ 검색로직 구현...너무 힘드네요 여러분.. 만약에 보신다면 힘내라고 한마디만 해주세요..↓↓↓ -->
+
+
+	<!-- 제목으로 검색 -->
+	<select id="searchBoardByTitle"
+		resultType="com.example.demo.dto.BoardViewDto">
+		SELECT * FROM boards
+		WHERE boardTitle LIKE CONCAT('%',#{searchInput} , '%') 
+		ORDER BY createdDate DESC
+		LIMIT #{startNum} ,
+		#{amount}
+	</select>
+	<select id="searchBoardByTitleCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM boards
+		WHERE boardTitle LIKE CONCAT('%',#{searchInput} , '%')
+	</select>
+
+	<!-- 내용으로 검색 -->
+
+	<select id="searchBoardByContent"
+		resultType="com.example.demo.dto.BoardViewDto">
+		SELECT * FROM boards
+		WHERE boardContent LIKE CONCAT('%',#{searchInput} , '%') 
+		ORDER BY createdDate DESC
+		LIMIT #{startNum}
+		, #{amount}
+	</select>
+	<select id="searchBoardByContentCount" resultType="_int">
+		SELECT
+		COUNT(*) FROM boards
+		WHERE boardContent LIKE CONCAT('%',#{searchInput} , '%')
+	</select>
+
+	<!-- 작성자로 검색 -->
+
+	<select id="searchBoardByWriter"
+		resultType="com.example.demo.dto.BoardViewDto">
+		SELECT * FROM boards
+		WHERE boardWriter LIKE CONCAT('%',#{searchInput} , '%') 
+		ORDER BY createdDate DESC
+		LIMIT #{startNum} ,
+		#{amount}
+	</select>
+	<select id="searchBoardByWriterCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM boards
+		WHERE boardWriter LIKE CONCAT('%',#{searchInput} , '%')
 	</select>
 
 
