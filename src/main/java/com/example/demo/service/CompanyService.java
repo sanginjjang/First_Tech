@@ -90,4 +90,36 @@ public class CompanyService implements ICompanyService{
 		
 	}
 
+
+
+	@Override
+	public List<CompanyDto> searchCompanyByCompanyName(int startNum, int amount, String searchInput,String sortPart) {
+		List<CompanyDto> companys = companyDao.searchCompanyByCompanyName(startNum, amount, searchInput,sortPart);
+		return companys;
+	}
+
+
+
+	@Override
+	public int searchCompanyByCompanyNameCount(String searchInput) {
+		int resultSearchCompanyByCompanyNameCount =companyDao.searchCompanyByCompanyNameCount(searchInput);
+		return resultSearchCompanyByCompanyNameCount;
+	}
+
+
+
+	@Override
+	public List<CompanyDto> searchCompanyWithSort(String sortPart, int startNum, int amount) {
+		List<CompanyDto> companys = companyDao.searchCompanyWithSort(sortPart, startNum, amount);
+		return companys;
+	}
+
+
+
+	@Override
+	public List<CompanyDto> searchCompanyWithBookmark(String sortPart, int startNum, int amount, String userId,String searchInput) {
+		List<CompanyDto> companys = companyDao.searchCompanyWithBookmark(sortPart, startNum, amount, userId, searchInput);
+		return companys;
+	}
+
 }

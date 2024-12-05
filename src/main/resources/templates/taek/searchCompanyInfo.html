@@ -222,10 +222,10 @@ footer {
 		<!-- 검색창 -->
 		<!-- 검색창 -->
 		<div class="search-container">
-			<form action="/c/searchCompany/1" method="GET">
+			<form action="/c/searchCompany/1" method="post">
 				<select class="search-select" name="searchPart" id="searchPart">
 					<option value="companyName">기업 이름</option>
-					<!-- 다른 검색 옵션을 여기에 추가 가능 -->
+
 				</select> <input type="text" class="search-input" name="searchInput"
 					id="searchInput" placeholder="기업 이름 검색"> <select
 					class="search-select" name="sortPart" id="sortPart">
@@ -267,20 +267,20 @@ footer {
 				<tr>
 					<td colspan="6"><th:block th:if="${currentPageNum > 1}">
 							<a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+								th:href="@{/c/searchCompany/{pageNum}(searchPart=${searchEntity.searchPart}, searchInput=${searchEntity.searchInput}, sortPart=${searchEntity.sortPart}, pageNum=${currentPageNum - 1})}">이전</a>
 						</th:block> <th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
 							<span th:if="${currentPageNum == pageNum}"> <a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"> <b
-									th:text="${pageNum}"></b>
+								th:href="@{/c/searchCompany/{pageNum}(searchPart=${searchEntity.searchPart}, searchInput=${searchEntity.searchInput}, sortPart=${searchEntity.sortPart}, pageNum=${pageNum})}">
+									<b th:text="${pageNum}"></b>
 							</a>&nbsp;&nbsp;
 							</span>
 							<span th:if="${currentPageNum != pageNum}"> <a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"
+								th:href="@{/c/searchCompany/{pageNum}(searchPart=${searchEntity.searchPart}, searchInput=${searchEntity.searchInput}, sortPart=${searchEntity.sortPart}, pageNum=${pageNum})}"
 								th:text="${pageNum}"></a>&nbsp;&nbsp;
 							</span>
 						</th:block> <th:block th:if="${currentPageNum < endPageNum}">
 							<a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+								th:href="@{/c/searchCompany/{pageNum}(searchPart=${searchEntity.searchPart}, searchInput=${searchEntity.searchInput}, sortPart=${searchEntity.sortPart}, pageNum=${currentPageNum + 1})}">다음</a>
 						</th:block></td>
 				</tr>
 			</tbody>
@@ -290,41 +290,59 @@ footer {
 	<footer>Footer</footer>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	$(document).ready(function() {
-	    $('.heart').click(function() {
-	        var companyId = $(this).data('company-id');
-	        var userId = $(this).data('user-id');
-	        var heartElement = $(this);
+		$(document)
+				.ready(
+						function() {
+							$('.heart')
+									.click(
+											function() {
+												var companyId = $(this).data(
+														'company-id');
+												var userId = $(this).data(
+														'user-id');
+												var heartElement = $(this);
 
-	        console.log("123123123123");
+												console.log("123123123123");
 
-	        // 현재 하트가 북마크 상태인지를 확인
-	        var isBookmarked = heartElement.hasClass('bookmarked');
+												// 현재 하트가 북마크 상태인지를 확인
+												var isBookmarked = heartElement
+														.hasClass('bookmarked');
 
-	        // Ajax 요청을 보낼 URL 및 메서드 설정
-	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark'; // 상태에 따라 추가/삭제 URL 변경
+												// Ajax 요청을 보낼 URL 및 메서드 설정
+												var url = isBookmarked ? '/c/removeBookmark'
+														: '/c/addBookmark'; // 상태에 따라 추가/삭제 URL 변경
 
-	        // Ajax 요청
-	        $.ajax({
-	            url: url, // 북마크 추가 또는 삭제 URL
-	            method: 'POST',
-	            data: {
-	                companyId: companyId,
-	                userId: userId
-	            },
-	            contentType: 'application/x-www-form-urlencoded',
-	            success: function(response) {
-	                console.log(isBookmarked ? '북마크 삭제 성공!' : '북마크 추가 성공!');
-	                // 상태에 따라 하트의 클래스를 토글
-	                heartElement.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
-	            },
-	            error: function(xhr, status, error) {
-	                console.log('에러 발생:', error);
-	            }
-	        });
-	    });
-	});
-
+												// Ajax 요청
+												$
+														.ajax({
+															url : url, // 북마크 추가 또는 삭제 URL
+															method : 'POST',
+															data : {
+																companyId : companyId,
+																userId : userId
+															},
+															contentType : 'application/x-www-form-urlencoded',
+															success : function(
+																	response) {
+																console
+																		.log(isBookmarked ? '북마크 삭제 성공!'
+																				: '북마크 추가 성공!');
+																// 상태에 따라 하트의 클래스를 토글
+																heartElement
+																		.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
+															},
+															error : function(
+																	xhr,
+																	status,
+																	error) {
+																console
+																		.log(
+																				'에러 발생:',
+																				error);
+															}
+														});
+											});
+						});
 	</script>
 </body>
 

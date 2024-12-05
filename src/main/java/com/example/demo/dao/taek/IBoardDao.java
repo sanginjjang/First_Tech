@@ -21,4 +21,15 @@ public interface IBoardDao {
 	
 	public void regBoard(BoardDto board);
 	
+	public List<BoardViewDto> searchBoardByTitle(@Param("searchInput")String searchInput,@Param("startNum")int startNum, @Param("amount")int amount);
+	
+	public int searchBoardByTitleCount(@Param("searchInput")String searchInput);
+	
+    public List<BoardViewDto> searchBoardByContent(@Param("searchInput")String searchInput,@Param("startNum")int startNum, @Param("amount")int amount);
+	
+	public int searchBoardByContentCount(@Param("searchInput")String searchInput);
+	
+	 public List<BoardViewDto> searchBoardByWriter(@Param("searchInput")String searchInput,@Param("startNum")int startNum, @Param("amount")int amount);
+		
+	public int searchBoardByWriterCount(@Param("searchInput")String searchInput);
 }
