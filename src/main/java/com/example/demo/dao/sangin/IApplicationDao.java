@@ -27,7 +27,7 @@ public interface IApplicationDao {
 
 	ApplicationDto getApplication(int applicationNum);
 
-	List<ApplicationDto> getApplicationByWorkingArea(@Param("userId") String userId,@Param("workArea") String workingArea);
+	List<ApplicationDto> getApplicationByWorkingArea(@Param("userId") String userId,@Param("workingArea") String workingArea);
 
 	List<ApplicationDto> getApplicationByRoleId(@Param("userId") String userId,@Param("roleId") String roleId);
 
