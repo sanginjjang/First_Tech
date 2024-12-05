@@ -27,5 +27,12 @@ public interface ICompanyService {
 	public List<UserToCompanyBookmarkDto> getUserToCompanyBookmark(String userId);
 	
 	public List<CompanyDto> testBookmark(int startNum, int amountm, String userId);
+	
+	public List<CompanyDto> searchCompanyByCompanyName(int startNum,int amount,String searchInput,String sortPart);
+	
+	public int searchCompanyByCompanyNameCount(String searchInput);
 
+	public List<CompanyDto> searchCompanyWithSort(String sortPart,int startNum,int amount);
+	
+	public List<CompanyDto> searchCompanyWithBookmark(String sortPart , int startNum , int amount ,String userId,String searchInput);
 }
