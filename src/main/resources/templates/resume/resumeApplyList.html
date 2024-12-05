@@ -14,31 +14,25 @@
 </head>
 <body>
 
-<div class="resumeList">
+<div class="resumeApplyList">
 <h2>이력서 관리</h2>
-   <table border="1">
+   <!--   <table border="1">
          <thead>
             <tr>
                <th>번호</th>
-               <th>resumeTitle</th>
-               <th>filename</th>
-               <th>fileimage</th>
-               <th>updatedate</th>
-               <th>직무</th>
-               <th>관리</th>
+               <th>지원날짜</th>
+               <th>이력서 제목</th>
+               <th>지원 현황</th>
+               <th>이력서 지원 관리</th>
             </tr>
          </thead>
          <tbody>
-   
-            <tr th:each="list, iterStat : ${resumelist}">
+  
+            <tr th:each="list, iterStat : ${resumeApplylist}">
                <td th:text="${iterStat.index + 1}"></td> 
-               <td>
-                    <img th:src="@{/uploads/{personalPhotoName}(personalPhotoName=${list.personalPhotoName})}" width="100px">
-               </td>
                 <td><a th:href="@{/resume/detailResume/{resumeNum}(resumeNum=${list.resumeNum})}" th:text="${list.resumeTitle}"></a></td>
-                <td th:text="${list.personalPhotoName}"></td>
                 <td th:text="${list.updatedDate}"></td>
-                <td th:text="${list.roleName}"></td>
+                <td th:text="${list.applyStatus}"></td>
                 <td><form th:action="@{/resume/deleteResume}" method="post">
                         <input type="hidden" name="resumeNum" th:value="${list.resumeNum}">
                         <input type="submit" value="삭제">
@@ -48,6 +42,7 @@
    
          </tbody>
       </table>
+      -->
 </div>
 </body>
 </html>
