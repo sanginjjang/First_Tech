@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApplicationDto {
 	private int applicationNum; // 1. 기업 공고 고유 번호
 	private String applicationName; // 2. 공고명

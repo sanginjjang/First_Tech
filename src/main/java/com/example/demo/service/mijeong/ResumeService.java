@@ -2,19 +2,15 @@ package com.example.demo.service.mijeong;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.dao.IResumeDao;
+import com.example.demo.dao.mijeong.IResumeDao;
 import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
 import com.example.demo.dto.JobRoleDto;
 import com.example.demo.dto.ResumeDto;
-import com.example.demo.dto.ResumeFileDto;
-import com.example.demo.dto.TechStackDto;
 import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserTechStackDto;

@@ -76,26 +76,102 @@
 	</delete>
 	<select id="getApplicationByWorkingArea"
 		resultType="com.example.demo.dto.ApplicationDto">
-		select * from Applications where workingArea =
+		SELECT
+		a.applicationNum,
+		a.applicationName,
+		a.companyId,
+		a.workingArea,
+		a.career,
+		a.education,
+		a.employmentType,
+		a.salary,
+		a.roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate,
+		CASE
+		WHEN
+		b.bookmarkNum IS NOT
+		NULL THEN 1 -- 북마크된 상태
+		ELSE 0 -- 북마크되지 않은 상태
+		END AS
+		isBookmarked
+		FROM
+		applications a
+		LEFT JOIN
+		usertoapplicationbookmarks b
+		ON
+		a.applicationNum
+		= b.applicationNum AND
+		b.userId = #{userId} where
+		workingArea =
 		#{workingArea};
 	</select>
 	<select id="getApplicationByRoleId"
 		resultType="com.example.demo.dto.ApplicationDto">
-		select * from Applications where roleId = #{roleId};
-	</select>
-	<select id="getApplicationByKeyword" resultType="com.example.demo.dto.ApplicationDto">
-		SELECT *
+		SELECT
+		a.applicationNum,
+		a.applicationName,
+		a.companyId,
+		a.workingArea,
+		a.career,
+		a.education,
+		a.employmentType,
+		a.salary,
+		a.roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate,
+		CASE
+		WHEN
+		b.bookmarkNum IS NOT
+		NULL THEN 1 -- 북마크된 상태
+		ELSE 0 -- 북마크되지 않은 상태
+		END AS
+		isBookmarked
 		FROM
-		Applications
-		WHERE applicationName = #{keyword}
-		OR companyId =
-		#{keyword}
-		OR career = #{keyword}
-		OR education = #{keyword}
-		OR salary = #{keyword}
+		applications a
+		LEFT JOIN
+		usertoapplicationbookmarks b
+		ON
+		a.applicationNum
+		= b.applicationNum AND
+		b.userId = #{userId} where roleId
+		= #{roleId};
+	</select>
+	<select id="getApplicationByKeyword"
+		resultType="com.example.demo.dto.ApplicationDto">
+		SELECT
+		a.applicationNum,
+		a.applicationName,
+		a.companyId,
+		a.workingArea,
+		a.career,
+		a.education,
+		a.employmentType,
+		a.salary,
+		a.roleId,
+		DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate,
+		CASE
+		WHEN b.bookmarkNum IS NOT NULL THEN 1 -- 북마크된 상태
+		ELSE 0 -- 북마크되지 않은 상태
+		END AS isBookmarked
+		FROM
+		applications a
+		LEFT JOIN
+		usertoapplicationbookmarks b
+		ON
+		a.applicationNum = b.applicationNum
+		AND
+		b.userId = #{userId}
+		WHERE
+		a.applicationName = #{keyword}
+		OR a.companyId
+		= #{keyword}
+		OR a.career = #{keyword}
+		OR a.education = #{keyword}
 		OR
-		workingArea = #{keyword}
-		OR roleId = #{keyword}
+		a.salary = #{keyword}
+		OR a.workingArea = #{keyword}
+		OR a.roleId =
+		#{keyword}
+
 	</select>
 
 </mapper>

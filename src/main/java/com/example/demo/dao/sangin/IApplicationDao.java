@@ -24,13 +24,13 @@ public interface IApplicationDao {
 	int removeStar(UserToCompanyBookmarkDto dto);
 
 	List<String> getBookmarkedCompany(String userId);
-	
+
 	ApplicationDto getApplication(int applicationNum);
-	
-	List<ApplicationDto> getApplicationByWorkingArea(String workingArea);
-	
-	List<ApplicationDto> getApplicationByRoleId(String roleId);
-	
-	List<ApplicationDto> getApplicationByKeyword(String keyword);
+
+	List<ApplicationDto> getApplicationByWorkingArea(@Param("userId") String userId,@Param("workArea") String workingArea);
+
+	List<ApplicationDto> getApplicationByRoleId(@Param("userId") String userId,@Param("roleId") String roleId);
+
+	List<ApplicationDto> getApplicationByKeyword(@Param("userId") String userId, @Param("keyword") String keyword);
 
 }

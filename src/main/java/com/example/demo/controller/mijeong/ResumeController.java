@@ -3,10 +3,7 @@ package com.example.demo.controller.mijeong;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,14 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
-import com.example.demo.dto.JobRoleDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeFileDto;
-import com.example.demo.dto.TechStackDto;
 import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserTechStackDto;
-import com.example.demo.service.ResumeService;
+import com.example.demo.service.mijeong.ResumeService;
 
 @Controller
 @RequestMapping("/resume")

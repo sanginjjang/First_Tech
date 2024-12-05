@@ -1,4 +1,4 @@
-package com.example.demo.dto.mijeong;
+package com.example.demo.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;

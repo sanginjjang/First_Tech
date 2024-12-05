@@ -163,7 +163,7 @@ public class SanginController {
 		if(value.equals("all")) {
 			listByArea = applicationService.getApplicationList("user001"); 
 		}else {
-			listByArea = applicationService.getApplicationByWorkingArea(value);
+			listByArea = applicationService.getApplicationByWorkingArea("user001",value);
 		}
 		Map<String, Object> response = new HashMap<>();
 	    response.put("listByArea", listByArea);
@@ -175,7 +175,7 @@ public class SanginController {
 	@RequestMapping("/searchingRoleId")
 	@ResponseBody
 	List<ApplicationDto> searchingArea(@RequestBody String value) {
-		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId(value);
+		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId("user001",value);
 		return listByRoleId;
 	}
 	// 검색어로 검색하기
@@ -185,8 +185,7 @@ public class SanginController {
 		System.out.println("이건 실행됐나요 09 : 57");
 		System.out.println("이건 실행됐나요 09 : 57");
 		System.out.println("이건 실행됐나요 09 : 57");
-		System.out.println("이건 실행됐나요 09 : 57");
-		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword(keyword);
+		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword("user001",keyword);
 		// 09 : 55 테스트 시작
 		//완료
 		System.out.println("키워드는 .. " + keyword + "입니다.." + listByKeyword);

@@ -2,9 +2,13 @@ package com.example.demo.dto;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class InternshipDto {
 
     private int internshipNum;        // 인턴십 고유 넘버
