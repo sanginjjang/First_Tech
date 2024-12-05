@@ -1,7 +1,11 @@
 package com.example.demo.dto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BoardViewDto {
 	private int boardNum; // 1. 게시판 고유 번호
 	private String boardTitle; // 2. 제목

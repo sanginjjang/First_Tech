@@ -2,9 +2,13 @@ package com.example.demo.dto;
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResumeApplyStatusDto {
 	
 	private int resumeApplyStatusNum;  // 이력서 지원 고유 넘버

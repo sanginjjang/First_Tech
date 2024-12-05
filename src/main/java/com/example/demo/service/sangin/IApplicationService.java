@@ -21,9 +21,9 @@ public interface IApplicationService {
 	
 	ApplicationDto getApplication(int applicationNum);
 	
-	List<ApplicationDto> getApplicationByWorkingArea(String workingArea);
+	List<ApplicationDto> getApplicationByWorkingArea( String userId, String workingArea);
 	
-	List<ApplicationDto> getApplicationByRoleId(String roleId);
+	List<ApplicationDto> getApplicationByRoleId(String userId, String roleId);
 	
-	List<ApplicationDto> getApplicationByKeyword(String keyword);
+	List<ApplicationDto> getApplicationByKeyword( String userId, String keyword);
 }
