@@ -16,4 +16,6 @@ public interface ICompanyApplicationManagementDao {
 			@Param("limit") int limit);
 
 	int insertApplication(@Param("dto") ApplicationDto dto);
+	
+	int getApplicationCount(@Param("companyId") String companyId);
 }

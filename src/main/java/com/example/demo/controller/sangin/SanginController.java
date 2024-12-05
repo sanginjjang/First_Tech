@@ -139,47 +139,22 @@ public class SanginController {
 	// 기업 공고 관리 폼
 	@RequestMapping("/companyApplicationManagementForm/{pageNum}")
 	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model) {
-		System.out.println("페이지 네이션 테스트 중");
 		String companyId = "comp001";
-		int offset = 0;
-		int limit = 5;
+		int limit = 10;
+		int startIdx = (pageNum - 1) * 10;
 		List<ApplicationDto> companyApplicationList = companyApplicationService.companyApplicationListLimit(companyId,
-				offset, limit);
-		
-		//페이지 갯수 정해줘야지
-		//전체 이력서 개수
-		//int totalApplication = resumeService.getResumeListCount(applicationNum); // 전체 이력서 개수
+				startIdx, limit);
+		int totalApplication = companyApplicationService.getApplicationCount(companyId); // 전체 이력서 개수
+		int totalPages = (int) Math.ceil((double) totalApplication / limit); //10개 // 10개 나누기 //올림
 
-		// 한 페이지에 보여줄 항목 수
-		//int itemsPerPage = 10;
-		
-		//총 페이지 수 계산
-		//int totalPages = (int) Math.ceil((double) totalResumes / itemsPerPage)
-		
-		// 해당 페이지의 시작 인덱스
-//		int startIdx = (pageNum - 1) * itemsPerPage;
-		
-//		// 페이지네이션 관련 데이터
-//		model.addAttribute("currentPage", pageNum); // 현재 페이지
-//		model.addAttribute("totalPages", totalPages); // 전체 페이지 수
-//
-//		System.out.println("============");
-//		System.out.println("currentPage: " + pageNum);
-//		System.out.println("totalPages: " + totalPages);
-//
-//		// 공고 번호로 북마크 리스트 추출
-//		List<ResumeDto> bookmarksResumeList = bookmarksAToRServiceHyepin.getBookmarkAToRList(applicationNum);
-//		model.addAttribute("bookmarksResumeList", bookmarksResumeList);
-//		System.out.println("============================");
-//		System.out.println("공고번호로 북마크 리스트 추출합니다...");
-//		for (ResumeDto l : bookmarksResumeList) {
-//			System.out.println(l);
-//		}
-//
-//		return "/hyepin/applicantManage";
-		/////////////////////////
-		model.addAttribute("companyApplicationList", companyApplicationList);
-		model.addAttribute("companyId", companyId);
+		model.addAttribute("currentPage", pageNum); // 현재 페이지
+		System.out.println("pageNum = " + pageNum);
+		model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+		System.out.println("totalPages = " + totalPages);
+		model.addAttribute("companyApplicationList", companyApplicationList); // 해당하는 공고 보내기
+		System.out.println("해당공고 = " + companyApplicationList);
+		model.addAttribute("companyId", companyId); // 회사 아이디 보내기
+		System.out.println("companyId = " + companyId);
 		return "sangin/companyApplicationManagementForm";
 	}
 
@@ -252,7 +227,5 @@ public class SanginController {
 		// 완료
 		return response;
 	}
-
-
 
 }

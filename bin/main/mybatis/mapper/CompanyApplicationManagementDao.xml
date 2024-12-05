@@ -38,6 +38,11 @@
 		WHERE companyId = #{companyId}
 		LIMIT #{offset}, #{limit};
 	</select>
+	<select  id="getApplicationCount" resultType="_INT">
+		SELECT count(*)
+		FROM applications
+		WHERE companyId = #{companyId}
+	</select>
 	<insert id="insertApplication">
 		INSERT INTO Applications (applicationName, companyId,
 		career,
