@@ -23,6 +23,6 @@ public class ApplicationDto {
 	private int isBookmarked; // 13. 북마크 상태 (1: 북마크됨, 0: 북마크되지 않음)// db에 없음
 	private String schedule = "9:00 ~ 18:00"; // 14. 근무시간 // db에 없음
 	private String onBoard = "진행 중";// 15. 진행 중 여부 //db에 없음
-	private String keyTasks;	
-	private String applicationIntro;
+	private String keyTasks;	//db에 없음
+	private String applicationIntro;//db에 없음
 }

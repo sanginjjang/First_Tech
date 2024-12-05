@@ -155,9 +155,9 @@ public class SanginController {
 	    return "sangin/sum";
 	}
 	// 지역 체크 시 지역에 해당하는 공고 리스트 반환
-	@RequestMapping("/searchingArea")
+	@RequestMapping("/searchingByArea")
 	@ResponseBody
-	Map<String, Object> searchingArea(@RequestBody String value, Model model) {
+	Map<String, Object> searchingByArea(@RequestBody String value) {
 		List<ApplicationDto> listByArea;
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
 		if(value.equals("all")) {
@@ -172,11 +172,16 @@ public class SanginController {
 	    return response;
 	}
 	// 직무 체크 시 지역에 해당하는 공고 리스트 반환
-	@RequestMapping("/searchingRoleId")
+	@RequestMapping("/searchingByRoleId")
 	@ResponseBody
-	List<ApplicationDto> searchingArea(@RequestBody String value) {
+	Map<String, Object> searchingByRoleId(@RequestBody String value) {
 		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId("user001",value);
-		return listByRoleId;
+		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		Map<String, Object> response = new HashMap<>();
+	    response.put("listByRoleId", listByRoleId);
+	    response.put("companyList", companyList);
+
+	    return response;
 	}
 	// 검색어로 검색하기
 	@RequestMapping("/searchingByKeyword")
