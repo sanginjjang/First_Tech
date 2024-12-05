@@ -2,7 +2,9 @@ package com.example.demo.controller.sangin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +23,6 @@ import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.sangin.ApplicationService;
 import com.example.demo.service.sangin.BookmarkedApplicationService;
 import com.example.demo.service.sangin.CompanyApplicationManagementService;
-import com.example.demo.vo.joontaek.BoardVo;
 
 @Controller
 @RequestMapping("/sangin")
@@ -47,7 +48,7 @@ public class SanginController {
 		List<ApplicationDto> applicationList = applicationService.getApplicationList("user001");
 		//기업 북마크
 		List<String> companyList = applicationService.getBookmarkedCompany("user001");
-		System.out.println("applicationList = " + applicationList);
+		System.out.println("공고 페이지 전체 리스트 = " + applicationList);
 		model.addAttribute("applicationList", applicationList);
 		model.addAttribute("companyList", companyList);
 
@@ -135,45 +136,62 @@ public class SanginController {
 	// 기업 공고 작성 폼
 	@RequestMapping("/insertApplicationForm/{companyId}")
 	String insertApplicationForm(@PathVariable("companyId") String companyId, Model model) {
-		// 기업 번호를 받아왔어요~
-		System.out.println("기업공고 작성 함수 시랭...");
-		System.out.println(companyId);
 		model.addAttribute("companyId", companyId);
 		return "sangin/insertApplicationForm";
 	}
+	// 공고 작성 완료 누름 시 db랑 연동되게끔 한 함수
 	@RequestMapping("/insertApplications")
 	public String insertApplication(@RequestParam("file") MultipartFile paramFile, ApplicationDto dto) {
-		System.out.println("Uploaded file: " + paramFile.getOriginalFilename());
-		//1. multipart 파일 객체 받고
-		//2. 파일 네임 따로 뽑고
-		//3. file 객체에 경로랑 이름 저장
-		//4. 이동하는데 오류 처리
 		MultipartFile file = paramFile;
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(uploadPath + fileName);
-		
 		try {
 			file.transferTo(uploadFile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("12:40 시작");
-		System.out.println("14:40");
-		System.out.println("14:50 시작");
-		System.out.println(dto.toString());
 		dto.setFileName(fileName);//파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
-		System.out.println("파일 네임 테스트 합니다 15:37");
-		System.out.println(fileName);
-		System.out.println("파일 네임 테스트 합니다 15:37");
 		int result = companyApplicationService.insertApplication(dto);
-		if(result == 1) {
-			System.out.println("공고 등록 성공");
-			System.out.println("15:?? 해결");
-		}else {
-			System.out.println("공고 등록 실패");
-		}
 	    return "sangin/sum";
 	}
+	// 지역 체크 시 지역에 해당하는 공고 리스트 반환
+	@RequestMapping("/searchingArea")
+	@ResponseBody
+	Map<String, Object> searchingArea(@RequestBody String value, Model model) {
+		List<ApplicationDto> listByArea;
+		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		if(value.equals("all")) {
+			listByArea = applicationService.getApplicationList("user001"); 
+		}else {
+			listByArea = applicationService.getApplicationByWorkingArea(value);
+		}
+		Map<String, Object> response = new HashMap<>();
+	    response.put("listByArea", listByArea);
+	    response.put("companyList", companyList);
+
+	    return response;
+	}
+	// 직무 체크 시 지역에 해당하는 공고 리스트 반환
+	@RequestMapping("/searchingRoleId")
+	@ResponseBody
+	List<ApplicationDto> searchingArea(@RequestBody String value) {
+		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId(value);
+		return listByRoleId;
+	}
+	// 검색어로 검색하기
+	@RequestMapping("/searchingByKeyword")
+	@ResponseBody
+	List<ApplicationDto> searchingByKeyword(@RequestBody String keyword) {
+		System.out.println("이건 실행됐나요 09 : 57");
+		System.out.println("이건 실행됐나요 09 : 57");
+		System.out.println("이건 실행됐나요 09 : 57");
+		System.out.println("이건 실행됐나요 09 : 57");
+		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword(keyword);
+		// 09 : 55 테스트 시작
+		//완료
+		System.out.println("키워드는 .. " + keyword + "입니다.." + listByKeyword);
+		return listByKeyword;
+	}
+	
 
 }

@@ -50,4 +50,19 @@ public class ApplicationService implements IApplicationService{
 		return applicationDao.getApplication(applicationNum);
 	}
 
+	@Override
+	public List<ApplicationDto> getApplicationByWorkingArea(String workingArea){
+		return applicationDao.getApplicationByWorkingArea(workingArea);
+	}
+
+	@Override
+	public List<ApplicationDto> getApplicationByRoleId(String roleId) {
+		return applicationDao.getApplicationByRoleId(roleId);
+	}
+
+	@Override
+	public List<ApplicationDto> getApplicationByKeyword(String keyword) {
+		return applicationDao.getApplicationByKeyword(keyword);
+	}
+
 }
