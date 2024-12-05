@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+   <form action="/resume/resumeForm" method="post" enctype="multipart/form-data">
+     <h3>사용자 정보</h3>
+    <input type="hidden" name="userId" th:value="${user.userId}"><br>
+    <input type="text" name="userName" th:value="${user.userName}" readonly><br>
+    <input type="text" name="userSsn" th:value="${user.userSsn}" readonly><br>
+    <input type="text" name="userPhone" th:value="${user.userPhone}" readonly><br>
+    <input type="text" name="userAddress" th:value="${user.userAddress}" readonly><br>
+    <input type="text" name="userPostalCode" th:value="${user.userPostalCode}" readonly><br>
+    <input type="text" name="userEmail" th:value="${user.userEmail}" readonly><br>
+    <input type="text" name="userNickname" th:value="${user.userNickname}" readonly><br>
+    <input type="file" name="personalPhotoName"><br>
+
+	<h4>직무 (Role)</h4>
+    <select name="roleId">
+        <option value="1">Backend Developer</option>
+        <option value="2">Data Analyst</</option>
+        <option value="3">Frontend Developer</option>
+    </select><br>
+   
+  
+
+    <h3>이력서 정보</h3>
+    제목 : <input type="text" name="resumeTitle"><br>
+    내용 : <input type="text" name="resumeContent"><br>
+
+    <h4>병역</h4>
+    <select name="militaryService">
+        <option value="Completed">군필</option>
+        <option value="Not Completed">미필</option>
+        <option value="Exempt">면제</option>
+        <option value="Not Required">해당사항없음</option>
+    </select><br>
+
+    <h4>학력</h4>
+    <select name="education">
+        <option value="HighSchool">고졸</option>
+        <option value="AssociateDegree">전문대졸</option>
+        <option value="BachelorDegree">학사</option>
+        <option value="MasterDegree">석사</option>
+        <option value="DoctoralDegree">박사</option>
+    </select><br>
+    
+    학교명 : <input type="text" name="school"><br>
+    포트폴리오 : <input type="file" name="portfolioName"><br>
+    <hr><hr>
+   
+    <h4>경력</h4>
+    <select name="career">
+        <option value="sixMonth">6개월</option>
+        <option value="oneYear">1년</option>
+        <option value="twoYear">2년</option>
+        <option value="threeYear">3년</option>
+        <option value="fourYear">4년</option>
+        <option value="fiveYear">5년</option>
+    </select><br>
+    회사명 : <input type="text" name="careerName"><br>
+
+    <h4>인턴/대외활동</h4>
+    <select name="internshipPeriod">
+        <option value="sixMonth">6개월</option>
+        <option value="oneYear">1년</option>
+        <option value="twoYear">2년</option>
+        <option value="threeYear">3년</option>
+        <option value="fourYear">4년</option>
+        <option value="fiveYear">5년</option>
+    </select><br>
+    활동명 : <input type="text" name="internshipName"><br>
+    활동 내용 : <input type="text" name="internshipDetails"><br>
+    시작날짜 : <input type="date" name ="startDate"> ~ 종료날짜 :<input type="date" name="endDate">
+
+ 	<h4>자격증 조회</h4>
+    자격증 이름: <input type="text" id="SerchCertificateName" placeholder="자격증 이름을 입력하세요" />
+    <div id="certificateInfo">
+        <p>자격증 이름: <span id="certificateNameResult"></span><input type="hidden" name="certificateName"  id="ajaxcertificateName"></p>
+        <p>자격증 번호: <span id="certificateNumResult"></span><input type="hidden" name="certificateNum"  id="ajaxcertificateNum"></p>
+        <p>발행처: <span id="certificateByResult"></span><input type="hidden" name="certificateBy"  id="ajaxcertificateBy"></p>
+        <p>취득날짜 : <input type="date" name ="certificateDate"></p>
+    </div>
+
+    <script>
+        $('#SerchCertificateName').on('input', function() {
+            var SerchCertificateName = $(this).val(); 
+
+            // 자격증 이름이 비어있지 않으면 서버로 요청
+            if (SerchCertificateName) {
+                $.ajax({
+                    url: '/resume/certificate',  // 자격증 정보를 가져오는 API
+                    type: 'GET',
+                    data: { SerchCertificateName: SerchCertificateName
+                    },
+                    success: function(response) {
+                        if (response) {
+                            // 자격증 정보가 있으면 화면에 표시
+                            $('#ajaxcertificateName').val(response.certificateName);  
+                            $('#ajaxcertificateNum').val(response.certificateNum);
+                            $('#ajaxcertificateBy').val(response.certificateBy);
+                            console.log($('#ajaxcertificateName').val()); // 자격증 이름
+                            console.log($('#ajaxcertificateNum').val());  // 자격증 번호
+                            console.log($('#ajaxcertificateBy').val());   // 발행처
+                            $('#certificateNameResult').text(response.certificateName);
+                            $('#certificateNumResult').text(response.certificateNum);
+                            $('#certificateByResult').text(response.certificateBy);
+                        } else {
+                            $('#certificateNameResult').text('정보가 없습니다.');
+                            $('#certificateNumResult').text('');
+                            $('#certificateByResult').text('');
+                        }
+                    },
+                    error: function() {
+                        alert('서버 오류가 발생했습니다.');
+                    }
+                });
+            } 
+            if (!certificateName || !certificateNum || !certificateBy) {
+                alert('자격증 정보를 모두 입력해주세요.');
+                event.preventDefault(); // 폼 제출 방지
+            } 
+        });
+    </script>
+    
+   
+    <h4>기술 스킬</h4>
+    <label><input type="checkbox" name="techStackNum" value="1"> JavaScript</label><br>
+    <label><input type="checkbox" name="techStackNum" value="2"> Java</label><br>
+    <label><input type="checkbox" name="techStackNum" value="3"> Python</label><br>
+    <label><input type="checkbox" name="techStackNum" value="4"> React</label><br>
+    <label><input type="checkbox" name="techStackNum" value="5"> Node.js</label><br>
+    <label><input type="checkbox" name="techStackNum" value="6"> Angular</label><br>
+    <label><input type="checkbox" name="techStackNum" value="7"> AWS</label><br>
+    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label><br>
+    <label><input type="checkbox" name="techStackNum" value="9"> Kubernetes</label><br>
+    <label><input type="checkbox" name="techStackNum" value="10"> SQL</label><br>
+    <label><input type="checkbox" name="techStackNum" value="11"> HTML/CSS</label><br>
+    <label><input type="checkbox" name="techStackNum" value="12"> TypeScript</label><br>
+    <label><input type="checkbox" name="techStackNum" value="13"> Spring</label><br>
+    <label><input type="checkbox" name="techStackNum" value="14"> Git</label><br>
+    <label><input type="checkbox" name="techStackNum" value="15"> MySQL</label><br>
+    <input type="submit" value="이력서등록">
+</form>
+
+</body>
+</html>

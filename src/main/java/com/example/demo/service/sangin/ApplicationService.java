@@ -11,10 +11,10 @@ import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 
 @Service
-public class ApplicationService implements IApplicationService{
+public class ApplicationService implements IApplicationService {
 	@Autowired
 	IApplicationDao applicationDao;
-	
+
 	@Override
 	public List<ApplicationDto> getApplicationList(String userId) {
 		return applicationDao.getApplicationList(userId);
@@ -48,6 +48,21 @@ public class ApplicationService implements IApplicationService{
 	@Override
 	public ApplicationDto getApplication(int applicationNum) {
 		return applicationDao.getApplication(applicationNum);
+	}
+
+	@Override
+	public List<ApplicationDto> getApplicationByWorkingArea(String userId, String workingArea) {
+		return applicationDao.getApplicationByWorkingArea(userId, workingArea);
+	}
+
+	@Override
+	public List<ApplicationDto> getApplicationByRoleId(String userId, String roleId) {
+		return applicationDao.getApplicationByRoleId(userId, roleId);
+	}
+
+	@Override
+	public List<ApplicationDto> getApplicationByKeyword(String userId, String keyword) {
+		return applicationDao.getApplicationByKeyword(userId, keyword);
 	}
 
 }

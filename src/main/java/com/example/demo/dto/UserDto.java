@@ -2,9 +2,13 @@ package com.example.demo.dto;
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
 	private String userId;          // 사용자 고유 ID
