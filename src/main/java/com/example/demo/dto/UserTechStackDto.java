@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserTechStackDto {
 	
 	private int userTechStackNum;    // 고유 넘버

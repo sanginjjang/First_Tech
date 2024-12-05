@@ -2,9 +2,13 @@ package com.example.demo.dto;
 
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommentDto {
 	private int commentNum; // 1. 댓글 고유 번호
 	private int boardNum; // 2. 게시판 고유 번호 (FK)

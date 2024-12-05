@@ -8,5 +8,6 @@ import com.example.demo.dto.ApplicationDto;
 
 public interface ICompanyApplicationManagementService {
 	List<ApplicationDto> companyApplicationList(String companyId);
-	int insertApplication(@Param("jobApplication") ApplicationDto dto);
+	int insertApplication(ApplicationDto dto);
+	
 }
