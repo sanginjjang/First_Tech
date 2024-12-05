@@ -550,251 +550,142 @@ function searchingByKeyword(){
 </script>
 <script>
 document.querySelector("#nav2_1").addEventListener("click", (event) => {
+    let url, listKey;
     if (event.target.classList.contains("areaCheckbox")) {
-    	const checkboxes = document.querySelectorAll('.areaCheckbox');
-    	checkboxes.forEach(checkbox => {
-            checkbox.checked = false; 
-        });
-    	event.target.checked = true;
-    	
-        const xhr = new XMLHttpRequest();
-        const value = event.target.value;
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // 응답 데이터 처리
-                const response = JSON.parse(xhr.responseText);
-                const listByArea = response.listByArea; // 리스트 데이터
-                const companyList = response.companyList; // 북마크된 컴퍼니 리스트
+        url = "/sangin/searchingByArea";
+        listKey = "listByArea";
 
-                // 기존 리스트 초기화
-                const section1 = document.querySelector("#section1");
-                section1.innerHTML = ""; // 기존 리스트 삭제
-
-                listByArea.forEach((jobApplication) => {
-                    const listDiv = document.createElement("div");
-                    listDiv.className = "list";
-
-                    const list1Div = document.createElement("div");
-                    list1Div.id = "list1";
-
-                    const bookmarkButton = document.createElement("button");
-                    if (jobApplication.isBookmarked == 1) {
-                        bookmarkButton.className = "colorHeart";
-                        bookmarkButton.textContent = "♥";
-                    } else {
-                        bookmarkButton.className = "uncolorHeart";
-                        bookmarkButton.textContent = "♡";
-                    }
-                    bookmarkButton.dataset.applicationNum = jobApplication.applicationNum;
-                    list1Div.appendChild(bookmarkButton);
-
-                    const list2Div = document.createElement("div");
-                    list2Div.id = "list2";
-
-                    const list2_1Div = document.createElement("div");
-                    list2_1Div.id = "list2_1";
-
-                    const applicationNameLink = document.createElement("a");
-                    applicationNameLink.id = "applicationName";
-                    applicationNameLink.href = `/sangin/applicationDetailForm/${jobApplication.applicationNum}`;
-                    applicationNameLink.textContent = jobApplication.applicationName;
-
-                    const deadlineDateDiv = document.createElement("div");
-                    deadlineDateDiv.id = "deadlineDate";
-                    deadlineDateDiv.textContent = jobApplication.deadlineDate;
-
-                    list2_1Div.appendChild(applicationNameLink);
-                    list2_1Div.appendChild(deadlineDateDiv);
-
-                    const list2_2Div = document.createElement("div");
-                    list2_2Div.id = "list2_2";
-
-                    const workingAreaDiv = document.createElement("div");
-                    workingAreaDiv.id = "workingArea";
-                    workingAreaDiv.textContent = jobApplication.workingArea;
-
-                    const careerDiv = document.createElement("div");
-                    careerDiv.id = "career";
-                    careerDiv.textContent = jobApplication.career;
-
-                    const educationDiv = document.createElement("div");
-                    educationDiv.id = "education";
-                    educationDiv.textContent = jobApplication.education;
-
-                    const employmentTypeDiv = document.createElement("div");
-                    employmentTypeDiv.id = "employmentType";
-                    employmentTypeDiv.textContent = jobApplication.employmentType;
-
-                    const salaryDiv = document.createElement("div");
-                    salaryDiv.id = "salary";
-                    salaryDiv.textContent = jobApplication.salary;
-
-                    list2_2Div.appendChild(workingAreaDiv);
-                    list2_2Div.appendChild(careerDiv);
-                    list2_2Div.appendChild(educationDiv);
-                    list2_2Div.appendChild(employmentTypeDiv);
-                    list2_2Div.appendChild(salaryDiv);
-
-                    list2Div.appendChild(list2_1Div);
-                    list2Div.appendChild(list2_2Div);
-
-                    const list3Div = document.createElement("div");
-                    list3Div.id = "list3";
-
-                    const companyNameDiv = document.createElement("div");
-                    companyNameDiv.id = "companyName";
-                    companyNameDiv.textContent = jobApplication.companyId;
-
-                    const starButton = document.createElement("button");
-                    if (companyList.includes(jobApplication.companyId)) {
-                        starButton.className = "colorStar";
-                        starButton.textContent = "★";
-                    } else {
-                        starButton.className = "uncolorStar";
-                        starButton.textContent = "☆";
-                    }
-                    starButton.dataset.companyId = jobApplication.companyId;
-
-                    list3Div.appendChild(companyNameDiv);
-                    list3Div.appendChild(starButton);
-
-                    listDiv.appendChild(list1Div);
-                    listDiv.appendChild(list2Div);
-                    listDiv.appendChild(list3Div);
-
-                    section1.appendChild(listDiv);
-                });
-            }
-        };
-
-
-        xhr.open("POST", "/sangin/searchingArea");
-        xhr.send(value);
-    }
-});
-
-</script>
-<script>
-document.querySelector("#nav2_1").addEventListener("click", (event) => {
-    if (event.target.classList.contains("roleCheckbox")) {
-        const checkboxes = document.querySelectorAll('.roleCheckbox');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
+        // 모든 체크박스 초기화 및 선택한 항목 체크
+        const checkboxes = document.querySelectorAll('.areaCheckbox');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
         event.target.checked = true;
+    } else if (event.target.classList.contains("roleCheckbox")) {
+        url = "/sangin/searchingByRoleId";
+        listKey = "listByRoleId";
 
-        const xhr = new XMLHttpRequest();
-        const value = event.target.value;
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // 기존 리스트 초기화
-                const section1 = document.querySelector("#section1");
-                section1.innerHTML = ""; // 기존 리스트 삭제
-
-                // 서버에서 받은 데이터 처리
-                const list = JSON.parse(xhr.responseText);
-
-                list.forEach((jobApplication) => {
-                    const listDiv = document.createElement("div");
-                    listDiv.className = "list";
-
-                    const list1Div = document.createElement("div");
-                    list1Div.id = "list1";
-
-                    const bookmarkButton = document.createElement("button");
-                    if (jobApplication.isBookmarked == 1) {
-                        bookmarkButton.className = "colorHeart";
-                        bookmarkButton.textContent = "♥";
-                    } else {
-                        bookmarkButton.className = "uncolorHeart";
-                        bookmarkButton.textContent = "♡";
-                    }
-                    bookmarkButton.dataset.applicationNum = jobApplication.applicationNum;
-                    list1Div.appendChild(bookmarkButton);
-
-                    const list2Div = document.createElement("div");
-                    list2Div.id = "list2";
-
-                    const list2_1Div = document.createElement("div");
-                    list2_1Div.id = "list2_1";
-
-                    const applicationNameLink = document.createElement("a");
-                    applicationNameLink.id = "applicationName";
-                    applicationNameLink.href = `/sangin/applicationDetailForm/${jobApplication.applicationNum}`;
-                    applicationNameLink.textContent = jobApplication.applicationName;
-
-                    const deadlineDateDiv = document.createElement("div");
-                    deadlineDateDiv.id = "deadlineDate";
-                    deadlineDateDiv.textContent = jobApplication.deadlineDate;
-
-                    list2_1Div.appendChild(applicationNameLink);
-                    list2_1Div.appendChild(deadlineDateDiv);
-
-                    const list2_2Div = document.createElement("div");
-                    list2_2Div.id = "list2_2";
-
-                    const workingAreaDiv = document.createElement("div");
-                    workingAreaDiv.id = "workingArea";
-                    workingAreaDiv.textContent = jobApplication.workingArea;
-
-                    const careerDiv = document.createElement("div");
-                    careerDiv.id = "career";
-                    careerDiv.textContent = jobApplication.career;
-
-                    const educationDiv = document.createElement("div");
-                    educationDiv.id = "education";
-                    educationDiv.textContent = jobApplication.education;
-
-                    const employmentTypeDiv = document.createElement("div");
-                    employmentTypeDiv.id = "employmentType";
-                    employmentTypeDiv.textContent = jobApplication.employmentType;
-
-                    const salaryDiv = document.createElement("div");
-                    salaryDiv.id = "salary";
-                    salaryDiv.textContent = jobApplication.salary;
-
-                    list2_2Div.appendChild(workingAreaDiv);
-                    list2_2Div.appendChild(careerDiv);
-                    list2_2Div.appendChild(educationDiv);
-                    list2_2Div.appendChild(employmentTypeDiv);
-                    list2_2Div.appendChild(salaryDiv);
-
-                    list2Div.appendChild(list2_1Div);
-                    list2Div.appendChild(list2_2Div);
-
-                    const list3Div = document.createElement("div");
-                    list3Div.id = "list3";
-
-                    const companyNameDiv = document.createElement("div");
-                    companyNameDiv.id = "companyName";
-                    companyNameDiv.textContent = jobApplication.companyId;
-
-                    const starButton = document.createElement("button");
-                    if (jobApplication.isBookmarked == 1) {
-                        starButton.className = "colorStar";
-                        starButton.textContent = "★";
-                    } else {
-                        starButton.className = "uncolorStar";
-                        starButton.textContent = "☆";
-                    }
-                    starButton.dataset.companyId = jobApplication.companyId;
-
-                    list3Div.appendChild(companyNameDiv);
-                    list3Div.appendChild(starButton);
-
-                    listDiv.appendChild(list1Div);
-                    listDiv.appendChild(list2Div);
-                    listDiv.appendChild(list3Div);
-
-                    section1.appendChild(listDiv);
-                });
-            }
-        };
-
-        xhr.open("POST", "/sangin/searchingRoleId"); // 직무에 맞는 검색 URL
-        xhr.send(value);
+        // 모든 체크박스 초기화 및 선택한 항목 체크
+        const checkboxes = document.querySelectorAll('.roleCheckbox');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        event.target.checked = true;
+    } else {
+        return; // 클릭한 대상이 체크박스가 아니라면 함수 종료
     }
+
+    const value = event.target.value;
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // 서버 응답 처리
+            const response = JSON.parse(xhr.responseText);
+            const list = response[listKey]; // 리스트 데이터
+            const companyList = response.companyList; // 북마크된 회사 리스트
+
+            // 기존 리스트 초기화
+            const section1 = document.querySelector("#section1");
+            section1.innerHTML = "";
+
+            // 새 데이터 렌더링
+            list.forEach((jobApplication) => {
+                const listDiv = document.createElement("div");
+                listDiv.className = "list";
+
+                const list1Div = document.createElement("div");
+                list1Div.id = "list1";
+
+                const bookmarkButton = document.createElement("button");
+                if (jobApplication.isBookmarked === 1) {
+                    bookmarkButton.className = "colorHeart";
+                    bookmarkButton.textContent = "♥";
+                } else {
+                    bookmarkButton.className = "uncolorHeart";
+                    bookmarkButton.textContent = "♡";
+                }
+                bookmarkButton.dataset.applicationNum = jobApplication.applicationNum;
+                list1Div.appendChild(bookmarkButton);
+
+                const list2Div = document.createElement("div");
+                list2Div.id = "list2";
+
+                const list2_1Div = document.createElement("div");
+                list2_1Div.id = "list2_1";
+
+                const applicationNameLink = document.createElement("a");
+                applicationNameLink.id = "applicationName";
+                applicationNameLink.href = `/sangin/applicationDetailForm/${jobApplication.applicationNum}`;
+                applicationNameLink.textContent = jobApplication.applicationName;
+
+                const deadlineDateDiv = document.createElement("div");
+                deadlineDateDiv.id = "deadlineDate";
+                deadlineDateDiv.textContent = jobApplication.deadlineDate;
+
+                list2_1Div.appendChild(applicationNameLink);
+                list2_1Div.appendChild(deadlineDateDiv);
+
+                const list2_2Div = document.createElement("div");
+                list2_2Div.id = "list2_2";
+
+                const workingAreaDiv = document.createElement("div");
+                workingAreaDiv.id = "workingArea";
+                workingAreaDiv.textContent = jobApplication.workingArea;
+
+                const careerDiv = document.createElement("div");
+                careerDiv.id = "career";
+                careerDiv.textContent = jobApplication.career;
+
+                const educationDiv = document.createElement("div");
+                educationDiv.id = "education";
+                educationDiv.textContent = jobApplication.education;
+
+                const employmentTypeDiv = document.createElement("div");
+                employmentTypeDiv.id = "employmentType";
+                employmentTypeDiv.textContent = jobApplication.employmentType;
+
+                const salaryDiv = document.createElement("div");
+                salaryDiv.id = "salary";
+                salaryDiv.textContent = jobApplication.salary;
+
+                list2_2Div.appendChild(workingAreaDiv);
+                list2_2Div.appendChild(careerDiv);
+                list2_2Div.appendChild(educationDiv);
+                list2_2Div.appendChild(employmentTypeDiv);
+                list2_2Div.appendChild(salaryDiv);
+
+                list2Div.appendChild(list2_1Div);
+                list2Div.appendChild(list2_2Div);
+
+                const list3Div = document.createElement("div");
+                list3Div.id = "list3";
+
+                const companyNameDiv = document.createElement("div");
+                companyNameDiv.id = "companyName";
+                companyNameDiv.textContent = jobApplication.companyId;
+
+                const starButton = document.createElement("button");
+                if (companyList.includes(jobApplication.companyId)) {
+                    starButton.className = "colorStar";
+                    starButton.textContent = "★";
+                } else {
+                    starButton.className = "uncolorStar";
+                    starButton.textContent = "☆";
+                }
+                starButton.dataset.companyId = jobApplication.companyId;
+
+                list3Div.appendChild(companyNameDiv);
+                list3Div.appendChild(starButton);
+
+                listDiv.appendChild(list1Div);
+                listDiv.appendChild(list2Div);
+                listDiv.appendChild(list3Div);
+
+                section1.appendChild(listDiv);
+            });
+        }
+    };
+
+    xhr.open("POST", url);
+    xhr.send(value);
 });
+
 
 </script>
 <script>
