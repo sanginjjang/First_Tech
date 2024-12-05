@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    width: 80%;
+    background-color: #f9f9f9;
+}
+
+/* 헤더 섹션 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    display: flex;
+    gap: 30px;  /* 간격을 넓혀서 더 여유 있게 배치 */
+    margin-top: 20px;
+}
+
+/* 사이드바 */
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff; /* 배경을 흰색으로 설정 */
+}
+
+/* 공고 리스트 섹션 */
+.list-item {
+    flex: 3;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff; /* 배경을 흰색으로 설정 */
+}
+
+/* 이력서 정보 */
+.resume-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 16px; /* 기본 폰트 크기 */
+    line-height: 1.8; /* 가독성을 높이기 위해 줄 간격을 넓힘 */
+}
+
+.resume-field {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #d9d9d9;
+}
+
+.resume-field strong {
+    font-weight: bold;
+    color: #333;
+    width: 150px; /* 항목 제목의 고정 너비 */
+}
+
+.resume-field span, .resume-field img {
+    color: #555;
+    font-size: 16px;
+}
+
+.resume-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #d9d9d9;
+}
+
+/* 추가적인 스타일 */
+.list-item h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1a73e8;
+}
+
+</style>
+</head>
+<body>
+	<header>
+		<div>기업 이름</div>
+		<div>
+			<span>공고 전체</span> <span>임시 저장</span> <span>채용 중</span>
+		</div>
+	</header>
+
+	<div class="main-container">
+		<div class="sidebar">
+			<h2>사이드바</h2>
+			<!-- 사이드바 버튼은 필요에 따라 추가 -->
+		</div>
+
+		<div class="list-item">
+		    <h3>이력서 정보</h3>
+		    <div class="resume-info">
+		        <div class="resume-field">
+		            <strong>이름:</strong>
+		            <span>이름</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>전화번호:</strong>
+		            <span>전화번호</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>이메일:</strong>
+		            <span>이메일</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>학력:</strong>
+		            <span>학력</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>병역:</strong>
+		            <span>병역</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>자격증:</strong>
+		            <span>자격증 이름</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>경력:</strong>
+		            <span>경력 기간</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>포트폴리오:</strong>
+		            <span>포트폴리오 파일명</span>
+		        </div>
+		        <div class="resume-field">
+		            <strong>증명사진:</strong>
+		            <img src="your-image-url.jpg" alt="증명사진" class="resume-photo">
+		        </div>
+		        <div class="resume-field">
+		            <strong>기술 스택:</strong>
+		            <span>기술 스택</span>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	
+</body>
+</html>
