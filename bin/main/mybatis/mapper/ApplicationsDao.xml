@@ -160,17 +160,14 @@
 		a.applicationNum = b.applicationNum
 		AND
 		b.userId = #{userId}
-		WHERE
-		a.applicationName = #{keyword}
-		OR a.companyId
-		= #{keyword}
-		OR a.career = #{keyword}
-		OR a.education = #{keyword}
-		OR
-		a.salary = #{keyword}
-		OR a.workingArea = #{keyword}
-		OR a.roleId =
-		#{keyword}
+		WHERE a.applicationName LIKE CONCAT('%',
+		#{keyword}, '%')
+		OR a.companyId LIKE CONCAT('%', #{keyword}, '%')
+		OR a.career LIKE CONCAT('%', #{keyword}, '%')
+		OR a.education LIKE CONCAT('%', #{keyword}, '%')
+		OR a.workingArea LIKE CONCAT('%', #{keyword}, '%')
+		OR a.employmentType LIKE CONCAT('%', #{keyword}, '%')
+
 
 	</select>
 

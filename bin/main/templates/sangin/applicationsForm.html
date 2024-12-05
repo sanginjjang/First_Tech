@@ -9,8 +9,9 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
 body {
-font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
 	margin: 0 auto;
 	width: 65vw;
 	height: 100vh;
@@ -22,7 +23,7 @@ header {
 	border: lightgray solid 1px;
 	width: 100%;
 	height: 15%;
-	background-color: #ffffff;
+	background-color: #f9f9f9;
 	font-size: 50px;
 	display: flex;
 	justify-content: center;
@@ -33,7 +34,7 @@ nav {
 	border: lightgray solid 1px;
 	width: 100%;
 	height: 35%;
-	background-color:  #ffffff;
+	background-color: #f9f9f9;
 	display: flex;
 	flex-direction: column;
 }
@@ -46,11 +47,11 @@ nav {
 }
 
 #nav1_img {
-	flex : 2;
+	flex: 2;
 	align-items: center;
 	justify-content: center;
 	border: 1px black solid;
-	background-color:  #ffffff;
+	background-color: #f9f9f9;
 	width: 65px;
 }
 
@@ -61,39 +62,41 @@ nav {
 }
 
 #checkSearching {
-	flex : 6;
+	flex: 6;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px black solid;
 }
-#searchingForm{
-	flex : 12;
+
+#searchingForm {
+	flex: 12;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap : 10px;
+	gap: 10px;
 }
-#searchingForm input[type="button"]{
-	margin-right : 10px;
+
+#searchingForm input[type="button"] {
+	margin-right: 10px;
 }
-#searching{
-	border-radius : 5px;
-	width : 100%;
-	padding : 10px;
-	font-size : 15px;
-	margin-left : 10px;
+
+#searching {
+	border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	font-size: 15px;
+	margin-left: 10px;
 }
 
 .searchOption {
-	border : 0px;
-	border-radius : 5px;
+	border: 0px;
+	border-radius: 5px;
 	font-size: 20px;
 	font-weight: bold;
 	background-color: blue;
-	color : white;
-	padding : 7px 14px;
-	
+	color: white;
+	padding: 7px 14px;
 }
 
 .searchOption:hover {
@@ -130,15 +133,15 @@ nav {
 }
 
 .label-text {
-	border : 1px solid lightgray;
-	border-radius : 5px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
 	padding: 7px;
-	font-size : 18px;
-	font-weight : bold;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .label-text:hover {
-	background-color : lightgray;
+	background-color: lightgray;
 	scale: 1.1;
 }
 
@@ -149,7 +152,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked+.label-text {
 	color: blue;
 	font-weight: bold;
-	background-color : lightgray;
+	background-color: lightgray;
 }
 
 #nav2_2 {
@@ -174,7 +177,7 @@ section {
 	font-weight: bold;
 	width: 100%;
 	height: 100%;
-	background-color:  #f9f9f9;
+	background-color: #f9f9f9;
 	display: flex;
 	flex-direction: row;
 }
@@ -212,7 +215,7 @@ section {
 	border: 0px;
 	padding: 10%;
 	width: 100%;
-	background-color:  #f9f9f9;
+	background-color: #f9f9f9;
 }
 
 .colorHeart {
@@ -293,7 +296,7 @@ section {
 	border: 1px black solid;
 	font-size: 20px;
 	padding: 0px;
-	background-color:  #f9f9f9;
+	background-color: #f9f9f9;
 }
 
 .uncolorStar {
@@ -334,18 +337,19 @@ section {
 					onclick="navButton(false)">
 			</div>
 			<div id="nav1_img">
-				<img src="/uploads/jobRole.webp" alt="jobRole">
+				<img src="/uploads/직무.jpg" alt="jobRole">
 			</div>
 			<div id="checkSearching">
 				<input type="button" value="직무별" class="searchOption"
 					onclick="navButton(true)">
 			</div>
 			<div id="nav1_img">
-				<img src="/uploads/돋보기.webp" alt="돋보기">
+				<img src="/uploads/돋보기.png" alt="돋보기">
 			</div>
 			<form id="searchingForm">
-				<input type="text" id="searching" name="searching">
-				<input type="button" value="검색" class="searchOption" onclick="searchingByKeyword()">
+				<input type="text" id="searching" name="searching"
+					placeholder="회사이름, 경력, 학력, 근무지, 고용형태"> <input
+					type="button" value="검색" class="searchOption">
 			</form>
 		</div>
 
@@ -433,7 +437,7 @@ section {
 			</div>
 
 			<div id="nav2_2">
-				<b id="description" style="font-size : 22px;"><= 선택해주세요.</b> <br>
+				<b id="description" style="font-size: 22px;"><= 선택해주세요.</b> <br>
 				<!--
 				<button id="reset" onclick="reset()">선택 초기화</button>  
 				 -->
@@ -491,23 +495,6 @@ section {
 	<footer>Footer</footer>
 </body>
 <script>
-function searchingByKeyword(){
-	// 09 : 41 함수 실행 이상 무
-	alert("실행..")
-	const form = document.querySelector("#searchingForm");
-	const value = form.searching.value;
-	alert("value 값은.. " + value);
-	// 09 : 44 밸류값 받아오는데 이상 무
-	const xhr = new XMLHttpRequest();
-	
-	xhr.onload = function(){
-		
-	}
-	xhr.open("POST","/sangin/searchingByKeyword");
-	xhr.send(value);
-}
-</script>
-<script>
     const roleCheckboxes = document.querySelectorAll(".roleCheckbox");
     const workingAreaCheckBoxes = document.querySelectorAll(".workingAreaCheckBox");
 
@@ -549,7 +536,8 @@ function searchingByKeyword(){
    // }
 </script>
 <script>
-document.querySelector("#nav2_1").addEventListener("click", (event) => {
+document.querySelector("nav").addEventListener("click", (event) => {
+    var value = event.target.value;
     let url, listKey;
     if (event.target.classList.contains("areaCheckbox")) {
         url = "/sangin/searchingByArea";
@@ -567,11 +555,15 @@ document.querySelector("#nav2_1").addEventListener("click", (event) => {
         const checkboxes = document.querySelectorAll('.roleCheckbox');
         checkboxes.forEach(checkbox => checkbox.checked = false);
         event.target.checked = true;
+    } else if (event.target.type === "button" && event.target.value === "검색"){
+    	url = "/sangin/searchingByKeyword";
+    	listKey = "listByKeyword";
+    	const form = document.querySelector("#searchingForm");
+    	value = form.searching.value;
     } else {
         return; // 클릭한 대상이 체크박스가 아니라면 함수 종료
     }
 
-    const value = event.target.value;
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
