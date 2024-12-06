@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.hyepin.IResumeDaoHyepin">
+	
+	<select id="getResumeList" resultType="com.example.demo.dto.ResumeDto">
+		SELECT 
+			r.resumeNum, r.userId, r.resumeTitle, r.resumePhone, r.resumeContent, r.portfolioName, 
+			r.personalPhotoName, r.education, r.school, r.address, r.roleId, r.militaryService,
+			r.createdDate, r.updatedDate 
+		FROM Resumes r 
+		JOIN Resumeapplystatus ras ON r.resumeNum = ras.resumeNum 
+		WHERE ras.applicationNum = #{applicationNum};
+	</select>
+	<select id="getResumeListCount">
+		SELECT count(r.resumeNum) AS count
+		FROM Resumes r 
+		JOIN Resumeapplystatus ras ON r.resumeNum = ras.resumeNum 
+		WHERE ras.applicationNum = #{applicationNum};
+	</select>
+	<select id="getResumeListPaging" resultType="com.example.demo.dto.ResumeDto">
+			SELECT 
+			r.resumeNum, r.userId, r.resumeTitle, r.resumePhone, r.resumeContent, r.portfolioName, 
+			r.personalPhotoName, r.education, r.school, r.address, r.roleId, r.militaryService,
+			r.createdDate, r.updatedDate 
+			FROM Resumes r 
+			JOIN Resumeapplystatus ras ON r.resumeNum = ras.resumeNum 
+			WHERE ras.applicationNum = #{applicationNum} 
+			LIMIT #{startIdx}, #{itemsPerPage};
+	</select>
+	<select id="getResumeDetail" resultType="com.example.demo.vo.hyepin.ResumeVo">
+			SELECT 
+			r.resumeNum, r.resumeTitle, r.resumeContent, r.education, r.militaryService, r.portfolioName,  
+			r.personalPhotoName, u.userName, u.userPhone, u.userEmail, u.userAddress, j.roleName 
+			FROM Resumes r 
+			JOIN Users u ON r.userId = u.userId 
+			JOIN JobRoles j ON r.roleId = j.roleId
+			WHERE r.resumeNum = #{resumeNum};
+	</select>
+	<select id="getUserIdByResumeNum" resultType="String">
+		SELECT userId FROM Resumes WHERE resumeNum = #{resumeNum};
+	</select>
+	<select id="getCertificateList" resultType="com.example.demo.dto.CertificateDto">
+		SELECT c.certificateNum, c.certificateName, c.certificateBy
+		FROM UserCertificates uc 
+		JOIN Certificates c ON uc.certificateNum = c.certificateNum 
+		WHERE uc.resumeNum = #{resumeNum};
+	</select>
+	<select id="getCareerList" resultType="com.example.demo.dto.CareerDto">
+		SELECT * FROM Careers WHERE resumeNum = #{resumeNum}
+	</select>
+	<select id="getTechStackList" resultType="com.example.demo.dto.TechStackDto">
+			SELECT * 
+			FROM TechStacks t
+			JOIN Usertechstacks ut ON t.techStackNum = ut.techStackNum
+			WHERE resumeNum = #{resumeNum};
+	</select>
+	
+	
+	
+
+</mapper>
+

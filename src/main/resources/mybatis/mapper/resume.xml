@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.mijeong.IResumeDao">
+  
+ 
+<insert id="insertResume" useGeneratedKeys="true" keyProperty="resumeNum">
+    INSERT INTO resumes (
+        userId,                   
+        resumeTitle,              
+        resumePhone,            
+        resumeContent,
+        portfolioName,       
+        personalPhotoName,              
+        education,                 
+        school,                    
+        address,                   
+        militaryService,             
+        roleId
+    ) VALUES (
+        #{userId},                 
+        #{resumeTitle},            
+        #{resumePhone},            
+        #{resumeContent},          
+        #{portfolioName},         
+        #{personalPhotoName},              
+        #{education},                 
+        #{school},                
+        #{address},                 
+        #{militaryService},
+        #{roleId}   
+    )
+     <selectKey resultType="int" keyProperty="resumeNum" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+</insert>
+
+
+
+	<insert id="insertCareer" parameterType="java.util.List">
+	    INSERT INTO careers (
+	        resumeNum,
+	        career,
+	        careerName
+	    ) VALUES
+	    <foreach collection="careers" item="career" separator=",">
+	        (#{career.resumeNum}, #{career.career}, #{career.careerName})
+    	</foreach>
+	</insert>
+
+
+  <!-- 인턴십 추가 -->
+    <insert id="insertInternship" parameterType="java.util.List">
+        INSERT INTO internships (
+            resumeNum,
+            internshipPeriod,
+            internshipName,
+            internshipDetails,
+            startDate,
+            endDate
+        ) VALUES (
+        <foreach collection="internships" item="internship" separator=",">
+            #{internship.resumeNum},
+            #{internship.internshipPeriod},
+            #{internship.internshipName},
+            #{internship.internshipDetails},
+            #{internship.startDate},
+            #{internship.endDate})
+         </foreach>
+    </insert>
+
+
+	<insert id="insertCertificate" parameterType="java.util.List">
+        INSERT INTO UserCertificates (
+            resumeNum,
+            certificateNum,
+            certificateDate
+        ) VALUES (
+        <foreach collection="usercertificates" item="usercertificate" separator=",">
+            #{usercertificate.resumeNum},
+            #{usercertificate.certificateNum},
+            #{usercertificate.certificateDate})
+         </foreach>
+    </insert>
+
+
+	<insert id="insertJobRole" parameterType="java.util.List">
+        INSERT INTO JobRoles (
+            resumeNum,
+            roleId,
+            roleName
+        ) VALUES (
+        <foreach collection="jobRoles" item="jobRole" separator=",">
+            #{jobRole.resumeNum},
+            #{jobRole.roleId},
+            #{jobRole.roleName})
+         </foreach>
+    </insert>
+
+
+
+  <!-- 자격증 이름에 해당하는 자격증 정보를 가져오는 쿼리 -->
+    <select id="getCertificateByName" resultType="com.example.demo.dto.CertificateDto">
+        SELECT certificateNum, certificateName, certificateBy
+        FROM certificates
+        WHERE certificateName = #{certificateName}
+    </select>
+
+
+	<insert id="insertTechStack" parameterType="java.util.List">
+	    INSERT INTO UserTechStacks (
+	        resumeNum, 
+	        techStackNum
+	    )
+	    VALUES
+	    <foreach collection="usertechStacks" item="usertechStack" separator=",">
+	        (#{usertechStack.resumeNum}, #{usertechStack.techStackNum})
+	    </foreach>
+	</insert>
+
+	
+	<select id="getuserId" resultType="com.example.demo.dto.UserDto">
+	    SELECT * FROM users where userId =#{userId}
+	</select>
+	
+	<resultMap id="resumeResultMap" type="com.example.demo.dto.ResumeDto">
+       <result property="resumeNum" column="resumeNum"/>
+       <result property="userId" column="userId"/>
+       <result property="resumeTitle" column="resumeTitle"/>
+       <result property="resumePhone" column="resumePhone"/>
+       <result property="resumeContent" column="resumeContent"/>
+       <result property="portfolioName" column="portfolioName"/>
+       <result property="personalPhotoName" column="personalPhotoName"/>
+       <result property="education" column="education"/>
+       <result property="school" column="school"/>
+       <result property="address" column="address"/>
+       <result property="militaryService" column="militaryService"/>
+       <result property="createdDate" column="createdDate"/>
+       <result property="updatedDate" column="updatedDate"/>
+       <result property="roleName" column="roleName"/>
+   </resultMap>
+
+   <select id="getResumeList" resultMap="resumeResultMap">
+       SELECT r.resumeNum, r.userId, r.resumeTitle, r.resumePhone, r.resumeContent,
+              r.portfolioName, r.personalPhotoName, r.education, r.school,
+              r.address, r.militaryService, r.createdDate, r.updatedDate,
+              j.roleName
+       FROM resumes r
+       JOIN jobroles j ON r.roleId = j.roleId
+       where r.userId = #{userId};
+   </select>
+   
+
+   <delete id="deleteResume">
+         DELETE FROM resumes WHERE resumeNum = #{resumeNum}
+   </delete>
+	
+   <!--resume  & resume apply status & application  -->
+	<select id="getResumeApply" resultType="com.example.demo.dto.UserResumeApplyStatus">
+	    SELECT r.resumeNum, 
+	           r.resumeTitle, 
+	           r.updatedDate, 
+	           ra.applyStatus ,
+	           a.applicationName
+	    FROM Resumes r
+	    JOIN ResumeApplyStatus ra ON r.resumeNum = ra.resumeNum 
+	    JOIN Applications a ON ra.applicationNum = a.applicationNum
+	    WHERE r.userId = #{userId};
+</select>
+	
+</mapper>

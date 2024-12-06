@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 헤더 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        #logo a{
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
+
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
+
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        /* footer */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        /* nav main  사이 */
+        .section {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+            height: 400px;
+        }
+
+        .image {
+            display: flex;
+            flex: 3;
+            border-radius: 5px;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            height: 400px;
+            /* 슬라이드 전체 높이 */
+            gap: 20px;
+            overflow: hidden;
+            /* 초과된 이미지 숨김 */
+        }
+
+        .image>div {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            border-radius: 20px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border: 1px #d9d9d9 solid;
+        }
+
+        .image>div>img {
+            flex: 3;
+        }
+
+        .image>div>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #ffffff;
+            border-radius: inherit;
+            padding: 10px;
+            object-fit: contain;
+            flex: 1;
+        }
+
+        .image img {
+            flex: 2;
+            max-width: 100%;
+            /* 부모의 너비를 초과하지 않도록 설정 */
+            max-height: 100%;
+            /* 부모의 높이를 초과하지 않도록 설정 */
+            /* object-fit: contain; */
+            /* 이미지 비율 유지 */
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px 20px 0 0;
+            box-sizing: border-box;
+        }
+
+        #slideShow {
+            border-radius: 20px;
+        }
+
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: 400px;
+            gap: 20px;
+        }
+
+        .info1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #1a73e8;
+            background-color: #1a73e8;
+            font-size: 22px;
+            flex: 3;
+        }
+
+        .info1 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hello {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .login {
+            color: white;
+            flex: 1;
+            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center
+        }
+
+        .login a {
+            display: flex;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: #105cbf;
+        }
+
+        .info2 {
+            border: 1px black solid;
+            padding: 10px;
+            background-color: white;
+            color: white;
+            font-weight: bold   ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #1a73e8;
+            background-color: #1a73e8;
+            font-size: 22px;
+            flex: 2;
+        }
+
+        /* 메인 섹션 */
+        .main {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .main h2 {
+            margin-left: 50px;
+        }
+
+        .container-list {
+            flex: 3;
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 20px;
+        }
+
+        .container-list>div {
+            display: flex;
+            align-items: center;
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px;
+            background-color: #ffffff;
+            justify-content: center;
+        }
+
+        .side-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            border: 1px black solid;
+            border-radius: 10px;
+            background-color: #1a73e8;
+            border: 1px solid #1a73e8;
+            height: 520px;
+            color: white;
+            font-size: 22px;
+        }
+
+        .under-bar {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .under-bar>img {
+            flex: 1;
+            align-items: center;
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px;
+            background-color: #ffffff;
+            height: 250px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 추천 공고 양식 */
+        .recommand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .recommand>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #companyId {
+            flex: 1;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            right: 50px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #applicationName {
+            flex: 1;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        #applicationImg {
+            flex: 4;
+            height: 100px;
+        }
+
+        #applicationImg>img {
+            height: inherit;
+            width: inherit;
+            object-fit: cover;
+
+        }
+
+        #deadlineDate {
+            flex: 1;
+            width: 50%;
+            border-radius: 20px 20px;
+            color: white;
+            font-weight: bold;
+            background-color: #105cbf;
+            opacity: 85%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+        <a href="/">
+            <img src="/uploads/logo.webp" alt="">
+        </a>
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post" id="form">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+        		<option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <th:block th:if="${session.user != null}">
+            <button id="searchBtn">검색</button>
+            </th:block>
+             <th:block th:if="${session.user == null}">
+            <button id="searchBtn" onclick="noSearch(event)">검색</button>
+            </th:block>
+         </form>
+        </div>
+        <div id="header-right">
+        	<th:block th:if="${session.user == null}">
+        	  	<span><a href="/hyepin/login">로그인</a></span>
+           		<span><a href="/hyepin/join">회원가입</a></span>
+            	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+        	</th:block>
+        	<th:block th:if="${session.user != null}">
+        	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+        	  	<span><a href="/hyepin/logout">로그아웃</a></span>
+        	</th:block>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-left">
+        <th:block th:if="${session.user == null}">
+            <div onclick="noLogin()">채용공고</div>
+            <div onclick="noLogin()">기업정보</div>
+            <div onclick="noLogin()">지원현황</div>
+            <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">커뮤니티</div>
+        </th:block>
+       
+        <th:block th:if="${session.user != null}">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
+        </th:block>
+        </div>
+        
+        <div class="nav-right">
+            <div>FAQ</div>
+        </div>
+    </nav>
+    <div class="section">
+        <div class="image">
+            <div>
+                <img src="/uploads/채용트렌드.jpg" alt="">
+                <div>채용과 함께 당신의 커리어를 시작하세요<br>
+                    <br>
+                    함께 가는 친구, 퍼스트 테크와 함께하는 성장의 기회를 만나보세요.
+                </div>
+            </div>
+            <img src="" alt="" id="slideShow">
+        </div>
+        <div class="info">
+            <div class="info1">
+            <th:block th:if="${session.user == null}">
+                <div class="hello">환영합니다. 로그인 후 이용해주세요</div>
+                <div class="login">
+                    <a href="/hyepin/login">로그인</a>
+                    <a href="/hyepin/join">회원가입</a>
+                </div>
+            </th:block>
+            <th:block th:if="${session.user != null}">
+                <div class="hello" >환영합니다. [[${session.user.userName}]]님</div>
+                <div class="login">
+                    <a href="/hyepin/goUserInformation">마이페이지</a>
+                    <a href="/hyepin/logout">로그아웃</a>
+                </div>
+            </th:block>
+            </div>
+            <div class="info2">
+                추가
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="container-list">
+         <th:block th:if="${session.user == null}">
+         	  <th:block th:each="item : ${aList}">
+	            <div class="recommand">
+	            	 <div id="companyId" onclick="noLogin()">[[${item.companyName}]]</div>
+	                <div id="applicationName"  onclick="noLogin()">[[${item.applicationName}]]</div>
+	                <div id="applicationImg"  onclick="noLogin()"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="deadlineDate"  onclick="noLogin()">D - [[${item.day}]]</div>
+	            </div>
+	         </th:block>
+         </th:block>
+         
+          <th:block th:if="${session.user != null}">
+         	  <th:block th:each="item : ${aList}">
+	            <div class="recommand">
+	            	 <div id="companyId">
+	            	 <a th:href="@{/c/companyDetail/{companyName}(companyName=${item.companyName})}">
+	                	[[${item.companyName}]]</a></div>
+	                <div id="applicationName"><a th:href="@{/sangin/applicationDetailForm/
+	               						 {applicationNum}(applicationNum=${item.applicationNum})}">
+	               						 [[${item.applicationName}]]</a></div>
+	                <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="deadlineDate">D - [[${item.day}]]</div>
+	            </div>
+	         </th:block>
+         </th:block>
+      </div>
+        <div class="side-bar">
+            <div>FAQ</div>
+        </div>
+    </div>
+    <div class="under-bar">
+        <img src="/uploads/세미나.jpg" alt="">
+        <img src="/uploads/박람회1.png" alt="">
+        <img src="/uploads/박람회2.jpg" alt="">
+    </div>
+    <footer>
+        © 2024 First Tech. 모든 권리 보유.
+    </footer>
+</body>
+<script>
+    const images = ['image0.jpg', 'image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
+    const slideShow = document.querySelector("#slideShow");
+    var currentIndex = 0;
+    slideShow.src = "/uploads/" + images[currentIndex];
+    setInterval(function () {
+        currentIndex = (currentIndex + 1) % 5;
+        slideShow.src = "/uploads/" + images[currentIndex];
+    }, 2000)
+
+   	function noLogin(){
+    	alert("로그인 후 이용해 주세요.");
+   	}
+	function noSearch(){
+		event.preventDefault(); // 폼 제출 방지
+    	alert("로그인 후 이용해 주세요.");
+   	}
+        
+        
+        
+</script>

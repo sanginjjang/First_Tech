@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 헤더 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        #logo {
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
+
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
+
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        
+
+        /* 컨테이너 */
+        .container {
+            display: flex;
+            margin: 20px auto;
+            width: 100%;
+            gap: 20px;
+        }
+
+        /* 사이드바 */
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 메인 섹션 */
+        .main {
+            flex: 6;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        .main h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        /* 테이블 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            margin-top: 20px; /* 테이블 위에 공간 추가 */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
+        }
+
+        /* 검색창 스타일 */
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            gap: 10px; /* 입력창과 버튼 사이 간격 */
+        }
+
+        .search-select, .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-select {
+            width: 200px;
+        }
+
+        .search-input {
+            width: 250px;
+        }
+
+        /* 검색 버튼 */
+        .search-button {
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 버튼 클릭 시 외곽선 제거 */
+        .search-button:focus {
+            outline: none;
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        .heart {
+            cursor: pointer;
+            color: gray;
+            transition: color 0.3s;
+        }
+
+        .heart.bookmarked {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <img src="/uploads/logo.webp" alt="">
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+              <option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <button id="searchBtn">검색</button>
+         </form>
+        </div>
+        <div id="header-right">
+           <th:block th:if="${session.user == null}">
+                <span><a href="/hyepin/login">로그인</a></span>
+                 <span><a href="/hyepin/join">회원가입</a></span>
+               <span><a href="">기업 홈</a></span>
+           </th:block>
+           <th:block th:if="${session.user != null}">
+                <span><a href="/hyepin/myPage">마이페이지</a></span>
+                <span><a href="/hyepin/logout">로그아웃</a></span>
+           </th:block>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-left">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
+        </div>
+        <div class="nav-right">
+            <div>FAQ</div>
+        </div>
+    </nav>
+
+
+
+    <section>
+        <div class="search-container">
+            <form action="/c/searchCompany/1" method="GET">
+                <select class="search-select" name="searchPart" id="searchPart">
+                    <option value="companyName">기업 이름</option>
+                </select>
+                <input type="text" class="search-input" name="searchInput" id="searchInput" placeholder="기업 이름 검색">
+                <select class="search-select" name="sortPart" id="sortPart">
+                    <option value="annualRevenue">매출액 순</option>
+                    <option value="employees">사원 수 순</option>
+                </select>
+                <button class="search-button" type="submit">검색</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>기업 이름</th>
+                    <th>홈페이지 주소</th>
+                    <th>사원 수</th>
+                    <th>총 매출액</th>
+                    <th>♥</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="companys : ${companys}">
+                    <tr>
+                        <td><a th:href="@{/c/companyDetail/{companyName}(companyName=${companys.companyName})}"
+                               th:text="${companys.companyName}"></a></td>
+                        <td th:text="${companys.companyEmail}"></td>
+                        <td th:text="${companys.employees}"></td>
+                        <td th:text="${companys.annualRevenue}"></td>
+                        <td><span class="heart"
+                                  th:data-company-id="${companys.companyId}"
+                                  th:data-user-id="${session.user != null ? session.user.userId : ''}"
+                                  th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span></td>
+                    </tr>
+                </th:block>
+
+                <tr>
+                    <td colspan="6">
+                        <th:block th:if="${currentPageNum > 1}">
+                            <a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+                        </th:block>
+                        <span th:text="${currentPageNum}"></span>
+                        <th:block th:if="${currentPageNum < totalPageNum}">
+                            <a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+                        </th:block>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>파란 메뉴 바 사용 예시</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
+	    $('.heart').click(function() {
+	        var companyId = $(this).data('company-id');
+	        var userId = $(this).data('user-id');
+	        var heartElement = $(this);
+
+	        var isBookmarked = heartElement.hasClass('bookmarked');
+	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark';
+
+	        if (!userId) {
+	            // 세션에 user가 없으면 로그인 요청을 알림으로 띄우고, 로그인 페이지로 리디렉션
+	            alert("로그인 해주세요.");
+	            window.location.href = "/hyepin/login"; // 로그인 페이지로 이동
+	            return; // ajax 요청을 중단
+	        }
+
+	        // Ajax 요청
+	        $.ajax({
+	            url: url,
+	            method: 'POST',
+	            data: {
+	                userId: userId,
+	                companyId: companyId
+	            },
+	            success: function(response) {
+	                // msg를 alert로 띄움
+	                alert(response.msg);
+	                heartElement.toggleClass('bookmarked');
+	                
+	                // 북마크 목록 처리
+	                console.log(response.bookmarks); // 북마크 목록 출력
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('에러 발생:', error);
+	            }
+	        });
+
+	    });
+	});
+
+	</script>
+</body>
+
+</html>

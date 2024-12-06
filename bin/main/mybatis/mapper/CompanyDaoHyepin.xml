@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.hyepin.ICompanyDaoHyepin">
+	
+	<select id="getCompanyById"
+		resultType="com.example.demo.dto.CompanyDto">
+		SELECT * FROM Companys WHERE companyId = #{companyId};
+	</select>
+	
+	<select id="getMainApplications"
+		resultType="com.example.demo.vo.hyepin.MainApplicationVo">
+		SELECT a.applicationName, a.deadlineDate, a.applicationNum, a.companyId, c.companyName
+		FROM Applications a 
+		JOIN Companys c ON c.companyId = a.companyId
+		ORDER BY RAND()
+		LIMIT 8;
+	</select>
+	
+
+
+
+</mapper>

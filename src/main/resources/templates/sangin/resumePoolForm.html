@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관심 공고 리스트</title>
+<style>
+/* 전체 페이지 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+/* 헤더 */
+header {
+    width: 80%;
+    height: 100px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 0 20px;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .user-actions {
+    display: flex;
+    gap: 15px;
+}
+
+header .user-actions button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+header .user-actions button:hover {
+    background-color: #eaeaea;
+}
+
+/* 네비게이션 메뉴 */
+nav {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+/* 필터 및 검색 */
+.filter-section {
+    display: flex;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-section .filters {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-section .filters div {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-section .filters label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-section .filters input[type="text"],
+.filter-section .filters button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.filter-section .filters button:hover {
+    background-color: #eaeaea;
+}
+
+.filter-section .search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-section .search input[type="text"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-section .search button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.filter-section .search button:hover {
+    background-color: #eaeaea;
+}
+
+/* 공고 리스트 */
+.job-list {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.job-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.job-item .thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #eaeaea;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.job-item .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.job-item .info .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.job-item .info .details {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.job-item .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.job-item .actions button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.job-item .actions .bookmark {
+    background-color: #007bff;
+    color: white;
+}
+
+.job-item .actions .bookmark:hover {
+    background-color: #0056b3;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+.pagination a:hover {
+    background-color: #eaeaea;
+}
+
+/* 푸터 */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #666;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">로고</div>
+    <div class="user-actions">
+        <button>회원가입</button>
+        <button>기업 로그인 / My 기업페이지</button>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">채용정보</a></li>
+        <li><a href="#">기업정보</a></li>
+        <li><a href="#">기업공고관리</a></li>
+        <li><a href="#">인재Pool</a></li>
+        <li><a href="#">지원자관리</a></li>
+        <li><a href="#">관심구직자</a></li>
+        <li><a href="#">커뮤니티</a></li>
+    </ul>
+</nav>
+
+<div class="filter-section">
+    <div class="filters">
+        <div>
+            <label for="region">지역</label>
+            <input type="text" id="region" placeholder="추가">
+        </div>
+        <div>
+            <label for="position">직무</label>
+            <input type="text" id="position" placeholder="추가">
+        </div>
+        <div>
+            <label for="education">학력</label>
+            <input type="text" id="education" placeholder="추가">
+        </div>
+    </div>
+    <div class="search">
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button>검색</button>
+    </div>
+</div>
+
+<div class="job-list">
+    <div class="job-item">
+        <div class="thumbnail">🙂</div>
+        <div class="info">
+            <div class="title">공고 제목</div>
+            <div class="details">
+                <span>경력: 2년 이상</span>
+                <span>지역: 서울</span>
+                <span>학력: 대졸</span>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="bookmark">북마크</button>
+        </div>
+    </div>
+    <div class="job-item">
+        <div class="thumbnail">😊</div>
+        <div class="info">
+            <div class="title">공고 제목</div>
+            <div class="details">
+                <span>경력: 신입</span>
+                <span>지역: 부산</span>
+                <span>학력: 고졸</span>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="bookmark">북마크</button>
+        </div>
+    </div>
+</div>
+
+<div class="pagination">
+    <a href="#">이전</a>
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">다음</a>
+</div>
+
+<footer>
+    홈페이지 고객센터 전화번호
+</footer>
+
+</body>
+</html>
