@@ -42,15 +42,17 @@ public class CompanyController {
 
 		HttpSession session = request.getSession();
 		UserDto user = (UserDto) session.getAttribute("user");
-
+		if(user != null) {
 		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());
-
-
-
 		model.addAttribute("companys", companys);
 		model.addAttribute("currentPageNum", pageNum);
 		model.addAttribute("endPageNum", endPageNum);
-
+		}else {
+			List<CompanyDto> companys = companyService.getCompanyList();
+			model.addAttribute("companys", companys);
+			model.addAttribute("currentPageNum", pageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		}
 		return "taek/companyInfo";
 	}
 

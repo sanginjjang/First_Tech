@@ -24,47 +24,64 @@
             text-decoration: none;
         }
 
-
-        /* 상단 로그인/회원가입 영역 */
-        .top {
-            display: flex;
-            justify-content: flex-end;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            gap: 20px;
-            background-color: #ffffff;
-            border-radius: 5px;
-            border: 1px solid #d9d9d9;
-            margin: 0px auto;
-        }
-
-        .top span a {
-            color: #1a73e8;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .top span a:hover {
-            color: #105cbf;
-        }
-
         /* 헤더 */
         header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 100px 20px;
+            padding: 30px 20px;
             background-color: #ffffff;
             border: 1px solid #d9d9d9;
             border-radius: 5px;
         }
 
+        #logo {
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
+
         header a {
+            margin: 0 10px;
             font-weight: bold;
-            font-size: 20px;
-            color: #1a73e8;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search>input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
+
+        .search>button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
         }
 
         /* 네브 */
@@ -82,7 +99,7 @@
         .nav-left {
             display: flex;
             gap: 120px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             display: flex;
         }
@@ -93,7 +110,7 @@
         }
 
         .nav-left div a:hover {
-            color: #1a73e8;
+            color: blue;
             cursor: pointer;
         }
 
@@ -101,7 +118,7 @@
             transition: 0.3s;
             display: flex;
             background-color: #1a73e8;
-            padding: 5px 10px;
+            padding: 15px 35px;
             border-radius: 10px;
             gap: 20px;
         }
@@ -118,67 +135,7 @@
             background-color: #105cbf;
         }
 
-        /* 컨테이너 */
-        .container {
-            display: flex;
-            margin: 20px auto;
-            width: 100%;
-            height: 800px;
-            gap: 20px;
-        }
-
-        /* 사이드바 */
-        .sidebar {
-            flex: 1;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #d9d9d9;
-            border-radius: 5px;
-        }
-
-        .sidebar h2 {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a73e8;
-            margin-bottom: 20px;
-        }
-
-        .sidebar button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            background-color: #1a73e8;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .sidebar button:hover {
-            background-color: #105cbf;
-        }
-
-        /* 메인 섹션 */
-        .main {
-            flex: 6;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #d9d9d9;
-            border-radius: 5px;
-        }
-
-        .main h2 {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333333;
-        }
-
-        /* 공통 스타일 */
+        /* footer */
         footer {
             padding: 15px;
             background-color: #ffffff;
@@ -188,59 +145,359 @@
             font-size: 14px;
             color: #555555;
         }
+
+        /* nav main  사이 */
+        .section {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+            height: 400px;
+        }
+
+        .image {
+            display: flex;
+            flex: 3;
+            border-radius: 5px;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            height: 400px;
+            /* 슬라이드 전체 높이 */
+            gap: 20px;
+            overflow: hidden;
+            /* 초과된 이미지 숨김 */
+        }
+
+        .image>div {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            border-radius: 20px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border: 1px #d9d9d9 solid;
+        }
+
+        .image>div>img {
+            flex: 3;
+        }
+
+        .image>div>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #ffffff;
+            border-radius: inherit;
+            padding: 10px;
+            object-fit: contain;
+            flex: 1;
+        }
+
+        .image img {
+            flex: 2;
+            max-width: 100%;
+            /* 부모의 너비를 초과하지 않도록 설정 */
+            max-height: 100%;
+            /* 부모의 높이를 초과하지 않도록 설정 */
+            /* object-fit: contain; */
+            /* 이미지 비율 유지 */
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px 20px 0 0;
+            box-sizing: border-box;
+        }
+
+        #slideShow {
+            border-radius: 20px;
+        }
+
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: 400px;
+            gap: 20px;
+        }
+
+        .info1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #1a73e8;
+            background-color: #1a73e8;
+            font-size: 22px;
+            flex: 3;
+        }
+
+        .info1 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hello {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .login {
+            color: white;
+            flex: 1;
+            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center
+        }
+
+        .login a {
+            display: flex;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: #105cbf;
+        }
+
+        .info2 {
+            border: 1px black solid;
+            padding: 10px;
+            background-color: white;
+            color: white;
+            font-weight: bold   ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #1a73e8;
+            background-color: #1a73e8;
+            font-size: 22px;
+            flex: 2;
+        }
+
+        /* 메인 섹션 */
+        .main {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .main h2 {
+            margin-left: 50px;
+        }
+
+        .container-list {
+            flex: 3;
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 20px;
+        }
+
+        .container-list>div {
+            display: flex;
+            align-items: center;
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px;
+            background-color: #ffffff;
+            justify-content: center;
+        }
+
+        .side-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            border: 1px black solid;
+            border-radius: 10px;
+            background-color: #1a73e8;
+            border: 1px solid #1a73e8;
+            height: 520px;
+            color: white;
+            font-size: 22px;
+        }
+
+        .under-bar {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .under-bar>img {
+            flex: 1;
+            align-items: center;
+            border: 1px #d9d9d9 solid;
+            border-radius: 20px;
+            background-color: #ffffff;
+            height: 250px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 추천 공고 양식 */
+        .recommand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .recommand>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #companyId {
+            flex: 1;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            right: 50px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #applicationName {
+            flex: 1;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        #applicationImg {
+            flex: 4;
+            height: 100px;
+        }
+
+        #applicationImg>img {
+            height: inherit;
+            width: inherit;
+            object-fit: cover;
+
+        }
+
+        #deadlineDate {
+            flex: 1;
+            width: 50%;
+            border-radius: 20px 20px;
+            color: white;
+            font-weight: bold;
+            background-color: #105cbf;
+            opacity: 85%;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="top">
-        <span><a href="/hyepin/login">로그인</a></span>
-        <span><a href="/hyepin/join">회원가입</a></span>
-    </div>
     <header>
-        <div><a href="/">HOME</a></div>
+        <div id="logo">
+            <img src="/uploads/logo.webp" alt="">
+        </div>
+        <div class="search">
+            <select id="searchSelect">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+            </select>
+            <input type="text" placeholder="텍스트를 입력하세요">
+            <button id="searchBtn">검색</button>
+        </div>
+        <div id="header-right">
+            <span><a href="/hyepin/login">로그인</a></span>
+            <span><a href="/hyepin/join">회원가입</a></span>
+        </div>
     </header>
     <nav>
         <div class="nav-left">
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
-            <div><a href="/resume/MyResumeList">이력서관리</a></div><!-- 추가 해봣심 [미정]-->
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
             <div><a href="/c/companyInfo/1">커뮤니티</a></div>
-            <div><a href="/">고객센터</a></div>
-            <div><a href="/">취업하기</a></div>
-        </div>
         </div>
         <div class="nav-right">
-            <div>파란 메뉴</div>
+            <div>FAQ</div>
         </div>
     </nav>
-
-    <div class="container">
-        <!-- 왼쪽 사이드바 -->
-        <div class="sidebar">
-            <h2>왼쪽 사이드바</h2>
-            <button type="button">메뉴 1</button>
-            <button type="button">메뉴 2</button>
-            <button type="button">메뉴 3</button>
+    <div class="section">
+        <div class="image">
+            <div>
+                <img src="/uploads/채용트렌드.jpg" alt="">
+                <div>채용과 함께 당신의 커리어를 시작하세요<br>
+                    <br>
+                    함께 가는 친구, 퍼스트 테크와 함께하는 성장의 기회를 만나보세요.
+                </div>
+            </div>
+            <img src="" alt="" id="slideShow">
         </div>
-
-        <!-- 메인 콘텐츠 -->
-        <div class="main">
-            <h2>메인 콘텐츠</h2>
-            <p>여기에 메인 내용을 넣으세요.</p>
-        </div>
-
-        <!-- 오른쪽 사이드바 -->
-        <div class="sidebar">
-            <h2>오른쪽 사이드바</h2>
-            <button type="button">메뉴 A</button>
-            <button type="button">메뉴 B</button>
-            <button type="button">메뉴 C</button>
+        <div class="info">
+            <div class="info1">
+                <div class="hello">환영합니다. 로그인 후 이용해주세요</div>
+                <div class="login">
+                    <a href="/hyepin/login">로그인</a>
+                    <a href="/hyepin/join">회원가입</a>
+                </div>
+            </div>
+            <div class="info2">
+                추가
+            </div>
         </div>
     </div>
-
+    <div class="main">
+        <div class="container-list">
+            <div class="recommand">
+                <div id="companyId">기업명</div>
+                <div id="applicationName">공고명</div>
+                <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+                <div id="deadlineDate">D - 7</div>
+            </div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <div class="side-bar">
+            <div>FAQ</div>
+        </div>
+    </div>
+    <div class="under-bar">
+        <img src="/uploads/세미나.jpg" alt="">
+        <img src="/uploads/박람회1.png" alt="">
+        <img src="/uploads/박람회2.jpg" alt="">
+    </div>
     <footer>
-        © 2024 회사 이름. 모든 권리 보유.
+        © 2024 First Tech. 모든 권리 보유.
     </footer>
 </body>
+<script>
+    const images = ['image0.jpg', 'image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
+    const slideShow = document.querySelector("#slideShow");
+    var currentIndex = 0;
+    slideShow.src = "/uploads/" + images[currentIndex];
+    setInterval(function () {
+        currentIndex = (currentIndex + 1) % 5;
+        slideShow.src = "/uploads/" + images[currentIndex];
+    }, 20000)
 
-</html>
+</script>

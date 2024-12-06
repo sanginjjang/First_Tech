@@ -259,11 +259,12 @@ footer {
 						<td th:text="${companys.annualRevenue}"></td>
 						<td><span class="heart"
 							th:data-company-id="${companys.companyId}"
-							th:data-user-id="${session.user.userId}"
+							th:data-user-id="${session.user != null ? session.user.userId : ''}"
 							th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span>
 						</td>
 					</tr>
 				</th:block>
+
 				<tr>
 					<td colspan="6"><th:block th:if="${currentPageNum > 1}">
 							<a
@@ -290,41 +291,60 @@ footer {
 	<footer>Footer</footer>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	$(document).ready(function() {
-	    $('.heart').click(function() {
-	        var companyId = $(this).data('company-id');
-	        var userId = $(this).data('user-id');
-	        var heartElement = $(this);
+		$(document)
+				.ready(
+						function() {
+							$('.heart')
+									.click(
+											function() {
+												var companyId = $(this).data(
+														'company-id');
+												var userId = $(this).data(
+														'user-id');
+												var heartElement = $(this);
 
-	        console.log("123123123123");
+												var isBookmarked = heartElement
+														.hasClass('bookmarked');
+												var url = isBookmarked ? '/c/removeBookmark'
+														: '/c/addBookmark';
+												if (!userId) {
+													// 세션에 user가 없으면 로그인 요청을 알림으로 띄우고, 로그인 페이지로 리디렉션
+													alert("로그인 해주세요.");
+													window.location.href = "/hyepin/login"; // 로그인 페이지로 이동
+													return; // ajax 요청을 중단
+												}
 
-	        // 현재 하트가 북마크 상태인지를 확인
-	        var isBookmarked = heartElement.hasClass('bookmarked');
-
-	        // Ajax 요청을 보낼 URL 및 메서드 설정
-	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark'; // 상태에 따라 추가/삭제 URL 변경
-
-	        // Ajax 요청
-	        $.ajax({
-	            url: url, // 북마크 추가 또는 삭제 URL
-	            method: 'POST',
-	            data: {
-	                companyId: companyId,
-	                userId: userId
-	            },
-	            contentType: 'application/x-www-form-urlencoded',
-	            success: function(response) {
-	                console.log(isBookmarked ? '북마크 삭제 성공!' : '북마크 추가 성공!');
-	                // 상태에 따라 하트의 클래스를 토글
-	                heartElement.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
-	            },
-	            error: function(xhr, status, error) {
-	                console.log('에러 발생:', error);
-	            }
-	        });
-	    });
-	});
-
+												// Ajax 요청
+												$
+														.ajax({
+															url : url, // 북마크 추가 또는 삭제 URL
+															method : 'POST',
+															data : {
+																companyId : companyId,
+																userId : userId
+															},
+															contentType : 'application/x-www-form-urlencoded',
+															success : function(
+																	response) {
+																console
+																		.log(isBookmarked ? '북마크 삭제 성공!'
+																				: '북마크 추가 성공!');
+																// 상태에 따라 하트의 클래스를 토글
+																heartElement
+																		.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
+															},
+															error : function(
+																	xhr,
+																	status,
+																	error) {
+																console
+																		.log(
+																				'에러 발생:',
+																				error);
+															}
+														});
+											});
+						});
 	</script>
 </body>
 
