@@ -156,5 +156,20 @@
          DELETE FROM resumes WHERE resumeNum = #{resumeNum}
    </delete>
 	
+   <!--resume  & resume apply status & application  -->
+	 <select id="getResumeApply" resultType="com.example.demo.dto.UserResumeApplyStatus">
+	    SELECT r.resumeTitle, r.updatedDate,
+	           a.applicationName,
+	           ra.applyStatus
+	    FROM ResumeApplyStatus ra
+	    JOIN Applications a ON ra.applicationNum = a.applicationNum
+	    JOIN Resumes r ON r.resumeNum = ra.resumeNum
+	    WHERE ra.resumeNum = #{resumeNum}
+	</select>
+	
+	
+ 
+	
+	
 
 </mapper>

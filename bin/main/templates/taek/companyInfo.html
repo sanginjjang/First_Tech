@@ -1,211 +1,309 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0 auto;
-            width: 80vw; /* 너비를 좀 더 넓게 */
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+	margin: 0 auto;
+	width: 80vw; /* 너비를 좀 더 넓게 */
+	height: 100vh;
+	font-family: 'Arial', sans-serif;
+}
 
-        header {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 15%;
-            background-color: aliceblue;
-            font-size: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+header {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 15%;
+	background-color: aliceblue;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-        nav {
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 5%;
-            background-color: ivory;
-            display: flex;
-            justify-content: center;
-        }
+nav {
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 5%;
+	background-color: ivory;
+	display: flex;
+	justify-content: center;
+}
 
-        #nav1 {
-            font-weight: bold;
-            width: 60%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+#nav1 {
+	font-weight: bold;
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
-        section {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 70%;
-            background-color: lightgray;
-            font-size: 20px; /* 글자 크기를 줄여서 테이블 내용이 잘 보이도록 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
-        }
+section {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 70%;
+	background-color: lightgray;
+	font-size: 20px; /* 글자 크기를 줄여서 테이블 내용이 잘 보이도록 */
+	display: flex;
+	flex-direction: column; /* 검색창과 테이블을 세로로 정렬 */
+	justify-content: flex-start; /* 검색창과 테이블이 위에서부터 차례로 배치되도록 */
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
+}
+/* 검색창 스타일 */
+.search-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+	gap: 10px; /* 입력창과 버튼 사이 간격 */
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #ffffff;
-        }
+/* 검색 조건 선택 박스 */
+.search-select {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
 
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+/* 검색 입력창 */
+.search-input {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	width: 250px; /* 입력창 크기 조정 */
+}
 
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-            color: #333;
-        }
+/* 검색 버튼 */
+.search-button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+/* 검색 버튼 호버 효과 */
+.search-button:hover {
+	background-color: #0056b3;
+}
 
-        tr:hover {
-            background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
-        }
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	margin-top: 20px; /* 테이블 위에 공간 추가 */
+}
 
-        footer {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 10%;
-            background-color: aliceblue;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .heart {
-            cursor: pointer;
-            color: gray;
-            transition: color 0.3s;
-        }
+th, td {
+	padding: 15px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
 
-        
-        .heart.bookmarked {
-            color: red;
-        }
-    </style>
+th {
+	background-color: #f4f4f4;
+	font-weight: bold;
+	color: #333;
+}
+
+tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+tr:hover {
+	background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
+}
+
+footer {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 10%;
+	background-color: aliceblue;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.heart {
+	cursor: pointer;
+	color: gray;
+	transition: color 0.3s;
+}
+
+.heart.bookmarked {
+	color: red;
+}
+
+/* 검색창 컨테이너 */
+.search-container {
+	width: 100%;
+	display: flex;
+	justify-content: center; /* 검색창을 가운데 정렬 */
+	margin-bottom: 20px;
+	gap: 10px; /* 입력창과 버튼 사이 간격 */
+}
+
+/* 검색 조건 선택 박스 */
+.search-select {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+/* 검색 입력창 */
+.search-input {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	width: 250px; /* 입력창 크기 조정 */
+}
+
+/* 검색 버튼 */
+.search-button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+/* 검색 버튼 호버 효과 */
+.search-button:hover {
+	background-color: #0056b3;
+}
+
+/* 버튼 클릭 시 외곽선 제거 */
+.search-button:focus {
+	outline: none;
+}
+</style>
 </head>
 
 <body>
-    <header><a href="/">Header</a></header>
-    <nav>
-        <div id="nav1">
-            <div>
-                <a href="/sangin/applicationsForm">채용공고</a>
-            </div>
-            <div>
-                <a href="/c/companyInfo/1">기업 정보</a>
-            </div>
-            <div>
-                이력서관리
-            </div>
-            <div>
-                지원현황
-            </div>
-            <div>
-                관심공고
-            </div>
-            <div>
-                <a href="/b/board/1">커뮤니티</a>
-            </div>
-        </div>
-    </nav>
-    
-    <section>		
-        <table>
-            <thead>
-                <tr>
-                    <th>기업 이름</th>
-                    <th>홈페이지 주소</th>
-                    <th>사원 수</th>
-                    <th>총 매출액</th>
-                    <th>♥</th>
-                </tr>
-            </thead>
-            <tbody>
-                <th:block th:each="companys : ${companys}">
-                    <tr>
-                       <td><a th:href="@{/c/companyDetail/{companyName}(companyName=${companys.companyName})}"
-  						 th:text="${companys.companyName}"></a></td>
-                        <td th:text="${companys.companyEmail}"></td>
-                        <td th:text="${companys.employees}"></td>
-                        <td th:text="${companys.annualRevenue}"></td>
-                        <td>
-                        <span class="heart" 
-						          th:data-company-id="${companys.companyId}" 
-						          th:data-user-id="${session.user.userId}"
-						          th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span>
-						          
-						          
-                        </td>
-                    </tr>
-                </th:block>
-                <tr>
-					<td colspan="6">
-					<th:block th:if="${currentPageNum > 1}">
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
-						</th:block>
-						
-						<th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
-							<span th:if="${currentPageNum == pageNum}"> <a
-								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"><b th:text="${pageNum}"></b></a>&nbsp;&nbsp;
-							</span>
-							<span th:if="${currentPageNum != pageNum}"> 
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a>&nbsp;&nbsp;
-							</span>
-						</th:block>
-						
-						
-						
-						<th:block th:if="${currentPageNum < endPageNum}">
-							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
-						</th:block>
-					</td>
-				</tr>
-            </tbody>
-        </table>
-    </section>
-        
-    <footer>Footer</footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</body>
+	<header>
+		<a href="/">Header</a>
+	</header>
+	<nav>
+		<div id="nav1">
+			<div>
+				<a href="/sangin/applicationsForm">채용공고</a>
+			</div>
+			<div>
+				<a href="/c/companyInfo/1">기업 정보</a>
+			</div>
+			<div>이력서관리</div>
+			<div>지원현황</div>
+			<div>관심공고</div>
+			<div>
+				<a href="/b/board/1">커뮤니티</a>
+			</div>
+		</div>
+	</nav>
 
- <script>
- $(document).ready(function() {
+	<section>
+		<!-- 검색창 -->
+		<!-- 검색창 -->
+		<div class="search-container">
+			<form action="/c/searchCompany/1" method="GET">
+				<select class="search-select" name="searchPart" id="searchPart">
+					<option value="companyName">기업 이름</option>
+					<!-- 다른 검색 옵션을 여기에 추가 가능 -->
+				</select> <input type="text" class="search-input" name="searchInput"
+					id="searchInput" placeholder="기업 이름 검색"> <select
+					class="search-select" name="sortPart" id="sortPart">
+					<option value="annualRevenue">매출액 순</option>
+					<option value="employees">사원 수 순</option>
+				</select>
+
+				<button class="search-button" type="submit">검색</button>
+			</form>
+		</div>
+
+
+		<table>
+			<thead>
+				<tr>
+					<th>기업 이름</th>
+					<th>홈페이지 주소</th>
+					<th>사원 수</th>
+					<th>총 매출액</th>
+					<th>♥</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="companys : ${companys}">
+					<tr>
+						<td><a
+							th:href="@{/c/companyDetail/{companyName}(companyName=${companys.companyName})}"
+							th:text="${companys.companyName}"></a></td>
+						<td th:text="${companys.companyEmail}"></td>
+						<td th:text="${companys.employees}"></td>
+						<td th:text="${companys.annualRevenue}"></td>
+						<td><span class="heart"
+							th:data-company-id="${companys.companyId}"
+							th:data-user-id="${session.user.userId}"
+							th:attr="class=${companys.isBookmarked == 1 ? 'heart bookmarked' : 'heart'}">♥</span>
+						</td>
+					</tr>
+				</th:block>
+				<tr>
+					<td colspan="6"><th:block th:if="${currentPageNum > 1}">
+							<a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+						</th:block> <th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+							<span th:if="${currentPageNum == pageNum}"> <a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"> <b
+									th:text="${pageNum}"></b>
+							</a>&nbsp;&nbsp;
+							</span>
+							<span th:if="${currentPageNum != pageNum}"> <a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"
+								th:text="${pageNum}"></a>&nbsp;&nbsp;
+							</span>
+						</th:block> <th:block th:if="${currentPageNum < endPageNum}">
+							<a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+						</th:block></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<footer>Footer</footer>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
 	    $('.heart').click(function() {
 	        var companyId = $(this).data('company-id');
 	        var userId = $(this).data('user-id');
-	        var heartElement = $(this); 
-	        
+	        var heartElement = $(this);
+
 	        console.log("123123123123");
+
 	        // 현재 하트가 북마크 상태인지를 확인
 	        var isBookmarked = heartElement.hasClass('bookmarked');
-	        
+
 	        // Ajax 요청을 보낼 URL 및 메서드 설정
 	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark'; // 상태에 따라 추가/삭제 URL 변경
-	        
+
 	        // Ajax 요청
 	        $.ajax({
 	            url: url, // 북마크 추가 또는 삭제 URL
@@ -227,7 +325,7 @@
 	    });
 	});
 
-
-</script>
+	</script>
+</body>
 
 </html>

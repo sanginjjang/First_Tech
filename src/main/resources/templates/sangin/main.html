@@ -1,128 +1,246 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <style>
-        body {
-            margin: 0 auto;
-            width: 80vw; /* 너비를 좀 더 넓게 */
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
-
-        header {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 15%;
-            background-color: aliceblue;
-            font-size: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        nav {
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 5%;
-            background-color: ivory;
-            display: flex;
-            justify-content: center;
-        }
-
-        #nav1 {
-            font-weight: bold;
-            width: 60%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        section {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 70%;
-            background-color: lightgray;
-            font-size: 20px; /* 글자 크기를 줄여서 테이블 내용이 잘 보이도록 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            overflow-y: auto; /* 스크롤이 필요할 경우를 대비한 설정 */
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #ffffff;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-            color: #333;
-        }
-
-        tr:nth-child(even) {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
             background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
         }
 
-        tr:hover {
-            background-color: #e1e1e1; /* 마우스 오버 시 배경색 변경 */
+        a {
+            text-decoration: none;
         }
 
-        footer {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 10%;
-            background-color: aliceblue;
-            font-size: 30px;
+
+        /* 상단 로그인/회원가입 영역 */
+        .top {
             display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            gap: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border: 1px solid #d9d9d9;
+            margin: 0px auto;
+        }
+
+        .top span a {
+            color: #1a73e8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .top span a:hover {
+            color: #105cbf;
+        }
+
+        /* 헤더 */
+        header {
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 100px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        header a {
+            font-weight: bold;
+            font-size: 20px;
+            color: #1a73e8;
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: #1a73e8;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 5px 10px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        /* 컨테이너 */
+        .container {
+            display: flex;
+            margin: 20px auto;
+            width: 100%;
+            height: 800px;
+            gap: 20px;
+        }
+
+        /* 사이드바 */
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 메인 섹션 */
+        .main {
+            flex: 6;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        .main h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        /* 공통 스타일 */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
         }
     </style>
 </head>
 
 <body>
-    <header><a href="/">Header</a></header>
+    <div class="top">
+        <span><a href="/hyepin/login">로그인</a></span>
+        <span><a href="/hyepin/join">회원가입</a></span>
+    </div>
+    <header>
+        <div><a href="/">HOME</a></div>
+    </header>
     <nav>
-        <div id="nav1">
-            <div>
-                채용정보
-            </div>
-            <div>
-                <a href="/c/companyInfo/1">기업 정보</a>
-            </div>
-            <div>
-                이력서관리
-            </div>
-            <div>
-                지원현황
-            </div>
-            <div>
-                관심공고
-            </div>
-            <div>
-                커뮤니티
-            </div>
+        <div class="nav-left">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div><!-- 추가 해봣심 [미정]-->
+            <div><a href="/c/companyInfo/1">커뮤니티</a></div>
+            <div><a href="/">고객센터</a></div>
+            <div><a href="/">취업하기</a></div>
+        </div>
+        </div>
+        <div class="nav-right">
+            <div>파란 메뉴</div>
         </div>
     </nav>
-    <section>DashBoard</section>
-    <footer>Footer</footer>
+
+    <div class="container">
+        <!-- 왼쪽 사이드바 -->
+        <div class="sidebar">
+            <h2>왼쪽 사이드바</h2>
+            <button type="button">메뉴 1</button>
+            <button type="button">메뉴 2</button>
+            <button type="button">메뉴 3</button>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main">
+            <h2>메인 콘텐츠</h2>
+            <p>여기에 메인 내용을 넣으세요.</p>
+        </div>
+
+        <!-- 오른쪽 사이드바 -->
+        <div class="sidebar">
+            <h2>오른쪽 사이드바</h2>
+            <button type="button">메뉴 A</button>
+            <button type="button">메뉴 B</button>
+            <button type="button">메뉴 C</button>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 회사 이름. 모든 권리 보유.
+    </footer>
 </body>
 
 </html>

@@ -21,5 +21,13 @@ public class CompanyApplicationManagementService implements ICompanyApplicationM
 		int result = dao.insertApplication(dto);
 		return result;
 	}
+	@Override
+	public List<ApplicationDto> companyApplicationListLimit(String companyId, int offset, int limit) {
+		return dao.companyApplicationListLimit(companyId, offset, limit);
+	}
+	@Override
+	public int getApplicationCount(String companyId) {
+		return dao.getApplicationCount(companyId);
+	}
 
 }

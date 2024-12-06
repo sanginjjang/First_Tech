@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
@@ -24,9 +26,12 @@ import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeFileDto;
 import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserResumeApplyStatus;
 import com.example.demo.dto.UserTechStackDto;
 import com.example.demo.service.mijeong.ResumeService;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -46,7 +51,16 @@ public class ResumeController {
 		UserDto user = resumeservice.getuserId(userId);
 		model.addAttribute("user", user);
 		return "/resume/MyResumeForm";
-	}
+	}	
+	/*박준택이 만든 로직@@@@@@@@@@@@@@
+	@RequestMapping("/MyResumeForm")
+	public String MyResumeForm( Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDto user2 = (UserDto)session.getAttribute("user");
+		UserDto user = resumeservice.getuserId(user2.getUserId());
+		model.addAttribute("user", user);
+		return "/resume/MyResumeForm";
+	}*/
 
 	// 이력서 제출 처리 메서드
 	@RequestMapping("/resumeForm")
@@ -183,7 +197,7 @@ public class ResumeController {
 		    System.out.println("userTechStack: " + userTechStackdto); // userCertificates 리스트 내용 확인
 		} 
 	  resumeservice.insertTechStack(userTeckStack);
-		return"redirect:/resume/MyResumeList";
+		return"/sangin/sum";
 	}
 		
 		
@@ -215,20 +229,21 @@ public class ResumeController {
         return "redirect:/resume/MyResumeList"; 
     }
     
-    
-    @RequestMapping("/resumeApplyList")
-    public String resumeApplyList() {
-        return "resume/getResumeApplyList";
+    @RequestMapping("/resumeApplyList/{resumeNum}")
+    public String resumeApplyList(@PathVariable("resumeNum") int resumeNum, RedirectAttributes redirectAttributes) {
+    	System.out.println("resumeNum" +resumeNum);
+    	redirectAttributes.addFlashAttribute("resumeNum", resumeNum);
+        return "redirect:/resume/getResumeApplyList";  
     }
-    
+  
     @RequestMapping("/getResumeApplyList")
-    public String getResumeApplyList(@PathVariable("resumeNum") String resumeNum) {
-        
-    	
-    	
-    	return "redirect:/resume/resumeApplyList";
+    public String getResumeApplyList(@ModelAttribute("resumeNum")  int resumeNum, Model model) {
+        System.out.println("resumeNum: " + resumeNum);
+        List<UserResumeApplyStatus> resumeApplyList = resumeservice.getResumeApplyList(resumeNum);
+        System.out.println("resumeApplyList!!!" + resumeApplyList);
+        model.addAttribute("resumeApplyList", resumeApplyList);
+        return "resume/resumeApplyList";  // 템플릿 경로 수정
     }
-    
     
 		
 
