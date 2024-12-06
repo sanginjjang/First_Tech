@@ -352,31 +352,45 @@ footer {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $(".heart").click(function() {
-                var heart = $(this);
-                var companyId = heart.data("company-id");
-                var userId = heart.data("user-id");
+	$(document).ready(function() {
+	    $('.heart').click(function() {
+	        var companyId = $(this).data('company-id');
+	        var userId = $(this).data('user-id');
+	        var heartElement = $(this);
 
-                if (!userId) {
-                    alert("로그인 후 이용 가능합니다.");
-                    return;
-                }
+	        var isBookmarked = heartElement.hasClass('bookmarked');
+	        var url = isBookmarked ? '/c/removeBookmark' : '/c/addBookmark';
 
-                $.ajax({
-                    url: '/c/bookmark',
-                    method: 'POST',
-                    data: { companyId: companyId, userId: userId },
-                    success: function(response) {
-                        if (response === "added") {
-                            heart.addClass("bookmarked");
-                        } else if (response === "removed") {
-                            heart.removeClass("bookmarked");
-                        }
-                    }
-                });
-            });
-        });
+	        if (!userId) {
+	            // 세션에 user가 없으면 로그인 요청을 알림으로 띄우고, 로그인 페이지로 리디렉션
+	            alert("로그인 해주세요.");
+	            window.location.href = "/hyepin/login"; // 로그인 페이지로 이동
+	            return; // ajax 요청을 중단
+	        }
+
+	        // Ajax 요청
+	        $.ajax({
+	            url: url,
+	            method: 'POST',
+	            data: {
+	                userId: userId,
+	                companyId: companyId
+	            },
+	            success: function(response) {
+	                // msg를 alert로 띄움
+	                alert(response.msg);
+	                heartElement.toggleClass('bookmarked');
+	                
+	                // 북마크 목록 처리
+	                console.log(response.bookmarks); // 북마크 목록 출력
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('에러 발생:', error);
+	            }
+	        });
+
+	    });
+	});
     </script>
 </body>
 

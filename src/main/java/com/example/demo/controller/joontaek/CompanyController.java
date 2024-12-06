@@ -1,8 +1,9 @@
 package com.example.demo.controller.joontaek;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -70,25 +71,54 @@ public class CompanyController {
 		return "taek/companyDetail";
 	}
 
-	@PostMapping("/addBookmark")
+	/*@PostMapping("/addBookmark")
 	@ResponseBody
 	public List<UserToCompanyBookmarkDto> addBookMark(@RequestParam("userId") String userId,
-			@RequestParam("companyId") String companyId) {
+			@RequestParam("companyId") String companyId,Model model) {
 
 		companyService.regUserToCompanyBookmark(userId, companyId);
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
-
+		model.addAttribute("msg","북마크가 추가되었습니다.");
 		return bookmarks;
+	}*/
+	@PostMapping("/addBookmark")
+	@ResponseBody
+	public Map<String, Object> addBookmark(@RequestParam("userId") String userId,
+	                                          @RequestParam("companyId") String companyId) {
+	    companyService.removeUserToCompanyBookmark(userId, companyId);
+	    List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
+	    companyService.regUserToCompanyBookmark(userId, companyId);
+	    // msg를 포함한 Map 반환
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("msg", "북마크가 추가되었습니다.");
+	    response.put("bookmarks", bookmarks);
+	    
+	    return response;
 	}
 
-	@PostMapping("/removeBookmark")
+/*	@PostMapping("/removeBookmark")
 	@ResponseBody
 	public List<UserToCompanyBookmarkDto> removeBookmark(@RequestParam("userId") String userId,
-			@RequestParam("companyId") String companyId) {
+			@RequestParam("companyId") String companyId,Model model) {
 		companyService.removeUserToCompanyBookmark(userId, companyId);
 		List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
-
+		model.addAttribute("msg","북마크가 삭제되었습니다.");
 		return bookmarks;
+	}*/
+	
+	@PostMapping("/removeBookmark")
+	@ResponseBody
+	public Map<String, Object> removeBookmark(@RequestParam("userId") String userId,
+	                                          @RequestParam("companyId") String companyId) {
+	    companyService.removeUserToCompanyBookmark(userId, companyId);
+	    List<UserToCompanyBookmarkDto> bookmarks = companyService.getUserToCompanyBookmark(userId);
+	    companyService.removeUserToCompanyBookmark(userId, companyId);
+	    // msg를 포함한 Map 반환
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("msg", "북마크가 삭제되었습니다.");
+	    response.put("bookmarks", bookmarks);
+	    
+	    return response;
 	}
 
 	// ----------------------검색........입니다.................................
