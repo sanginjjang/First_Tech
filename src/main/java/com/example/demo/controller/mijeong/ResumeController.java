@@ -183,7 +183,7 @@ public class ResumeController {
 		    System.out.println("userTechStack: " + userTechStackdto); // userCertificates 리스트 내용 확인
 		} 
 	  resumeservice.insertTechStack(userTeckStack);
-		return"redirect:/resume/MyResumeList";
+		return"/sangin/sum";
 	}
 		
 		
