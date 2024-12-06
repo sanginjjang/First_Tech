@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.sangin.IBookmarkedApplicationDao">
+    <select id="getBookmarkedApplicationList"
+            resultType="com.example.demo.dto.ApplicationDto">
+        SELECT
+            a.applicationNum,
+            a.applicationName,
+            a.companyId,
+            a.workingArea,
+            a.career,
+            a.education,
+            a.employmentType,
+            a.salary,
+            DATE_FORMAT(deadlineDate, '%Y-%m-%d') AS deadlineDate,
+            1 AS isBookmarked
+        FROM
+            Applications a
+        INNER JOIN
+            UserToApplicationBookmarks b
+        ON
+            a.applicationNum = b.applicationNum
+        WHERE
+            b.userId = #{userId};
+    </select>
+</mapper>

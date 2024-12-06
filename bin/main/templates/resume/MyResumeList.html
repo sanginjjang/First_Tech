@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .resumeList {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .resumeList h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: #555;
+    }
+
+    table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    table img {
+        border-radius: 5px;
+    }
+
+    table a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    table a:hover {
+        text-decoration: underline;
+    }
+
+    input[type="submit"] {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin : 20px;
+        height: 50px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #c82333;
+    }
+</style>
+
+
+</head>
+<body>
+
+<div class="resumeList">
+<h2>이력서 관리</h2>
+ <form action="/resume/MyResumeForm" method="post" enctype="multipart/form-data">
+  <input type="submit" value="이력서 등록">
+</form>
+ 
+ <table border="1">
+         <thead>
+            <tr>
+               <th>번호</th>
+               <th>증명사진</th>
+               <th>resumeTitle</th>
+               <th>updatedate</th>
+               <th>직무</th>
+               <th>관리</th>
+            </tr>
+         </thead>
+         <tbody>
+   
+            <tr th:each="list, iterStat : ${resumelist}">
+               <td th:text="${iterStat.index + 1}"></td> 
+               <td>
+                    <img th:src="@{/uploads/{personalPhotoName}(personalPhotoName=${list.personalPhotoName})}" width="100px">
+               </td>
+                <td><a th:href="@{/resume/detailResume/{resumeNum}(resumeNum=${list.resumeNum})}" th:text="${list.resumeTitle}"></a></td>
+                <td th:text="${list.updatedDate}"></td>
+                <td th:text="${list.roleName}"></td>
+                <td><form th:action="@{/resume/deleteResume}" method="post">
+                        <input type="hidden" name="resumeNum" th:value="${list.resumeNum}">
+                        <input type="submit" value="삭제">
+                    </form>
+                </td>
+            </tr>
+   
+         </tbody>
+      </table>
+</div>
+</body>
+</html>
+  

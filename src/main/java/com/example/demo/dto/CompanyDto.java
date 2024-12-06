@@ -3,9 +3,13 @@ package com.example.demo.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompanyDto {
 
     private String companyId;                    // 기업 ID / 사업자번호
@@ -21,5 +25,8 @@ public class CompanyDto {
     private String ceo;                          // 대표자명
     private int employees;                       // 사원수
     private int annualRevenue;                   // 매출액
+    
+    private int isBookmarked;
+    
     private Timestamp companyRegistDate;        // 계정 생성일 (가입 일자)
 }

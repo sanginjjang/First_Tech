@@ -1,7 +1,11 @@
 package com.example.demo.dto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RatingDto {
 	private int ratingNum; // 1. 평점 고유 번호
 	private String companyId; // 2. 기업 ID (FK)

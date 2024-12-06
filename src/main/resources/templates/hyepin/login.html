@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+	body{
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 50px;
+	}
+    header {
+        font-weight: bold;
+        border: lightgray solid 1px;
+        width: 100%;
+        height: 15%;
+        background-color: aliceblue;
+        font-size: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    footer {
+        font-weight: bold;
+        border: lightgray solid 1px;
+        width: 100%;
+        height: 10%;
+        background-color: Faliceblue;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        /* 링크 기본 스타일 */
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .login {
+        font-size: 20px;
+    }
+
+    #home {
+        margin: 0px 30px 0px 30px;
+    }
+
+
+    #logo {
+        margin-left: 30px;
+        height: 60px;
+    }
+
+    section {
+        width: 100%;
+        height: 70%;
+        font-size: 60px;
+        border: lightgray solid 1px;
+    }
+
+    .item1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10%;
+        margin-top: 30px;
+    }
+
+    .memberBtn {
+        font-size: 30px;
+        background-color: white;
+        border: none;
+        color: gray;
+    }
+
+    .memberBtn:hover {
+        color: black;
+        transition: all 0.3s ease;
+    }
+
+    .inputForm {
+        text-align: center;
+    }
+
+    .formStyle {
+        width: 40%;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .find {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        text-align: center;
+        margin: 40px 0px 20px 0px;
+        gap: 3%;
+    }
+
+    footer {
+        font-weight: bold;
+        border: lightgray solid 1px;
+        width: 100%;
+        height: 10%;
+        background-color: Faliceblue;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #joinText{
+        text-decoration: underline;
+    }
+</style>
+
+<body>
+    <header>
+        <div id="logo"></div>
+        <div class="login">
+            <span><a href="/">홈으로</a></span>
+            <span id="home"> <a href="/hyepin/companyMain"> 기업 홈</a></span>
+        </div>
+    </header>
+    <section>
+        <div class="item1">
+            <div><button class="memberBtn" id="userMemberBtn">개인회원</button></div>
+            <div><button class="memberBtn" id="companyMemberBtn">기업회원</button></div>
+        </div>
+
+        <form id="loginForm">
+            <div class="inputForm">
+                <input name="id" id="id" class="formStyle" type="text" th:value="${id}" placeholder="ID를 입력하세요"> <br>
+                <input name="pw" id="pw" class="formStyle" type="text" placeholder="PW를 입력하세요"> <br>
+                
+                <input class="formStyle" type="button" value="로그인" onclick="userLogin()">
+            </div>
+        </form>
+
+
+        <div class="find">
+            <div><a href="" id="findId" onclick="check(event)">ID 찾기</a></div>
+            <div><a href="" id="findPw" onclick="check(event)">PW 찾기</a></div>
+            <div>아직 계정이 없나요? <a href="/hyepin/join" id="joinText">회원가입</a></div>
+        </div>
+
+    </section>
+    <footer>Footer</footer>
+</body>
+
+<script>
+	let selectedMember = "user";
+	
+	const userMemberBtn = document.getElementById('userMemberBtn');
+    const companyMemberBtn = document.getElementById('companyMemberBtn');
+    const loginForm = document.getElementById('loginForm');
+    const findId = document.getElementById('findId');
+    const findPw = document.getElementById('findPw');
+    const id = document.getElementById('id');
+    const pw = document.getElementById('pw');
+    
+    window.onload = function() {
+		findId.href = '/hyepin/findUserId';
+        findPw.href = '/hyepin/findUserPw';
+        id.name = "userId";
+        pw.name= "userPassword";
+		userMemberBtn.style.color = 'black';
+	    userMemberBtn.style.transform = 'scale(1.1)';
+	    companyMemberBtn.style.transform = 'scale(1)';
+	    companyMemberBtn.style.color = ''; 
+		selectedMember = "user";
+	}
+    
+    userMemberBtn.addEventListener('click', event => {
+    	
+    	//loginForm.action = '/hyepin/userLogin';
+        findId.href = '/hyepin/findUserId';
+        findPw.href = '/hyepin/findUserPw';
+        id.name = "userId";
+        pw.name= "userPassword";
+        
+        userMemberBtn.style.color = 'black';
+        userMemberBtn.style.transform = 'scale(1.1)';
+        companyMemberBtn.style.transform = 'scale(1)';
+        companyMemberBtn.style.color = ''; 
+        
+        selectedMember = "user";
+    });
+
+    companyMemberBtn.addEventListener('click', event =>{
+       
+    	//여기 수정
+    	//loginForm.action = '/hyepin/companyLogin';
+        findId.href = '';
+        findPw.href = '';
+        id.name = "companyId";
+        pw.name= "companyPassword";
+        
+        companyMemberBtn.style.transform = 'scale(1.1)';
+        companyMemberBtn.style.color = 'black';
+        userMemberBtn.style.transform = 'scale(1)';
+        userMemberBtn.style.color = ''; 
+        
+        selectedMember = "company";
+    });
+
+    function check(event){
+    	if(selectedMember == null){
+    		event.preventDefault();
+    		alert('개인회원 또는 기업회원 중 하나를 선택하세요.');
+    		//const button = document.getElementById("myButton");  // 특정 버튼을 찾습니다.
+    	}
+    }
+    
+    function userLogin(){
+		const form = document.getElementById("loginForm");
+		const formData = new FormData(form);
+		
+		const loginAjax = document.getElementById("loginAjax");
+		
+		
+		if(selectedMember == null){
+			alert('개인회원 또는 기업회원 중 하나를 선택하세요.');
+		}else if(selectedMember === "user"){
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				if(xhr.status === 200){
+            		const response = xhr.responseText;
+            		if(response === "fail"){
+            			alert("아이디 또는 비밀번호가 틀렸습니다.");
+            		}else if(response === "userSuccess"){
+            			window.location.href = "/";
+            		}else if(response === "companySuccess"){
+            			window.location.href = "/";
+            		}else if(response === "ready"){
+            			alert("아이디와 비밀번호를 입력하세요");
+            		}
+            	}else{
+            		alert("서버오류 발생");
+            	}
+            }
+            xhr.open("POST", "/hyepin/userLogin");  
+            //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(formData);
+		}else if(selectedMember === "company"){
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				if(xhr.status === 200){
+            		const response = xhr.responseText;
+            		if(response === "fail"){
+            			alert("아이디 또는 비밀번호가 틀렸습니다.");
+            		}else if(response === "comnpanySuccess"){
+            			window.location.href = "/hyepin/companyMain";
+            		}else if(response === "ready"){
+            			alert("아이디와 비밀번호를 입력하세요");
+            		}
+            	}else{
+            		alert("서버오류 발생");
+            	}
+			}	
+			xhr.open("POST", "/hyepin/companyLogin");  
+			xhr.send(formData);
+			
+		}
+	}
+
+</script>
+
+
+
+</html>
