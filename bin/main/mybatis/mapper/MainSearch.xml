@@ -8,7 +8,7 @@
 	<select id="fromMainSearchByCompanyName"
 		resultType="com.example.demo.dto.CompanyDto">
 
-SELECT * FROM companys
+		SELECT * FROM companys
 		WHERE companyName LIKE
 		CONCAT('%',#{mainSearchInput},'%')
 		ORDER BY employees ASC
@@ -18,12 +18,15 @@ SELECT * FROM companys
 
 	<select id="fromMainSearchByApplication"
 		resultType="com.example.demo.dto.ApplicationDto">
-		SELECT * FROM applications
-		WHERE applicationName LIKE
-		CONCAT('%',#{mainSearchInput},'%')
-		ORDER BY deadlineDate ASC
+		SELECT a.applicationNum, a.applicationName, a.roleId, j.roleName,
+		a.deadlineDate
+		FROM applications a
+		JOIN jobRoles j ON a.roleId = j.roleId
+		WHERE a.applicationName LIKE CONCAT('%', #{mainSearchInput}, '%')
+		ORDER BY a.deadlineDate ASC
 		LIMIT 8;
 	</select>
+
 
 
 

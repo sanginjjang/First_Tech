@@ -122,7 +122,7 @@
             width: 100%;
             margin-top: 20px;
             gap: 20px;
-            height: 200px;
+            height: 400px;
         }
 
         .image {
@@ -133,38 +133,85 @@
             align-items: center;
             box-sizing: border-box;
             height: 400px;
+            /* 슬라이드 전체 높이 */
             gap: 20px;
+            overflow: hidden;
+            /* 초과된 이미지 숨김 */
         }
 
-        .image div {
+        .image>div {
             display: flex;
+            flex-direction: column;
             flex: 1;
-            border: 1px #d9d9d9 solid;
             border-radius: 20px;
-            background-color: #ffffff;
             box-sizing: border-box;
             align-items: center;
             justify-content: center;
+            height: 100%;
+            border: 1px #d9d9d9 solid;
+        }
+
+        .image>div>img {
+            flex: 3;
+        }
+
+        .image>div>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #ffffff;
+            border-radius: inherit;
+            padding: 10px;
+            object-fit: contain;
+            flex: 1;
         }
 
         .image img {
-            display: flex;
-            flex: 3;
+            flex: 2;
+            max-width: 100%;
+            /* 부모의 너비를 초과하지 않도록 설정 */
+            max-height: 100%;
+            /* 부모의 높이를 초과하지 않도록 설정 */
+            /* object-fit: contain; */
+            /* 이미지 비율 유지 */
             border: 1px #d9d9d9 solid;
-            border-radius: 20px;
+            border-radius: 20px 20px 0 0;
             box-sizing: border-box;
+        }
+        #slideShow{
+            border-radius: 20px;
         }
 
 
         .info {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             flex: 1;
-            border-radius: 5px;
-            background-color: #1a73e8;
-            border: 1px solid #1a73e8;
+            height: 400px;
+            gap: 20px;
         }
+
+        .info div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #1a73e8;
+            background-color: #1a73e8;
+            flex: 1;
+            color: white;
+            font-size: 22px;
+            gap: 30px;
+        }
+
+        .info div span {
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
 
         /* 메인 섹션 */
         .main {
@@ -202,10 +249,12 @@
             align-items: center;
             flex: 1;
             border: 1px black solid;
-            border-radius: 5px;
+            border-radius: 10px;
             background-color: #1a73e8;
             border: 1px solid #1a73e8;
             height: 520px;
+            color: white;
+            font-size: 22px;
         }
 
         .under-bar {
@@ -226,6 +275,13 @@
             justify-content: center;
             align-items: center;
         }
+        
+        
+        
+ /*혜빈 추가합니다*/
+ .items{
+ }
+ 
     </style>
 </head>
 
@@ -235,15 +291,13 @@
             로고
         </div>
         <div class="search">
-      	  <form action="/s/searchResult2" method="post">
-        	<select name="searchPart">
-        		<option value="searchApplication">공고명</option>
-        		<option value="searchCompany">기업명</option>
-        	</select>
-        	
-            <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
+            <select>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+            </select>
+            <input type="text" placeholder="텍스트를 입력하세요">
             <button>검색</button>
-           </form>
         </div>
         <div>
             <span><a href="/hyepin/login">로그인</a></span>
@@ -254,9 +308,9 @@
         <div class="nav-left">
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/">지원현황</a></div>
+            <div><a href="/">이력서관리</a></div>
             <div><a href="/c/companyInfo/1">커뮤니티</a></div>
-            <div><a href="/">고객센터</a></div>
-            <div><a href="/">야근그만</a></div>
         </div>
         <div class="nav-right">
             <div>파란 메뉴</div>
@@ -264,24 +318,39 @@
     </nav>
     <div class="section">
         <div class="image">
-            <div>1</div>
+            <div>
+                <img src="채용트렌드.jpg" alt="">
+                <div>채용과 함께 당신의 커리어를 시작하세요<br>
+                    <br>
+                    함께 가는 친구, 퍼스트 테크와 함께하는 성장의 기회를 만나보세요.
+                </div>
+            </div>
             <img src="" alt="" id="slideShow">
         </div>
-        <div class="info">로그인/회원가입</div>
+        <div class="info">
+            <div>
+                <span>로그인</span>
+                <span>회원가입</span>
+            </div>
+            <div>
+                추가
+            </div>
+        </div>
     </div>
     <div class="main">
         <div class="container-list">
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
+        	<th:block th:each="item : ${aList}">
+        	<div class="recommand" >
+                <div id="companyId">[[${item.companyName}]]</div>
+                <div id="applicationName">[[${item.applicationName}]]</div>
+                <div id="applicationImg">이미지가 들어갑니다.</div>
+                <div id="deadlineDate">[[${item.day}]]</div>
+            </div>
+            </th:block>
+           
         </div>
         <div class="side-bar">
-            <div>사이드바입니다</div>
+            <div>FAQ</div>
         </div>
     </div>
     <div class="under-bar">
@@ -289,15 +358,17 @@
         <div>박람회</div>
     </div>
     <footer>
-        © 2024 회사 이름. 모든 권리 보유.
+        © 2024 First Tech. 모든 권리 보유.
     </footer>
 </body>
 <script>
-    const images = ['image0.png', 'image1.png', 'image2.png', 'image3.png', 'image4.png'];
+    const images = ['image0.jpg', 'image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
     const slideShow = document.querySelector("#slideShow");
     var currentIndex = 0;
+    slideShow.src = images[currentIndex];
     setInterval(function () {
         currentIndex = (currentIndex + 1) % 5;
-    }, 1000)
+        slideShow.src = images[currentIndex];
+    }, 2000)
 
 </script>

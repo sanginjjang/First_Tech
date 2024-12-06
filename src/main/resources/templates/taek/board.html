@@ -191,8 +191,12 @@ footer {
 			</form>
 		</div>
 
+		
 		<a href="/b/boardWriteForm" class="write-button">게시글 작성</a>
-
+		
+		<script th:if="${msg} != null">
+			alert("로그인 해주세요.");
+		</script>
 		<!-- 게시글 목록 테이블 -->
 		<table>
 			<thead>
