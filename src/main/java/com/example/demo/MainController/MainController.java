@@ -14,7 +14,6 @@ public class MainController {
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("logUser","한상인");
-		
 		return "/sangin/main";
 	}
 
