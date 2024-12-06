@@ -22,13 +22,13 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 	
 	@Autowired
-	ICompanyServiceHyepin cpmpanyService;
+	ICompanyServiceHyepin companyService;
 	
 	@RequestMapping("/")
 	String main(Model model) {
 		
 		// 모두가 같이 쓰는 즐거운 메인 페이지 ^^
-		List<MainApplicationVo> aList = cpmpanyService.getMainApplications();
+		List<MainApplicationVo> aList = companyService.getMainApplications();
 		ArrayList<LocalDateTime> deadlineDate = new ArrayList<>();
 		// 오늘 날짜
 		LocalDateTime today = LocalDateTime.now();

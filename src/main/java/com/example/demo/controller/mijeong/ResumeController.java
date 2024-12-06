@@ -205,15 +205,17 @@ public class ResumeController {
 	
 	
 	@RequestMapping("/MyResumeList")
-    public String MyResumeList1(HttpSession session ,Model model) {
+    public String MyResumeList1(HttpSession session, Model model) {
 	   UserDto user = (UserDto) session.getAttribute("user");
 	   System.out.println(user + "!!!!");
 	   String userId =user.getUserId();
        List<ResumeDto> resumelist = resumeservice.getResumeList(userId);
 	   model.addAttribute("user", user);
        model.addAttribute("resumelist",resumelist);
-       return "resume/MyResumeList";
+       return "/resume/MyResumeList";
     }
+    
+    
     @RequestMapping("/deleteResume")
     public String deleteResume(@RequestParam("resumeNum") int resumeNum) {
         System.out.println("삭제할 resumeNum: " + resumeNum); 

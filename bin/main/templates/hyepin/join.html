@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <style>
+body{
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 50px;
+	}
     
     header {
         font-weight: bold;
@@ -45,8 +50,9 @@
         margin: 0px 30px 0px 30px;
     }
 
-    #logo {
+        #logo {
         margin-left: 30px;
+        height: 60px;
     }
 
     section {
@@ -116,9 +122,8 @@
 </style>
 
 <body>
-    <h1>Join Page</h1>
     <header>
-        <div id="logo"> 로고 </div>
+        <div id="logo">  </div>
         <div class="login">
            <span><a href="/">홈으로</a></span>
            <span id="home"> <a href=""> 기업 홈</a></span>
@@ -144,7 +149,19 @@
     const userMemberBtn = document.getElementById('userMemberBtn');
     const companyMemberBtn = document.getElementById('companyMemberBtn');
     const join = document.getElementById('join');
-    let selectedMember = null;
+    let selectedMember = "user";
+    
+    window.onload = function() {
+		join.href = '/hyepin/userJoin';
+        
+        userMemberBtn.style.color = 'black';
+        userMemberBtn.style.transform = 'scale(1.1)';
+        companyMemberBtn.style.transform = 'scale(1)';
+        companyMemberBtn.style.color = ''; 
+        
+        selectedMember = "user";
+	}
+    
     
     userMemberBtn.addEventListener('click', event => {
     	join.href = '/hyepin/userJoin';
