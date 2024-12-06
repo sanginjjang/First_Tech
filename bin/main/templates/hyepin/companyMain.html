@@ -409,18 +409,23 @@
 <body>
     <header>
         <div id="logo">
-        <a href="/">
+        <a href="/hyepin/companyMain">
             <img src="/uploads/logo.webp" alt="">
         </a>
         </div>
         <div class="search">
-        <form action="/s/searchResult2" method="post">
+        <form action="/s/searchResult2" method="post" id="form">
             <select id="searchSelect"  name="searchPart">
               <option value="searchApplication">공고명</option>
         		<option value="searchCompany">기업명</option>
             </select>
             <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <th:block th:if="${session.company == null}">
+            <button id="searchBtn" onclick="noSearch(event)">검색</button>
+        	</th:block>
+        	<th:block th:if="${session.company != null}">
             <button id="searchBtn">검색</button>
+        	</th:block>
          </form>
         </div>
         <div id="header-right">
@@ -430,7 +435,7 @@
             	<span><a href="/">홈으로</a></span>
         	</th:block>
         	<th:block th:if="${session.company != null}">
-        	  	<span><a href="/hyepin/myPage">마이페이지</a></span>
+        	  	<span><a href="">마이페이지</a></span>
         	  	<span><a href="/hyepin/logout">로그아웃</a></span>
         	</th:block>
         </div>
@@ -482,7 +487,7 @@
             <th:block th:if="${session.company != null}">
                 <div class="hello" >환영합니다. [[${session.company.companyName}]]님</div>
                 <div class="login">
-                    <a href="/hyepin/myPage">마이페이지</a>
+                    <a href="">마이페이지</a>
                     <a href="/hyepin/logout">로그아웃</a>
                 </div>
             </th:block>
@@ -545,6 +550,10 @@
 
    	function noLogin(){
    		alert("로그인 후 이용해 주세요.");
+   	}
+    function noSearch(){
+		event.preventDefault(); // 폼 제출 방지
+    	alert("로그인 후 이용해 주세요.");
    	}
         
         
