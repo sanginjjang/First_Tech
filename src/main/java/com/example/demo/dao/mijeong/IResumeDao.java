@@ -39,11 +39,11 @@ public interface IResumeDao {
 
 	public CertificateDto getCertificateByName(String SerchCertificateName);
 
-	public List<ResumeDto> getResumeList();
+	public List<ResumeDto> getResumeList(String userid);
 
 	public int deleteResume(int resumeNum);
 
-	public List<UserResumeApplyStatus> getResumeApply(@Param("resumeNum") int resumeNum);
+	public List<UserResumeApplyStatus> getResumeApply(@Param("userId") String userId);
 	
 	
 	
