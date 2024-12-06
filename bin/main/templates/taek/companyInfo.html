@@ -324,7 +324,7 @@
             <div><a href="/c/companyInfo/1">기업정보</a></div>
             <div><a href="/resume/resumeApplyList">지원현황</a></div>
             <div><a href="/resume/MyResumeList">이력서관리</a></div>
-            <div><a href="/c/companyInfo/1">커뮤니티</a></div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
         </div>
         <div class="nav-right">
             <div>FAQ</div>
@@ -411,22 +411,25 @@
 
 	        // Ajax 요청
 	        $.ajax({
-	            url: url, // 북마크 추가 또는 삭제 URL
+	            url: url,
 	            method: 'POST',
 	            data: {
-	                companyId: companyId,
-	                userId: userId
+	                userId: userId,
+	                companyId: companyId
 	            },
-	            contentType: 'application/x-www-form-urlencoded',
 	            success: function(response) {
-	                console.log(isBookmarked ? '북마크 삭제 성공!' : '북마크 추가 성공!');
-	                // 상태에 따라 하트의 클래스를 토글
-	                heartElement.toggleClass('bookmarked'); // 'bookmarked' 클래스 추가/제거
+	                // msg를 alert로 띄움
+	                alert(response.msg);
+	                heartElement.toggleClass('bookmarked');
+	                
+	                // 북마크 목록 처리
+	                console.log(response.bookmarks); // 북마크 목록 출력
 	            },
 	            error: function(xhr, status, error) {
 	                console.log('에러 발생:', error);
 	            }
 	        });
+
 	    });
 	});
 
