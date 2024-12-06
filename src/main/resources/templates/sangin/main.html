@@ -60,14 +60,14 @@
             align-items: center;
         }
 
-        .search>input {
+        .search> form > input {
             padding: 20px;
             width: 600px;
             border: 1px solid #d9d9d9;
             border-radius: 10px;
         }
 
-        .search>button {
+        .search> form > button {
             padding: 15px 20px;
             border: 1px solid #d9d9d9;
             background: white;
@@ -412,17 +412,25 @@
             <img src="/uploads/logo.webp" alt="">
         </div>
         <div class="search">
-            <select id="searchSelect">
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
+        <form action="/s/searchResult2" method="post">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+        		<option value="searchCompany">기업명</option>
             </select>
-            <input type="text" placeholder="텍스트를 입력하세요">
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
             <button id="searchBtn">검색</button>
+         </form>
         </div>
         <div id="header-right">
-            <span><a href="/hyepin/login">로그인</a></span>
-            <span><a href="/hyepin/join">회원가입</a></span>
+        	<th:block th:if="${session.user == null}">
+        	  	<span><a href="/hyepin/login">로그인</a></span>
+           		<span><a href="/hyepin/join">회원가입</a></span>
+            	<span><a href="">기업 홈</a></span>
+        	</th:block>
+        	<th:block th:if="${session.user != null}">
+        	  	<span><a href="/hyepin/myPage">마이페이지</a></span>
+        	  	<span><a href="/hyepin/logout">로그아웃</a></span>
+        	</th:block>
         </div>
     </header>
     <nav>
@@ -450,11 +458,20 @@
         </div>
         <div class="info">
             <div class="info1">
+            <th:block th:if="${session.user == null}">
                 <div class="hello">환영합니다. 로그인 후 이용해주세요</div>
                 <div class="login">
                     <a href="/hyepin/login">로그인</a>
                     <a href="/hyepin/join">회원가입</a>
                 </div>
+            </th:block>
+            <th:block th:if="${session.user != null}">
+                <div class="hello" >환영합니다. [[${session.user.userName}]]님</div>
+                <div class="login">
+                    <a href="/hyepin/myPage">마이페이지</a>
+                    <a href="/hyepin/logout">로그아웃</a>
+                </div>
+            </th:block>
             </div>
             <div class="info2">
                 추가
@@ -463,19 +480,14 @@
     </div>
     <div class="main">
         <div class="container-list">
+        <th:block th:each="item : ${aList}">
             <div class="recommand">
-                <div id="companyId">기업명</div>
-                <div id="applicationName">공고명</div>
+                <div id="companyId">[[${item.companyName}]]</div>
+                <div id="applicationName">[[${item.applicationName}]]</div>
                 <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
-                <div id="deadlineDate">D - 7</div>
+                <div id="deadlineDate">D - [[${item.day}]]</div>
             </div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
+         </th:block>
         </div>
         <div class="side-bar">
             <div>FAQ</div>
