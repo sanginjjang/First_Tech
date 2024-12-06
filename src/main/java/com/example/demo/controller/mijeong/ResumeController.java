@@ -235,6 +235,7 @@ public class ResumeController {
   
     @RequestMapping("/getResumeApplyList")
     public String getResumeApplyList(@SessionAttribute("user") UserDto user, Model model) {
+    	String userId = user.getUserId();
         System.out.println("userId: " + userId);
         List<UserResumeApplyStatus> resumeApplyList = resumeservice.getResumeApplyList(userId);
         System.out.println("resumeApplyList!!!" + resumeApplyList);
