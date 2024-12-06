@@ -15,7 +15,7 @@ public class MainController {
 		
 		session.setAttribute("logUser","한상인");
 		
-		return "/sangin/sum";
+		return "/sangin/main";
 	}
 
 }
