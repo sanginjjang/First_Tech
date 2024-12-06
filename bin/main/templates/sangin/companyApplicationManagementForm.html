@@ -171,7 +171,7 @@ header div {
 </head>
 <body>
 	<header>
-		<div th:text="${companyId}">기업 이름</div>
+		<div th:text="${session.company.companyName}">기업 이름</div>
 		<div>
 			<span>공고 전체</span> <span>임시 저장</span> <span>채용 중</span>
 		</div>

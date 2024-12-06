@@ -35,7 +35,7 @@
             border-radius: 5px;
         }
 
-        #logo {
+        #logo a{
             display: flex;
             width: 100px;
             height: 100px;
@@ -409,38 +409,56 @@
 <body>
     <header>
         <div id="logo">
+        <a href="/">
             <img src="/uploads/logo.webp" alt="">
+        </a>
         </div>
         <div class="search">
-        <form action="/s/searchResult2" method="post">
+        <form action="/s/searchResult2" method="post" id="form">
             <select id="searchSelect"  name="searchPart">
               <option value="searchApplication">공고명</option>
         		<option value="searchCompany">기업명</option>
             </select>
             <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <th:block th:if="${session.user != null}">
             <button id="searchBtn">검색</button>
+            </th:block>
+             <th:block th:if="${session.user == null}">
+            <button id="searchBtn" onclick="noSearch(event)">검색</button>
+            </th:block>
          </form>
         </div>
         <div id="header-right">
         	<th:block th:if="${session.user == null}">
         	  	<span><a href="/hyepin/login">로그인</a></span>
            		<span><a href="/hyepin/join">회원가입</a></span>
-            	<span><a href="">기업 홈</a></span>
+            	<span><a href="/hyepin/companyMain">기업 홈</a></span>
         	</th:block>
         	<th:block th:if="${session.user != null}">
-        	  	<span><a href="/hyepin/myPage">마이페이지</a></span>
+        	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
         	  	<span><a href="/hyepin/logout">로그아웃</a></span>
         	</th:block>
         </div>
     </header>
     <nav>
         <div class="nav-left">
+        <th:block th:if="${session.user == null}">
+            <div onclick="noLogin()">채용공고</div>
+            <div onclick="noLogin()">기업정보</div>
+            <div onclick="noLogin()">지원현황</div>
+            <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">커뮤니티</div>
+        </th:block>
+       
+        <th:block th:if="${session.user != null}">
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
             <div><a href="/resume/resumeApplyList">지원현황</a></div>
             <div><a href="/resume/MyResumeList">이력서관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
+        </th:block>
         </div>
+        
         <div class="nav-right">
             <div>FAQ</div>
         </div>
@@ -468,7 +486,7 @@
             <th:block th:if="${session.user != null}">
                 <div class="hello" >환영합니다. [[${session.user.userName}]]님</div>
                 <div class="login">
-                    <a href="/hyepin/myPage">마이페이지</a>
+                    <a href="/hyepin/goUserInformation">마이페이지</a>
                     <a href="/hyepin/logout">로그아웃</a>
                 </div>
             </th:block>
@@ -480,19 +498,32 @@
     </div>
     <div class="main">
         <div class="container-list">
-        <th:block th:each="item : ${aList}">
-            <div class="recommand">
-            	 <div id="companyId">
-            	 <a th:href="@{/c/companyDetail/{companyName}(companyName=${item.companyName})}">
-                	[[${item.companyName}]]</a></div>
-                <div id="applicationName"><a th:href="@{/sangin/applicationDetailForm/
-               						 {applicationNum}(applicationNum=${item.applicationNum})}">
-               						 [[${item.applicationName}]]</a></div>
-                <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
-                <div id="deadlineDate">D - [[${item.day}]]</div>
-            </div>
+         <th:block th:if="${session.user == null}">
+         	  <th:block th:each="item : ${aList}">
+	            <div class="recommand">
+	            	 <div id="companyId" onclick="noLogin()">[[${item.companyName}]]</div>
+	                <div id="applicationName"  onclick="noLogin()">[[${item.applicationName}]]</div>
+	                <div id="applicationImg"  onclick="noLogin()"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="deadlineDate"  onclick="noLogin()">D - [[${item.day}]]</div>
+	            </div>
+	         </th:block>
          </th:block>
-        </div>
+         
+          <th:block th:if="${session.user != null}">
+         	  <th:block th:each="item : ${aList}">
+	            <div class="recommand">
+	            	 <div id="companyId">
+	            	 <a th:href="@{/c/companyDetail/{companyName}(companyName=${item.companyName})}">
+	                	[[${item.companyName}]]</a></div>
+	                <div id="applicationName"><a th:href="@{/sangin/applicationDetailForm/
+	               						 {applicationNum}(applicationNum=${item.applicationNum})}">
+	               						 [[${item.applicationName}]]</a></div>
+	                <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="deadlineDate">D - [[${item.day}]]</div>
+	            </div>
+	         </th:block>
+         </th:block>
+      </div>
         <div class="side-bar">
             <div>FAQ</div>
         </div>
@@ -514,6 +545,16 @@
     setInterval(function () {
         currentIndex = (currentIndex + 1) % 5;
         slideShow.src = "/uploads/" + images[currentIndex];
-    }, 20000)
+    }, 2000)
 
+   	function noLogin(){
+    	alert("로그인 후 이용해 주세요.");
+   	}
+	function noSearch(){
+		event.preventDefault(); // 폼 제출 방지
+    	alert("로그인 후 이용해 주세요.");
+   	}
+        
+        
+        
 </script>

@@ -9,4 +9,5 @@ public interface ICompanyServiceHyepin {
 	public boolean idCheck(CompanyDto companyDto);
 	public CompanyDto getCompanyById(String companyId);
 	public List<MainApplicationVo> getMainApplications();
+	public int getApplicationByCompanyId(String companyId);
 }

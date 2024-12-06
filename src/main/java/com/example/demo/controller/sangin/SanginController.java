@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ApplicationDto;
+import com.example.demo.dto.CompanyDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
@@ -151,8 +152,10 @@ public class SanginController {
 
 	// 기업 공고 관리 폼
 	@RequestMapping("/companyApplicationManagementForm/{pageNum}")
-	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model) {
-		String companyId = "comp001";
+	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model,
+											HttpSession session) {
+		CompanyDto company = (CompanyDto) session.getAttribute("company");
+		String companyId = company.getCompanyId();
 		int limit = 10;
 		int startIdx = (pageNum - 1) * 10;
 		List<ApplicationDto> companyApplicationList = companyApplicationService.companyApplicationListLimit(companyId,
