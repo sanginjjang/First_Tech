@@ -30,6 +30,9 @@ public class CompanyServiceHyepin implements ICompanyServiceHyepin{
 	@Override
 	public CompanyDto getCompanyById(String companyId) {
 		CompanyDto company = companyDao.getCompanyById(companyId);
+		System.out.println("여기 컴퍼니 서비스혜빈");
+		System.out.println("companyId" + companyId);
+		System.out.println("company" + company);
 		return company;
 	}
 
