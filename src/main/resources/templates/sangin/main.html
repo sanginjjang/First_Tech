@@ -482,8 +482,12 @@
         <div class="container-list">
         <th:block th:each="item : ${aList}">
             <div class="recommand">
-                <div id="companyId">[[${item.companyName}]]</div>
-                <div id="applicationName">[[${item.applicationName}]]</div>
+            	 <div id="companyId">
+            	 <a th:href="@{/c/companyDetail/{companyName}(companyName=${item.companyName})}">
+                	[[${item.companyName}]]</a></div>
+                <div id="applicationName"><a th:href="@{/sangin/applicationDetailForm/
+               						 {applicationNum}(applicationNum=${item.applicationNum})}">
+               						 [[${item.applicationName}]]</a></div>
                 <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
                 <div id="deadlineDate">D - [[${item.day}]]</div>
             </div>
