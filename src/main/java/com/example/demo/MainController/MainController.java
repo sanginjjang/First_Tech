@@ -42,7 +42,7 @@ public class MainController {
 		model.addAttribute("aList", aList);
 		
 		
-		return "/sangin/main";
+		return "/sangin/sum";
 	}
 
 }

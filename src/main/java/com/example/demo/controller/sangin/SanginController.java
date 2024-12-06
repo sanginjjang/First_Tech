@@ -44,6 +44,19 @@ public class SanginController {
 	String main() {
 		return "sangin/sum";
 	}
+	@RequestMapping("test")
+	String test(Model model) {
+		System.out.println("공고 페이지로 들어갑니다~~");
+		// 전체 공고랑 북마크 된 공고
+		List<ApplicationDto> applicationList = applicationService.getApplicationList("user001");
+		// 기업 북마크
+		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		System.out.println("공고 페이지 전체 리스트 = " + applicationList);
+		model.addAttribute("applicationList", applicationList);
+		model.addAttribute("companyList", companyList);
+
+		return "sangin/test";
+	}
 
 	// 공고 리스트 페이지
 	@RequestMapping("/applicationsForm")
