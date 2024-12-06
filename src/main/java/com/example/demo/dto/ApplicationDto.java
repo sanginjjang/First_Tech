@@ -25,4 +25,5 @@ public class ApplicationDto {
 	private String onBoard = "진행 중";// 15. 진행 중 여부 //db에 없음
 	private String keyTasks;	//db에 없음
 	private String applicationIntro;//db에 없음
+	private String roleName; //db에 없음
 }
