@@ -206,4 +206,5 @@ public class BoardController {
 		return commentService.getCommentList(boardNum);
 	}
 
+
 }

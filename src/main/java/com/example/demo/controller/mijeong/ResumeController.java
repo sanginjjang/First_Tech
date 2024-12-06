@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
-import com.example.demo.dto.ResumeApplyStatusDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeFileDto;
 import com.example.demo.dto.UserCertificateDto;
@@ -34,8 +32,6 @@ import com.example.demo.service.mijeong.ResumeService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-
 
 
 @Controller
@@ -50,23 +46,27 @@ public class ResumeController {
 	private String uploadPath;
 
 	
-	@RequestMapping("/MyResumeForm")
-	public String MyResumeForm(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		UserDto user = (UserDto) session.getAttribute("user"); 
-		user.toString();
+	@RequestMapping("/MyResumeForm/{userId}")
+	public String MyResumeForm(@PathVariable("userId") String userId, Model model) {
+		UserDto user = resumeservice.getuserId(userId);
 		model.addAttribute("user", user);
 		return "/resume/MyResumeForm";
-	}
-	
+	}	
+	/*박준택이 만든 로직@@@@@@@@@@@@@@
+	@RequestMapping("/MyResumeForm")
+	public String MyResumeForm( Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDto user2 = (UserDto)session.getAttribute("user");
+		UserDto user = resumeservice.getuserId(user2.getUserId());
+		model.addAttribute("user", user);
+		return "/resume/MyResumeForm";
+	}*/
+
 	// 이력서 제출 처리 메서드
 	@RequestMapping("/resumeForm")
-	public String getResumeUser(@SessionAttribute("user") UserDto user,
+	public String getResumeUser(@RequestParam("userId") String userId,
 								ResumeFileDto resumefiledto, Model model) {
-		String userId =user.getUserId();
-		model.addAttribute("user", userId);
-		
-		
+			
 		// 파일쓰기
 		MultipartFile file = resumefiledto.getPortfolioName();
 		String filenameport = file.getOriginalFilename();
@@ -112,6 +112,11 @@ public class ResumeController {
 		Integer resumeNum = resumedto.getResumeNum(); // 생성된 PK 가져오기
 		System.out.println("sdfsdfsdf"+resumeNum);
 
+		
+		
+		
+		
+		
 		
 		//경력저장
 		List<String> career = resumefiledto.getCareer();
@@ -177,6 +182,9 @@ public class ResumeController {
 		} 
 		resumeservice.insertCertificate(userCertificates);
 		
+		
+	 
+		
 	  String[] techsteck = resumefiledto.getTechStackNum();
 	  System.out.println(techsteck + "넘넘넘 기술 스택 넘넘넘");
 	  List<UserTechStackDto> userTeckStack = new ArrayList<>();
@@ -189,7 +197,7 @@ public class ResumeController {
 		    System.out.println("userTechStack: " + userTechStackdto); // userCertificates 리스트 내용 확인
 		} 
 	  resumeservice.insertTechStack(userTeckStack);
-		return"redirect:/resume/MyResumeList";
+		return"/sangin/sum";
 	}
 		
 		
@@ -205,14 +213,10 @@ public class ResumeController {
 	        return null;  
 	    }
     }
-	
-	
+		
 	@RequestMapping("/MyResumeList")
-    public String MyResumeList1(@SessionAttribute("user") UserDto user,Model model) {
-	   System.out.println(user + "!!!!");
-	   String userId =user.getUserId();
-       List<ResumeDto> resumelist = resumeservice.getResumeList(userId);
-	   model.addAttribute("user", user);
+    public String MyResumeList(Model model) {
+       List<ResumeDto> resumelist = resumeservice.getResumeList();
        model.addAttribute("resumelist",resumelist);
        return "resume/MyResumeList";
     }
@@ -225,18 +229,17 @@ public class ResumeController {
         return "redirect:/resume/MyResumeList"; 
     }
     
-    @RequestMapping("/resumeApplyList")
-    public String resumeApplyList(@SessionAttribute("user") UserDto user, RedirectAttributes redirectAttributes) {
-    	System.out.println("user" +user);
-    	String userId = user.getUserId();
-    	redirectAttributes.addFlashAttribute("userId", userId);
+    @RequestMapping("/resumeApplyList/{resumeNum}")
+    public String resumeApplyList(@PathVariable("resumeNum") int resumeNum, RedirectAttributes redirectAttributes) {
+    	System.out.println("resumeNum" +resumeNum);
+    	redirectAttributes.addFlashAttribute("resumeNum", resumeNum);
         return "redirect:/resume/getResumeApplyList";  
     }
   
     @RequestMapping("/getResumeApplyList")
-    public String getResumeApplyList(@SessionAttribute("user") UserDto user, Model model) {
-        System.out.println("userId: " + userId);
-        List<UserResumeApplyStatus> resumeApplyList = resumeservice.getResumeApplyList(userId);
+    public String getResumeApplyList(@ModelAttribute("resumeNum")  int resumeNum, Model model) {
+        System.out.println("resumeNum: " + resumeNum);
+        List<UserResumeApplyStatus> resumeApplyList = resumeservice.getResumeApplyList(resumeNum);
         System.out.println("resumeApplyList!!!" + resumeApplyList);
         model.addAttribute("resumeApplyList", resumeApplyList);
         return "resume/resumeApplyList";  // 템플릿 경로 수정

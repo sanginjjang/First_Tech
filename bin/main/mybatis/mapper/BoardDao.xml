@@ -50,8 +50,10 @@
 		LEFT JOIN
 		comments c ON b.boardNum = c.boardNum
 		GROUP BY
-		b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, b.views,
-		b.createdDate, b.modifyDate
+		b.boardNum, b.boardTitle,
+		b.boardContent, b.boardWriter, b.fileName, b.views,
+		b.createdDate,
+		b.modifyDate
 		ORDER BY
 		b.createdDate DESC
 		LIMIT
@@ -64,11 +66,29 @@
 	<!-- 제목으로 검색 -->
 	<select id="searchBoardByTitle"
 		resultType="com.example.demo.dto.BoardViewDto">
-		SELECT * FROM boards
-		WHERE boardTitle LIKE CONCAT('%',#{searchInput} , '%') 
-		ORDER BY createdDate DESC
-		LIMIT #{startNum} ,
-		#{amount}
+		SELECT
+		b.boardNum,
+		b.boardTitle,
+		b.boardContent,
+		b.boardWriter,
+		b.fileName,
+		b.views,
+		b.createdDate,
+		b.modifyDate,
+		COALESCE(COUNT(c.commentNum), 0) AS commentCount
+		FROM
+		boards b
+		LEFT JOIN
+		comments c ON b.boardNum = c.boardNum
+		WHERE
+		b.boardTitle LIKE CONCAT('%', #{searchInput}, '%')
+		GROUP BY
+		b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, b.views,
+		b.createdDate, b.modifyDate
+		ORDER BY
+		b.createdDate DESC
+		LIMIT
+		#{startNum}, #{amount}
 	</select>
 	<select id="searchBoardByTitleCount" resultType="_int">
 		SELECT COUNT(*)
@@ -78,30 +98,65 @@
 
 	<!-- 내용으로 검색 -->
 
-	<select id="searchBoardByContent"
-		resultType="com.example.demo.dto.BoardViewDto">
-		SELECT * FROM boards
-		WHERE boardContent LIKE CONCAT('%',#{searchInput} , '%') 
-		ORDER BY createdDate DESC
-		LIMIT #{startNum}
-		, #{amount}
-	</select>
+	<select id="searchBoardByContent" resultType="com.example.demo.dto.BoardViewDto">
+    SELECT
+        b.boardNum,
+        b.boardTitle,
+        b.boardContent,
+        b.boardWriter,
+        b.fileName,
+        b.views,
+        b.createdDate,
+        b.modifyDate,
+        COALESCE(COUNT(c.commentNum), 0) AS commentCount
+    FROM
+        boards b
+    LEFT JOIN
+        comments c ON b.boardNum = c.boardNum
+    WHERE
+        b.boardContent LIKE CONCAT('%', #{searchInput}, '%')
+    GROUP BY
+        b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, b.views, b.createdDate, b.modifyDate
+    ORDER BY
+        b.createdDate DESC
+    LIMIT
+        #{startNum}, #{amount}
+</select>
+	
 	<select id="searchBoardByContentCount" resultType="_int">
 		SELECT
 		COUNT(*) FROM boards
-		WHERE boardContent LIKE CONCAT('%',#{searchInput} , '%')
+		WHERE boardContent LIKE CONCAT('%',#{searchInput}
+		, '%')
 	</select>
 
 	<!-- 작성자로 검색 -->
 
-	<select id="searchBoardByWriter"
-		resultType="com.example.demo.dto.BoardViewDto">
-		SELECT * FROM boards
-		WHERE boardWriter LIKE CONCAT('%',#{searchInput} , '%') 
-		ORDER BY createdDate DESC
-		LIMIT #{startNum} ,
-		#{amount}
-	</select>
+	<select id="searchBoardByWriter" resultType="com.example.demo.dto.BoardViewDto">
+    SELECT
+        b.boardNum,
+        b.boardTitle,
+        b.boardContent,
+        b.boardWriter,
+        b.fileName,
+        b.views,
+        b.createdDate,
+        b.modifyDate,
+        COALESCE(COUNT(c.commentNum), 0) AS commentCount
+    FROM
+        boards b
+    LEFT JOIN
+        comments c ON b.boardNum = c.boardNum
+    WHERE
+        b.boardWriter LIKE CONCAT('%', #{searchInput}, '%')
+    GROUP BY
+        b.boardNum, b.boardTitle, b.boardContent, b.boardWriter, b.fileName, b.views, b.createdDate, b.modifyDate
+    ORDER BY
+        b.createdDate DESC
+    LIMIT
+        #{startNum}, #{amount}
+</select>
+
 	<select id="searchBoardByWriterCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM boards
