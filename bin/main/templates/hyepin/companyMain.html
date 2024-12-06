@@ -409,7 +409,7 @@
 <body>
     <header>
         <div id="logo">
-        <a href="/">
+        <a href="/hyepin/companyMain">
             <img src="/uploads/logo.webp" alt="">
         </a>
         </div>
@@ -420,41 +420,42 @@
         		<option value="searchCompany">기업명</option>
             </select>
             <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
-            <th:block th:if="${session.user != null}">
-            <button id="searchBtn">검색</button>
-            </th:block>
-             <th:block th:if="${session.user == null}">
+            <th:block th:if="${session.company == null}">
             <button id="searchBtn" onclick="noSearch(event)">검색</button>
-            </th:block>
+        	</th:block>
+        	<th:block th:if="${session.company != null}">
+            <button id="searchBtn">검색</button>
+        	</th:block>
          </form>
         </div>
         <div id="header-right">
-        	<th:block th:if="${session.user == null}">
+        	<th:block th:if="${session.company == null}">
         	  	<span><a href="/hyepin/login">로그인</a></span>
            		<span><a href="/hyepin/join">회원가입</a></span>
-            	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+            	<span><a href="/">홈으로</a></span>
         	</th:block>
-        	<th:block th:if="${session.user != null}">
-        	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+        	<th:block th:if="${session.company != null}">
+        	  	<span><a href="">마이페이지</a></span>
         	  	<span><a href="/hyepin/logout">로그아웃</a></span>
         	</th:block>
         </div>
     </header>
     <nav>
         <div class="nav-left">
-        <th:block th:if="${session.user == null}">
+        <th:block th:if="${session.company == null}">
             <div onclick="noLogin()">채용공고</div>
             <div onclick="noLogin()">기업정보</div>
-            <div onclick="noLogin()">지원현황</div>
-            <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">기업공고관리</div>
+            <div onclick="noLogin()">지원자관리</div>
             <div onclick="noLogin()">커뮤니티</div>
         </th:block>
        
-        <th:block th:if="${session.user != null}">
+      	<th:block th:if="${session.company != null}">
+        <input type="hidden" value="${applicationNum}">
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
-            <div><a href="/resume/resumeApplyList">지원현황</a></div>
-            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/sangin/companyApplicationManagementForm/1">기업공고관리</a></div>
+            <div><a th:href="@{/hyepin/applicantManage/{applicationNum}/1(applicationNum=${applicationNum})}">지원자관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
         </th:block>
         </div>
@@ -476,17 +477,17 @@
         </div>
         <div class="info">
             <div class="info1">
-            <th:block th:if="${session.user == null}">
+            <th:block th:if="${session.company == null}">
                 <div class="hello">환영합니다. 로그인 후 이용해주세요</div>
                 <div class="login">
                     <a href="/hyepin/login">로그인</a>
                     <a href="/hyepin/join">회원가입</a>
                 </div>
             </th:block>
-            <th:block th:if="${session.user != null}">
-                <div class="hello" >환영합니다. [[${session.user.userName}]]님</div>
+            <th:block th:if="${session.company != null}">
+                <div class="hello" >환영합니다. [[${session.company.companyName}]]님</div>
                 <div class="login">
-                    <a href="/hyepin/goUserInformation">마이페이지</a>
+                    <a href="">마이페이지</a>
                     <a href="/hyepin/logout">로그아웃</a>
                 </div>
             </th:block>
@@ -498,7 +499,7 @@
     </div>
     <div class="main">
         <div class="container-list">
-         <th:block th:if="${session.user == null}">
+         <th:block th:if="${session.company == null}">
          	  <th:block th:each="item : ${aList}">
 	            <div class="recommand">
 	            	 <div id="companyId" onclick="noLogin()">[[${item.companyName}]]</div>
@@ -509,7 +510,7 @@
 	         </th:block>
          </th:block>
          
-          <th:block th:if="${session.user != null}">
+          <th:block th:if="${session.company != null}">
          	  <th:block th:each="item : ${aList}">
 	            <div class="recommand">
 	            	 <div id="companyId">
@@ -548,9 +549,9 @@
     }, 2000)
 
    	function noLogin(){
-    	alert("로그인 후 이용해 주세요.");
+   		alert("로그인 후 이용해 주세요.");
    	}
-	function noSearch(){
+    function noSearch(){
 		event.preventDefault(); // 폼 제출 방지
     	alert("로그인 후 이용해 주세요.");
    	}

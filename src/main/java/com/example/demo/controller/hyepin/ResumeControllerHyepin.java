@@ -15,6 +15,8 @@ import com.example.demo.dto.TechStackDto;
 import com.example.demo.service.IResumeServiceHyepin;
 import com.example.demo.vo.hyepin.ResumeVo;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/hyepin")
 public class ResumeControllerHyepin {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.hyepin.IApplicationsDaoHyepin;
 import com.example.demo.dao.hyepin.ICompanyDaoHyepin;
 import com.example.demo.dto.ApplicationDto;
 import com.example.demo.dto.CompanyDto;
@@ -15,6 +16,9 @@ public class CompanyServiceHyepin implements ICompanyServiceHyepin{
 
 	@Autowired
 	ICompanyDaoHyepin companyDao;
+	
+	@Autowired
+	IApplicationsDaoHyepin applicationsDaoHyepin;
 	
 	@Override
 	public boolean idCheck(CompanyDto companyDto) {
@@ -43,6 +47,12 @@ public class CompanyServiceHyepin implements ICompanyServiceHyepin{
 			System.out.println(a);
 		}
 		return aList;
+	}
+
+	@Override
+	public int getApplicationByCompanyId(String companyId) {
+		int applicationNum = applicationsDaoHyepin.getApplicationByCompanyId(companyId);
+		return applicationNum;
 	}
 	
 
