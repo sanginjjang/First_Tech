@@ -219,7 +219,7 @@ public class ResumeController {
     public String deleteResume(@RequestParam("resumeNum") int resumeNum) {
         System.out.println("삭제할 resumeNum: " + resumeNum); 
         resumeservice.deleterResume(resumeNum);
-        return "redirect:/resume/MyResumeList"; 
+        return "/sangin/main"; 
     }
     
     @RequestMapping("/resumeApplyList")
