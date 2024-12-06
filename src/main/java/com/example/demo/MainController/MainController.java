@@ -14,7 +14,7 @@ public class MainController {
 		
 		
 		
-		return "/sangin/sum";
+		return "/sangin/main";
 	}
 
 }
