@@ -157,17 +157,47 @@
         ORDER BY c.employees DESC
     </if>
     <if test="sortPart == 'annualRevenue'">
+        ORDER BY c.annualRevenue DESC     
+    </if>
+    <if test="sortPart == null">
         ORDER BY c.annualRevenue DESC
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    </if>
+    LIMIT #{startNum}, #{amount}
+    
+</select>
+
+	<select id="searchCompanyWithBookmarkFeatGuest"
+        resultType="com.example.demo.dto.CompanyDto">
+    SELECT
+        c.companyId,
+        c.companyPassword,
+        c.companyName,
+        c.companyEmail,
+        c.businessRegistrationCertificate,
+        c.companyAddress,
+        c.companyPostalCode,
+        c.companyTel,
+        c.establishmentDate,
+        c.webSite,
+        c.ceo,
+        c.employees,
+        c.annualRevenue,
+        c.companyRegistDate,
+        CASE
+            WHEN b.bookmarkNum IS NOT NULL THEN 1 -- 북마크된 상태
+            ELSE 0 -- 북마크되지 않은 상태
+        END AS isBookmarked
+    FROM
+        companys c
+    LEFT JOIN
+        usertocompanybookmarks b ON c.companyId = b.companyId
+    WHERE
+        c.companyName LIKE CONCAT('%', #{searchInput}, '%')
+    <if test="sortPart == 'employees'">
+        ORDER BY c.employees DESC
+    </if>
+    <if test="sortPart == 'annualRevenue'">
+        ORDER BY c.annualRevenue DESC     
     </if>
     <if test="sortPart == null">
         ORDER BY c.annualRevenue DESC
