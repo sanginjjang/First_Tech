@@ -72,9 +72,32 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardWriteForm")
-	public String boardWriteForm() {
-
+	public String boardWriteForm(HttpServletRequest request,Model model) {
+		
+		
+		HttpSession session = request.getSession();
+		UserDto user =(UserDto)session.getAttribute("user");
+		
+		//아래는 게시판 보여줄때 무조건 필수임 ㅡㅡ
+		int pageNum=1;
+		int startNum = pageNum * amount - amount;
+		int totalCnt = boardService.getBoardCount();
+		int endPageNum = Math.ceilDiv(totalCnt, amount);
+		List<BoardViewDto> boardList = boardService.getBoardListPaging(startNum, amount);
+	
+		
+		
+		if(user==null) {
+			model.addAttribute("msg","");
+			model.addAttribute("currentPageNum", pageNum);
+			model.addAttribute("endPageNum", endPageNum);
+			model.addAttribute("boardList", boardList);	
+			return "/taek/board";
+		}else {
+		
+		
 		return "/taek/boardWriteForm";
+		}
 	}
 
 	// ----------------------------파일업로드 vo용 테스트----------------------------------
