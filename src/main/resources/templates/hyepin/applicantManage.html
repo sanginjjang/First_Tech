@@ -201,6 +201,7 @@ a {
     color: black;
 }
 
+
 </style>
 </head>
 <body>
@@ -216,7 +217,11 @@ a {
 			<h2>사이드바</h2>
 			<th:block th:each="item : ${companyApplication}">
 			<div class="list-item">
-				<a href="" id="applicationName">[[${item.applicationName}]]</a> 
+				<a th:href="@{/hyepin/applicantManage/{applicationNum}/1
+							(applicationNum=${item.applicationNum})}"
+							 id="applicationName"
+							 th:style="${applicationResult.applicationNum == item.applicationNum} ? 'font-weight: bold; color: #1a73e8;' : ''"
+							 >[[${item.applicationName}]]</a> 
 			</div>
 			</th:block>
 		</div>
@@ -238,7 +243,9 @@ a {
 							<button class="btn">V</button>
 							
 							<!-- 이력서 번호들고 상세보기 페이지로 가요~  -->
-							<a href="" id="resume">[[${item.resumeTitle}]]</a>
+							<a th:href="@{/hyepin/resumeViewDetails/{applicationNum}/{resumeNum}
+							(applicationNum=${applicationResult.applicationNum}, resumeNum=${item.resumeNum})}"
+								id="resume">[[${item.resumeTitle}]]</a>
 						</div>
 						<div class="right">
 							<div >대학교(졸업)</div>
@@ -262,7 +269,9 @@ a {
 					<div class="list-item">
 						<div class="left">
 							<button >V</button>
-							<a href="" id="resume">[[${item.resumeTitle}]]</a>
+							<a th:href="@{/hyepin/resumeViewDetails/{applicationNum}/{resumeNum}
+							(applicationNum=${applicationResult.applicationNum}, resumeNum=${item.resumeNum})}"
+							 id="resume">[[${item.resumeTitle}]]</a>
 						</div>
 						<div class="right">
 							<div >대학교(졸업)</div>
