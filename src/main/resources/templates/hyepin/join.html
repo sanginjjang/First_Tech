@@ -144,7 +144,19 @@
     const userMemberBtn = document.getElementById('userMemberBtn');
     const companyMemberBtn = document.getElementById('companyMemberBtn');
     const join = document.getElementById('join');
-    let selectedMember = null;
+    let selectedMember = "user";
+    
+    window.onload = function() {
+		join.href = '/hyepin/userJoin';
+        
+        userMemberBtn.style.color = 'black';
+        userMemberBtn.style.transform = 'scale(1.1)';
+        companyMemberBtn.style.transform = 'scale(1)';
+        companyMemberBtn.style.color = ''; 
+        
+        selectedMember = "user";
+	}
+    
     
     userMemberBtn.addEventListener('click', event => {
     	join.href = '/hyepin/userJoin';

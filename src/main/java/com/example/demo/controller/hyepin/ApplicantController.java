@@ -111,11 +111,8 @@ public class ApplicantController {
 		System.out.println("공고 번호: " + applicationNum);
 		
 		//회사번호로 공고 목록 가져오기
-		//여기 원래 세션 해서 넘겨줘야하는거임!!!!!!!!!!!!!!!!!!!!!!!!!!!! 테스트 때문에 지워두겠음.
-		//CompanyDto company = (CompanyDto) session.getAttribute("company");
-		//List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(company.getCompanyId());
-		String companyId = "comp001";
-		List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(companyId);
+		CompanyDto company = (CompanyDto) session.getAttribute("company");
+		List<ApplicationDto> companyApplication = companyApplicationService.companyApplicationList(company.getCompanyId());
 		model.addAttribute("companyApplication", companyApplication);
 		
 		//공고 제목 추출..

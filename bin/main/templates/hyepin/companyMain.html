@@ -424,12 +424,12 @@
          </form>
         </div>
         <div id="header-right">
-        	<th:block th:if="${session.user == null}">
+        	<th:block th:if="${session.company == null}">
         	  	<span><a href="/hyepin/login">로그인</a></span>
            		<span><a href="/hyepin/join">회원가입</a></span>
-            	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+            	<span><a href="/">홈으로</a></span>
         	</th:block>
-        	<th:block th:if="${session.user != null}">
+        	<th:block th:if="${session.company != null}">
         	  	<span><a href="/hyepin/myPage">마이페이지</a></span>
         	  	<span><a href="/hyepin/logout">로그아웃</a></span>
         	</th:block>
@@ -437,19 +437,20 @@
     </header>
     <nav>
         <div class="nav-left">
-        <th:block th:if="${session.user == null}">
+        <th:block th:if="${session.company == null}">
             <div onclick="noLogin()">채용공고</div>
             <div onclick="noLogin()">기업정보</div>
-            <div onclick="noLogin()">지원현황</div>
-            <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">기업공고관리</div>
+            <div onclick="noLogin()">지원자관리</div>
             <div onclick="noLogin()">커뮤니티</div>
         </th:block>
        
-        <th:block th:if="${session.user != null}">
+      	<th:block th:if="${session.company != null}">
+        <input type="hidden" value="${applicationNum}">
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
-            <div><a href="/resume/resumeApplyList">지원현황</a></div>
-            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/sangin/companyApplicationManagementForm/1">기업공고관리</a></div>
+            <div><a th:href="@{/hyepin/applicantManage/{applicationNum}/1(applicationNum=${applicationNum})}">지원자관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
         </th:block>
         </div>
@@ -471,15 +472,15 @@
         </div>
         <div class="info">
             <div class="info1">
-            <th:block th:if="${session.user == null}">
+            <th:block th:if="${session.company == null}">
                 <div class="hello">환영합니다. 로그인 후 이용해주세요</div>
                 <div class="login">
                     <a href="/hyepin/login">로그인</a>
                     <a href="/hyepin/join">회원가입</a>
                 </div>
             </th:block>
-            <th:block th:if="${session.user != null}">
-                <div class="hello" >환영합니다. [[${session.user.userName}]]님</div>
+            <th:block th:if="${session.company != null}">
+                <div class="hello" >환영합니다. [[${session.company.companyName}]]님</div>
                 <div class="login">
                     <a href="/hyepin/myPage">마이페이지</a>
                     <a href="/hyepin/logout">로그아웃</a>
@@ -493,7 +494,7 @@
     </div>
     <div class="main">
         <div class="container-list">
-         <th:block th:if="${session.user == null}">
+         <th:block th:if="${session.company == null}">
          	  <th:block th:each="item : ${aList}">
 	            <div class="recommand">
 	            	 <div id="companyId" onclick="noLogin()">[[${item.companyName}]]</div>
@@ -504,7 +505,7 @@
 	         </th:block>
          </th:block>
          
-          <th:block th:if="${session.user != null}">
+          <th:block th:if="${session.company != null}">
          	  <th:block th:each="item : ${aList}">
 	            <div class="recommand">
 	            	 <div id="companyId">

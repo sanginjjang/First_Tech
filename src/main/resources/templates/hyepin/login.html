@@ -149,8 +149,9 @@
 </body>
 
 <script>
-
-    const userMemberBtn = document.getElementById('userMemberBtn');
+	let selectedMember = "user";
+	
+	const userMemberBtn = document.getElementById('userMemberBtn');
     const companyMemberBtn = document.getElementById('companyMemberBtn');
     const loginForm = document.getElementById('loginForm');
     const findId = document.getElementById('findId');
@@ -158,7 +159,17 @@
     const id = document.getElementById('id');
     const pw = document.getElementById('pw');
     
-    let selectedMember = null;
+    window.onload = function() {
+		findId.href = '/hyepin/findUserId';
+        findPw.href = '/hyepin/findUserPw';
+        id.name = "userId";
+        pw.name= "userPassword";
+		userMemberBtn.style.color = 'black';
+	    userMemberBtn.style.transform = 'scale(1.1)';
+	    companyMemberBtn.style.transform = 'scale(1)';
+	    companyMemberBtn.style.color = ''; 
+		selectedMember = "user";
+	}
     
     userMemberBtn.addEventListener('click', event => {
     	
@@ -218,7 +229,7 @@
             		if(response === "fail"){
             			alert("아이디 또는 비밀번호가 틀렸습니다.");
             		}else if(response === "userSuccess"){
-            			window.location.href = "/hyepin/myPage";
+            			window.location.href = "/";
             		}else if(response === "companySuccess"){
             			window.location.href = "/";
             		}else if(response === "ready"){
@@ -239,7 +250,7 @@
             		if(response === "fail"){
             			alert("아이디 또는 비밀번호가 틀렸습니다.");
             		}else if(response === "comnpanySuccess"){
-            			window.location.href = "/";
+            			window.location.href = "/hyepin/companyMain";
             		}else if(response === "ready"){
             			alert("아이디와 비밀번호를 입력하세요");
             		}
