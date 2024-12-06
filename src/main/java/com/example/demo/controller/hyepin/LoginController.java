@@ -63,7 +63,7 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 완료");
 		session.invalidate();
-		return "/sangin/sum";
+		return "redirect:/";
 	}
 	
 
