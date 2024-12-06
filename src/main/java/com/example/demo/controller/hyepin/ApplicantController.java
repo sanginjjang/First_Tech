@@ -129,6 +129,11 @@ public class ApplicantController {
 		    
 	    int startIdx = (pageNum - 1) * itemsPerPage;  // 해당 페이지의 시작 인덱스
 	    List<ResumeDto> resumeList = resumeService.getResumeListPaging(applicationNum, startIdx, itemsPerPage);
+	    System.out.println("=======================");
+	    System.out.println("이력서 리스트...");
+	    for(ResumeDto l: resumeList) {
+	    	 System.out.println(l);
+	    }
 	    model.addAttribute("resumeList", resumeList);
 		
 	    // 페이지네이션 관련 데이터
@@ -139,8 +144,7 @@ public class ApplicantController {
 	    System.out.println("currentPage: " + pageNum);
 	    System.out.println("totalPages: " + totalPages);
 	    
-	    
-		//공고 번호로 북마크 리스트 추출
+	    //공고 번호로 북마크 리스트 추출
 		List<ResumeDto> bookmarksResumeList = bookmarksAToRServiceHyepin.getBookmarkAToRList(applicationNum);
 		model.addAttribute("bookmarksResumeList", bookmarksResumeList);
 		System.out.println("============================");

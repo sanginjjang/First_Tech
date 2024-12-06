@@ -9,5 +9,14 @@
 		resultType="com.example.demo.dto.CompanyDto">
 		SELECT * FROM companys WHERE companyId = #{companyId};
 	</select>
+	
+	<select id="getMainApplications"
+		resultType="com.example.demo.vo.hyepin.MainApplicationVo">
+		SELECT a.applicationName, a.deadlineDate, c.companyName
+		FROM Applications a 
+		JOIN Companys c ON c.companyId = a.companyId
+		LIMIT 8;
+	</select>
+	
 
 </mapper>
