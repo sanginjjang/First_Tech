@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
-import com.example.demo.dto.ResumeApplyStatusDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeFileDto;
 import com.example.demo.dto.UserCertificateDto;
@@ -30,7 +29,9 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserResumeApplyStatus;
 import com.example.demo.dto.UserTechStackDto;
 import com.example.demo.service.mijeong.ResumeService;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -50,7 +51,16 @@ public class ResumeController {
 		UserDto user = resumeservice.getuserId(userId);
 		model.addAttribute("user", user);
 		return "/resume/MyResumeForm";
-	}
+	}	
+	/*박준택이 만든 로직@@@@@@@@@@@@@@
+	@RequestMapping("/MyResumeForm")
+	public String MyResumeForm( Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDto user2 = (UserDto)session.getAttribute("user");
+		UserDto user = resumeservice.getuserId(user2.getUserId());
+		model.addAttribute("user", user);
+		return "/resume/MyResumeForm";
+	}*/
 
 	// 이력서 제출 처리 메서드
 	@RequestMapping("/resumeForm")
@@ -187,7 +197,7 @@ public class ResumeController {
 		    System.out.println("userTechStack: " + userTechStackdto); // userCertificates 리스트 내용 확인
 		} 
 	  resumeservice.insertTechStack(userTeckStack);
-		return"redirect:/resume/MyResumeList";
+		return"/sangin/sum";
 	}
 		
 		
