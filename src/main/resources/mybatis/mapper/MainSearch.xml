@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.taek.ISearchDao">
+
+	<select id="fromMainSearchByCompanyName"
+		resultType="com.example.demo.dto.CompanyDto">
+
+SELECT * FROM companys
+		WHERE companyName LIKE
+		CONCAT('%',#{mainSearchInput},'%')
+		ORDER BY employees ASC
+		LIMIT 8;
+
+	</select>
+
+	<select id="fromMainSearchByApplication"
+		resultType="com.example.demo.dto.ApplicationDto">
+		SELECT * FROM applications
+		WHERE applicationName LIKE
+		CONCAT('%',#{mainSearchInput},'%')
+		ORDER BY deadlineDate ASC
+		LIMIT 8;
+	</select>
+
+
+
+</mapper>
