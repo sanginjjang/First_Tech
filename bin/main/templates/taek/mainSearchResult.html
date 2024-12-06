@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0 auto;
+	background-color: #f9f9f9;
+	color: #333333;
+	width: 80%;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* 헤더 */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px 20px;
+	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
+
+header a {
+	margin: 0 5px;
+	font-weight: bold;
+	font-size: 15px;
+	color: black;
+}
+
+.search input {
+	padding: 20px;
+	width: 600px;
+	border: 1px black solid;
+	border-radius: 10px;
+}
+
+.search button {
+	padding: 20px;
+	border-radius: 10px;
+}
+
+/* 네브 */
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #ffffff;
+	margin-top: 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	padding: 15px 50px;
+	gap: 250px;
+}
+
+.nav-left {
+	display: flex;
+	gap: 120px;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+}
+
+.nav-left div a {
+	color: black;
+	transition: 0.3s;
+}
+
+.nav-left div a:hover {
+	color: #1a73e8;
+	cursor: pointer;
+}
+
+.nav-right {
+	transition: 0.3s;
+	display: flex;
+	background-color: #1a73e8;
+	padding: 5px 10px;
+	border-radius: 10px;
+	gap: 20px;
+}
+
+.nav-right div {
+	font-size: 18px;
+	color: white;
+	margin: 0;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.nav-right:hover {
+	background-color: #105cbf;
+}
+
+/* footer */
+footer {
+	padding: 15px;
+	background-color: #ffffff;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #555555;
+}
+
+/* nav main  사이 */
+.section {
+	display: flex;
+	width: 100%;
+	margin-top: 20px;
+	gap: 20px;
+	height: 200px;
+}
+
+.image {
+	display: flex;
+	flex: 3;
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	height: 400px;
+	gap: 20px;
+}
+
+.image div {
+	display: flex;
+	flex: 1;
+	border: 1px #d9d9d9 solid;
+	border-radius: 20px;
+	background-color: #ffffff;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+}
+
+.image img {
+	display: flex;
+	flex: 3;
+	border: 1px #d9d9d9 solid;
+	border-radius: 20px;
+	box-sizing: border-box;
+}
+
+.info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+	border-radius: 5px;
+	background-color: #1a73e8;
+	border: 1px solid #1a73e8;
+}
+
+/* 메인 섹션 */
+.main {
+	display: flex;
+	width: 100%;
+	margin-top: 20px;
+	gap: 20px;
+}
+
+.main h2 {
+	margin-left: 50px;
+}
+
+.container-list {
+	flex: 3;
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(auto, 250px);
+	gap: 20px;
+}
+
+.container-list div {
+	display: flex;
+	align-items: center;
+	border: 1px #d9d9d9 solid;
+	border-radius: 20px;
+	background-color: #ffffff;
+	justify-content: center;
+}
+
+.side-bar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+	border: 1px black solid;
+	border-radius: 5px;
+	background-color: #1a73e8;
+	border: 1px solid #1a73e8;
+	height: 520px;
+}
+
+.under-bar {
+	display: flex;
+	width: 100%;
+	gap: 20px;
+}
+
+.under-bar div {
+	flex: 1;
+	align-items: center;
+	border: 1px #d9d9d9 solid;
+	border-radius: 20px;
+	background-color: #ffffff;
+	height: 250px;
+	margin: 20px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<div>로고</div>
+		<div class="search">
+			<form action="/s/searchResult">
+				<select name="searchPart">
+					<option value="searchApplication">공고명</option>
+					<option value="searchCompany">기업명</option>
+				</select> <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
+				<button>검색</button>
+			</form>
+		</div>
+		<div>
+			<span><a href="/hyepin/login">로그인</a></span> <span><a
+				href="/hyepin/join">회원가입</a></span>
+		</div>
+	</header>
+	<nav>
+		<div class="nav-left">
+			<div>
+				<a href="/sangin/applicationsForm">채용공고</a>
+			</div>
+			<div>
+				<a href="/c/companyInfo/1">기업정보</a>
+			</div>
+			<div>
+				<a href="/c/companyInfo/1">커뮤니티</a>
+			</div>
+			<div>
+				<a href="/">고객센터</a>
+			</div>
+			<div>
+				<a href="/">야근그만</a>
+			</div>
+		</div>
+		<div class="nav-right">
+			<div>파란 메뉴</div>
+		</div>
+	</nav>
+	<div class="section">
+		<div class="image">
+			<div>1</div>
+			<img src="" alt="" id="slideShow">
+		</div>
+		<div class="info">로그인/회원가입</div>
+	</div>
+<div class="main" th:if="${searchPart == 'searchCompany'}">
+    <table class="company-table" border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>기업명</th>
+                <th>기업전화번호</th>
+                <th>기업사원수</th>
+                <th>기업매출액</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="company : ${searchList}">
+                <td th:text="${company.companyName}">기업명</td>
+                <td th:text="${company.companyTel}">기업전화번호</td>
+                <td th:text="${company.employees}">기업사원수</td>
+                <td th:text="${company.annualRevenue}">기업매출액</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+	<div class="main" th:if="${searchPart == 'searchApplication'}">
+    <table class="application-table" border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>공고명</th>
+                <th>근무형태</th>
+                <th>근무지역</th>
+                <th>요구학력</th>
+                <th>마감날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="jobApplication : ${searchList}">
+                <td th:text="${jobApplication.applicationName}">공고제목</td>
+                <td th:text="${jobApplication.employmentType}">근무형태</td>
+                <td th:text="${jobApplication.workingArea}">근무지역</td>
+                <td th:text="${jobApplication.education}">요구학력</td>
+                <td th:text="${jobApplication.deadlineDate}">마감날짜</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+	<div class="side-bar">
+		<div>사이드바입니다</div>
+	</div>
+	</div>
+	<div class="under-bar">
+		<div>세미나</div>
+		<div>박람회</div>
+	</div>
+	<footer> © 2024 회사 이름. 모든 권리 보유. </footer>
+</body>
+<script>
+	const images = [ 'image0.png', 'image1.png', 'image2.png', 'image3.png',
+			'image4.png' ];
+	const slideShow = document.querySelector("#slideShow");
+	var currentIndex = 0;
+	setInterval(function() {
+		currentIndex = (currentIndex + 1) % 5;
+	}, 1000)
+</script>

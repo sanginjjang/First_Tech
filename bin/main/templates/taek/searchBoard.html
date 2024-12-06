@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+	margin: 0 auto;
+	width: 80vw;
+	height: 100vh;
+	font-family: 'Arial', sans-serif;
+}
+
+header {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 15%;
+	background-color: aliceblue;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav {
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 5%;
+	background-color: ivory;
+	display: flex;
+	justify-content: center;
+}
+
+#nav1 {
+	font-weight: bold;
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+section {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 70%;
+	background-color: lightgray;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	position: relative;
+	flex-direction: column;
+}
+
+/* 검색창 스타일 */
+.search-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+	gap: 10px; /* 입력창과 버튼 사이의 간격 */
+}
+
+.search-select, .search-input {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.search-button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #ffffff;
+}
+
+th, td {
+	padding: 15px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+th {
+	background-color: #f4f4f4;
+	font-weight: bold;
+	color: #333;
+}
+
+tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+tr:hover {
+	background-color: #e1e1e1;
+}
+
+footer {
+	font-weight: bold;
+	border: lightgray solid 1px;
+	width: 100%;
+	height: 10%;
+	background-color: aliceblue;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.write-button {
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.write-button {
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<a href="/">Header</a>
+	</header>
+	<nav>
+		<div id="nav1">
+			<div>
+				<a href="/applicationsListForm">채용공고</a>
+			</div>
+			<div>
+				<a href="/c/companyInfo/1">기업 정보</a>
+			</div>
+			<div>이력서관리</div>
+			<div>지원현황</div>
+			<div>관심공고</div>
+			<div>
+				<a href="/b/board/1">커뮤니티</a>
+			</div>
+		</div>
+	</nav>
+
+	<section>
+		<!-- 검색 조건 선택 -->
+		<div class="search-container">
+			<form action="/b/boardSearch/1" method="GET">
+				<select class="search-select" name="searchPart" id="searchPart">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="writer">작성자</option>
+				</select> <input type="text" class="search-input" name="searchInput"
+					id="searchInput" placeholder="검색어 입력">
+				<button class="search-button" type="submit">검색</button>
+			</form>
+		</div>
+
+		<a href="/b/boardWriteForm" class="write-button">게시글 작성</a>
+
+		<!-- 게시글 목록 테이블 -->
+		<table>
+			<thead>
+				<tr>
+					<th>제목</th>
+					<th>댓글 수</th>
+					<th>조회수</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="board : ${boardList}">
+					<tr>
+						<td><a
+							th:href="@{/b/boardDetail/{boardNum}(boardNum=${board.boardNum})}"
+							th:text="${board.boardTitle}"></a></td>
+						<td th:text="${board.commentCount}"></td>
+						<td th:text="${board.views}"></td>
+						<td th:text="${board.boardWriter}"></td>
+						<td th:text="${board.createdDate}"></td>
+					</tr>
+				</th:block>
+
+				<!-- 페이지 네비게이션 -->
+				<tr>
+					<td colspan="6">
+						<!-- 이전 페이지 링크 --> <th:block th:if="${currentPageNum > 1}">
+							<a
+								th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum - 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">이전</a>
+						</th:block> <!-- 페이지 번호 리스트 --> <th:block
+							th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+							<span th:if="${currentPageNum == pageNum}"> <a
+								th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">
+									<b th:text="${pageNum}"></b>
+							</a>&nbsp;&nbsp;
+							</span>
+							<span th:if="${currentPageNum != pageNum}"> <a
+								th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}"
+								th:text="${pageNum}"></a>&nbsp;&nbsp;
+							</span>
+						</th:block> <!-- 다음 페이지 링크 --> <th:block
+							th:if="${currentPageNum < endPageNum}">
+							<a
+								th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum + 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">다음</a>
+						</th:block>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</section>
+
+	<footer>Footer</footer>
+</body>
+
+</html>

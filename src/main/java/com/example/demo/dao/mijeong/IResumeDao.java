@@ -11,11 +11,13 @@ import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
 import com.example.demo.dto.JobRoleDto;
+import com.example.demo.dto.ResumeApplyStatusDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeFileDto;
 import com.example.demo.dto.TechStackDto;
 import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserResumeApplyStatus;
 import com.example.demo.dto.UserTechStackDto;
 
 @Mapper
@@ -41,6 +43,9 @@ public interface IResumeDao {
 
 	public int deleteResume(int resumeNum);
 
+	public List<UserResumeApplyStatus> getResumeApply(@Param("resumeNum") int resumeNum);
+	
+	
 	
 	
 }

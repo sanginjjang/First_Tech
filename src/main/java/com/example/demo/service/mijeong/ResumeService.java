@@ -10,9 +10,11 @@ import com.example.demo.dto.CareerDto;
 import com.example.demo.dto.CertificateDto;
 import com.example.demo.dto.InternshipDto;
 import com.example.demo.dto.JobRoleDto;
+import com.example.demo.dto.ResumeApplyStatusDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserResumeApplyStatus;
 import com.example.demo.dto.UserTechStackDto;
 
 @Service
@@ -69,8 +71,15 @@ public class ResumeService  implements IResumeService{
 
 	public int deleterResume(int resumeNum) {
 		return resumeMapper.deleteResume(resumeNum);
+	}
+
+
+	public List<UserResumeApplyStatus> getResumeApplyList(int resumeNum) {
+		return resumeMapper.getResumeApply(resumeNum);
 	};
 	
 
+	
+	
 	
 }
