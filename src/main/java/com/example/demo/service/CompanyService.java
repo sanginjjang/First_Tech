@@ -122,4 +122,12 @@ public class CompanyService implements ICompanyService{
 		return companys;
 	}
 
+
+
+	@Override
+	public List<CompanyDto> searchCompanyWithBookmarkFeatGuest(String sortPart, int startNum, int amount, String searchInput) {
+		List<CompanyDto> companys = companyDao.searchCompanyWithBookmarkFeatGuest(sortPart, startNum, amount, searchInput);
+		return companys;
+	}
+
 }

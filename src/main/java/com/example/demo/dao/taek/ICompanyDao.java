@@ -41,4 +41,9 @@ public interface ICompanyDao {
 	
 	public List<CompanyDto> searchCompanyWithBookmark(@Param("sortPart") String sortPart, @Param("startNum") int startNum,
 			@Param("amount") int amount,@Param("userId")String userId,@Param("searchInput")String searchInput);
+	
+	public List<CompanyDto> searchCompanyWithBookmarkFeatGuest(@Param("sortPart") String sortPart, @Param("startNum") int startNum,
+			@Param("amount") int amount,@Param("searchInput")String searchInput);
+	
+	
 }

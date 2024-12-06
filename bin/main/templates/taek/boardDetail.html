@@ -1,48 +1,299 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>게시글 보기</title>
     <style>
-        /* 스타일은 그대로 유지 */
-        body { margin: 0 auto; width: 80vw; height: 100vh; font-family: 'Arial', sans-serif; }
-        header { font-weight: bold; border: lightgray solid 1px; width: 100%; height: 15%; background-color: aliceblue; font-size: 50px; display: flex; justify-content: center; align-items: center; }
-        nav { border: lightgray solid 1px; width: 100%; height: 5%; background-color: ivory; display: flex; justify-content: center; }
-        #nav1 { font-weight: bold; width: 60%; display: flex; justify-content: space-between; align-items: center; }
-        section { font-weight: bold; border: lightgray solid 1px; width: 100%; height: 70%; background-color: lightgray; font-size: 18px; display: block; padding: 20px; box-sizing: border-box; overflow-y: auto; }
-        .board-container { width: 100%; max-width: 1000px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; }
-        .board-header { font-size: 24px; font-weight: bold; margin-bottom: 10px; color: #333; }
-        .board-info { font-size: 16px; margin-bottom: 20px; color: #555; }
-        .board-content { font-size: 18px; color: #333; line-height: 1.6; border-top: 1px solid #ddd; padding-top: 15px; }
-        .comment-list { width: 100%; max-width: 1000px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); margin-top: 20px; overflow-y: auto; max-height: 300px; }
-        .comment-item { padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; display: flex; flex-direction: column; }
-        .comment-item:last-child { border-bottom: none; }
-        .comment-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
-        .comment-author { font-weight: bold; margin-bottom: 5px; }
-        .comment-content { font-size: 16px; color: #333; margin-top: 5px; }
-        .comment-date { font-size: 12px; color: #777; margin-left: 10px; align-self: flex-start; }
-        .comment-section { width: 100%; max-width: 1000px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); margin-top: 20px; }
-        .comment-section textarea { width: 100%; height: 100px; padding: 10px; font-size: 16px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ddd; box-sizing: border-box; }
-        .comment-section button { padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .comment-section button:hover { background-color: #0056b3; }
-        footer { font-weight: bold; border: lightgray solid 1px; width: 100%; height: 10%; background-color: aliceblue; font-size: 30px; display: flex; justify-content: center; align-items: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 헤더 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        #logo {
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
+
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
+
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        /* 게시글 컨테이너 */
+        section {
+            display: flex;
+            margin: 20px auto;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            border: 1px solid #d9d9d9;
+        }
+
+        .board-container {
+            flex: 3;
+            margin-right: 20px;
+        }
+
+        .board-header {
+            font-size: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .board-info {
+            font-size: 14px;
+            color: #777;
+            margin: 10px 0;
+        }
+
+        .board-image img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .board-content {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* 댓글 영역 */
+        .comment-section {
+            flex: 1;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #d9d9d9;
+        }
+
+        .comment-item {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comment-author {
+            font-weight: bold;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .comment-content {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .comment-section button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .comment-section button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
     </style>
 </head>
 
 <body>
-    <header><a href="/">Header</a></header>
+
+
+     <header>
+        <div id="logo">
+            <img src="/uploads/logo.webp" alt="">
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+              <option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <button id="searchBtn">검색</button>
+         </form>
+        </div>
+        <div id="header-right">
+           <th:block th:if="${session.user == null}">
+                <span><a href="/hyepin/login">로그인</a></span>
+                 <span><a href="/hyepin/join">회원가입</a></span>
+               <span><a href="">기업 홈</a></span>
+           </th:block>
+           <th:block th:if="${session.user != null}">
+                <span><a href="/hyepin/myPage">마이페이지</a></span>
+                <span><a href="/hyepin/logout">로그아웃</a></span>
+           </th:block>
+        </div>
+    </header>
     <nav>
-        <div id="nav1">
-            <div><a href="/sangin/applicationsListForm">채용공고</a></div>
-            <div><a href="/c/companyInfo/1">기업 정보</a></div>
-            <div>이력서관리</div>
-            <div>지원현황</div>
-            <div>관심공고</div>
+        <div class="nav-left">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
         </div>
+        <div class="nav-right">
+            <div>FAQ</div>
+        </div>
     </nav>
+
 
     <section>
         <div class="board-container">
@@ -54,27 +305,23 @@
             </div>
 
             <div class="board-image">
-                <!-- 이미지가 있을 경우에만 출력 -->
-                <img th:if="${board.fileName != null}" th:src="'/uploads/' + ${board.fileName}" alt="첨부 이미지" style="max-width: 100%; height: auto; margin-top: 15px;">
+                <img th:if="${board.fileName != null}" th:src="'/uploads/' + ${board.fileName}" alt="첨부 이미지">
             </div>
 
-            <!-- 게시글 내용 -->
             <div class="board-content" th:text="${board.boardContent}">게시글 내용</div>
         </div>
 
-        <!-- 댓글 목록 -->
-        <div class="comment-list">
-            <div th:each="comment : ${commentList}" class="comment-item">
-                <div class="comment-header">
-                    <div class="comment-author" th:text="${comment.commentWriter}"></div>
-                    <div class="comment-date" th:text="${comment.createdDate}"></div>
-                </div>
-                <div class="comment-content" th:text="${comment.commentContent}"></div>
-            </div>
-        </div>
-
-        <!-- 댓글 작성란 -->
         <div class="comment-section">
+            <div class="comment-list">
+                <div th:each="comment : ${commentList}" class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-author" th:text="${comment.commentWriter}"></div>
+                        <div class="comment-date" th:text="${comment.createdDate}"></div>
+                    </div>
+                    <div class="comment-content" th:text="${comment.commentContent}"></div>
+                </div>
+            </div>
+
             <textarea id="commentContent" placeholder="댓글을 작성하세요"></textarea><br>
             <button id="regComment">작성</button>
         </div>
@@ -83,68 +330,37 @@
     <footer>Footer</footer>
 
     <script>
-  	  var boardNum = [[${board.boardNum}]];  // Thymeleaf에서 boardNum 값을 JavaScript로 전달
+        var boardNum = [[${board.boardNum}]];  // Thymeleaf에서 boardNum 값을 JavaScript로 전달
 
         // 댓글 추가 함수
         $('#regComment').click(function() {
-            console.log(boardNum);  // boardNum 값이 제대로 출력되는지 확인
             var content = $('#commentContent').val();
+            if (content.trim() === '') {
+                alert('댓글을 입력해주세요.');
+                return;
+            }
+
             $.ajax({
                 url: '/b/addComment',  // 댓글 추가 요청 URL
                 method: 'POST',
                 data: {
-                    content: content, 
+                    content: content,
                     boardNum: boardNum
                 },
                 success: function(response) {
-                    if (response && Array.isArray(response)) {
-                        $('#commentContent').val(''); // 텍스트박스 초기화
-                        alert("댓글 작성이 완료됐습니다.");
-
-                        // 댓글 목록을 갱신하는 함수 호출
-                        updateCommentList(response);  
+                    if (response.success) {
+                        // 댓글 추가 성공 후 처리 (새로운 댓글 리스트 반영 등)
+                        location.reload();
                     } else {
-                        alert("댓글 작성에 실패했습니다.");
+                        alert('댓글 작성 절반의 성공..');
+                        location.reload();
                     }
                 },
                 error: function() {
-                    alert("댓글 작성 중 오류가 발생했습니다.");
-                }
-            });
-        });
-
-        // 댓글 목록 갱신 함수
-        function updateCommentList(comments) {
-            var commentListHtml = '';
-            comments.forEach(function(comment) {
-                commentListHtml += `
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <div class="comment-author">${comment.commentWriter}</div>
-                            <div class="comment-date">${comment.createdDate}</div>
-                        </div>
-                        <div class="comment-content">${comment.commentContent}</div>
-                    </div>
-                `;
-            });
-            $('.comment-list').html(commentListHtml);  // 댓글 목록 갱신
-        }
-
-        // 페이지 로드 시 댓글 목록 불러오기
-        $(document).ready(function() {
-            $.ajax({
-                url: '/b/getCommentList',  // 댓글 목록을 불러오는 요청 URL
-                method: 'POST',
-                data: { boardNum: boardNum },
-                success: function(comments) {
-                    updateCommentList(comments);  // 댓글 목록을 화면에 표시
-                },
-                error: function() {
-                    alert("댓글 목록을 불러오는 데 실패했습니다.");
+                    alert('서버 오류가 발생했습니다.');
                 }
             });
         });
     </script>
-
 </body>
 </html>

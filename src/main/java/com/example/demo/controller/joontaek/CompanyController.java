@@ -2,6 +2,7 @@ package com.example.demo.controller.joontaek;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -42,12 +43,12 @@ public class CompanyController {
 
 		HttpSession session = request.getSession();
 		UserDto user = (UserDto) session.getAttribute("user");
-		if(user != null) {
-		List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());
-		model.addAttribute("companys", companys);
-		model.addAttribute("currentPageNum", pageNum);
-		model.addAttribute("endPageNum", endPageNum);
-		}else {
+		if (user != null) {
+			List<CompanyDto> companys = companyService.testBookmark(startNum, amount, user.getUserId());
+			model.addAttribute("companys", companys);
+			model.addAttribute("currentPageNum", pageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		} else {
 			List<CompanyDto> companys = companyService.getCompanyList();
 			model.addAttribute("companys", companys);
 			model.addAttribute("currentPageNum", pageNum);
@@ -92,44 +93,46 @@ public class CompanyController {
 
 	// ----------------------검색........입니다.................................
 	@RequestMapping("/searchCompany/{pageNum}")
-	public String searchCompany(@PathVariable("pageNum")int pageNum,HttpServletRequest request
-			,Model model, @ModelAttribute("searchEntity")SearchCompanyEntityDto searchEntity) {
-
-		int startNum = pageNum * amount - amount;
-
-		
+	public String searchCompany(@PathVariable("pageNum") int pageNum, HttpServletRequest request, Model model,
+			@ModelAttribute("searchEntity") SearchCompanyEntityDto searchEntity) {
 		
 		HttpSession session = request.getSession();
-		UserDto user = (UserDto) session.getAttribute("user");
-		String userId = user.getUserId();
+		UserDto user = (UserDto)session.getAttribute("user");
+		String userId = (user != null) ? user.getUserId() : null;
+		int startNum = pageNum*amount-amount;
 
-		if (searchEntity.getSearchPart().equals("")) {
-			List<CompanyDto> companys = companyService.searchCompanyWithBookmark(searchEntity.getSortPart(), startNum, amount, userId,
-					searchEntity.getSearchInput());
-			int totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
-			int endPageNum = Math.ceilDiv(totalCnt, amount);
-			model.addAttribute("currentPageNum", pageNum);
-			model.addAttribute("endPageNum", endPageNum);
-			model.addAttribute("companys", companys);
-			model.addAttribute("searchEntity",searchEntity);
+		List<CompanyDto> companys;
+		int totalCnt;
+		if (user != null) {
+
+		    if (searchEntity.getSearchPart().equals("companyName")) {
+		        companys = companyService.searchCompanyWithBookmark(searchEntity.getSortPart(),
+		                startNum, amount, userId, searchEntity.getSearchInput());
+		        totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
+		    } else {
+		        companys = companyService.searchCompanyWithBookmark(searchEntity.getSortPart(),
+		                startNum, amount, userId, searchEntity.getSearchInput());
+		        totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
+		    }
+		} else {
+		    // 유저가 없을 경우
+		    if (searchEntity.getSearchPart().equals("companyName")) {
+		        companys = companyService.searchCompanyWithBookmarkFeatGuest(searchEntity.getSortPart(),
+		                startNum, amount, searchEntity.getSearchInput());
+		        totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
+		    } else {
+		        companys = companyService.searchCompanyWithBookmarkFeatGuest(searchEntity.getSortPart(),
+		                startNum, amount, searchEntity.getSearchInput());
+		        totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
+		    }
 		}
-
-		if (searchEntity.getSearchPart().equals("companyName")) {
-			List<CompanyDto> companys = companyService.searchCompanyWithBookmark(searchEntity.getSortPart(), startNum, amount, userId,
-					searchEntity.getSearchInput());
-			int totalCnt = companyService.searchCompanyByCompanyNameCount(searchEntity.getSearchInput());
-			int endPageNum = Math.ceilDiv(totalCnt, amount);
-			model.addAttribute("currentPageNum", pageNum);
-			model.addAttribute("endPageNum", endPageNum);
-			
-			model.addAttribute("companys", companys);
-			
-		}
-
-		
-		
+		int endPageNum = Math.ceilDiv(totalCnt, amount);
+		model.addAttribute("currentPageNum", pageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("companys", companys);
+		model.addAttribute("searchEntity", searchEntity);
 		return "/taek/searchCompanyInfo";
 	}
 	
-
+	
 }

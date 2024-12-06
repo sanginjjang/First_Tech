@@ -35,4 +35,6 @@ public interface ICompanyService {
 	public List<CompanyDto> searchCompanyWithSort(String sortPart,int startNum,int amount);
 	
 	public List<CompanyDto> searchCompanyWithBookmark(String sortPart , int startNum , int amount ,String userId,String searchInput);
+	
+	public List<CompanyDto> searchCompanyWithBookmarkFeatGuest(String sortPart , int startNum , int amount ,String searchInput);
 }

@@ -2,224 +2,363 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0 auto;
-            width: 80vw;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
-
-        header {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 15%;
-            background-color: aliceblue;
-            font-size: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        nav {
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 5%;
-            background-color: ivory;
-            display: flex;
-            justify-content: center;
-        }
-
-        #nav1 {
-            font-weight: bold;
-            width: 60%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        section {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: auto;
-            background-color: lightgray;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-direction: column;
-            padding: 20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            overflow-y: auto;
         }
 
-        .company-info {
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 8px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 헤더 */
+        header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
         }
 
-        .company-info .company-name {
-            margin-left: 300px;
-            font-size: 32px;
-            font-weight: bold;
-            flex-basis: 45%;
-            margin-right: 30px;
-        }
-
-        .company-info .center-info {
-            font-size: 14px;
-            flex-basis: 20%;
+        #logo {
             display: flex;
-            flex-direction: column;
+            width: 100px;
+            height: 100px;
+        }
+
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
             justify-content: center;
             align-items: center;
-            text-align: center;
         }
 
-        .company-info .center-info div {
-            margin-bottom: 10px;
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
         }
 
-        .company-info .right-info {
-            font-size: 14px;
-            flex-basis: 30%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .company-info .right-info div {
-            margin-bottom: 10px;
-        }
-
-        .company-info .right-info b {
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
             font-weight: bold;
         }
 
-        .reviewList {
-            width: 100%;
-            background-color: #fff;
-            padding: 20px;
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
             margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .reviewList div {
-            margin-bottom: 15px;
-        }
-
-        .reviewList span {
-            display: block;
-            font-size: 14px;
-        }
-
-        .review-form {
-            width: 100%;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .review-form textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #d9d9d9;
             border-radius: 5px;
-            resize: none;
+            padding: 15px 50px;
+            gap: 250px;
         }
 
-        .review-form button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
             cursor: pointer;
         }
 
-        .review-form button:hover {
-            background-color: #45a049;
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
         }
 
-        footer {
-            font-weight: bold;
-            border: lightgray solid 1px;
-            width: 100%;
-            height: 10%;
-            background-color: aliceblue;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
         }
-    </style>
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+/* 컨테이너 */
+.container {
+	display: flex;
+	margin: 20px auto;
+	width: 100%;
+	gap: 20px;
+	flex-direction: column;
+}
+
+/* 기업 정보 */
+.company-info {
+	width: 100%;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 20px;
+	margin-bottom: 30px;
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.company-info .company-name {
+	font-size: 32px;
+	font-weight: bold;
+	flex-basis: 45%;
+	margin-right: 30px;
+}
+
+.company-info .center-info {
+	font-size: 14px;
+	flex-basis: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.company-info .center-info div {
+	margin-bottom: 10px;
+}
+
+.company-info .right-info {
+	font-size: 14px;
+	flex-basis: 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.company-info .right-info div {
+	margin-bottom: 10px;
+}
+
+.company-info .right-info b {
+	font-weight: bold;
+}
+
+/* 리뷰 리스트 */
+.reviewList {
+	width: 100%;
+	background-color: #fff;
+	padding: 20px;
+	margin-top: 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+}
+
+.reviewList div {
+	margin-bottom: 15px;
+}
+
+.reviewList span {
+	display: block;
+	font-size: 14px;
+}
+
+/* 리뷰 폼 */
+.review-form {
+	width: 100%;
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin-top: 20px;
+}
+
+.review-form textarea {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
+}
+
+.review-form button {
+	padding: 10px 20px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.review-form button:hover {
+	background-color: #45a049;
+}
+
+/* 푸터 */
+footer {
+	padding: 15px;
+	background-color: #ffffff;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #555555;
+}
+</style>
 </head>
 
 <body>
-    <header><a href="/">Header</a></header>
+    <header>
+        <div id="logo">
+            <img src="/uploads/logo.webp" alt="">
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+              <option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <button id="searchBtn">검색</button>
+         </form>
+        </div>
+        <div id="header-right">
+           <th:block th:if="${session.user == null}">
+                <span><a href="/hyepin/login">로그인</a></span>
+                 <span><a href="/hyepin/join">회원가입</a></span>
+               <span><a href="">기업 홈</a></span>
+           </th:block>
+           <th:block th:if="${session.user != null}">
+                <span><a href="/hyepin/myPage">마이페이지</a></span>
+                <span><a href="/hyepin/logout">로그아웃</a></span>
+           </th:block>
+        </div>
+    </header>
     <nav>
-        <div id="nav1">
-            <div><a href="/applicationsListForm">채용공고</a></div>
-            <div><a href="/c/companyInfo/1">기업 정보</a></div>
-            <div>이력서관리</div>
-            <div>지원현황</div>
-            <div>관심공고</div>
-            <div><a href="/b/board/1">커뮤니티</a></div>
+        <div class="nav-left">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/c/companyInfo/1">커뮤니티</a></div>
+        </div>
+        <div class="nav-right">
+            <div>FAQ</div>
         </div>
     </nav>
 
-    <section>
-        <div class="company-info">
-            <div class="company-name" th:text="${company.companyName}"></div>
 
-            <div class="center-info">
-                <div><b>대표자:</b><span th:text="${company.ceo}"></span></div>
-                <div><b>이메일:</b><span th:text="${company.companyEmail}"></span></div>
-            </div>
+	<section class="container">
+		<div class="company-info">
+			<div class="company-name" th:text="${company.companyName}"></div>
 
-            <div class="right-info">
-                <div><b>설립일:</b><span th:text="${company.establishmentDate}"></span></div>
-                <div><b>주소:</b><span th:text="${company.companyAddress}"></span></div>
-                <div><b>사원 수:</b><span th:text="${company.employees}"></span></div>
-            </div>
-        </div>
+			<div class="center-info">
+				<div>
+					<b>대표자:</b><span th:text="${company.ceo}"></span>
+				</div>
+				<div>
+					<b>이메일:</b><span th:text="${company.companyEmail}"></span>
+				</div>
+			</div>
 
-        <!-- Review List -->
-        <div class="reviewList" th:if="${rating != null}">
-            <div><span th:text="${rating.createdDate}"></span></div>
-            <div><span th:text="${rating.review}"></span></div>
-            <div><span th:if="${rating.rating==1}">★☆☆☆☆</span></div>
-            <div><span th:if="${rating.rating==2}">★★☆☆☆</span></div>
-            <div><span th:if="${rating.rating==3}">★★★☆☆</span></div>
-            <div><span th:if="${rating.rating==4}">★★★★☆</span></div>
-            <div><span th:if="${rating.rating==5}">★★★★★</span></div>
-        </div>
-        <div class="review-form" th:if="${user != null}">
-            <h3>리뷰 작성</h3>
-            <textarea placeholder="리뷰를 작성해 주세요..."></textarea>
-            <button type="submit">리뷰 제출</button>
-        </div>
-        
-    </section>
+			<div class="right-info">
+				<div>
+					<b>설립일:</b><span th:text="${company.establishmentDate}"></span>
+				</div>
+				<div>
+					<b>주소:</b><span th:text="${company.companyAddress}"></span>
+				</div>
+				<div>
+					<b>사원 수:</b><span th:text="${company.employees}"></span>
+				</div>
+			</div>
+		</div>
 
-    <footer>Footer</footer>
+		<!-- Review List -->
+		<div class="reviewList" th:if="${rating != null}">
+			<div>
+				<span th:text="${rating.createdDate}"></span>
+			</div>
+			<div>
+				<span th:text="${rating.review}"></span>
+			</div>
+			<div>
+				<span th:if="${rating.rating==1}">★☆☆☆☆</span>
+			</div>
+			<div>
+				<span th:if="${rating.rating==2}">★★☆☆☆</span>
+			</div>
+			<div>
+				<span th:if="${rating.rating==3}">★★★☆☆</span>
+			</div>
+			<div>
+				<span th:if="${rating.rating==4}">★★★★☆</span>
+			</div>
+			<div>
+				<span th:if="${rating.rating==5}">★★★★★</span>
+			</div>
+		</div>
+
+		<div class="review-form" th:if="${user != null}">
+			<h3>리뷰 작성</h3>
+			<textarea placeholder="리뷰를 작성해 주세요..."></textarea>
+			<button type="submit">리뷰 제출</button>
+		</div>
+	</section>
+
+	<footer>Footer</footer>
 </body>
 
 </html>
