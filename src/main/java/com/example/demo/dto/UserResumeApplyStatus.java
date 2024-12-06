@@ -19,4 +19,5 @@ public class UserResumeApplyStatus {
     private Timestamp applyDate;       // 지원 날짜
     private String applyStatus; 
     
+    private String userId;
 }

@@ -65,8 +65,8 @@ public class ResumeService  implements IResumeService{
 		return resumeMapper.getCertificateByName(SerchCertificateName);
 	}
 
-	public List<ResumeDto> getResumeList() {
-		return resumeMapper.getResumeList();
+	public List<ResumeDto> getResumeList(String userId) {
+		return resumeMapper.getResumeList(userId);
 	}
 
 	public int deleterResume(int resumeNum) {
@@ -74,8 +74,8 @@ public class ResumeService  implements IResumeService{
 	}
 
 
-	public List<UserResumeApplyStatus> getResumeApplyList(int resumeNum) {
-		return resumeMapper.getResumeApply(resumeNum);
+	public List<UserResumeApplyStatus> getResumeApplyList(String userId) {
+		return resumeMapper.getResumeApply(userId);
 	};
 	
 
