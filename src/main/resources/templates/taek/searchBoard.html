@@ -1,252 +1,361 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<style>
-body {
-	margin: 0 auto;
-	width: 80vw;
-	height: 100vh;
-	font-family: 'Arial', sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-header {
-	font-weight: bold;
-	border: lightgray solid 1px;
-	width: 100%;
-	height: 15%;
-	background-color: aliceblue;
-	font-size: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
 
-nav {
-	border: lightgray solid 1px;
-	width: 100%;
-	height: 5%;
-	background-color: ivory;
-	display: flex;
-	justify-content: center;
-}
+        a {
+            text-decoration: none;
+        }
 
-#nav1 {
-	font-weight: bold;
-	width: 60%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+        /* 헤더 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
 
-section {
-	font-weight: bold;
-	border: lightgray solid 1px;
-	width: 100%;
-	height: 70%;
-	background-color: lightgray;
-	font-size: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
-	box-sizing: border-box;
-	overflow-y: auto;
-	position: relative;
-	flex-direction: column;
-}
+        #logo {
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
 
-/* 검색창 스타일 */
-.search-container {
-	width: 100%;
-	display: flex;
-	justify-content: flex-start;
-	margin-bottom: 20px;
-	gap: 10px; /* 입력창과 버튼 사이의 간격 */
-}
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
 
-.search-select, .search-input {
-	padding: 10px;
-	font-size: 16px;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-}
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
 
-.search-button {
-	padding: 10px 20px;
-	background-color: #007bff;
-	color: white;
-	border-radius: 5px;
-	font-size: 16px;
-	cursor: pointer;
-}
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	background-color: #ffffff;
-}
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
 
-th, td {
-	padding: 15px;
-	text-align: center;
-	border: 1px solid #ddd;
-}
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
 
-th {
-	background-color: #f4f4f4;
-	font-weight: bold;
-	color: #333;
-}
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
 
-tr:nth-child(even) {
-	background-color: #f9f9f9;
-}
+        }
 
-tr:hover {
-	background-color: #e1e1e1;
-}
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
 
-footer {
-	font-weight: bold;
-	border: lightgray solid 1px;
-	width: 100%;
-	height: 10%;
-	background-color: aliceblue;
-	font-size: 30px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
 
-.write-button {
-	text-decoration: none;
-	font-size: 18px;
-	padding: 10px 20px;
-	background-color: #007bff;
-	color: white;
-	border-radius: 5px;
-	display: inline-block;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
 
-.write-button {
-	text-decoration: none;
-	font-size: 18px;
-	padding: 10px 20px;
-	background-color: #007bff;
-	color: white;
-	border-radius: 5px;
-	display: inline-block;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
 
-.button-container {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
-}
-</style>
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        /* 검색창 */
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .search-select, .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 게시글 목록 테이블 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e1e1e1;
+        }
+
+        /* 게시글 작성 버튼 */
+        .write-button {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .write-button:hover {
+            background-color: #105cbf;
+        }
+
+        /* 페이지 네비게이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-	<header>
-		<a href="/">Header</a>
-	</header>
-	<nav>
-		<div id="nav1">
-			<div>
-				<a href="/applicationsListForm">채용공고</a>
-			</div>
-			<div>
-				<a href="/c/companyInfo/1">기업 정보</a>
-			</div>
-			<div>이력서관리</div>
-			<div>지원현황</div>
-			<div>관심공고</div>
-			<div>
-				<a href="/b/board/1">커뮤니티</a>
-			</div>
-		</div>
-	</nav>
+    <header>
+        <div id="logo">
+            <img src="/uploads/logo.webp" alt="">
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+              <option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <button id="searchBtn">검색</button>
+         </form>
+        </div>
+        <div id="header-right">
+           <th:block th:if="${session.user == null}">
+                <span><a href="/hyepin/login">로그인</a></span>
+                 <span><a href="/hyepin/join">회원가입</a></span>
+               <span><a href="">기업 홈</a></span>
+           </th:block>
+           <th:block th:if="${session.user != null}">
+                <span><a href="/hyepin/myPage">마이페이지</a></span>
+                <span><a href="/hyepin/logout">로그아웃</a></span>
+           </th:block>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-left">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
+        </div>
+        <div class="nav-right">
+            <div>FAQ</div>
+        </div>
+    </nav>
 
-	<section>
-		<!-- 검색 조건 선택 -->
-		<div class="search-container">
-			<form action="/b/boardSearch/1" method="GET">
-				<select class="search-select" name="searchPart" id="searchPart">
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="writer">작성자</option>
-				</select> <input type="text" class="search-input" name="searchInput"
-					id="searchInput" placeholder="검색어 입력">
-				<button class="search-button" type="submit">검색</button>
-			</form>
-		</div>
+    <section>
+        <!-- 검색 조건 선택 -->
+        <div class="search-container">
+            <form action="/b/boardSearch/1" method="GET">
+                <select class="search-select" name="searchPart" id="searchPart">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="writer">작성자</option>
+                </select>
+                <input type="text" class="search-input" name="searchInput" id="searchInput" placeholder="검색어 입력">
+                <button class="search-button" type="submit">검색</button>
+            </form>
+        </div>
 
-		<a href="/b/boardWriteForm" class="write-button">게시글 작성</a>
+        <a href="/b/boardWriteForm" class="write-button">게시글 작성</a>
 
-		<!-- 게시글 목록 테이블 -->
-		<table>
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>댓글 수</th>
-					<th>조회수</th>
-					<th>작성자</th>
-					<th>작성날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<th:block th:each="board : ${boardList}">
-					<tr>
-						<td><a
-							th:href="@{/b/boardDetail/{boardNum}(boardNum=${board.boardNum})}"
-							th:text="${board.boardTitle}"></a></td>
-						<td th:text="${board.commentCount}"></td>
-						<td th:text="${board.views}"></td>
-						<td th:text="${board.boardWriter}"></td>
-						<td th:text="${board.createdDate}"></td>
-					</tr>
-				</th:block>
+        <!-- 게시글 목록 테이블 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>댓글 수</th>
+                    <th>조회수</th>
+                    <th>작성자</th>
+                    <th>작성날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="board : ${boardList}">
+                    <tr>
+                        <td><a th:href="@{/b/boardDetail/{boardNum}(boardNum=${board.boardNum})}" th:text="${board.boardTitle}"></a></td>
+                        <td th:text="${board.commentCount}"></td>
+                        <td th:text="${board.views}"></td>
+                        <td th:text="${board.boardWriter}"></td>
+                        <td th:text="${board.createdDate}"></td>
+                    </tr>
+                </th:block>
 
-				<!-- 페이지 네비게이션 -->
-				<tr>
-					<td colspan="6">
-						<!-- 이전 페이지 링크 --> <th:block th:if="${currentPageNum > 1}">
-							<a
-								th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum - 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">이전</a>
-						</th:block> <!-- 페이지 번호 리스트 --> <th:block
-							th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
-							<span th:if="${currentPageNum == pageNum}"> <a
-								th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">
-									<b th:text="${pageNum}"></b>
-							</a>&nbsp;&nbsp;
-							</span>
-							<span th:if="${currentPageNum != pageNum}"> <a
-								th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}"
-								th:text="${pageNum}"></a>&nbsp;&nbsp;
-							</span>
-						</th:block> <!-- 다음 페이지 링크 --> <th:block
-							th:if="${currentPageNum < endPageNum}">
-							<a
-								th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum + 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">다음</a>
-						</th:block>
-					</td>
-				</tr>
+                <!-- 페이지 네비게이션 -->
+                <tr>
+                    <td colspan="6">
+                        <div class="pagination">
+                            <th:block th:if="${currentPageNum > 1}">
+                                <a th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum - 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">이전</a>
+                            </th:block>
+                            <th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+                                <span th:if="${currentPageNum == pageNum}">
+                                    <a th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">
+                                        <b th:text="${pageNum}"></b>
+                                    </a>&nbsp;&nbsp;
+                                </span>
+                                <span th:if="${currentPageNum != pageNum}">
+                                    <a th:href="@{/b/boardSearch/{pageNum}(pageNum=${pageNum}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">
+                                        <span th:text="${pageNum}"></span>
+                                    </a>&nbsp;&nbsp;
+                                </span>
+                            </th:block>
+                            <th:block th:if="${currentPageNum < endPageNum}">
+                                <a th:href="@{/b/boardSearch/{pageNum}(pageNum=${currentPageNum + 1}, searchPart=${searchBoardEntity.searchPart}, searchInput=${searchBoardEntity.searchInput})}">다음</a>
+                            </th:block>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-			</tbody>
-		</table>
-	</section>
-
-	<footer>Footer</footer>
+    <footer>
+        <p>footer</p>
+    </footer>
 </body>
 
 </html>
