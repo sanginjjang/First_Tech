@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.hyepin.ICompanyDaoHyepin;
+import com.example.demo.dto.ApplicationDto;
 import com.example.demo.dto.CompanyDto;
+import com.example.demo.vo.hyepin.MainApplicationVo;
 
 @Service
 public class CompanyServiceHyepin implements ICompanyServiceHyepin{
@@ -29,5 +33,14 @@ public class CompanyServiceHyepin implements ICompanyServiceHyepin{
 		return company;
 	}
 
+	@Override
+	public List<MainApplicationVo> getMainApplications() {
+		List<MainApplicationVo> aList = companyDao.getMainApplications();
+		for(MainApplicationVo a : aList) {
+			System.out.println(a);
+		}
+		return aList;
+	}
+	
 
 }
