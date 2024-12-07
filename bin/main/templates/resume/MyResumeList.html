@@ -70,8 +70,8 @@
         text-decoration: underline;
     }
 
-    input[type="submit"] {
-        background-color: #dc3545;
+   #formbtn {
+        background-color: #007BFF;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -80,6 +80,20 @@
         font-size: 0.9em;
         margin : 20px;
         height: 50px;
+        width: 500px;
+        margin-bottom:  50px;
+    }
+    #deleteBTN{
+     background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin : 20px;
+        height: 50px;
+        margin-bottom:  50px;
     }
 
     input[type="submit"]:hover {
@@ -259,7 +273,7 @@
 <div class="resumeList">
 <h2>이력서 관리</h2>
  <form action="/resume/MyResumeForm" method="post" enctype="multipart/form-data">
-  <input type="submit" value="이력서 등록">
+  <input type="submit" value="이력서 등록" id="formbtn">
 </form>
  
  <table border="1">
@@ -285,7 +299,7 @@
                 <td th:text="${list.updatedDate}"></td>
                 <td><form th:action="@{/resume/deleteResume}" method="post">
                         <input type="hidden" name="resumeNum" th:value="${list.resumeNum}">
-                        <input type="submit" value="삭제">
+                        <input type="submit" value="삭제" id="deleteBTN">
                     </form>
                 </td>
             </tr>
