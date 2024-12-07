@@ -45,7 +45,7 @@ public class SanginController {
 	String main() {
 		return "sangin/sum";
 	}
-	@RequestMapping("test")
+	@RequestMapping("/test")
 	String test(Model model) {
 		System.out.println("공고 페이지로 들어갑니다~~");
 		// 전체 공고랑 북마크 된 공고

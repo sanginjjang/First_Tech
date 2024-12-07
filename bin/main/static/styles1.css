@@ -1,0 +1,406 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    color: #333333;
+    width: 80%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 헤더 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+}
+
+#logo {
+    display: flex;
+    width: 100px;
+    height: 100px;
+}
+
+header a {
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #867a7a;
+}
+
+#header-right {
+    position: relative;
+    bottom: 55px;
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search>form>input {
+    padding: 20px;
+    width: 600px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+}
+
+#searchBtn {
+    padding: 15px 20px;
+    border: 1px solid #d9d9d9;
+    background: white;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#searchSelect {
+    padding: 15px 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    font-size: 15px;
+
+}
+
+/* 네브 */
+nav {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    margin-top: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    padding: 15px 50px;
+    gap: 250px;
+}
+
+.nav-left {
+    display: flex;
+    gap: 120px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+}
+
+.nav-left div a {
+    color: black;
+    transition: 0.3s;
+}
+
+.nav-left div a:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+.nav-right {
+    transition: 0.3s;
+    display: flex;
+    background-color: #1a73e8;
+    padding: 15px 35px;
+    border-radius: 5px;
+    gap: 20px;
+}
+
+.nav-right div {
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-right:hover {
+    background-color: #105cbf;
+}
+
+
+/* footer */
+footer {
+    padding: 15px;
+    background-color: #ffffff;
+    text-align: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555555;
+    margin-top: 20px;
+}
+
+
+/* 체크 옵션 */
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked+label {
+    color: #007BFF;
+    font-weight: bold;
+    scale: 1.1;
+    /* 살짝 커지게 */
+}
+
+.checklist-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.checklist-container.active {
+    display: block;
+}
+
+.checklist {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.checklist li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.checklist li input+label {
+    transition: 0.2s;
+}
+
+.checklist li input+label:hover {
+    cursor: pointer;
+    color: blue;
+    font-weight: bold;
+    scale: 1.05;
+}
+
+/* 섹션 */
+section {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    height: 200px;
+}
+
+.section_search {
+    display: flex;
+    gap: 20px;
+    flex: 3;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+}
+
+.search_left {
+    flex: 3;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    height: inherit;
+    border-radius: 20px;
+}
+
+.search_btn {
+    display: flex;
+}
+
+.search_btn button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    flex: 1;
+    border: 1px #d9d9d9 solid;
+    transition: 0.3s;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.search_btn button:nth-child(1) {
+    border-radius: 20px 0 0 0;
+}
+
+.search_btn button:nth-child(2) {
+    border-radius: 0 20px 0 0;
+}
+
+.search_btn button:hover {
+    background-color: #d3cfcf;
+    cursor: pointer;
+}
+
+.search_right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+    background-color: #ffffff;
+    height: inherit;
+    gap: 20px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+}
+
+.search_right>input {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+}
+
+.search_right>button {
+    padding: 15px 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.search_right>button:hover {
+    scale: 1.1;
+}
+
+.section_aside {
+    display: flex;
+    flex: 1;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+}
+
+/* 메인 */
+main {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    height: 1000px;
+}
+
+.main_aside {
+    display: flex;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    justify-content: center;
+    background-color: #ffffff;
+    align-items: center;
+    flex: 1;
+}
+
+/* 공고 리스트 */
+#applicationList {
+    margin: 20px 0 !important;
+    overflow: scroll;
+    /* 스크롤 기능 유지 */
+    background-color: ivory;
+    border-radius: 5px;
+    flex: 3;
+    scrollbar-width: none;
+    /* Firefox에서 스크롤바 숨기기 */
+    -ms-overflow-style: none;
+    /* Internet Explorer에서 스크롤바 숨기기 */
+}
+
+#applicationList::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge에서 스크롤바 숨기기 */
+}
+
+.application {
+    display: flex;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    height: 120px;
+    align-items: center;
+}
+
+
+.application_center {
+    display: flex;
+    flex-direction: column;
+    margin-right: 100px;
+    gap: 5px;
+}
+
+.jobApplicationName {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    border: 1px #d9d9d9 solid;
+    border-radius: 3px;
+    padding: 3px 5px;
+    font-size: 24px;
+    font-weight: bold;
+    width: 700px;
+}
+
+.required {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.required>div {
+    border: 1px #d9d9d9 solid;
+    padding: 3px 5px;
+}
+
+.application_rigth {
+    display: flex;
+    gap: 10px;
+}
+
+.companyId {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3px 5px;
+}
+
+.star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.star > button {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	background-color:white;
+	border : none;
+	font-size : 20px;
+}
+
+.heart {
+    display: flex;
+    margin: 0 50px;
+}
+.heart > button {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	font-size : 20px;
+	background-color:white;
+	border : none;
+}
