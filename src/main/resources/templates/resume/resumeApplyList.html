@@ -4,95 +4,273 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 20px;
-    }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-    .resumeApplyList {
-        text-align: center;
-        margin: 20px auto;
-    }
+body {
+	font-family: Arial, sans-serif;
+	margin: 0 auto;
+	background-color: #f9f9f9;
+	color: #333333;
+	width: 80%;
+}
 
-    .resumeApplyList h2 {
-        font-size: 2em;
-        color: #333;
-        margin-bottom: 20px;
-    }
+a {
+	text-decoration: none;
+}
 
-    table {
-        width: 90%;
-        border-collapse: collapse;
-        margin: 0 auto;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
 
-    table th, table td {
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
+.resumeApplyList {
+	text-align: center;
+	margin: 20px auto;
+}
 
-    table th {
-        background-color: #f4f4f4;
-        font-weight: bold;
-        color: #555;
-    }
+.resumeApplyList h2 {
+	font-size: 2em;
+	color: #333;
+	margin-bottom: 20px;
+}
 
-    table tbody tr:hover {
-        background-color: #f9f9f9;
-    }
+table {
+	width: 90%;
+	border-collapse: collapse;
+	margin: 0 auto;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    table a {
-        color: #007BFF;
-        text-decoration: none;
-    }
+table th, table td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
 
-    table a:hover {
-        text-decoration: underline;
-    }
+table th {
+	background-color: #f4f4f4;
+	font-weight: bold;
+	color: #555;
+}
 
-    input[type="submit"] {
-        background-color: #dc3545;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        font-size: 0.9em;
-    }
+table tbody tr:hover {
+	background-color: #f9f9f9;
+}
 
-    input[type="submit"]:hover {
-        background-color: #c82333;
-    }
+table a {
+	color: #007BFF;
+	text-decoration: none;
+}
 
-    table th:nth-child(1), table td:nth-child(1) {
-        width: 5%;
-    }
+table a:hover {
+	text-decoration: underline;
+}
 
-    table th:nth-child(2), table td:nth-child(2),
-    table th:nth-child(4), table td:nth-child(4) {
-        width: 15%;
-    }
+input[type="submit"] {
+	background-color: #dc3545;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+	font-size: 0.9em;
+}
 
-    table th:nth-child(3), table td:nth-child(3) {
-        width: 30%;
-    }
+input[type="submit"]:hover {
+	background-color: #c82333;
+}
 
-    table th:nth-child(5), table td:nth-child(5) {
-        width: 20%;
-    }
+table th:nth-child(1), table td:nth-child(1) {
+	width: 5%;
+}
 
-    table th:nth-child(6), table td:nth-child(6) {
-        width: 15%;
-    }
+table th:nth-child(2), table td:nth-child(2), table th:nth-child(4),
+	table td:nth-child(4) {
+	width: 15%;
+}
+
+table th:nth-child(3), table td:nth-child(3) {
+	width: 30%;
+}
+
+table th:nth-child(5), table td:nth-child(5) {
+	width: 20%;
+}
+
+table th:nth-child(6), table td:nth-child(6) {
+	width: 15%;
+}
+/* 헤더 */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px 20px;
+	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
+
+#logo a {
+	display: flex;
+	width: 100px;
+	height: 100px;
+}
+
+header a {
+	margin: 0 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #867a7a;
+}
+
+#header-right {
+	position: relative;
+	bottom: 55px;
+}
+
+.search {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.search>form>input {
+	padding: 20px;
+	width: 600px;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+}
+
+.search>form>button {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	background: white;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#searchSelect {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+/* 네브 */
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #ffffff;
+	margin-top: 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	padding: 15px 50px;
+	gap: 250px;
+}
+
+.nav-left {
+	display: flex;
+	gap: 120px;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+}
+
+.nav-left div a {
+	color: black;
+	transition: 0.3s;
+}
+
+.nav-left div a:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.nav-right {
+	transition: 0.3s;
+	display: flex;
+	background-color: #1a73e8;
+	padding: 15px 35px;
+	border-radius: 10px;
+	gap: 20px;
+}
+
+.nav-right div {
+	font-size: 18px;
+	color: white;
+	margin: 0;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.nav-right:hover {
+	background-color: #105cbf;
+}
 </style>
 
 </head>
 <body>
+<header>
+    <div id="logo">
+    <a href="/">
+        <img src="/uploads/logo.webp" alt="">
+    </a>
+    </div>
+    <div class="search">
+    <form action="/s/searchResult2" method="post" id="form">
+        <select id="searchSelect"  name="searchPart">
+          <option value="searchApplication">공고명</option>
+    		<option value="searchCompany">기업명</option>
+        </select>
+        <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+        <th:block th:if="${session.user != null}">
+        <button id="searchBtn">검색</button>
+        </th:block>
+         <th:block th:if="${session.user == null}">
+        <button id="searchBtn" onclick="noSearch(event)">검색</button>
+        </th:block>
+     </form>
+    </div>
+    <div id="header-right">
+    	<th:block th:if="${session.user == null}">
+    	  	<span><a href="/hyepin/login">로그인</a></span>
+       		<span><a href="/hyepin/join">회원가입</a></span>
+        	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+    	</th:block>
+    	<th:block th:if="${session.user != null}">
+    	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+    	  	<span><a href="/hyepin/logout">로그아웃</a></span>
+    	</th:block>
+    </div>
+</header>
+<nav>
+    <div class="nav-left">
+    <th:block th:if="${session.user == null}">
+        <div onclick="noLogin()">채용공고</div>
+        <div onclick="noLogin()">기업정보</div>
+        <div onclick="noLogin()">지원현황</div>
+        <div onclick="noLogin()">이력서관리</div>
+        <div onclick="noLogin()">커뮤니티</div>
+    </th:block>
+   
+    <th:block th:if="${session.user != null}">
+        <div><a href="/sangin/applicationsForm">채용공고</a></div>
+        <div><a href="/c/companyInfo/1">기업정보</a></div>
+        <div><a href="/resume/resumeApplyList">지원현황</a></div>
+        <div><a href="/resume/MyResumeList">이력서관리</a></div>
+        <div><a href="/b/board/1">커뮤니티</a></div>
+    </th:block>
+    </div>
+    
+    <div class="nav-right">
+        <div>FAQ</div>
+    </div>
+</nav>
+
 
 <div class="resumeApplyList">
 <h2>이력서 지원현황</h2>
