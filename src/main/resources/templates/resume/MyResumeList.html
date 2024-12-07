@@ -4,12 +4,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 20px;
-    }
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
 
     .resumeList {
         text-align: center;
@@ -256,9 +267,9 @@
             <tr>
                <th>번호</th>
                <th>증명사진</th>
-               <th>resumeTitle</th>
-               <th>updatedate</th>
+               <th>이력서 제목 </th>
                <th>직무</th>
+               <th>updatedate</th>
                <th>관리</th>
             </tr>
          </thead>
@@ -270,8 +281,8 @@
                     <img th:src="@{/uploads/{personalPhotoName}(personalPhotoName=${list.personalPhotoName})}" width="100px">
                </td>
                 <td><a th:href="@{/resume/detailResume/{resumeNum}(resumeNum=${list.resumeNum})}" th:text="${list.resumeTitle}"></a></td>
-                <td th:text="${list.updatedDate}"></td>
                 <td th:text="${list.roleName}"></td>
+                <td th:text="${list.updatedDate}"></td>
                 <td><form th:action="@{/resume/deleteResume}" method="post">
                         <input type="hidden" name="resumeNum" th:value="${list.resumeNum}">
                         <input type="submit" value="삭제">

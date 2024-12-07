@@ -48,7 +48,7 @@
     }
 
     .resumeForm input[type="text"], .resumeForm input[type="file"], .resumeForm select, .resumeForm input[type="date"] {
-        width: 100%;
+        width: 500px;
         padding: 10px;
         margin: 10px 0;
         font-size: 16px;
@@ -65,6 +65,7 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
+        margin-top: 50px;
     }
 
     .resumeForm input[type="submit"]:hover {
@@ -85,23 +86,34 @@
     }
 
     #certificateInfo p {
-        font-size: 14px;
+        font-size: 20px;
+        font-weight: 900;
     }
 
     #certificateInfo input[type="hidden"] {
         display: none;
     }
 
-    /* 기술 스택 체크박스 */
-    .resumeForm .tech-stack label {
-        margin-right: 15px;
-        font-size: 16px;
-    }
-
-    .resumeForm .tech-stack input {
-        margin-right: 5px;
-    }
-
+	.resumeForm .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: calc(5 * 150px + 5 * 15px);
+    text-align: center;
+    margin : 0 auto;
+	}
+	
+	/* 기술 스택 항목 */
+	.resumeForm .tech-stack label {
+	    display: flex;
+	    align-items: center; /* 체크박스와 텍스트를 세로로 정렬 */
+	    font-size: 16px;
+	    width: 150px; /* 고정 너비 설정 */
+	}
+	
+	.resumeForm .tech-stack input {
+	    margin-right: 5px;
+	}
 
   /* 네브 */
         nav {
@@ -293,6 +305,16 @@
         .nav-right:hover {
             background-color: #105cbf;
         }
+        
+        #content{
+	        width: 500px;
+	        height:500px;
+	        padding: 10px;
+	        margin: 10px 0;
+	        font-size: 16px;
+	        border: 1px solid #d9d9d9;
+	        border-radius: 5px;
+        }
 </style>
 </head>
 <body>
@@ -388,7 +410,7 @@
 	   
 	    <h3>이력서 정보</h3>
 	    제목 : <input type="text" name="resumeTitle" id="Title"><br>
-	    내용 : <input type="text" name="resumeContent" id="content"><br>
+	    내용 : <input type="text" name="resumeContent" id="content" ><br>
 		
 		<h3>자격증 조회</h3>
 	    자격증 이름: <input type="text" id="SerchCertificateName" placeholder="정보처리기사 라고 입력하세요"/>
@@ -444,15 +466,15 @@
 	   
 	    
 	    <h3>기술 스킬</h3>
-	    <div id="techStackNum">
-		    <label><input type="checkbox" name="techStackNum" value="1"> JavaScript</label>
+	    <div id="techStackNum" class="tech-stack">
+		    <label><input type="checkbox" name="techStackNum" value="1" > JavaScript</label>
 		    <label><input type="checkbox" name="techStackNum" value="2"> Java</label>
 		    <label><input type="checkbox" name="techStackNum" value="3"> Python</label>
 		    <label><input type="checkbox" name="techStackNum" value="4"> React</label>
 		    <label><input type="checkbox" name="techStackNum" value="5"> Node.js</label>
 		    <label><input type="checkbox" name="techStackNum" value="6"> Angular</label>
 		    <label><input type="checkbox" name="techStackNum" value="7"> AWS</label>
-		    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label><br>
+		    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label>
 		    <label><input type="checkbox" name="techStackNum" value="9"> Kubernetes</label>
 		    <label><input type="checkbox" name="techStackNum" value="10"> SQL</label>
 		    <label><input type="checkbox" name="techStackNum" value="11"> HTML/CSS</label>
@@ -472,7 +494,7 @@ $('#SerchCertificateName').on('input', function() {
 
     if (SerchCertificateName) {
         $.ajax({
-            url: '/resume/certificate',  // 자격증 정보를 가져오는 API
+            url: '/resume/certificate',  
             type: 'GET',
             data: { SerchCertificateName: SerchCertificateName },
             success: function(response) {
@@ -496,10 +518,9 @@ $('#SerchCertificateName').on('input', function() {
     } 
 });
 
-// 폼 제출 시 유효성 검사
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("MyForm").addEventListener("submit", function(event){
-        event.preventDefault();  // 폼 제출 기본 동작 방지
+        event.preventDefault();  
 
         var Title = document.getElementById("Title").value;
         var content = document.getElementById("content").value;
@@ -520,7 +541,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var techStackNum = document.querySelectorAll('input[name="techStackNum"]:checked');
         var techStackValid = techStackNum.length > 0;
 
-        // 필수 입력값 검증
         if (roleid === "") {
             alert("직무를 입력하세요");
         } else if (Title === "") {
@@ -552,7 +572,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (!techStackValid) {
             alert("기술 스킬을 체크해주세요");
         } else {
-            // 모든 조건을 만족할 경우 폼 제출
             document.getElementById("MyForm").submit();
         }
     });
