@@ -12,10 +12,8 @@
 <body>
 	<header>
 		<div id="logo">
-        <a href="/">
-        	First Tech
-        </a>
-        </div>
+			<a href="/"> First Tech </a>
+		</div>
 		<div class="search">
 			<form action="/s/searchResult2" method="post" id="form">
 				<select id="searchSelect" name="searchPart">
@@ -85,37 +83,38 @@
 				</div>
 				<div id="jobChecklist" class="checklist-container">
 					<ul class="checklist">
-						<li><input type="checkbox" id="job_1" value="1"><label
-							for="job_1" class="roleId">개발자</label></li>
-						<li><input type="checkbox" id="job_2" value="2"><label
-							for="job_2" class="roleId">기술지원</label></li>
-						<li><input type="checkbox" id="job_3" value="3"><label
-							for="job_3" class="roleId">데이터분석가</label></li>
-						<li><input type="checkbox" id="job_4" value="4"><label
-							for="job_4" class="roleId">데이터엔지니어</label></li>
-						<li><input type="checkbox" id="job_5" value="5"><label
-							for="job_5" class="roleId">백엔드/서버개발</label></li>
-						<li><input type="checkbox" id="job_6" value="6"><label
-							for="job_6" class="roleId">보안컨설팅</label></li>
-						<li><input type="checkbox" id="job_7" value="7"><label
-							for="job_7" class="roleId">앱개발</label></li>
-						<li><input type="checkbox" id="job_8" value="8"><label
-							for="job_8" class="roleId">웹개발</label></li>
-						<li><input type="checkbox" id="job_9" value="9"><label
-							for="job_9" class="roleId">웹마스터</label></li>
-						<li><input type="checkbox" id="job_10" value="10"><label
-							for="job_10" class="roleId">유지보수</label></li>
-						<li><input type="checkbox" id="job_11" value="11"><label
-							for="job_11" class="roleId">정보보안</label></li>
-						<li><input type="checkbox" id="job_12" value="12"><label
-							for="job_12" class="roleId">프론트엔드</label></li>
-						<li><input type="checkbox" id="job_13" value="13"><label
-							for="job_13" class="roleId">퍼블리셔</label></li>
-						<li><input type="checkbox" id="job_14" value="14"><label
-							for="job_14" class="roleId">BI엔지니어</label></li>
-						<li><input type="checkbox" id="job_15" value="15"><label
-							for="job_15" class="roleId">CISO</label></li>
+						<li><input type="checkbox" id="job_1" value="1"> <label
+							for="job_1" class="roleId" data-value="1">개발자</label></li>
+						<li><input type="checkbox" id="job_2" value="2"> <label
+							for="job_2" class="roleId" data-value="2">기술지원</label></li>
+						<li><input type="checkbox" id="job_3" value="3"> <label
+							for="job_3" class="roleId" data-value="3">데이터분석가</label></li>
+						<li><input type="checkbox" id="job_4" value="4"> <label
+							for="job_4" class="roleId" data-value="4">데이터엔지니어</label></li>
+						<li><input type="checkbox" id="job_5" value="5"> <label
+							for="job_5" class="roleId" data-value="5">백엔드/서버개발</label></li>
+						<li><input type="checkbox" id="job_6" value="6"> <label
+							for="job_6" class="roleId" data-value="6">보안컨설팅</label></li>
+						<li><input type="checkbox" id="job_7" value="7"> <label
+							for="job_7" class="roleId" data-value="7">앱개발</label></li>
+						<li><input type="checkbox" id="job_8" value="8"> <label
+							for="job_8" class="roleId" data-value="8">웹개발</label></li>
+						<li><input type="checkbox" id="job_9" value="9"> <label
+							for="job_9" class="roleId" data-value="9">웹마스터</label></li>
+						<li><input type="checkbox" id="job_10" value="10"> <label
+							for="job_10" class="roleId" data-value="10">유지보수</label></li>
+						<li><input type="checkbox" id="job_11" value="11"> <label
+							for="job_11" class="roleId" data-value="11">정보보안</label></li>
+						<li><input type="checkbox" id="job_12" value="12"> <label
+							for="job_12" class="roleId" data-value="12">프론트엔드</label></li>
+						<li><input type="checkbox" id="job_13" value="13"> <label
+							for="job_13" class="roleId" data-value="13">퍼블리셔</label></li>
+						<li><input type="checkbox" id="job_14" value="14"> <label
+							for="job_14" class="roleId" data-value="14">BI엔지니어</label></li>
+						<li><input type="checkbox" id="job_15" value="15"> <label
+							for="job_15" class="roleId" data-value="15">CISO</label></li>
 					</ul>
+
 				</div>
 				<div id="regionChecklist" class="checklist-container">
 					<ul class="checklist">
@@ -266,49 +265,68 @@
     </script>
 	<!-- 클릭시 url 설정, 벨류값 전송 -->
 	<script>
-        document.querySelector("section").addEventListener("click", (event) => {
-            let url = "";
-            let value = "";
-            let listKey = "";
+	document.querySelector("section").addEventListener("click", (event) => {
+	    let url = "";
+	    let value = "";
+	    let listKey = "";
 
-            if (event.target.classList.contains("workingArea")) {
-                url = "/sangin/searchingByArea";
-                listKey = "listByArea";
-                value = event.target.value;
-                alert("지역 옳게 진행되고 있습니다~~");
-            } else if (event.target.classList.contains("roleId")) {
-                url = "/sangin/searchingByRoleId";
-                listKey = "listByRoleId";
-                value = event.target.value;
-                alert("직무 옳게 진행되고 있습니다~~");
-            } else if (event.target.id === "searchBtn") {
-                url = "/sangin/searchingByKeyword";
-                listKey = "listByKeyword";
-                value = document.querySelector("#searching").value;
-                alert("키워드 옳게 진행되고 있습니다~~");
-            } else {
-                return;
-            }
+	    // workingArea 클릭
+	    if (event.target.classList.contains("workingArea")) {
+	        // label 클릭 시, for 속성을 이용해 연결된 input의 value를 가져옴
+	        const inputId = event.target.getAttribute("for");
+	        const inputElement = document.getElementById(inputId);
+	        value = inputElement ? inputElement.value : null;
+	        url = "/sangin/searchingByArea";
+	        listKey = "listByArea";
+	        alert("지역 옳게 진행되고 있습니다~~");
+	    }
 
-            // AJAX 요청
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
+	    // roleId 클릭
+	    else if (event.target.classList.contains("roleId")) {
+	        // label 클릭 시, for 속성을 이용해 연결된 input의 value를 가져옴
+	        const inputId = event.target.getAttribute("for");
+	        const inputElement = document.getElementById(inputId);
+	        value = inputElement ? inputElement.value : null;
+	        url = "/sangin/searchingByRoleId";
+	        listKey = "listByRoleId";
+	        alert("직무 옳게 진행되고 있습니다~~");
+	    }
 
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    console.log("AJAX 성공:", xhr.responseText); // 응답 확인
-                    const response = JSON.parse(xhr.responseText);
-                    console.log("응답 데이터:", response); // 데이터 확인
-                    updateApplicationList(response.listByArea || response.listByRoleId || response.listByKeyword);
-                } else {
-                    console.error("AJAX 요청 실패:", xhr.status, xhr.statusText);
-                }
-            };
+	    // 키워드 검색 버튼 클릭
+	    else if (event.target.id === "searchBtn") {
+	        value = document.querySelector("#searching").value;
+	        url = "/sangin/searchingByKeyword";
+	        listKey = "listByKeyword";
+	        alert("키워드 옳게 진행되고 있습니다~~");
+	    } else {
+	        return; // 처리할 수 없는 클릭 이벤트는 무시
+	    }
 
-            xhr.send(JSON.stringify({ value })); 
+	    // 값 확인
+	    if (!value) {
+	        alert("value 값을 가져오지 못했습니다!");
+	        return;
+	    }
+	    alert(`value: ${value}`); // value 값을 제대로 출력
 
-        });
+	    // AJAX 요청
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", url, true);
+	    xhr.setRequestHeader("Content-Type", "application/json");
+
+	    xhr.onload = function () {
+	        if (xhr.status === 200) {
+	            console.log("AJAX 성공:", xhr.responseText); // 응답 확인
+	            const response = JSON.parse(xhr.responseText);
+	            console.log("응답 데이터:", response); // 데이터 확인
+	            updateApplicationList(response.listByArea || response.listByRoleId || response.listByKeyword);
+	        } else {
+	            console.error("AJAX 요청 실패:", xhr.status, xhr.statusText);
+	        }
+	    };
+
+	    xhr.send(value); // JSON 형태로 데이터 전송
+	});
 
     </script>
 	<!-- 채용 공고 리스트를 업데이트하는 함수 -->

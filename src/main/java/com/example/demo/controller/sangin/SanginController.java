@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ApplicationDto;
 import com.example.demo.dto.CompanyDto;
-import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.sangin.ApplicationService;
@@ -45,6 +44,7 @@ public class SanginController {
 	String main() {
 		return "sangin/sum";
 	}
+
 	@RequestMapping("/test")
 	String test(Model model) {
 		System.out.println("공고 페이지로 들어갑니다~~");
@@ -152,8 +152,7 @@ public class SanginController {
 
 	// 기업 공고 관리 폼
 	@RequestMapping("/companyApplicationManagementForm/{pageNum}")
-	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model,
-											HttpSession session) {
+	String companyApplicationManagementForm(@PathVariable("pageNum") int pageNum, Model model, HttpSession session) {
 		CompanyDto company = (CompanyDto) session.getAttribute("company");
 		String companyId = company.getCompanyId();
 		int limit = 10;
@@ -161,7 +160,7 @@ public class SanginController {
 		List<ApplicationDto> companyApplicationList = companyApplicationService.companyApplicationListLimit(companyId,
 				startIdx, limit);
 		int totalApplication = companyApplicationService.getApplicationCount(companyId); // 전체 이력서 개수
-		int totalPages = (int) Math.ceil((double) totalApplication / limit); //10개 // 10개 나누기 //올림
+		int totalPages = (int) Math.ceil((double) totalApplication / limit); // 10개 // 10개 나누기 //올림
 
 		model.addAttribute("currentPage", pageNum); // 현재 페이지
 		System.out.println("pageNum = " + pageNum);
@@ -201,13 +200,19 @@ public class SanginController {
 	@RequestMapping("/searchingByArea")
 	@ResponseBody
 	Map<String, Object> searchingByArea(@RequestBody String value) {
+		System.out.println("area value: " + value); // 요청으로 들어온 값 출력
 		List<ApplicationDto> listByArea;
-		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+
+		// value 값에 따라 분기 처리
 		if (value.equals("all")) {
 			listByArea = applicationService.getApplicationList("user001");
 		} else {
 			listByArea = applicationService.getApplicationByWorkingArea("user001", value);
 		}
+
+		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		System.out.println("공고 지역 리스트 listByArea: " + listByArea); // 가져온 데이터 출력
+
 		Map<String, Object> response = new HashMap<>();
 		response.put("listByArea", listByArea);
 		response.put("companyList", companyList);
@@ -219,29 +224,48 @@ public class SanginController {
 	@RequestMapping("/searchingByRoleId")
 	@ResponseBody
 	Map<String, Object> searchingByRoleId(@RequestBody String value) {
-		List<ApplicationDto> listByRoleId = applicationService.getApplicationByRoleId("user001", value);
-		List<String> companyList = applicationService.getBookmarkedCompany("user001");
-		Map<String, Object> response = new HashMap<>();
-		response.put("listByRoleId", listByRoleId);
-		response.put("companyList", companyList);
+	    System.out.println("roleId value: " + value); // 요청으로 들어온 값 출력
+	    List<ApplicationDto> listByRoleId;
 
-		return response;
+	    if ("all".equals(value)) {
+	        listByRoleId = applicationService.getApplicationList("user001");
+	    } else {
+	        listByRoleId = applicationService.getApplicationByRoleId("user001", value);
+	    }
+
+	    List<String> companyList = applicationService.getBookmarkedCompany("user001");
+	    System.out.println("공고 직무 리스트 listByRoleId: " + listByRoleId); // 가져온 데이터 출력
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("listByRoleId", listByRoleId);
+	    response.put("companyList", companyList);
+
+	    return response;
 	}
 
 	// 검색어로 검색하기
 	@RequestMapping("/searchingByKeyword")
 	@ResponseBody
 	Map<String, Object> searchingByKeyword(@RequestBody String keyword) {
-		// 14 : 21 테스트 시작
-		System.out.println("여기는 됐나요?");
-		List<ApplicationDto> listByKeyword = applicationService.getApplicationByKeyword("user001", keyword);
-		System.out.println("키워드는 .. " + keyword + "입니다.." + listByKeyword);
-		List<String> companyList = applicationService.getBookmarkedCompany("user001");
-		Map<String, Object> response = new HashMap<>();
-		response.put("listByKeyword", listByKeyword);
-		response.put("companyList", companyList);
-		// 완료
-		return response;
+	    System.out.println("검색어: " + keyword); // 요청으로 들어온 값 출력
+	    List<ApplicationDto> listByKeyword;
+
+	    if (keyword == null || keyword.trim().isEmpty()) {
+	        listByKeyword = applicationService.getApplicationList("user001"); // 전체 리스트 반환
+	    } else {
+	        listByKeyword = applicationService.getApplicationByKeyword("user001", keyword);
+	    }
+
+	    List<String> companyList = applicationService.getBookmarkedCompany("user001");
+	    System.out.println("공고 키워드 리스트 listByKeyword: " + listByKeyword); // 가져온 데이터 출력
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("listByKeyword", listByKeyword);
+	    response.put("companyList", companyList);
+
+	    return response;
 	}
+
+
 
 }

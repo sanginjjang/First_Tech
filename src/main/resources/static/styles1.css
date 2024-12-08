@@ -313,7 +313,7 @@ main {
     margin: 20px 0 !important;
     overflow: scroll;
     /* 스크롤 기능 유지 */
-    background-color: ivory;
+    background-color: #ffffff;
     border-radius: 5px;
     flex: 3;
     scrollbar-width: none;
