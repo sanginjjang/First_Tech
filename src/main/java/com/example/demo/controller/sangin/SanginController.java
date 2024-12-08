@@ -71,7 +71,7 @@ public class SanginController {
 		model.addAttribute("applicationList", applicationList);
 		model.addAttribute("companyList", companyList);
 
-		return "sangin/applicationsForm";
+		return "sangin/test";
 	}
 
 	// 공고 상세 정보 페이지

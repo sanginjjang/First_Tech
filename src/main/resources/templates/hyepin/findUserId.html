@@ -11,6 +11,7 @@ body{
 		width: 80%;
 		margin: 0 auto;
 		margin-top: 50px;
+        background-color: #f9f9f9;
 	}
 
     header {
@@ -18,24 +19,16 @@ body{
         border: lightgray solid 1px;
         width: 100%;
         height: 15%;
-        background-color: aliceblue;
+         background-color: #ffffff;
         font-size: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-radius: 5px 5px 0 0;
+        border: 1px solid #d9d9d9;
+        background-color: #f5f5f5;
     }
-
-    footer {
-        font-weight: bold;
-        border: lightgray solid 1px;
-        width: 100%;
-        height: 10%;
-        background-color: Faliceblue;
-        font-size: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    
 
     a {
         /* 링크 기본 스타일 */
@@ -56,13 +49,16 @@ body{
         margin-left: 30px;
         height: 60px;
     }
-
-    section {
+   
+ section {
         width: 100%;
         height: 70%;
         border: lightgray solid 1px;
         text-align: center;
         padding: 50px 0px 50px 0px;
+        border-radius: 0 0 5px 5px;
+        background-color: #ffffff;
+        border: 1px solid #d9d9d9;
     }
 
     /*여기까지 공통*/
@@ -84,6 +80,43 @@ body{
         width: 8%;
     }
 
+    footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+            margin-top: 20px;
+        }
+
+        input{
+        border-radius: 5px;
+        border: 1px solid #d9d9d9;
+   }
+   #realBtn{
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        border: none;
+    }
+    #realBtn:hover{
+        background-color: #0056b3;
+    }
+    #findForm > div > div{
+        margin-top: 30px;
+    }
+
+    #findForm > div > div > p {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+
 </style>
 
 <body>
@@ -102,8 +135,11 @@ body{
         </div>
         <form id="findForm">
             <div>
+                <div>
                 <p>이름 입력</p>
                 <input type="text" name="userName" id="userName" class="formStyle" placeholder="이름을 입력하세요">
+            </div>
+                <div>
                 <p>휴대전화 입력</p>
                 
                 <select name="userPhoneFirst" class="formStyle1" id="userPhoneFirst">
@@ -123,17 +159,25 @@ body{
                 -
                 <input type="text" name="userPhoneLast" id="userPhoneLast" class="formStyle1" maxlength="4">
 
-                
+            </div>
+
+            <div>
                 <p>이메일 입력</p>
                 <input type="text" name="userEmail" id="userEmail" class="formStyle" placeholder="이메일을 입력하세요">
             </div>
+            </div>
             <br>
-            <input type="button" onclick="find()" class="formStyle" value="찾기">
+            <input type="button" id="realBtn" onclick="find()" class="formStyle" value="찾기">
 
         </form>
     </section>
-    <footer>Footer</footer>
+    <footer>
+        © 2024 First Tech. 모든 권리 보유.
+    </footer>
 </body>
+
+
+
 
 <script>
     
