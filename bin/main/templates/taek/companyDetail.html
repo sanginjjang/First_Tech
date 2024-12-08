@@ -281,7 +281,9 @@ footer {
 								<option value="searchCompany">기업명</option>
 							</select> <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
 							
-								<button id="searchBtn">검색</button>
+							<th:block th:if="${session.user != null || session.company != null}">
+													<button id="searchBtn">검색</button>
+												</th:block>
 							
 							<th:block th:if="${session.user == null and session.company == null}">
 								<button id="searchBtn" onclick="noSearch(event)">검색</button>
