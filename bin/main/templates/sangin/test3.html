@@ -145,10 +145,9 @@ nav {
 	scale: 1.1;
 }
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
 	display: none;
-}
-
+} */
 input[type="checkbox"]:checked+.label-text {
 	color: blue;
 	font-weight: bold;
@@ -348,8 +347,8 @@ section {
 			</div>
 			<form id="searchingForm">
 				<input type="text" id="searching" name="searching"
-					placeholder="회사이름, 경력, 학력, 근무지, 고용형태"> <input
-					type="button" value="검색" class="searchOption">
+					placeholder="회사이름, 경력, 학력, 근무지, 고용형태"> <input type="button"
+					value="검색" class="searchOption">
 			</form>
 		</div>
 
@@ -402,12 +401,9 @@ section {
 					<label for="roleCheckbox4" class="label-text">데이터엔지니어</label> <input
 						type="checkbox" value="BackendServerDeveloper" id="roleCheckbox5"
 						class="roleCheckbox"> <label for="roleCheckbox5"
-						class="label-text">백엔드/서버개발</label>
-				</div>
-				<div class="roleCheckbox hidden">
-					<input type="checkbox" value="SecurityConsultant"
-						id="roleCheckbox6" class="roleCheckbox"> <label
-						for="roleCheckbox6" class="label-text">보안컨설팅</label> <input
+						class="label-text">백엔드/서버개발</label> <input type="checkbox"
+						value="SecurityConsultant" id="roleCheckbox6" class="roleCheckbox">
+					<label for="roleCheckbox6" class="label-text">보안컨설팅</label> <input
 						type="checkbox" value="AppDeveloper" id="roleCheckbox7"
 						class="roleCheckbox"> <label for="roleCheckbox7"
 						class="label-text">앱개발</label> <input type="checkbox"
@@ -417,31 +413,28 @@ section {
 						class="roleCheckbox"> <label for="roleCheckbox9"
 						class="label-text">웹마스터</label> <input type="checkbox"
 						value="Maintenance" id="roleCheckbox10" class="roleCheckbox">
-					<label for="roleCheckbox10" class="label-text">유지보수</label>
+					<label for="roleCheckbox10" class="label-text">유지보수</label> <input
+						type="checkbox" value="InformationSecurity" id="roleCheckbox11"
+						class="roleCheckbox"> <label for="roleCheckbox11"
+						class="label-text">정보보안</label> <input type="checkbox"
+						value="Frontend" id="roleCheckbox12" class="roleCheckbox">
+					<label for="roleCheckbox12" class="label-text">프론트엔드</label> <input
+						type="checkbox" value="Publisher" id="roleCheckbox13"
+						class="roleCheckbox"> <label for="roleCheckbox13"
+						class="label-text">퍼블리셔</label> <input type="checkbox"
+						value="BiEngineer" id="roleCheckbox14" class="roleCheckbox">
+					<label for="roleCheckbox14" class="label-text">BI엔지니어</label> <input
+						type="checkbox" value="Ciso" id="roleCheckbox15"
+						class="roleCheckbox"> <label for="roleCheckbox15"
+						class="label-text">CISO</label>
 				</div>
-				<div class="roleCheckbox hidden">
-					<input type="checkbox" value="InformationSecurity"
-						id="roleCheckbox11" class="roleCheckbox"> <label
-						for="roleCheckbox11" class="label-text">정보보안</label> <input
-						type="checkbox" value="Frontend" id="roleCheckbox12"
-						class="roleCheckbox"> <label for="roleCheckbox12"
-						class="label-text">프론트엔드</label> <input type="checkbox"
-						value="Publisher" id="roleCheckbox13" class="roleCheckbox">
-					<label for="roleCheckbox13" class="label-text">퍼블리셔</label> <input
-						type="checkbox" value="BiEngineer" id="roleCheckbox14"
-						class="roleCheckbox"> <label for="roleCheckbox14"
-						class="label-text">BI엔지니어</label> <input type="checkbox"
-						value="Ciso" id="roleCheckbox15" class="roleCheckbox"> <label
-						for="roleCheckbox15" class="label-text">CISO</label>
-				</div>
-			</div>
 
-			<div id="nav2_2">
-				<b id="description" style="font-size: 22px;"><= 선택해주세요.</b> <br>
-				<!--
+				<div id="nav2_2">
+					<b id="description" style="font-size: 22px;"><= 선택해주세요.</b> <br>
+					<!--
 				<button id="reset" onclick="reset()">선택 초기화</button>  
 				 -->
-			</div>
+				</div>
 	</nav>
 	<section>
 		<div id="section1">

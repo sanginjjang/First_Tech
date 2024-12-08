@@ -1,8 +1,11 @@
 package com.example.demo.controller.mijeong;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +30,9 @@ import com.example.demo.dto.UserCertificateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserResumeApplyStatus;
 import com.example.demo.dto.UserTechStackDto;
+import com.example.demo.service.ICompanyServiceHyepin;
 import com.example.demo.service.mijeong.ResumeService;
+import com.example.demo.vo.hyepin.MainApplicationVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -215,12 +220,25 @@ public class ResumeController {
        return "/resume/MyResumeList";
     }
     
-    
+	@Autowired
+	ICompanyServiceHyepin companyService;
     @RequestMapping("/deleteResume")
-    public String deleteResume(@RequestParam("resumeNum") int resumeNum) {
+    public String deleteResume(@RequestParam("resumeNum") int resumeNum, Model model) {
         System.out.println("삭제할 resumeNum: " + resumeNum); 
         resumeservice.deleterResume(resumeNum);
-        return "/sangin/main"; 
+        List<MainApplicationVo> aList = companyService.getMainApplications();
+		ArrayList<LocalDateTime> deadlineDate = new ArrayList<>();
+		// 오늘 날짜
+		LocalDateTime today = LocalDateTime.now();
+		for(MainApplicationVo a : aList) {
+			// Timestamp 객체를 LocalDateTime으로 변환
+			 LocalDateTime deadlineDate_1 = a.getDeadlineDate().toLocalDateTime();
+			 // 날짜 차이 계산 (일수)
+			 int daysBetween = (int) ChronoUnit.DAYS.between(today, deadlineDate_1);
+			 a.setDay(daysBetween);
+		}
+		model.addAttribute("aList", aList);
+		return "/sangin/main";
     }
     
     @RequestMapping("/resumeApplyList")
