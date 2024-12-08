@@ -48,7 +48,7 @@
     }
 
     .resumeForm input[type="text"], .resumeForm input[type="file"], .resumeForm select, .resumeForm input[type="date"] {
-        width: 100%;
+        width: 500px;
         padding: 10px;
         margin: 10px 0;
         font-size: 16px;
@@ -65,6 +65,7 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
+        margin-top: 50px;
     }
 
     .resumeForm input[type="submit"]:hover {
@@ -85,28 +86,298 @@
     }
 
     #certificateInfo p {
-        font-size: 14px;
+        font-size: 20px;
+        font-weight: 900;
     }
 
     #certificateInfo input[type="hidden"] {
         display: none;
     }
 
-    /* 기술 스택 체크박스 */
-    .resumeForm .tech-stack label {
-        margin-right: 15px;
-        font-size: 16px;
-    }
+	.resumeForm .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: calc(5 * 150px + 5 * 15px);
+    text-align: center;
+    margin : 0 auto;
+	}
+	
+	/* 기술 스택 항목 */
+	.resumeForm .tech-stack label {
+	    display: flex;
+	    align-items: center; /* 체크박스와 텍스트를 세로로 정렬 */
+	    font-size: 16px;
+	    width: 150px; /* 고정 너비 설정 */
+	}
+	
+	.resumeForm .tech-stack input {
+	    margin-right: 5px;
+	}
 
-    .resumeForm .tech-stack input {
-        margin-right: 5px;
-    }
+  /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
 
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+
+        /* footer */
+        footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+             * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+       /* 헤더 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+        }
+
+        #logo a{
+            display: flex;
+            width: 100px;
+            height: 100px;
+        }
+
+        header a {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #867a7a;
+        }
+
+        #header-right {
+            position: relative;
+            bottom: 55px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search> form > input {
+            padding: 20px;
+            width: 600px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+        }
+
+        .search> form > button {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchSelect {
+            padding: 15px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        /* 네브 */
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px 50px;
+            gap: 250px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-left div a {
+            color: black;
+            transition: 0.3s;
+        }
+
+        .nav-left div a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            transition: 0.3s;
+            display: flex;
+            background-color: #1a73e8;
+            padding: 15px 35px;
+            border-radius: 10px;
+            gap: 20px;
+        }
+
+        .nav-right div {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-right:hover {
+            background-color: #105cbf;
+        }
+        
+        #content{
+	        width: 500px;
+	        height:500px;
+	        padding: 10px;
+	        margin: 10px 0;
+	        font-size: 16px;
+	        border: 1px solid #d9d9d9;
+	        border-radius: 5px;
+        }
 </style>
 </head>
 <body>
+<header>
+  <div id="logo">
+  <a href="/">
+      <img src="/uploads/logo.webp" alt="">
+  </a>
+  </div>
+  <div class="search">
+  <form action="/s/searchResult2" method="post" id="form">
+      <select id="searchSelect"  name="searchPart">
+        <option value="searchApplication">공고명</option>
+  		<option value="searchCompany">기업명</option>
+      </select>
+      <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+      <th:block th:if="${session.user != null}">
+      <button id="searchBtn">검색</button>
+      </th:block>
+       <th:block th:if="${session.user == null}">
+      <button id="searchBtn" onclick="noSearch(event)">검색</button>
+        </th:block>
+     </form>
+    </div>
+    <div id="header-right">
+    	<th:block th:if="${session.user == null}">
+    	  	<span><a href="/hyepin/login">로그인</a></span>
+       		<span><a href="/hyepin/join">회원가입</a></span>
+        	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+    	</th:block>
+    	<th:block th:if="${session.user != null}">
+    	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+    	  	<span><a href="/hyepin/logout">로그아웃</a></span>
+    	</th:block>
+    </div>
+</header>
+ <nav>
+     <div class="nav-left">
+     <th:block th:if="${session.user == null}">
+         <div onclick="noLogin()">채용공고</div>
+         <div onclick="noLogin()">기업정보</div>
+         <div onclick="noLogin()">지원현황</div>
+         <div onclick="noLogin()">이력서관리</div>
+         <div onclick="noLogin()">커뮤니티</div>
+     </th:block>
+    
+     <th:block th:if="${session.user != null}">
+         <div><a href="/sangin/applicationsForm">채용공고</a></div>
+         <div><a href="/c/companyInfo/1">기업정보</a></div>
+         <div><a href="/resume/resumeApplyList">지원현황</a></div>
+         <div><a href="/resume/MyResumeList">이력서관리</a></div>
+         <div><a href="/b/board/1">커뮤니티</a></div>
+     </th:block>
+     </div>
+     
+     <div class="nav-right">
+         <div>FAQ</div>
+     </div>
+ </nav>
+ 
 <div class="resumeForm">
-   <h2>이력서 등록</h2>
+   <h2>이력서 등록</h2><br>
+   
    <form action="/resume/resumeForm" method="post" enctype="multipart/form-data" id="MyForm">
 	    <h3>사용자 정보</h3>
 	    <input type="hidden" name="userId" th:value="${user.userId}"><br>
@@ -140,7 +411,7 @@
 	   
 	    <h3>이력서 정보</h3>
 	    제목 : <input type="text" name="resumeTitle" id="Title"><br>
-	    내용 : <input type="text" name="resumeContent" id="content"><br>
+	    내용 : <input type="text" name="resumeContent" id="content" ><br>
 		
 		<h3>자격증 조회</h3>
 	    자격증 이름: <input type="text" id="SerchCertificateName" placeholder="정보처리기사 라고 입력하세요"/>
@@ -196,15 +467,15 @@
 	   
 	    
 	    <h3>기술 스킬</h3>
-	    <div id="techStackNum">
-		    <label><input type="checkbox" name="techStackNum" value="1"> JavaScript</label>
+	    <div id="techStackNum" class="tech-stack">
+		    <label><input type="checkbox" name="techStackNum" value="1" > JavaScript</label>
 		    <label><input type="checkbox" name="techStackNum" value="2"> Java</label>
 		    <label><input type="checkbox" name="techStackNum" value="3"> Python</label>
 		    <label><input type="checkbox" name="techStackNum" value="4"> React</label>
 		    <label><input type="checkbox" name="techStackNum" value="5"> Node.js</label>
 		    <label><input type="checkbox" name="techStackNum" value="6"> Angular</label>
 		    <label><input type="checkbox" name="techStackNum" value="7"> AWS</label>
-		    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label><br>
+		    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label>
 		    <label><input type="checkbox" name="techStackNum" value="9"> Kubernetes</label>
 		    <label><input type="checkbox" name="techStackNum" value="10"> SQL</label>
 		    <label><input type="checkbox" name="techStackNum" value="11"> HTML/CSS</label>
@@ -224,7 +495,7 @@ $('#SerchCertificateName').on('input', function() {
 
     if (SerchCertificateName) {
         $.ajax({
-            url: '/resume/certificate',  // 자격증 정보를 가져오는 API
+            url: '/resume/certificate',  
             type: 'GET',
             data: { SerchCertificateName: SerchCertificateName },
             success: function(response) {
@@ -248,10 +519,9 @@ $('#SerchCertificateName').on('input', function() {
     } 
 });
 
-// 폼 제출 시 유효성 검사
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("MyForm").addEventListener("submit", function(event){
-        event.preventDefault();  // 폼 제출 기본 동작 방지
+        event.preventDefault();  
 
         var Title = document.getElementById("Title").value;
         var content = document.getElementById("content").value;
@@ -272,7 +542,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var techStackNum = document.querySelectorAll('input[name="techStackNum"]:checked');
         var techStackValid = techStackNum.length > 0;
 
-        // 필수 입력값 검증
         if (roleid === "") {
             alert("직무를 입력하세요");
         } else if (Title === "") {
@@ -304,7 +573,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (!techStackValid) {
             alert("기술 스킬을 체크해주세요");
         } else {
-            // 모든 조건을 만족할 경우 폼 제출
             document.getElementById("MyForm").submit();
         }
     });

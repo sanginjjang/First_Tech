@@ -42,7 +42,7 @@ public class ResumeController {
 	@Autowired
 	private ResumeService resumeservice;
 
-	// 업로드 디렉토리 경로
+
 	@Value("${spring.servlet.multipart.location:./uploads}")
 	private String uploadPath;
 
@@ -56,7 +56,7 @@ public class ResumeController {
 		return "/resume/MyResumeForm";
 	}
 	
-	// 이력서 제출 처리 메서드
+	
 	@RequestMapping("/resumeForm")
 	public String getResumeUser(@SessionAttribute("user") UserDto user,
 								ResumeFileDto resumefiledto, Model model) {
@@ -97,16 +97,16 @@ public class ResumeController {
 		resumedto.setResumeContent(resumefiledto.getResumeContent());
 		resumedto.setPortfolioName(filenameport); 
 		resumedto.setPersonalPhotoName(filenamephoto);
-		resumedto.setEducation(resumefiledto.getEducation());
+		resumedto.setEducation(resumefiledto.getEducation());///// 이넘..
 		resumedto.setSchool(resumefiledto.getSchool());
 		resumedto.setAddress(resumefiledto.getAddress());
-		resumedto.setMilitaryService(resumefiledto.getMilitaryService());
+		resumedto.setMilitaryService(resumefiledto.getMilitaryService()); ///// 이넘..
 		resumedto.setCreatedDate(resumefiledto.getCreatedDate());
 		resumedto.setUpdatedDate(resumefiledto.getUpdatedDate());
 		resumedto.setRoleId(resumefiledto.getRoleId());
-		resumedto.setUserId(userId); // 사용자 ID 설정
-		resumeservice.insertResume(resumedto); // 이력서 저장
-		Integer resumeNum = resumedto.getResumeNum(); // 생성된 PK 가져오기
+		resumedto.setUserId(userId); 
+		resumeservice.insertResume(resumedto); 
+		Integer resumeNum = resumedto.getResumeNum(); 
 		System.out.println("sdfsdfsdf"+resumeNum);
 
 		
@@ -120,11 +120,11 @@ public class ResumeController {
 		List<CareerDto> careers = new ArrayList<>();
 		for (int i = 0; i < career.size(); i++) {
 			CareerDto careerDto = new CareerDto();
-			careerDto.setResumeNum(resumeNum); // 경력에 설정
-			careerDto.setCareer(career.get(i)); // 경력 기간 설정
-			careerDto.setCareerName(resumefiledto.getCareerName().get(i)); // 경력 회사명 설정
-			careers.add(careerDto); // 리스트에 CareerDto 추가
-			System.out.println("Careers: " + careers); // careers 리스트 내용 확인
+			careerDto.setResumeNum(resumeNum);
+			careerDto.setCareer(career.get(i)); 
+			careerDto.setCareerName(resumefiledto.getCareerName().get(i)); 
+			careers.add(careerDto); 
+			System.out.println("Careers: " + careers); 
 		}
 		resumeservice.insertCareer(careers);
 		
@@ -147,7 +147,7 @@ public class ResumeController {
 		    internship.setStartDate(resumefiledto.getStartDate().get(i)); // 시작 날짜
 		    internship.setEndDate(resumefiledto.getEndDate().get(i)); // 종료 날짜
 		    internships.add(internship);
-		    System.out.println("internships: " + careers); // careers 리스트 내용 확인
+		    System.out.println("internships: " + careers);
 		} 
 		resumeservice.insertInternship(internships);
 	
@@ -170,7 +170,7 @@ public class ResumeController {
 			Date certificateDate = resumefiledto.getCertificateDate();
 		    userCertificate.setCertificateDate(certificateDate);
 		    userCertificates.add(userCertificate);
-		    System.out.println("userCertificate: " + userCertificates); // userCertificates 리스트 내용 확인
+		    System.out.println("userCertificate: " + userCertificates); 
 		} 
 		resumeservice.insertCertificate(userCertificates);
 		
@@ -183,7 +183,7 @@ public class ResumeController {
 			userTechStackdto.setResumeNum(resumeNum);
 			userTechStackdto.setTechStackNum(Integer.parseInt(techsteck[i]));
 			userTeckStack.add(userTechStackdto);
-		    System.out.println("userTechStack: " + userTechStackdto); // userCertificates 리스트 내용 확인
+		    System.out.println("userTechStack: " + userTechStackdto); 
 		} 
 	  resumeservice.insertTechStack(userTeckStack);
 		return"redirect:/resume/MyResumeList";
@@ -238,7 +238,7 @@ public class ResumeController {
         List<UserResumeApplyStatus> resumeApplyList = resumeservice.getResumeApplyList(userId);
         System.out.println("resumeApplyList!!!" + resumeApplyList);
         model.addAttribute("resumeApplyList", resumeApplyList);
-        return "resume/resumeApplyList";  // 템플릿 경로 수정
+        return "resume/resumeApplyList"; 
     }
     
 		
