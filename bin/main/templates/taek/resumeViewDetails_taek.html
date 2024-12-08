@@ -487,7 +487,7 @@
 
     <div class="main-container">
         <div class="sidebar">
-            <h2>이력서 목록(가변)</h2>
+            <h2>이력서 목록</h2>
             <!-- 그냥 이력서 리스트 나옵니다~ -->
             <th:block th:each="item : ${resumeList}">
                 <div class="list-item">
@@ -513,12 +513,13 @@
                             <span>[[${resume.userName}]]</span>
                         </div>
                     </div>
-                    <div class="items">
-                        <strong>증명사진</strong>
-                        <div class="resume-value">
-                            <img src="your-image-url.jpg" alt="증명사진" class="resume-photo">
-                        </div>
-                    </div>
+					<div class="items">
+					                       <strong>증명사진</strong>
+					                       <div class="resume-value" style="border: none">
+											<img th:src="@{/uploads/{resume}(resume=${resume.personalPhotoName})}" class="resume-photo" width="100px">
+					                         
+					                       </div>
+					                   </div>
                     <div class="items">
                         <strong>이력서 내용</strong>
                         <div class="resume-value">
