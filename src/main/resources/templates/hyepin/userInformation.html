@@ -7,37 +7,38 @@
     <title>Document</title>
 </head>
 <style>
-body{
+    body{
 		width: 80%;
 		margin: 0 auto;
 		margin-top: 50px;
+        background-color: #f9f9f9;
 	}
-
 
     header {
         font-weight: bold;
         border: lightgray solid 1px;
         width: 100%;
         height: 15%;
-        background-color: aliceblue;
+         background-color: #ffffff;
         font-size: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-radius: 5px 5px 0 0;
+        border: 1px solid #d9d9d9;
+        background-color: #f5f5f5;
     }
 
-    footer {
-        font-weight: bold;
-        border: lightgray solid 1px;
-        width: 100%;
-        height: 10%;
-        background-color: Faliceblue;
-        font-size: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
+  footer {
+            padding: 15px;
+            background-color: #ffffff;
+            text-align: center;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555555;
+            margin-top: 20px;
+        }
     a {
         /* 링크 기본 스타일 */
         text-decoration: none;
@@ -61,9 +62,11 @@ body{
     section {
         width: 100%;
         height: 70%;
-        border: lightgray solid 1px;
         text-align: center;
         padding: 50px 0px 50px 0px;
+        border-radius: 0 0 5px 5px;
+        background-color: #ffffff;
+        border: 1px solid #d9d9d9;
     }
 
     /*여기까지 공통*/
@@ -144,6 +147,29 @@ body{
     .description {
         margin-bottom: 15px;
     }
+    input{
+        border-radius: 5px;
+        border: 1px solid #d9d9d9;
+   }
+   #realBtn, #userPostalCodeCheck{
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        border: none;
+    }
+    #realBtn:hover, #userPostalCodeCheck:hover{
+        background-color: #0056b3;
+    }
+    #joinForm > div > div{
+        margin-top: 30px;
+    }
+    #joinForm > div > div > p{
+        font-size: 20px;
+        font-weight: bold;
+    }
     
 </style>
 
@@ -163,36 +189,49 @@ body{
         </div>
         <form id="joinForm">
             <div>
+                <div>
                 <p>아이디</p>
                 <input type="text" class="formStyle" name="userId" id="userId" th:value="${user.userId}" readonly>
                 <br>
+                </div>
                 
+                <div>
                 <p>닉네임</p>
                 <input type="text" name="userNickname" id="userNickname" th:value="${user.userNickname}" maxlength="10">
-                <input type="button" value="중복확인" onclick="nicknameCheck()" id="userNicknameCheck">
+                <input type="button" id="realBtn" value="중복확인" onclick="nicknameCheck()" id="userNicknameCheck">
                 <br>
                 <span class="ajax" id="nicknameAjax"></span>
+                </div>
                 
+                <div>
                 <p>비밀번호</p>
-                <input type="text" name="userPassword" id="userPassword" class="formStyle"> <br> <br>
-                <input type="text" name="userPwCheck" id="userPwCheck" class="formStyle" placeholder="비밀번호 확인"> <br>
+                <input type="password" name="userPassword" id="userPassword" class="formStyle"> <br> <br>
+                <input type="password" name="userPwCheck" id="userPwCheck" class="formStyle" placeholder="비밀번호 확인"> <br>
                 <span class="ajax" id="pwAjax"></span>
-                
+            </div>
+
+            <div>
                 <p>이메일</p>
                 <input type="text" name="userEmail" id="userEmail" th:value="${user.userEmail}" class="formStyle" > <br>
                 <span class="ajax" id="emailAjax"></span>
-                
+            </div>
+
+            <div>
                 <p>이름</p>
                 <input type="text" name="userName" id="userName" th:value="${user.userName}" class="formStyle" > <br>
                 <span class="ajax" id="nameAjax"></span>
 
+            </div>
+
+            <div>
                 <p>주민등록번호</p>
                 <input type="hidden" id="ssn" th:value="${user.userSsn}">
                 <input type="text" name="userSsnFirst" id="userSsnFirst" class="formStyle1" maxlength="6" readonly>
                 -
-                <input type="text" name="userSsnLast" id="userSsnLast" class="formStyle1" maxlength="7" readonly> <br>
+                <input type="password" name="userSsnLast" id="userSsnLast" class="formStyle1" maxlength="7" readonly> <br>
                 <span class="ajax" id="ssnAjax"></span>
-                
+            </div> 
+                <div>
                 <p>휴대전화</p>
                 <input type="hidden" id="phone" th:value="${user.userPhone}">
                 <select name="userPhoneFirst" class="formStyle2" id="userPhoneFirst">
@@ -213,25 +252,32 @@ body{
                 <input type="text" name="userPhoneLast" id="userPhoneLast" class="formStyle2" maxlength="4">
                 <br>
                 <span class="ajax" id="phoneAjax"></span>
-				
+            </div>
+            
+
+            <div>
 				<p>우편번호</p>
 				<input type="text"  class="formStyle" name="userPostalCode" id="userPostalCode" placeholder="우편번호" th:value="${user.userPostalCode}" readonly>
 				<input type="button" id="userPostalCodeCheck" onclick="findPostcode()" value="우편번호 찾기"><br>
-				
+			</div>
+            
+            <div>
 				<p>주소</p>
 				<input type="text" name="addressFirst" id="addressFirst" placeholder="도로명주소" class="formStyle" th:value="${user.userAddress}" readonly>
 				<span id="guide" style="color:#999;display:none"></span><br><br>
 				<input type="text" name="addressSecond" id="addressSecond" class="formStyle"  placeholder="상세주소">
                 <br><br>
                 <span class="ajax" id="postalCodeAjax"></span>
-               
+            </div>
             </div>
             <br>
-            <input type="button" onclick="find()" class="formStyle" value="회원정보 수정">
+            <input type="button" id="realBtn"  onclick="find()" class="formStyle" value="회원정보 수정">
 
         </form>
     </section>
-    <footer>Footer</footer>
+    <footer>
+        © 2024 First Tech. 모든 권리 보유.
+    </footer>
 
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -5,312 +5,654 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-	
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0 auto;
-        background-color: #f9f9f9;
-        color: #333;
-        width: 80%;
-    }
+body {
+	font-family: Arial, sans-serif;
+	margin: 0 auto;
+	background-color: #f9f9f9;
+	color: #333;
+	width: 80%;
+}
 
-    a {
-        text-decoration: none;
-    }
+a {
+	text-decoration: none;
+}
 
-    .resumeForm {
-        text-align: center;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #d9d9d9;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
+.resumeForm {
+	text-align: center;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	margin-top: 20px;
+}
 
-    .resumeForm h2 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #1a73e8;
-    }
+.resumeForm h2 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #1a73e8;
+}
 
-    .resumeForm h3 {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 20px 0;
-        color: #333;
-    }
+.resumeForm h3 {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 20px 0;
+	color: #333;
+}
 
-    .resumeForm input[type="text"], .resumeForm input[type="file"], .resumeForm select, .resumeForm input[type="date"] {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        font-size: 16px;
-        border: 1px solid #d9d9d9;
-        border-radius: 5px;
-    }
+.resumeForm input[type="text"], .resumeForm input[type="file"],
+	.resumeForm select, .resumeForm input[type="date"] {
+	width: 500px;
+	padding: 10px;
+	margin: 10px 0;
+	font-size: 16px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
 
-    .resumeForm input[type="submit"] {
-        background-color: #1a73e8;
-        color: white;
-        font-weight: bold;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+.resumeForm input[type="submit"] {
+	background-color: #1a73e8;
+	color: white;
+	font-weight: bold;
+	border: none;
+	padding: 12px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	margin-top: 50px;
+}
 
-    .resumeForm input[type="submit"]:hover {
-        background-color: #105cbf;
-    }
+.resumeForm input[type="submit"]:hover {
+	background-color: #105cbf;
+}
 
-    .resumeForm label {
-        display: block;
-        margin: 5px 0;
-    }
+.resumeForm label {
+	display: block;
+	margin: 5px 0;
+}
 
-    #certificateInfo {
-        margin-top: 10px;
-        background-color: #f1f1f1;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #d9d9d9;
-    }
+#certificateInfo {
+	margin-top: 10px;
+	background-color: #f1f1f1;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #d9d9d9;
+}
 
-    #certificateInfo p {
-        font-size: 14px;
-    }
+#certificateInfo p {
+	font-size: 20px;
+	font-weight: 900;
+}
 
-    #certificateInfo input[type="hidden"] {
-        display: none;
-    }
+#certificateInfo input[type="hidden"] {
+	display: none;
+}
 
-    /* 기술 스택 체크박스 */
-    .resumeForm .tech-stack label {
-        margin-right: 15px;
-        font-size: 16px;
-    }
+.resumeForm .tech-stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	max-width: calc(5 * 150px + 5 * 15px);
+	text-align: center;
+	margin: 0 auto;
+}
 
-    .resumeForm .tech-stack input {
-        margin-right: 5px;
-    }
+/* 기술 스택 항목 */
+.resumeForm .tech-stack label {
+	display: flex;
+	align-items: center; /* 체크박스와 텍스트를 세로로 정렬 */
+	font-size: 16px;
+	width: 150px; /* 고정 너비 설정 */
+}
 
+.resumeForm .tech-stack input {
+	margin-right: 5px;
+}
+
+/* 네브 */
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #ffffff;
+	margin-top: 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	padding: 15px 50px;
+	gap: 250px;
+}
+
+.nav-left {
+	display: flex;
+	gap: 120px;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+}
+
+.nav-left div a {
+	color: black;
+	transition: 0.3s;
+}
+
+.nav-left div a:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.nav-right {
+	transition: 0.3s;
+	display: flex;
+	background-color: #1a73e8;
+	padding: 15px 35px;
+	border-radius: 10px;
+	gap: 20px;
+}
+
+.nav-right div {
+	font-size: 18px;
+	color: white;
+	margin: 0;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.nav-right:hover {
+	background-color: #105cbf;
+}
+
+/* footer */
+footer {
+	padding: 15px;
+	background-color: #ffffff;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #555555;
+	margin-top: 20px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0 auto;
+	background-color: #f9f9f9;
+	color: #333333;
+	width: 80%;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* 헤더 */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px 20px;
+	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
+
+#logo a {
+	display: flex;
+	font-size: 30px;
+	font-weight: bold;
+	color: #867a7a;
+}
+
+header a {
+	margin: 10px 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #867a7a;
+}
+
+#header-right {
+	margin-top: 30px;
+	position: relative;
+	bottom: 55px;
+}
+
+.search {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.search>form>input {
+	padding: 20px;
+	width: 600px;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+}
+
+#searchBtn {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	background: white;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#searchSelect {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+/* 네브 */
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #ffffff;
+	margin-top: 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	padding: 15px 50px;
+	gap: 250px;
+}
+
+.nav-left {
+	display: flex;
+	gap: 120px;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+}
+
+.nav-left div a {
+	color: black;
+	transition: 0.3s;
+}
+
+.nav-left div a:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.nav-right {
+	transition: 0.3s;
+	display: flex;
+	background-color: #1a73e8;
+	padding: 15px 35px;
+	border-radius: 5px;
+	gap: 20px;
+}
+
+.nav-right div {
+	font-size: 18px;
+	color: white;
+	margin: 0;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.nav-right:hover {
+	background-color: #105cbf;
+}
+
+#content {
+	width: 500px;
+	height: 500px;
+	padding: 10px;
+	margin: 10px 0;
+	font-size: 16px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
 </style>
 </head>
 <body>
-<div class="resumeForm">
-   <h2>이력서 등록</h2>
-   <form action="/resume/resumeForm" method="post" enctype="multipart/form-data" id="MyForm">
-	    <h3>사용자 정보</h3>
-	    <input type="hidden" name="userId" th:value="${user.userId}"><br>
-	    이름 : <input type="text" name="userName" th:value="${user.userName}" readonly><br>
-	    주민번호 : <input type="text" name="userSsn" th:value="${user.userSsn}" readonly><br>
-	    전화번호 : <input type="text" name="userPhone" th:value="${user.userPhone}" readonly><br>
-	    주소 : <input type="text" name="userAddress" th:value="${user.userAddress}" readonly><br>
-	    우편번호 : <input type="text" name="userPostalCode" th:value="${user.userPostalCode}" readonly><br>
-	    이메일 : <input type="text" name="userEmail" th:value="${user.userEmail}" readonly><br>
-	    닉네임 : <input type="text" name="userNickname" th:value="${user.userNickname}" readonly><br>
-	    증명사진 : <input type="file" name="personalPhotoName"><br>
-	
-		<h3>직무 (Role)</h3>
-	    <select name="roleId" id="roleId">
-				    <option value="1">백엔드 개발자</option>
-				    <option value="2">데이터 분석가</option>
-				    <option value="3">프론트엔드 개발자</option>
-				    <option value="4">데이터 엔지니어</option>
-				    <option value="5">>백엔드/서버 개발자</option>
-				    <option value="6">보안 컨설턴트</option>
-				    <option value="7">앱 개발자</option>
-				    <option value="8">웹 개발자</option>
-				    <option value="9">웹 마스터</option>
-				    <option value="10">유지 보수</option>
-				    <option value="11">정보 보안</option>
-				    <option value="12">프론트엔드</option>
-				    <option value="13">퍼블리셔</option>
-				    <option value="14">BI 엔지니어</option>
-				    <option value="15">CISO</option>
-				</select>
-	   
-	    <h3>이력서 정보</h3>
-	    제목 : <input type="text" name="resumeTitle" id="Title"><br>
-	    내용 : <input type="text" name="resumeContent" id="content"><br>
-		
-		<h3>자격증 조회</h3>
-	    자격증 이름: <input type="text" id="SerchCertificateName" placeholder="정보처리기사 라고 입력하세요"/>
-	    <div id="certificateInfo">
-	        <p>자격증 이름: <span id="certificateNameResult"></span><input type="hidden" name="certificateName"  id="ajaxcertificateName"></p>
-	        <p>자격증 번호: <span id="certificateNumResult"></span><input type="hidden" name="certificateNum"  id="ajaxcertificateNum"></p>
-	        <p>발행처: <span id="certificateByResult"></span><input type="hidden" name="certificateBy"  id="ajaxcertificateBy"></p>
-	        <p>취득날짜 : <input type="date" name ="certificateDate" id="certificateDate"></p>
-	    </div>
-	
-	    <h3>병역</h3>
-	    <select name="militaryService" id="militaty">
-	        <option value="군필">군필</option>
-	        <option value="미필">미필</option>
-	        <option value="면제">면제</option>
-	        <option value="해당사항없음">해당사항없음</option>
-	    </select><br>
-	
-	    <h3>학력</h3>
-	   학교구분 : <select name="education" id="edu">
-	        <option value="고졸">고졸</option>
-	        <option value="전문대졸">전문대졸</option>
-	        <option value="학사">학사</option>
-	        <option value="석사">석사</option>
-	        <option value="빅시">박사</option>
-	    </select><br>
-	    
-	    학교명 : <input type="text" name="school" id="school"><br>
-	    포트폴리오 : <input type="file" name="portfolioName" id="portfo"><br>
-	    <hr><hr>
-	   
-	    <h3>경력</h3>
-	    경력기간 : <select name="career" id="career">
-	        <option value="6개월">6개월</option>
-	        <option value="1년">1년</option>
-	        <option value="2년">2년</option>
-	        <option value="3년">3년</option>
-	        <option value="4년">4년</option>
-	        <option value="5년 이상">5년 이상</option>
-	    </select><br>
-	    회사명 : <input type="text" name="careerName" id="careerName"><br>
-	
-	    <h3>인턴/대외활동</h3>
-	    인턴 기간 : <select name="internshipPeriod" id="internshipPeriod">
-	        <option value="6개월">6개월</option>
-	        <option value="1년">1년</option>
-	        <option value="2년">2년</option>
-	    </select><br>
-	    활동명 : <input type="text" name="internshipName" id="internshipName"><br>
-	    활동 내용 : <input type="text" name="internshipDetails" id="internshipDetails"><br>
-	    시작날짜 : <input type="date" name ="startDate" id="startDate"> ~ 종료날짜 :<input type="date" name="endDate" id="endDate">
-	
-	   
-	    
-	    <h3>기술 스킬</h3>
-	    <div id="techStackNum">
-		    <label><input type="checkbox" name="techStackNum" value="1"> JavaScript</label>
-		    <label><input type="checkbox" name="techStackNum" value="2"> Java</label>
-		    <label><input type="checkbox" name="techStackNum" value="3"> Python</label>
-		    <label><input type="checkbox" name="techStackNum" value="4"> React</label>
-		    <label><input type="checkbox" name="techStackNum" value="5"> Node.js</label>
-		    <label><input type="checkbox" name="techStackNum" value="6"> Angular</label>
-		    <label><input type="checkbox" name="techStackNum" value="7"> AWS</label>
-		    <label><input type="checkbox" name="techStackNum" value="8"> Docker</label><br>
-		    <label><input type="checkbox" name="techStackNum" value="9"> Kubernetes</label>
-		    <label><input type="checkbox" name="techStackNum" value="10"> SQL</label>
-		    <label><input type="checkbox" name="techStackNum" value="11"> HTML/CSS</label>
-		    <label><input type="checkbox" name="techStackNum" value="12"> TypeScript</label>
-		    <label><input type="checkbox" name="techStackNum" value="13"> Spring</label>
-		    <label><input type="checkbox" name="techStackNum" value="14"> Git</label>
-		    <label><input type="checkbox" name="techStackNum" value="15"> MySQL</label><br><br>
-		  </div>  
-		    <input type="submit" value="이력서등록" >
-	</form>
-</div>
+	<header>
+		<div id="logo">
+        <a href="/">
+        	First Tech
+        </a>
+        </div>
+		<div class="search">
+			<form action="/s/searchResult2" method="post" id="form">
+				<select id="searchSelect" name="searchPart">
+					<option value="searchApplication">공고명</option>
+					<option value="searchCompany">기업명</option>
+				</select> <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
+				<th:block th:if="${session.user != null}">
+					<button id="searchBtn">검색</button>
+				</th:block>
+				<th:block th:if="${session.user == null}">
+					<button id="searchBtn" onclick="noSearch(event)">검색</button>
+				</th:block>
+			</form>
+		</div>
+		<div id="header-right">
+			<th:block th:if="${session.user == null}">
+				<span><a href="/hyepin/login">로그인</a></span>
+				<span><a href="/hyepin/join">회원가입</a></span>
+				<span><a href="/hyepin/companyMain">기업 홈</a></span>
+			</th:block>
+			<th:block th:if="${session.user != null}">
+				<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+				<span><a href="/hyepin/logout">로그아웃</a></span>
+			</th:block>
+		</div>
+	</header>
+	<nav>
+		<div class="nav-left">
+			<th:block th:if="${session.user == null}">
+				<div onclick="noLogin()">채용공고</div>
+				<div onclick="noLogin()">기업정보</div>
+				<div onclick="noLogin()">지원현황</div>
+				<div onclick="noLogin()">이력서관리</div>
+				<div onclick="noLogin()">커뮤니티</div>
+			</th:block>
 
-<script>
-//자격증 이름 입력 시 서버에서 자격증 정보를 가져오는 AJAX 요청
-$('#SerchCertificateName').on('input', function() {
-    var SerchCertificateName = $(this).val(); 
+			<th:block th:if="${session.user != null}">
+				<div>
+					<a href="/sangin/applicationsForm">채용공고</a>
+				</div>
+				<div>
+					<a href="/c/companyInfo/1">기업정보</a>
+				</div>
+				<div>
+					<a href="/resume/resumeApplyList">지원현황</a>
+				</div>
+				<div>
+					<a href="/resume/MyResumeList">이력서관리</a>
+				</div>
+				<div>
+					<a href="/b/board/1">커뮤니티</a>
+				</div>
+			</th:block>
+		</div>
 
-    if (SerchCertificateName) {
-        $.ajax({
-            url: '/resume/certificate',  // 자격증 정보를 가져오는 API
-            type: 'GET',
-            data: { SerchCertificateName: SerchCertificateName },
-            success: function(response) {
-                if (response) {
-                    $('#ajaxcertificateName').val(response.certificateName);  
-                    $('#ajaxcertificateNum').val(response.certificateNum);
-                    $('#ajaxcertificateBy').val(response.certificateBy);
-                    $('#certificateNameResult').text(response.certificateName);
-                    $('#certificateNumResult').text(response.certificateNum);
-                    $('#certificateByResult').text(response.certificateBy);
-                } else {
-                    $('#certificateNameResult').text('정보가 없습니다.');
-                    $('#certificateNumResult').text('');
-                    $('#certificateByResult').text('');
-                }
-            },
-            error: function() {
-                alert('서버 오류가 발생했습니다.');
-            }
-        });
-    } 
-});
+		<div class="nav-right">
+			<div>FAQ</div>
+		</div>
+	</nav>
 
-// 폼 제출 시 유효성 검사
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById("MyForm").addEventListener("submit", function(event){
-        event.preventDefault();  // 폼 제출 기본 동작 방지
+	<div class="resumeForm">
+		<h2>이력서 등록</h2>
+		<br>
 
-        var Title = document.getElementById("Title").value;
-        var content = document.getElementById("content").value;
-        var SerchCertificateName = document.getElementById("SerchCertificateName").value;
-        var roleid = document.getElementById("roleId").value;
-        var certificateDate = document.getElementById("certificateDate").value;
-        var militaty = document.getElementById("militaty").value;
-        var edu = document.getElementById("edu").value;
-        var school = document.getElementById("school").value;
-        var portfo = document.getElementById("portfo").files[0];
-        var portfolioName = portfo ? portfo.name : "";
-        var career = document.getElementById("career").value;
-        var careerName = document.getElementById("careerName").value;
-        var internshipPeriod = document.getElementById("internshipPeriod").value;
-        var internshipDetails = document.getElementById("internshipDetails").value;
-        var startDate = document.getElementById("startDate").value;
-        var endDate = document.getElementById("endDate").value;
-        var techStackNum = document.querySelectorAll('input[name="techStackNum"]:checked');
-        var techStackValid = techStackNum.length > 0;
+		<form action="/resume/resumeForm" method="post"
+			enctype="multipart/form-data" id="MyForm">
+			<h3>사용자 정보</h3>
+			<input type="hidden" name="userId" th:value="${user.userId}"><br>
+			이름 : <input type="text" name="userName" th:value="${user.userName}"
+				readonly><br> 주민번호 : <input type="text" name="userSsn"
+				th:value="${user.userSsn}" readonly><br> 전화번호 : <input
+				type="text" name="userPhone" th:value="${user.userPhone}" readonly><br>
+			주소 : <input type="text" name="userAddress"
+				th:value="${user.userAddress}" readonly><br> 우편번호 : <input
+				type="text" name="userPostalCode" th:value="${user.userPostalCode}"
+				readonly><br> 이메일 : <input type="text" name="userEmail"
+				th:value="${user.userEmail}" readonly><br> 닉네임 : <input
+				type="text" name="userNickname" th:value="${user.userNickname}"
+				readonly><br> 증명사진 : <input type="file"
+				name="personalPhotoName"><br>
 
-        // 필수 입력값 검증
-        if (roleid === "") {
-            alert("직무를 입력하세요");
-        } else if (Title === "") {
-            alert("제목을 입력하세요");
-        } else if (content === "") {
-            alert("내용을 입력하세요");
-        } else if (SerchCertificateName === "") {
-            alert("자격증 이름을 입력하세요");
-        } else if (militaty === "") {
-            alert("병역을 입력하세요");
-        } else if (edu === "") {
-            alert("학력을 입력하세요");
-        } else if (!portfo) {
-            alert("이력서 사진을 넣어주세요");
-        } else if (!portfolioName) {
-            alert("포트폴리오 파일을 넣어주세요");
-        } else if (career === "") {
-            alert("경력을 입력하세요");
-        } else if (careerName === "") {
-            alert("회사명을 입력하세요");
-        } else if (internshipPeriod === "") {
-            alert("인턴십 기간을 입력하세요");
-        } else if (internshipDetails === "") {
-            alert("활동 내용을 입력하세요");
-        } else if (startDate === "") {
-            alert("인턴 시작 기간을 입력하세요");
-        } else if (endDate === "") {
-            alert("인턴 종료 기간을 입력하세요");
-        } else if (!techStackValid) {
-            alert("기술 스킬을 체크해주세요");
-        } else {
-            // 모든 조건을 만족할 경우 폼 제출
-            document.getElementById("MyForm").submit();
-        }
-    });
-});
+			<h3>직무 (Role)</h3>
+			<select name="roleId" id="roleId">
+				<option value="1">백엔드 개발자</option>
+				<option value="2">데이터 분석가</option>
+				<option value="3">프론트엔드 개발자</option>
+				<option value="4">데이터 엔지니어</option>
+				<option value="5">>백엔드/서버 개발자</option>
+				<option value="6">보안 컨설턴트</option>
+				<option value="7">앱 개발자</option>
+				<option value="8">웹 개발자</option>
+				<option value="9">웹 마스터</option>
+				<option value="10">유지 보수</option>
+				<option value="11">정보 보안</option>
+				<option value="12">프론트엔드</option>
+				<option value="13">퍼블리셔</option>
+				<option value="14">BI 엔지니어</option>
+				<option value="15">CISO</option>
+			</select>
 
-	
-</script>
+			<h3>이력서 정보</h3>
+			제목 : <input type="text" name="resumeTitle" id="Title"><br>
+			내용 : <input type="text" name="resumeContent" id="content"><br>
+
+			<h3>자격증 조회</h3>
+			자격증 이름: <input type="text" id="SerchCertificateName"
+				placeholder="정보처리기사 라고 입력하세요" />
+			<div id="certificateInfo">
+				<p>
+					자격증 이름: <span id="certificateNameResult"></span><input
+						type="hidden" name="certificateName" id="ajaxcertificateName">
+				</p>
+				<p>
+					자격증 번호: <span id="certificateNumResult"></span><input type="hidden"
+						name="certificateNum" id="ajaxcertificateNum">
+				</p>
+				<p>
+					발행처: <span id="certificateByResult"></span><input type="hidden"
+						name="certificateBy" id="ajaxcertificateBy">
+				</p>
+				<p>
+					취득날짜 : <input type="date" name="certificateDate"
+						id="certificateDate">
+				</p>
+			</div>
+
+			<h3>병역</h3>
+			<select name="militaryService" id="militaty">
+				<option value="군필">군필</option>
+				<option value="미필">미필</option>
+				<option value="면제">면제</option>
+				<option value="해당사항없음">해당사항없음</option>
+			</select><br>
+
+			<h3>학력</h3>
+			학교구분 : <select name="education" id="edu">
+				<option value="고졸">고졸</option>
+				<option value="전문대졸">전문대졸</option>
+				<option value="학사">학사</option>
+				<option value="석사">석사</option>
+				<option value="빅시">박사</option>
+			</select><br> 학교명 : <input type="text" name="school" id="school"><br>
+			포트폴리오 : <input type="file" name="portfolioName" id="portfo"><br>
+			<hr>
+			<hr>
+
+			<h3>경력</h3>
+			경력기간 : <select name="career" id="career">
+				<option value="6개월">6개월</option>
+				<option value="1년">1년</option>
+				<option value="2년">2년</option>
+				<option value="3년">3년</option>
+				<option value="4년">4년</option>
+				<option value="5년 이상">5년 이상</option>
+			</select><br> 회사명 : <input type="text" name="careerName" id="careerName"><br>
+
+			<h3>인턴/대외활동</h3>
+			인턴 기간 : <select name="internshipPeriod" id="internshipPeriod">
+				<option value="6개월">6개월</option>
+				<option value="1년">1년</option>
+				<option value="2년">2년</option>
+			</select><br> 활동명 : <input type="text" name="internshipName"
+				id="internshipName"><br> 활동 내용 : <input type="text"
+				name="internshipDetails" id="internshipDetails"><br>
+			시작날짜 : <input type="date" name="startDate" id="startDate"> ~
+			종료날짜 :<input type="date" name="endDate" id="endDate">
+
+
+
+			<h3>기술 스킬</h3>
+			<div id="techStackNum" class="tech-stack">
+				<label><input type="checkbox" name="techStackNum" value="1">
+					JavaScript</label> <label><input type="checkbox"
+					name="techStackNum" value="2"> Java</label> <label><input
+					type="checkbox" name="techStackNum" value="3"> Python</label> <label><input
+					type="checkbox" name="techStackNum" value="4"> React</label> <label><input
+					type="checkbox" name="techStackNum" value="5"> Node.js</label> <label><input
+					type="checkbox" name="techStackNum" value="6"> Angular</label> <label><input
+					type="checkbox" name="techStackNum" value="7"> AWS</label> <label><input
+					type="checkbox" name="techStackNum" value="8"> Docker</label> <label><input
+					type="checkbox" name="techStackNum" value="9"> Kubernetes</label> <label><input
+					type="checkbox" name="techStackNum" value="10"> SQL</label> <label><input
+					type="checkbox" name="techStackNum" value="11"> HTML/CSS</label> <label><input
+					type="checkbox" name="techStackNum" value="12"> TypeScript</label>
+				<label><input type="checkbox" name="techStackNum" value="13">
+					Spring</label> <label><input type="checkbox" name="techStackNum"
+					value="14"> Git</label> <label><input type="checkbox"
+					name="techStackNum" value="15"> MySQL</label><br> <br>
+			</div>
+			<input type="submit" value="이력서등록">
+		</form>
+	</div>
+	<footer> © 2024 First Tech. 모든 권리 보유. </footer>
+
+
+	<script>
+		//자격증 이름 입력 시 서버에서 자격증 정보를 가져오는 AJAX 요청
+		$('#SerchCertificateName').on(
+				'input',
+				function() {
+					var SerchCertificateName = $(this).val();
+
+					if (SerchCertificateName) {
+						$.ajax({
+							url : '/resume/certificate',
+							type : 'GET',
+							data : {
+								SerchCertificateName : SerchCertificateName
+							},
+							success : function(response) {
+								if (response) {
+									$('#ajaxcertificateName').val(
+											response.certificateName);
+									$('#ajaxcertificateNum').val(
+											response.certificateNum);
+									$('#ajaxcertificateBy').val(
+											response.certificateBy);
+									$('#certificateNameResult').text(
+											response.certificateName);
+									$('#certificateNumResult').text(
+											response.certificateNum);
+									$('#certificateByResult').text(
+											response.certificateBy);
+								} else {
+									$('#certificateNameResult').text(
+											'정보가 없습니다.');
+									$('#certificateNumResult').text('');
+									$('#certificateByResult').text('');
+								}
+							},
+							error : function() {
+								alert('서버 오류가 발생했습니다.');
+							}
+						});
+					}
+				});
+
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+							document
+									.getElementById("MyForm")
+									.addEventListener(
+											"submit",
+											function(event) {
+												event.preventDefault();
+
+												var Title = document
+														.getElementById("Title").value;
+												var content = document
+														.getElementById("content").value;
+												var SerchCertificateName = document
+														.getElementById("SerchCertificateName").value;
+												var roleid = document
+														.getElementById("roleId").value;
+												var certificateDate = document
+														.getElementById("certificateDate").value;
+												var militaty = document
+														.getElementById("militaty").value;
+												var edu = document
+														.getElementById("edu").value;
+												var school = document
+														.getElementById("school").value;
+												var portfo = document
+														.getElementById("portfo").files[0];
+												var portfolioName = portfo ? portfo.name
+														: "";
+												var career = document
+														.getElementById("career").value;
+												var careerName = document
+														.getElementById("careerName").value;
+												var internshipPeriod = document
+														.getElementById("internshipPeriod").value;
+												var internshipDetails = document
+														.getElementById("internshipDetails").value;
+												var startDate = document
+														.getElementById("startDate").value;
+												var endDate = document
+														.getElementById("endDate").value;
+												var techStackNum = document
+														.querySelectorAll('input[name="techStackNum"]:checked');
+												var techStackValid = techStackNum.length > 0;
+
+												if (roleid === "") {
+													alert("직무를 입력하세요");
+												} else if (Title === "") {
+													alert("제목을 입력하세요");
+												} else if (content === "") {
+													alert("내용을 입력하세요");
+												} else if (SerchCertificateName === "") {
+													alert("자격증 이름을 입력하세요");
+												} else if (militaty === "") {
+													alert("병역을 입력하세요");
+												} else if (edu === "") {
+													alert("학력을 입력하세요");
+												} else if (!portfo) {
+													alert("이력서 사진을 넣어주세요");
+												} else if (!portfolioName) {
+													alert("포트폴리오 파일을 넣어주세요");
+												} else if (career === "") {
+													alert("경력을 입력하세요");
+												} else if (careerName === "") {
+													alert("회사명을 입력하세요");
+												} else if (internshipPeriod === "") {
+													alert("인턴십 기간을 입력하세요");
+												} else if (internshipDetails === "") {
+													alert("활동 내용을 입력하세요");
+												} else if (startDate === "") {
+													alert("인턴 시작 기간을 입력하세요");
+												} else if (endDate === "") {
+													alert("인턴 종료 기간을 입력하세요");
+												} else if (!techStackValid) {
+													alert("기술 스킬을 체크해주세요");
+												} else {
+													document.getElementById(
+															"MyForm").submit();
+												}
+											});
+						});
+		function noLogin() {
+			alert("로그인 후 이용해 주세요.");
+		}
+		function noSearch() {
+			event.preventDefault();
+			alert("로그인 후 이용해 주세요.");
+		}
+	</script>
 </body>
 </html>
