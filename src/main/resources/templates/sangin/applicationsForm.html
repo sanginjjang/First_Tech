@@ -145,7 +145,7 @@
 				<button id="searchBtn">검색</button>
 			</div>
 		</div>
-		<aside class="section_aside">aside 공사 중...</aside>
+		<aside class="section_aside">광고 받습니다</aside>
 	</section>
 	<main>
 		<div id="applicationList">
@@ -172,6 +172,7 @@
 							<div th:text="${jobApplication.education}">학력</div>
 							<div th:text="${jobApplication.employmentType}">근무형태</div>
 							<div th:text="${jobApplication.salary}">급여</div>
+							<div th:text="${jobApplication.deadlineDate}" style="color : red; border:none; background-color:white; font-weight:bold">마감일</div>
 						</div>
 					</div>
 					<div class="application_rigth">
@@ -189,7 +190,7 @@
 		</div>
 
 
-		<aside class="main_aside">aside 공사 중...</aside>
+		<aside class="main_aside">광고 받습니다</aside>
 
 	</main>
 	<footer> © 2024 회사 이름. 모든 권리 보유. </footer>

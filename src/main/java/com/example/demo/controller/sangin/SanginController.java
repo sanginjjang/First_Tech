@@ -193,7 +193,7 @@ public class SanginController {
 		}
 		dto.setFileName(fileName);// 파일 네임도 dto 에 넣어서 데이터 베이스로 보내기
 		int result = companyApplicationService.insertApplication(dto);
-		return "sangin/sum";
+		return "redirect:/hyepin/companyMain";
 	}
 
 	// 지역 체크 시 지역에 해당하는 공고 리스트 반환
