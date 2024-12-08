@@ -273,7 +273,6 @@
 	        value = inputElement ? inputElement.value : null;
 	        url = "/sangin/searchingByArea";
 	        listKey = "listByArea";
-	        alert("지역 옳게 진행되고 있습니다~~");
 	    }
 
 	    // roleId 클릭
@@ -284,7 +283,6 @@
 	        value = inputElement ? inputElement.value : null;
 	        url = "/sangin/searchingByRoleId";
 	        listKey = "listByRoleId";
-	        alert("직무 옳게 진행되고 있습니다~~");
 	    }
 
 	    // 키워드 검색 버튼 클릭
@@ -292,7 +290,6 @@
 	        value = document.querySelector("#searching").value;
 	        url = "/sangin/searchingByKeyword";
 	        listKey = "listByKeyword";
-	        alert("키워드 옳게 진행되고 있습니다~~");
 	    } else {
 	        return; // 처리할 수 없는 클릭 이벤트는 무시
 	    }
@@ -302,7 +299,6 @@
 	        alert("value 값을 가져오지 못했습니다!");
 	        return;
 	    }
-	    alert(`value: ${value}`); // value 값을 제대로 출력
 
 	    // AJAX 요청
 	    const xhr = new XMLHttpRequest();
