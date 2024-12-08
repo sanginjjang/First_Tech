@@ -396,14 +396,25 @@
 
                 <tr>
                     <td colspan="6">
-                        <th:block th:if="${currentPageNum > 1}">
-                            <a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
-                        </th:block>
-                        <span th:text="${currentPageNum}"></span>
-                        <th:block th:if="${currentPageNum < totalPageNum}">
-                            <a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
-                        </th:block>
-                    </td>
+					<th:block th:if="${currentPageNum > 1}">
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum - 1})}">이전</a>
+						</th:block>
+						
+						<th:block th:each="pageNum : ${#numbers.sequence(1, endPageNum)}">
+							<span th:if="${currentPageNum == pageNum}"> <a
+								th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}"><b th:text="${pageNum}"></b></a>&nbsp;&nbsp;
+							</span>
+							<span th:if="${currentPageNum != pageNum}"> 
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a>&nbsp;&nbsp;
+							</span>
+						</th:block>
+						
+						
+						
+						<th:block th:if="${currentPageNum < endPageNum}">
+							<a th:href="@{/c/companyInfo/{pageNum}(pageNum=${currentPageNum + 1})}">다음</a>
+						</th:block>
+					</td>
                 </tr>
             </tbody>
         </table>

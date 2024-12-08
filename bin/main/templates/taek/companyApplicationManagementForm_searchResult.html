@@ -7,17 +7,22 @@
 <style>
 /* 기본 설정 */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-	font-family: Arial, sans-serif;
-	margin: 20px auto;
-	width: 80%;
-	background-color: #f9f9f9;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333333;
+            width: 80%;
+        }
+
+        a {
+            text-decoration: none;
+        }
 
         /* 헤더 */
         header {
@@ -64,7 +69,7 @@ body {
             border-radius: 10px;
         }
 
-        #searchBtn {
+        .search> form > button {
             padding: 15px 20px;
             border: 1px solid #d9d9d9;
             background: white;
@@ -76,7 +81,7 @@ body {
         #searchSelect {
             padding: 15px 20px;
             border: 1px solid #d9d9d9;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 15px;
 
         }
@@ -116,7 +121,7 @@ body {
             display: flex;
             background-color: #1a73e8;
             padding: 15px 35px;
-            border-radius: 5px;
+            border-radius: 10px;
             gap: 20px;
         }
 
@@ -302,7 +307,7 @@ header1 div {
 </head>
 <body>
 
-    <header>
+       <header>
         <div id="logo">
         <a href="/">
         	First Tech
@@ -335,13 +340,14 @@ header1 div {
         	</th:block>
         </div>
     </header>
- <nav>
+    <nav>
         <div class="nav-left">
         <th:block th:if="${session.user == null}">
             <div onclick="noLogin()">채용공고</div>
             <div onclick="noLogin()">기업정보</div>
             <div onclick="noLogin()">지원현황</div>
             <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">관심공고</div>
             <div onclick="noLogin()">커뮤니티</div>
         </th:block>
        
@@ -349,6 +355,7 @@ header1 div {
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
             <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/sangin/bookmarkedApplicationsForm">관심 공고</a></div>
             <div><a href="/resume/MyResumeList">이력서관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
         </th:block>
