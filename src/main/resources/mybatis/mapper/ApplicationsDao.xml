@@ -170,5 +170,8 @@
 
 
 	</select>
+	<insert id="insertApplicationUser001">
+	insert into resumeapplystatus (applicationNum, resumeNum, applyDate, applyStatus) values (1, #{num}, now(),'진행 중')
+	</insert>
 
 </mapper>
