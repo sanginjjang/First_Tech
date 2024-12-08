@@ -10,69 +10,64 @@
 </head>
 
 <body>
-	<header>
-		<div id="logo">
-			<a href="/"> First Tech </a>
-		</div>
-		<div class="search">
-			<form action="/s/searchResult2" method="post" id="form">
-				<select id="searchSelect" name="searchPart">
-					<option value="searchApplication">공고명</option>
-					<option value="searchCompany">기업명</option>
-				</select> <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
-				<th:block th:if="${session.user != null}">
-					<button id="searchBtn">검색</button>
-				</th:block>
-				<th:block th:if="${session.user == null}">
-					<button id="searchBtn" onclick="noSearch(event)">검색</button>
-				</th:block>
-			</form>
-		</div>
-		<div id="header-right">
-			<th:block th:if="${session.user == null}">
-				<span><a href="/hyepin/login">로그인</a></span>
-				<span><a href="/hyepin/join">회원가입</a></span>
-				<span><a href="/hyepin/companyMain">기업 홈</a></span>
-			</th:block>
-			<th:block th:if="${session.user != null}">
-				<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
-				<span><a href="/hyepin/logout">로그아웃</a></span>
-			</th:block>
-		</div>
-	</header>
-	<nav>
-		<div class="nav-left">
-			<th:block th:if="${session.user == null}">
-				<div onclick="noLogin()">채용공고</div>
-				<div onclick="noLogin()">기업정보</div>
-				<div onclick="noLogin()">지원현황</div>
-				<div onclick="noLogin()">이력서관리</div>
-				<div onclick="noLogin()">커뮤니티</div>
-			</th:block>
-
-			<th:block th:if="${session.user != null}">
-				<div>
-					<a href="/sangin/applicationsForm">채용공고</a>
-				</div>
-				<div>
-					<a href="/c/companyInfo/1">기업정보</a>
-				</div>
-				<div>
-					<a href="/resume/resumeApplyList">지원현황</a>
-				</div>
-				<div>
-					<a href="/resume/MyResumeList">이력서관리</a>
-				</div>
-				<div>
-					<a href="/b/board/1">커뮤니티</a>
-				</div>
-			</th:block>
-		</div>
-
-		<div class="nav-right">
-			<div>FAQ</div>
-		</div>
-	</nav>
+	 <header>
+        <div id="logo">
+        <a href="/">
+        	First Tech
+        </a>
+        </div>
+        <div class="search">
+        <form action="/s/searchResult2" method="post" id="form">
+            <select id="searchSelect"  name="searchPart">
+              <option value="searchApplication">공고명</option>
+        		<option value="searchCompany">기업명</option>
+            </select>
+            <input type="text" name="mainSearchInput"  placeholder="텍스트를 입력하세요">
+            <th:block th:if="${session.user != null}">
+            <button id="searchBtn">검색</button>
+            </th:block>
+             <th:block th:if="${session.user == null}">
+            <button id="searchBtn" onclick="noSearch(event)">검색</button>
+            </th:block>
+         </form>
+        </div>
+        <div id="header-right">
+        	<th:block th:if="${session.user == null}">
+        	  	<span><a href="/hyepin/login">로그인</a></span>
+           		<span><a href="/hyepin/join">회원가입</a></span>
+            	<span><a href="/hyepin/companyMain">기업 홈</a></span>
+        	</th:block>
+        	<th:block th:if="${session.user != null}">
+        	  	<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+        	  	<span><a href="/hyepin/logout">로그아웃</a></span>
+        	</th:block>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-left">
+        <th:block th:if="${session.user == null}">
+            <div onclick="noLogin()">채용공고</div>
+            <div onclick="noLogin()">기업정보</div>
+            <div onclick="noLogin()">지원현황</div>
+            <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">관심공고</div>
+            <div onclick="noLogin()">커뮤니티</div>
+        </th:block>
+       
+        <th:block th:if="${session.user != null}">
+            <div><a href="/sangin/applicationsForm">채용공고</a></div>
+            <div><a href="/c/companyInfo/1">기업정보</a></div>
+            <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/sangin/bookmarkedApplicationsForm">관심 공고</a></div>
+            <div><a href="/resume/MyResumeList">이력서관리</a></div>
+            <div><a href="/b/board/1">커뮤니티</a></div>
+        </th:block>
+        </div>
+        
+        <div class="nav-right">
+            <div>FAQ</div>
+        </div>
+    </nav>
 
 	<section>
 		<div class="section_search">
@@ -379,6 +374,101 @@
 	        applicationList.appendChild(div);
 	    });
 	}
+
+    </script>
+	<script>
+ // 북마크(하트)와 회사 북마크(별) 클릭 이벤트 처리
+    document.querySelector("#applicationList").addEventListener("click", (event) => {
+        const userId = "user001"; // 사용자 ID
+        let url = "";
+        let data = {};
+
+        // 하트(북마크) 버튼 처리
+        if (event.target.classList.contains("colorHeart")) {
+            const applicationNum = event.target.dataset.applicationNum;
+            url = "/sangin/removeHeart";
+            data = { userId, applicationNum };
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("북마크가 취소되었습니다!");
+                    event.target.classList.remove("colorHeart");
+                    event.target.classList.add("uncolorHeart");
+                    event.target.textContent = "♡";
+                } else {
+                    alert("북마크 취소 중 오류가 발생했습니다.");
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        } else if (event.target.classList.contains("uncolorHeart")) {
+            const applicationNum = event.target.dataset.applicationNum;
+            url = "/sangin/addHeart";
+            data = { userId, applicationNum };
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("북마크가 추가되었습니다!");
+                    event.target.classList.remove("uncolorHeart");
+                    event.target.classList.add("colorHeart");
+                    event.target.textContent = "♥";
+                } else {
+                    alert("북마크 추가 중 오류가 발생했습니다.");
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        }
+
+        // 별(회사 북마크) 버튼 처리
+        else if (event.target.classList.contains("colorStar")) {
+            const companyId = event.target.dataset.companyId;
+            url = "/sangin/removeStar";
+            data = { userId, companyId };
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("회사 북마크가 취소되었습니다!");
+                    event.target.classList.remove("colorStar");
+                    event.target.classList.add("uncolorStar");
+                    event.target.textContent = "☆";
+                } else {
+                    alert("회사 북마크 취소 중 오류가 발생했습니다.");
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        } else if (event.target.classList.contains("uncolorStar")) {
+            const companyId = event.target.dataset.companyId;
+            url = "/sangin/addStar";
+            data = { userId, companyId };
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("회사 북마크가 추가되었습니다!");
+                    event.target.classList.remove("uncolorStar");
+                    event.target.classList.add("colorStar");
+                    event.target.textContent = "★";
+                } else {
+                    alert("회사 북마크 추가 중 오류가 발생했습니다.");
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        }
+    });
 
     </script>
 

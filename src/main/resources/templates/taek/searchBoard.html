@@ -282,13 +282,14 @@
         	</th:block>
         </div>
     </header>
- <nav>
+    <nav>
         <div class="nav-left">
         <th:block th:if="${session.user == null}">
             <div onclick="noLogin()">채용공고</div>
             <div onclick="noLogin()">기업정보</div>
             <div onclick="noLogin()">지원현황</div>
             <div onclick="noLogin()">이력서관리</div>
+            <div onclick="noLogin()">관심공고</div>
             <div onclick="noLogin()">커뮤니티</div>
         </th:block>
        
@@ -296,6 +297,7 @@
             <div><a href="/sangin/applicationsForm">채용공고</a></div>
             <div><a href="/c/companyInfo/1">기업정보</a></div>
             <div><a href="/resume/resumeApplyList">지원현황</a></div>
+            <div><a href="/sangin/bookmarkedApplicationsForm">관심 공고</a></div>
             <div><a href="/resume/MyResumeList">이력서관리</a></div>
             <div><a href="/b/board/1">커뮤니티</a></div>
         </th:block>
