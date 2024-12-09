@@ -164,6 +164,8 @@
 	font-weight: bold;
 	flex-basis: 45%;
 	margin-right: 30px;
+	display: flex;
+	gap:10px;
 }
 
 .company-info .center-info {
@@ -344,8 +346,12 @@ footer {
 
 	<section class="container">
 		<div class="company-info">
-			<div class="company-name" th:text="${company.companyName}"></div>
-
+			<div class="company-name">
+			<div><img th:src="@{'/uploads/' + ${company.companyName} + '.jpg'}"
+								alt="별거아냐" width="100px"></div>
+								[[${company.companyName}]]
+			</div>
+			
 			<div class="center-info">
 				<div>
 					<b>대표자:</b><span th:text="${company.ceo}"></span>
