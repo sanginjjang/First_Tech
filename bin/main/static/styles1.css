@@ -334,14 +334,11 @@ main {
     background-color: #ffffff;
     border-radius: 5px;
     flex: 3;
-    scrollbar-width: none;
     /* Firefox에서 스크롤바 숨기기 */
-    -ms-overflow-style: none;
     /* Internet Explorer에서 스크롤바 숨기기 */
 }
 
 #applicationList::-webkit-scrollbar {
-    display: none;
     /* Chrome, Safari, Edge에서 스크롤바 숨기기 */
 }
 
