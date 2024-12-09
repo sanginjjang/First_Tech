@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dao.sangin.IApplicationDao;
 import com.example.demo.dto.ApplicationDto;
 import com.example.demo.dto.CompanyDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 import com.example.demo.service.sangin.ApplicationService;
@@ -75,10 +76,13 @@ public class SanginController {
 	public String applicationDetailForm(@PathVariable("applicationNum") int applicationNum, Model model) {
 		System.out.println("디테일 들어오는 것엔 문제가 없습니다");// 확인 완료
 		System.out.println("Application Number: " + applicationNum);
+		String userId = "user001";
 		ApplicationDto application = applicationService.getApplication(applicationNum);
-		List<String> companyList = applicationService.getBookmarkedCompany("user001");
+		List<String> companyList = applicationService.getBookmarkedCompany(userId); //user001 가라값입니다
 		model.addAttribute("jobApplication", application);
 		model.addAttribute("companyList", companyList);
+		List<ResumeDto> resumeList = dao.getResumeList(userId); 
+		model.addAttribute("resumeList",resumeList);
 		return "sangin/applicationDetailForm";
 	}
 
