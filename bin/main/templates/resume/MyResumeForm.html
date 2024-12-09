@@ -537,6 +537,7 @@ nav {
 
 
 	<script>
+	
 		//자격증 이름 입력 시 서버에서 자격증 정보를 가져오는 AJAX 요청
 		$('#SerchCertificateName').on(
 				'input',
@@ -578,89 +579,88 @@ nav {
 					}
 				});
 
-		document
-				.addEventListener(
+		document.addEventListener(
 						'DOMContentLoaded',
 						function() {
 							document
-									.getElementById("MyForm")
-									.addEventListener(
-											"submit",
-											function(event) {
-												event.preventDefault();
+			.getElementById("MyForm")
+			.addEventListener(
+					"submit",
+					function(event) {
+						event.preventDefault();
 
-												var Title = document
-														.getElementById("Title").value;
-												var content = document
-														.getElementById("content").value;
-												var SerchCertificateName = document
-														.getElementById("SerchCertificateName").value;
-												var roleid = document
-														.getElementById("roleId").value;
-												var certificateDate = document
-														.getElementById("certificateDate").value;
-												var militaty = document
-														.getElementById("militaty").value;
-												var edu = document
-														.getElementById("edu").value;
-												var school = document
-														.getElementById("school").value;
-												var portfo = document
-														.getElementById("portfo").files[0];
-												var portfolioName = portfo ? portfo.name
-														: "";
-												var career = document
-														.getElementById("career").value;
-												var careerName = document
-														.getElementById("careerName").value;
-												var internshipPeriod = document
-														.getElementById("internshipPeriod").value;
-												var internshipDetails = document
-														.getElementById("internshipDetails").value;
-												var startDate = document
-														.getElementById("startDate").value;
-												var endDate = document
-														.getElementById("endDate").value;
-												var techStackNum = document
-														.querySelectorAll('input[name="techStackNum"]:checked');
-												var techStackValid = techStackNum.length > 0;
+						var Title = document
+								.getElementById("Title").value;
+						var content = document
+								.getElementById("content").value;
+						var SerchCertificateName = document
+								.getElementById("SerchCertificateName").value;
+						var roleid = document
+								.getElementById("roleId").value;
+						var certificateDate = document
+								.getElementById("certificateDate").value;
+						var militaty = document
+								.getElementById("militaty").value;
+						var edu = document
+								.getElementById("edu").value;
+						var school = document
+								.getElementById("school").value;
+						var portfo = document
+								.getElementById("portfo").files[0];
+						var portfolioName = portfo ? portfo.name
+								: "";
+						var career = document
+								.getElementById("career").value;
+						var careerName = document
+								.getElementById("careerName").value;
+						var internshipPeriod = document
+								.getElementById("internshipPeriod").value;
+						var internshipDetails = document
+								.getElementById("internshipDetails").value;
+						var startDate = document
+								.getElementById("startDate").value;
+						var endDate = document
+								.getElementById("endDate").value;
+						var techStackNum = document
+								.querySelectorAll('input[name="techStackNum"]:checked');
+						var techStackValid = techStackNum.length > 0;
 
-												if (roleid === "") {
-													alert("직무를 입력하세요");
-												} else if (Title === "") {
-													alert("제목을 입력하세요");
-												} else if (content === "") {
-													alert("내용을 입력하세요");
-												} else if (SerchCertificateName === "") {
-													alert("자격증 이름을 입력하세요");
-												} else if (militaty === "") {
-													alert("병역을 입력하세요");
-												} else if (edu === "") {
-													alert("학력을 입력하세요");
-												} else if (!portfo) {
-													alert("이력서 사진을 넣어주세요");
-												} else if (!portfolioName) {
-													alert("포트폴리오 파일을 넣어주세요");
-												} else if (career === "") {
-													alert("경력을 입력하세요");
-												} else if (careerName === "") {
-													alert("회사명을 입력하세요");
-												} else if (internshipPeriod === "") {
-													alert("인턴십 기간을 입력하세요");
-												} else if (internshipDetails === "") {
-													alert("활동 내용을 입력하세요");
-												} else if (startDate === "") {
-													alert("인턴 시작 기간을 입력하세요");
-												} else if (endDate === "") {
-													alert("인턴 종료 기간을 입력하세요");
-												} else if (!techStackValid) {
-													alert("기술 스킬을 체크해주세요");
-												} else {
-													document.getElementById(
-															"MyForm").submit();
-												}
-											});
-						});
+						if (roleid === "") {
+							alert("직무를 입력하세요");
+						} else if (Title === "") {
+							alert("제목을 입력하세요");
+						} else if (content === "") {
+							alert("내용을 입력하세요");
+						} else if (SerchCertificateName === "") {
+							alert("자격증 이름을 입력하세요");
+						} else if (militaty === "") {
+							alert("병역을 입력하세요");
+						} else if (edu === "") {
+							alert("학력을 입력하세요");
+						} else if (!portfo) {
+							alert("이력서 사진을 넣어주세요");
+						} else if (!portfolioName) {
+							alert("포트폴리오 파일을 넣어주세요");
+						} else if (career === "") {
+							alert("경력을 입력하세요");
+						} else if (careerName === "") {
+							alert("회사명을 입력하세요");
+						} else if (internshipPeriod === "") {
+							alert("인턴십 기간을 입력하세요");
+						} else if (internshipDetails === "") {
+							alert("활동 내용을 입력하세요");
+						} else if (startDate === "") {
+							alert("인턴 시작 기간을 입력하세요");
+						} else if (endDate === "") {
+							alert("인턴 종료 기간을 입력하세요");
+						} else if (!techStackValid) {
+							alert("기술 스킬을 체크해주세요");
+						} else {
+							document.getElementById(
+									"MyForm").submit();
+						}
+					});
+});
 		function noLogin() {
 			alert("로그인 후 이용해 주세요.");
 		}
