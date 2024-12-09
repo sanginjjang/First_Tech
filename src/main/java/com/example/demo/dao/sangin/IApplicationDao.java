@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.ApplicationDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserToApplicationBookmarkDto;
 import com.example.demo.dto.UserToCompanyBookmarkDto;
 
@@ -34,5 +35,7 @@ public interface IApplicationDao {
 	List<ApplicationDto> getApplicationByKeyword(@Param("userId") String userId, @Param("keyword") String keyword);
 	
 	int insertApplicationUser001(@Param("num") int num);
+	
+	List<ResumeDto> getResumeList(@Param("userId") String userId);
 
 }
