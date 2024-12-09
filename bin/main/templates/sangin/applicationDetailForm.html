@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+/* 헤더 */
 * {
 	margin: 0;
 	padding: 0;
@@ -11,17 +12,138 @@
 }
 
 body {
+	font-family: Arial, sans-serif;
 	margin: 0 auto;
-	width: 65vw;
-	/* 폭 설정 */
+	background-color: #f9f9f9;
+	color: #333333;
+	width: 80%;
 }
 
+a {
+	text-decoration: none;
+}
+
+/* 헤더 */
 header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 0;
-	border-bottom: 1px solid #ccc;
+	padding: 30px 20px;
+	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+}
+
+#logo a {
+	display: flex;
+	font-size: 30px;
+	font-weight: bold;
+	color: #867a7a;
+}
+
+header a {
+	margin: 10px 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #867a7a;
+}
+
+#header-right {
+	margin-top: 30px;
+	position: relative;
+	bottom: 55px;
+}
+
+.search {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.search>form>input {
+	padding: 20px;
+	width: 600px;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+}
+
+.search>form>button {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	background: white;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#searchSelect {
+	padding: 15px 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+/* 네브 */
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #ffffff;
+	margin-top: 20px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	padding: 15px 50px;
+	gap: 250px;
+}
+
+.nav-left {
+	display: flex;
+	gap: 120px;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+}
+
+.nav-left div a {
+	color: black;
+	transition: 0.3s;
+}
+
+.nav-left div a:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.nav-right {
+	transition: 0.3s;
+	display: flex;
+	background-color: #1a73e8;
+	padding: 15px 35px;
+	border-radius: 10px;
+	gap: 20px;
+}
+
+.nav-right div {
+	font-size: 18px;
+	color: white;
+	margin: 0;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.nav-right:hover {
+	background-color: #105cbf;
+}
+
+header1 {
+	display: flex;
+	justify-content: space-between;
+	background-color: #ffffff;
+	align-items: center;
+	border-radius: 5px 5px 0 0;
+	padding: 20px;
+	border: 1px solid #d9d9d9;
+	margin-top: 20px;
 }
 
 .companySection {
@@ -33,10 +155,10 @@ header {
 .jobTitleSection {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 40px;
 }
 
-header div {
+header1 div {
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -46,17 +168,19 @@ header div {
 	cursor: pointer;
 }
 
-nav {
+nav1 {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	border: 1px #d9d9d9 solid;
+	border-radius: 0 0 5px 5px;
+	background-color: #ffffff;
 }
 
 #nav1 {
 	display: flex;
 	justify-content: space-between;
-	flex-direction: column; margin : 0 auto;
-	width: 20%;
+	flex-direction: column;
 	margin: 0 auto;
 }
 
@@ -66,6 +190,14 @@ nav {
 	gap: 10px;
 	padding: 20px 0;
 	border-bottom: 1px solid #ccc;
+}
+
+#applicationName {
+	font-weight: bold;
+	font-size: 25px;
+	padding: 20px;
+	width: 500px;
+	padding: 20px
 }
 
 .infoColumn {
@@ -90,6 +222,8 @@ nav {
 
 section {
 	padding: 20px 0;
+	border: #d9d9d9 1px solid;
+	background-color: white;
 }
 
 .warningSection {
@@ -110,9 +244,11 @@ section {
 }
 
 .imageSection {
+	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
 	text-align: center;
-	border: 1px solid #ccc;
 	padding: 20px;
+	border-radius: 5px;
 }
 
 .imageSection img {
@@ -163,10 +299,9 @@ footer input[type="button"]:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 0px;
+	border: none;
 	padding: 0px;
-	width: 100%;
-	background-color: white;
+	background-color: inherit;
 }
 
 .uncolorStar, .colorStar {
@@ -185,13 +320,13 @@ footer input[type="button"]:hover {
 .colorHeart {
 	cursor: pointer;
 	color: red;
-	font-size: 30px;
+	font-size: 40px;
 }
 
 .uncolorHeart {
 	cursor: pointer;
 	color: black;
-	font-size: 20px;
+	font-size: 30px;
 }
 
 .colorHeart:hover, .uncolorHeart:hover {
@@ -209,97 +344,207 @@ footer input[type="button"]:hover {
 .colorStar:hover, .uncolorStar:hover {
 	scale: 1.2;
 }
+
+#resumeNum {
+	padding: 10px;
+	border: 5px #d9d9d9 solid;
+	border-radius: 20px;
+}
+
+#insertBtn:hover {
+	background-color: #FFA000;
+	scale: 1.1;
+}
 </style>
 </head>
 <body>
-	<!-- 헤더 -->
 	<header>
-		<!-- 기업명 및 별표 -->
-		<div class="companySection">
-			<button class="colorStar"
-				th:attr="data-company-id=${jobApplication.companyId}"
-				th:if="${companyList.contains(jobApplication.companyId)}">⭐</button>
-			<button class="uncolorStar"
-				th:attr="data-company-id=${jobApplication.companyId}"
-				th:if="${!companyList.contains(jobApplication.companyId)}">☆</button>
-			<div id="companyName" th:text="${jobApplication.companyId}">기업명</div>
-		</div>
-	</header>
+		<div id="logo">
+			<th:block th:if="${session.user != null}">
+				<a href="/"> First Tech </a>
+			</th:block>
+			<th:block th:if="${session.company != null}">
+				<a href="/hyepin/companyMain"> First Tech </a>
+			</th:block>
+			<th:block th:if="${session.user == null and session.company == null}">
+				<a href="/"> First Tech </a>
+			</th:block>
 
-	<!-- 네비게이션 -->
-	<nav>
-		<!-- 공고명 및 하트 -->
-		<div id="nav1">
-			<div class="jobTitleSection">
-				<button class="colorHeart"
-					th:attr="data-application-num=${jobApplication.applicationNum}"
-					th:if="${jobApplication.isBookmarked == 1}">♥</button>
-				<button class="uncolorHeart"
-					th:attr="data-application-num=${jobApplication.applicationNum}"
-					th:if="${jobApplication.isBookmarked != 1}">♡</button>
-				<div id="applicationName">[[${jobApplication.applicationName}]]</div>
-			</div>
-			<form id="resumeForm" action="/sangin/test" method="post">
-				<label for="resumeNum">이력서를 선택하세요:</label> <select name="resumeNum"
-					id="resumeNum">
-					<option value="1">프론트엔드 이력서 1</option>
-					<option value="2">백엔드 이력서 2</option>
-					<option value="3">데이터 분석가 이력서 3</option>
-					<option value="4">데이터 엔지니어 이력서 4</option>
-					<option value="5">AI 엔지니어 이력서 5</option>
-					<option value="6">풀스택 개발자 이력서 6</option>
-					<option value="7">프로덕트 매니저 이력서 7</option>
-					<option value="8">프론트엔드 이력서 8</option>
-					<option value="9">백엔드 이력서 9</option>
-					<option value="10">데이터 분석가 이력서 10</option>
-					<option value="11">AI 연구원 이력서 11</option>
-					<option value="12">데이터 사이언티스트 이력서 12</option>
-					<option value="13">프론트엔드 엔지니어 이력서 13</option>
-					<option value="14">풀스택 엔지니어 이력서 14</option>
-					<option value="15">프로덕트 디자이너 이력서 15</option>
-					<option value="16">백엔드 엔지니어 이력서 16</option>
-					<option value="17">프론트엔드 디자이너 이력서 17</option>
-					<option value="18">데브옵스 엔지니어 이력서 18</option>
-					<option value="19">소프트웨어 엔지니어 이력서 19</option>
-					<option value="20">UI/UX 디자이너 이력서 20</option>
-				</select> <input type="submit" value="입사지원"
-					style="border: 1px black solid; padding: 15px 20px; margin: 10px">
+		</div>
+		<div class="search">
+			<form action="/s/searchResult2" method="post" id="form">
+				<select id="searchSelect" name="searchPart">
+					<option value="searchApplication">공고명</option>
+					<option value="searchCompany">기업명</option>
+				</select> <input type="text" name="mainSearchInput" placeholder="텍스트를 입력하세요">
+
+				<th:block th:if="${session.user != null || session.company != null}">
+					<button id="searchBtn">검색</button>
+				</th:block>
+				<th:block
+					th:if="${session.user == null and session.company == null}">
+					<button id="searchBtn" onclick="noSearch(event)">검색</button>
+				</th:block>
 			</form>
 		</div>
-		<div id="nav2">
-			<!-- 첫 번째 열 -->
-			<div class="infoColumn">
-				<div class="infoGroup">
-					<div>지역</div>
-					<div th:text="${jobApplication.workingArea}">서울</div>
-				</div>
-				<div class="infoGroup">
-					<div>학력</div>
-					<div th:text="${jobApplication.education}"></div>
-				</div>
-				<div class="infoGroup">
-					<div>경력</div>
-					<div th:text="${jobApplication.career}"></div>
-				</div>
-			</div>
+		<div id="header-right">
+			<th:block th:if="${session.user == null and session.company == null}">
+				<span><a href="/hyepin/login">로그인</a></span>
+				<span><a href="/hyepin/join">회원가입</a></span>
+				<span><a href="/">홈으로</a></span>
+			</th:block>
+			<th:block th:if="${session.user != null}">
+				<span><a href="/hyepin/goUserInformation">마이페이지</a></span>
+				<span><a href="/hyepin/logout">로그아웃</a></span>
+			</th:block>
+			<th:block th:if="${session.company != null}">
+				<span><a href="">마이페이지</a></span>
+				<span><a href="/hyepin/logout">로그아웃</a></span>
+			</th:block>
+		</div>
+	</header>
+	<nav>
+		<div class="nav-left">
+			<th:block th:if="${session.user == null and session.company == null}">
+				<div onclick="noLogin()">채용공고</div>
+				<div onclick="noLogin()">기업정보</div>
+				<div onclick="noLogin()">기업공고관리</div>
+				<div onclick="noLogin()">지원자관리</div>
+				<div onclick="noLogin()">커뮤니티</div>
+			</th:block>
 
-			<!-- 두 번째 열 -->
-			<div class="infoColumn">
-				<div class="infoGroup">
-					<div>급여</div>
-					<div th:text="${jobApplication.salary}">4000만원</div>
+			<!-- 유저 세션이 있을 때 -->
+			<th:block th:if="${session.user != null and session.company == null}">
+				<div>
+					<a href="/sangin/applicationsForm">채용공고</a>
 				</div>
-				<div class="infoGroup">
-					<div>근무일시</div>
-					<div th:text="${jobApplication.schedule}">9:00~18:00</div>
+				<div>
+					<a href="/c/companyInfo/1">기업정보</a>
 				</div>
-				<div class="infoGroup">
-					<div>고용형태</div>
-					<div th:text="${jobApplication.employmentType}">정규직</div>
+				<div>
+					<a href="/resume/resumeApplyList">지원현황</a>
 				</div>
-			</div>
+				<div>
+					<a href="/sangin/bookmarkedApplicationsForm">관심 공고</a>
+				</div>
+				<div>
+					<a href="/resume/MyResumeList">이력서관리</a>
+				</div>
+				<div>
+					<a href="/b/board/1">커뮤니티</a>
+				</div>
+			</th:block>
+
+			<!-- 기업 세션이 있을 때 -->
+			<th:block th:if="${session.company != null and session.user == null}">
+				<div>
+					<a href="/sangin/applicationsForm">채용공고</a>
+				</div>
+				<div>
+					<a href="/c/companyInfo/1">기업정보</a>
+				</div>
+				<div>
+					<a href="/sangin/companyApplicationManagementForm/1">기업공고관리</a>
+				</div>
+				<div>
+					<a href="/hyepin/applicantManage/1/1">지원자관리</a>
+				</div>
+				<div>
+					<a href="/b/board/1">커뮤니티</a>
+				</div>
+			</th:block>
+		</div>
+
+		<div class="nav-right">
+			<div>FAQ</div>
 		</div>
 	</nav>
+	<!-- 헤더 -->
+	<header1> <!-- 기업명 및 별표 -->
+	<div class="companySection">
+		<button class="colorStar"
+			th:attr="data-company-id=${jobApplication.companyId}"
+			th:if="${companyList.contains(jobApplication.companyId)}">⭐</button>
+		<button class="uncolorStar"
+			th:attr="data-company-id=${jobApplication.companyId}"
+			th:if="${!companyList.contains(jobApplication.companyId)}">☆</button>
+		<div id="companyName" th:text="${jobApplication.companyId}">기업명</div>
+	</div>
+	</header1>
+
+	<!-- 네비게이션 -->
+	<nav1> <!-- 공고명 및 하트 -->
+	<div id="nav1">
+		<div class="jobTitleSection">
+			<button class="colorHeart"
+				th:attr="data-application-num=${jobApplication.applicationNum}"
+				th:if="${jobApplication.isBookmarked == 1}">♥</button>
+			<button class="uncolorHeart"
+				th:attr="data-application-num=${jobApplication.applicationNum}"
+				th:if="${jobApplication.isBookmarked != 1}">♡</button>
+			<div id="applicationName">[[${jobApplication.applicationName}]]</div>
+		</div>
+		<form id="resumeForm" action="/sangin/test" method="post">
+			<label for="resumeNum" style="font-weight: bold; padding: 20px;">이력서
+				선택</label> <select name="resumeNum" id="resumeNum">
+				<option value="1">프론트엔드 이력서 1</option>
+				<option value="2">백엔드 이력서 2</option>
+				<option value="3">데이터 분석가 이력서 3</option>
+				<option value="4">데이터 엔지니어 이력서 4</option>
+				<option value="5">AI 엔지니어 이력서 5</option>
+				<option value="6">풀스택 개발자 이력서 6</option>
+				<option value="7">프로덕트 매니저 이력서 7</option>
+				<option value="8">프론트엔드 이력서 8</option>
+				<option value="9">백엔드 이력서 9</option>
+				<option value="10">데이터 분석가 이력서 10</option>
+				<option value="11">AI 연구원 이력서 11</option>
+				<option value="12">데이터 사이언티스트 이력서 12</option>
+				<option value="13">프론트엔드 엔지니어 이력서 13</option>
+				<option value="14">풀스택 엔지니어 이력서 14</option>
+				<option value="15">프로덕트 디자이너 이력서 15</option>
+				<option value="16">백엔드 엔지니어 이력서 16</option>
+				<option value="17">프론트엔드 디자이너 이력서 17</option>
+				<option value="18">데브옵스 엔지니어 이력서 18</option>
+				<option value="19">소프트웨어 엔지니어 이력서 19</option>
+				<option value="20">UI/UX 디자이너 이력서 20</option>
+			</select> <input type="submit" value="입사지원" id="insertBtn"
+				style="border: 1px #d9d9d9 solid; padding: 15px 20px; margin: 10px; cursor: pointer; border-radius: 5px; background-color: #FFC107; color: white; font-weight: bold; font-size: 18px;">
+		</form>
+	</div>
+	<div id="nav2">
+		<!-- 첫 번째 열 -->
+		<div class="infoColumn">
+			<div class="infoGroup">
+				<div>지역</div>
+				<div th:text="${jobApplication.workingArea}">서울</div>
+			</div>
+			<div class="infoGroup">
+				<div>학력</div>
+				<div th:text="${jobApplication.education}"></div>
+			</div>
+			<div class="infoGroup">
+				<div>경력</div>
+				<div th:text="${jobApplication.career}"></div>
+			</div>
+		</div>
+
+		<!-- 두 번째 열 -->
+		<div class="infoColumn">
+			<div class="infoGroup">
+				<div>급여</div>
+				<div th:text="${jobApplication.salary}">4000만원</div>
+			</div>
+			<div class="infoGroup">
+				<div>근무일시</div>
+				<div th:text="${jobApplication.schedule}">9:00~18:00</div>
+			</div>
+			<div class="infoGroup">
+				<div>고용형태</div>
+				<div th:text="${jobApplication.employmentType}">정규직</div>
+			</div>
+		</div>
+	</div>
+	</nav1>
 
 
 	<!-- 경고 및 이미지 섹션 -->
