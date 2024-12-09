@@ -528,7 +528,8 @@
 	            <div class="recommand">
 	            	 <div id="companyId" onclick="noLogin()">[[${item.companyName}]]</div>
 	                <div id="applicationName"  onclick="noLogin()">[[${item.applicationName}]]</div>
-	                <div id="applicationImg"  onclick="noLogin()"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="applicationImg"  onclick="noLogin()"><img th:src="@{'/uploads/' + ${item.companyName} + '.jpg'}"
+								alt="별거아냐"></div>
 	                <div id="deadlineDate"  onclick="noLogin()">D - [[${item.day}]]</div>
 	            </div>
 	         </th:block>
@@ -543,7 +544,8 @@
 	                <div id="applicationName"><a th:href="@{/sangin/applicationDetailForm/
 	               						 {applicationNum}(applicationNum=${item.applicationNum})}">
 	               						 [[${item.applicationName}]]</a></div>
-	                <div id="applicationImg"><img src="/uploads/삼성.webp" alt="별거아냐"></div>
+	                <div id="applicationImg"><img th:src="@{'/uploads/' + ${item.companyName} + '.jpg'}"
+								alt="별거아냐"></div>
 	                <div id="deadlineDate">D - [[${item.day}]]</div>
 	            </div>
 	         </th:block>
