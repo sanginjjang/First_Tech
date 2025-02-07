@@ -1,3 +1,160 @@
+-- [1] Users 테이블
+INSERT INTO Users (userId, userPassword, userEmail, userName, userNickname, userSsn, userPhone, userAddress, userPostalCode, userRegistDate) VALUES
+('user001', 'password123', 'user001@gmail.com', '김철수', '철수', '123456-1234567', '010-1234-5678', '서울특별시 강남구 테헤란로', 12345, NOW()),
+('user002', 'password456', 'user002@gmail.com', '이영희', '영희', '987654-9876543', '010-9876-5432', '부산광역시 해운대구 해운대로', 54321, NOW()),
+('user003', 'password789', 'user003@gmail.com', '박민수', '민수', '456789-4567890', '010-4567-8901', '대구광역시 수성구 신천대로', 67890, NOW());
+
+-- [2] Companys 테이블
+INSERT INTO Companys (companyId, companyPassword, companyName, companyEmail, businessRegistrationCertificate, companyAddress, companyPostalCode, companyTel, establishmentDate, webSite, ceo, employees, annualRevenue, companyRegistDate) VALUES
+('comp001', 'compPass123', '삼성전자', 'contact@samsung.com', '123-45-67890', '서울특별시 서초구 서초대로', 12345, '02-1234-5678', '1969-01-13', 'https://www.samsung.com', '이재용', 100000, 1000000000, NOW()),
+('comp002', 'compPass456', 'LG전자', 'contact@lg.com', '987-65-43210', '서울특별시 영등포구 여의대로', 54321, '02-9876-5432', '1958-01-15', 'https://www.lg.com', '구광모', 70000, 800000000, NOW()),
+('comp003', 'compPass789', '네이버', 'contact@naver.com', '456-78-90123', '경기도 성남시 분당구 정자동', 13579, '031-4567-8901', '1999-06-02', 'https://www.naver.com', '최수연', 5000, 500000000, NOW());
+
+-- [3] Certificates 테이블
+INSERT INTO Certificates (certificateName, certificateBy) VALUES
+('정보처리기사', '한국산업인력공단'),
+('AWS Certified Solutions Architect', 'Amazon'),
+('OCJP', 'Oracle');
+
+-- [4] JobRoles 테이블
+INSERT INTO JobRoles (roleName) VALUES
+('프론트엔드 개발자'),
+('백엔드 개발자'),
+('데이터 엔지니어'),
+('데이터 분석가'),
+('프로덕트 매니저');
+
+-- [5] TechStacks 테이블
+INSERT INTO TechStacks (stackName) VALUES
+('Java'),
+('Python'),
+('JavaScript'),
+('React'),
+('Spring');
+
+-- [6] Resumes 테이블
+INSERT INTO `Resumes` (userId, resumeTitle, resumePhone, resumeContent, portfolioName, personalPhotoName, education, school, address, roleId, militaryService, createdDate, updatedDate) VALUES
+('user001', '프론트엔드 이력서 1', '010-1234-5678', '신입', 'portfolio1_1.pdf', 'photo1.png', '대학교 졸업 (학사)', '서울대학교', '서울특별시 강남구', 1, 'Completed', NOW(), NOW()),
+('user001', '백엔드 이력서 2', '010-1234-5678', '경력 1년', 'portfolio1_2.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '고려대학교', '서울특별시 송파구', 2, 'Completed', NOW(), NOW()),
+('user001', '데이터 분석가 이력서 3', '010-1234-5678', '경력 2년', 'portfolio1_3.pdf', 'photo1.png', '대학원 졸업 (석사)', '연세대학교', '서울특별시 관악구', 4, 'Completed', NOW(), NOW()),
+('user001', '데이터 엔지니어 이력서 4', '010-1234-5678', '경력 3년', 'portfolio1_4.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '서울대학교', '서울특별시 은평구', 3, 'Completed', NOW(), NOW()),
+('user001', 'AI 엔지니어 이력서 5', '010-1234-5678', '경력 5년', 'portfolio1_5.pdf', 'photo1.png', '대학원 졸업 (석사)', 'KAIST', '서울특별시 중구', 3, 'Completed', NOW(), NOW()),
+('user001', '풀스택 개발자 이력서 6', '010-1234-5678', '경력 2년', 'portfolio1_6.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '성균관대학교', '서울특별시 종로구', 2, 'Completed', NOW(), NOW()),
+('user001', '프로덕트 매니저 이력서 7', '010-1234-5678', '경력 1년', 'portfolio1_7.pdf', 'photo1.png', '대학교 졸업 (학사)', '서강대학교', '서울특별시 노원구', 5, 'Completed', NOW(), NOW()),
+('user001', '프론트엔드 이력서 8', '010-1234-5678', '경력 4년', 'portfolio1_8.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '한양대학교', '서울특별시 강동구', 1, 'Completed', NOW(), NOW()),
+('user001', '백엔드 이력서 9', '010-1234-5678', '경력 3년', 'portfolio1_9.pdf', 'photo1.png', '대학교 졸업 (학사)', '부산대학교', '부산광역시 해운대구', 2, 'Completed', NOW(), NOW()),
+('user001', '데이터 분석가 이력서 10', '010-1234-5678', '경력 5년', 'portfolio1_10.pdf', 'photo2.jpg', '대학원 졸업 (석사)', '포항공과대학교', '경상북도 포항시', 4, 'Completed', NOW(), NOW()),
+('user001', 'AI 연구원 이력서 11', '010-1234-5678', '경력 6년', 'portfolio1_11.pdf', 'photo1.png', '대학원 졸업 (석사)', 'KAIST', '대전광역시 유성구', 3, 'Completed', NOW(), NOW()),
+('user001', '데이터 사이언티스트 이력서 12', '010-1234-5678', '경력 7년', 'portfolio1_12.pdf', 'photo2.jpg', '대학원 졸업 (박사)', '서울대학교', '서울특별시 중구', 4, 'Completed', NOW(), NOW()),
+('user001', '프론트엔드 엔지니어 이력서 13', '010-1234-5678', '경력 2년', 'portfolio1_13.pdf', 'photo1.png', '대학교 졸업 (학사)', '성균관대학교', '서울특별시 서대문구', 1, 'Completed', NOW(), NOW()),
+('user001', '풀스택 엔지니어 이력서 14', '010-1234-5678', '경력 3년', 'portfolio1_14.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '한양대학교', '서울특별시 관악구', 2, 'Completed', NOW(), NOW()),
+('user001', '프로덕트 디자이너 이력서 15', '010-1234-5678', '경력 5년', 'portfolio1_15.pdf', 'photo1.png', '대학교 졸업 (학사)', '서울대학교', '서울특별시 은평구', 5, 'Completed', NOW(), NOW()),
+('user001', '백엔드 엔지니어 이력서 16', '010-1234-5678', '경력 4년', 'portfolio1_16.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '고려대학교', '서울특별시 종로구', 2, 'Completed', NOW(), NOW()),
+('user001', '프론트엔드 디자이너 이력서 17', '010-1234-5678', '경력 1년', 'portfolio1_17.pdf', 'photo1.png', '대학교 졸업 (학사)', '이화여자대학교', '서울특별시 강서구', 1, 'Completed', NOW(), NOW()),
+('user001', '데브옵스 엔지니어 이력서 18', '010-1234-5678', '경력 3년', 'portfolio1_18.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '중앙대학교', '서울특별시 동작구', 3, 'Completed', NOW(), NOW()),
+('user001', '소프트웨어 엔지니어 이력서 19', '010-1234-5678', '경력 6년', 'portfolio1_19.pdf', 'photo1.png', '대학교 졸업 (학사)', '홍익대학교', '서울특별시 송파구', 2, 'Completed', NOW(), NOW()),
+('user001', 'UI/UX 디자이너 이력서 20', '010-1234-5678', '경력 4년', 'portfolio1_20.pdf', 'photo2.jpg', '대학교 졸업 (학사)', '서울과학기술대학교', '서울특별시 강남구', 5, 'Completed', NOW(), NOW());
+
+-- [7] Careers 테이블
+INSERT INTO Careers (resumeNum, career, careerName) VALUES
+(1, '6개월', '삼성전자');
+
+-- [8] Internships 테이블
+INSERT INTO Internships (resumeNum, internshipPeriod, internshipName, internshipDetails, startDate, endDate) VALUES
+(1, '3개월', 'LG전자', '프론트엔드 개발 참여', '2021-01-01', '2021-03-31');
+
+-- [9] UserCertificates 테이블
+INSERT INTO UserCertificates (resumeNum, certificateNum, certificateDate) VALUES
+(1, 1, '2020-12-01');
+
+-- [10] UserTechStacks 테이블
+INSERT INTO UserTechStacks (resumeNum, techStackNum) VALUES
+(1, 3);
+
+-- [11] Applications 테이블
+INSERT INTO Applications (applicationName, companyId, createdDate, deadlineDate, fileName, career, education, salary, workingArea, employmentType, roleId) VALUES
+('프론트엔드 개발자 모집', 'comp001', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 'frontend.pdf', '6개월', '학사', '4000만 이하', '서울', '정규직', 1),
+('백엔드 개발자 모집', 'comp002', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'backend.pdf', '1년', '석사', '6000만 이하', '부산', '정규직', 2);
+
+-- [12] CompanyTechStacks 테이블
+INSERT INTO CompanyTechStacks (applicationNum, techStackNum) VALUES
+(1, 3),
+(2, 2);
+
+-- [13] UserToCompanyBookmarks 테이블
+INSERT INTO UserToCompanyBookmarks (userId, companyId, bookmarkDate) VALUES
+('user001', 'comp001', NOW());
+
+-- [14] UserToApplicationBookmarks 테이블
+INSERT INTO UserToApplicationBookmarks (userId, applicationNum, bookmarkDate) VALUES
+('user001', 1, NOW());
+
+-- [15] ApplicationToResumeBookmarks 테이블
+INSERT INTO ApplicationToResumeBookmarks (applicationNum, resumeNum, bookmarkDate) VALUES
+(1, 1, NOW());
+
+-- [16] CompanyToResumeBookmarks 테이블
+INSERT INTO CompanyToResumeBookmarks (companyId, resumeNum, bookmarkDate) VALUES
+('comp001', 1, NOW());
+
+-- [17] ResumeApplyStatus 테이블
+INSERT INTO ResumeApplyStatus (applicationNum, resumeNum, applyDate, applyStatus) VALUES
+(1, 1, NOW(), 'Progress');
+
+-- [18] Ratings 테이블
+INSERT INTO Ratings (companyId, userId, rating, review, createdDate) VALUES
+('comp001', 'user001', 5, '좋은 회사입니다.', NOW());
+
+-- [19] EmploymentHistory 테이블
+INSERT INTO EmploymentHistory (userId, companyId, startDate, endDate) VALUES
+('user001', 'comp001', '2020-01-01', '2022-12-31');
+
+-- [20] Boards 테이블
+INSERT INTO Boards (boardTitle, boardContent, boardWriter, fileName, views, createdDate, modifyDate) VALUES
+('공지사항', '공지사항 내용입니다.', 'user001', 'notice.pdf', 100, NOW(), NOW());
+
+-- [21] Comments 테이블
+INSERT INTO Comments (boardNum, commentContent, commentWriter, createdDate, modifyDate) VALUES
+(1, '공지 잘 읽었습니다.', 'user002', NOW(), NOW());
+
+
+INSERT INTO Companys (companyId, companyPassword, companyName, companyEmail, businessRegistrationCertificate, companyAddress, companyPostalCode, companyTel, establishmentDate, webSite, ceo, employees, annualRevenue, companyRegistDate) VALUES
+('comp004', 'compPass789', '카카오', 'contact@kakao.com', '654-78-91234', '제주특별자치도 제주시 첨단로', 78912, '064-1234-5678', '2010-01-20', 'https://www.kakao.com', '홍은택', 15000, 400000000, NOW()),
+('comp005', 'compPass234', '현대자동차', 'contact@hyundai.com', '234-56-78901', '울산광역시 남구 두왕로', 89012, '052-1234-5678', '1967-01-20', 'https://www.hyundai.com', '정의선', 50000, 1000000000, NOW());
+
+INSERT INTO Applications (applicationName, companyId, createdDate, deadlineDate, fileName, career, education, salary, workingArea, employmentType, roleId) VALUES
+-- 삼성전자 공고
+('프론트엔드 개발자 모집', 'comp001', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 'frontend1.pdf', '6개월', '학사', '4000만 이하', '서울', '정규직', 1),
+('백엔드 개발자 모집', 'comp001', NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY), 'backend1.pdf', '2년', '석사', '6000만 이하', '서울', '정규직', 2),
+('풀스택 개발자 모집', 'comp001', NOW(), DATE_ADD(NOW(), INTERVAL 25 DAY), 'fullstack1.pdf', '3년', '학사', '8000만 이하', '경기', '정규직', 2),
+
+-- LG전자 공고
+('데이터 엔지니어 모집', 'comp002', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'dataeng1.pdf', '1년', '학사', '5000만 이하', '부산', '정규직', 3),
+('데이터 분석가 모집', 'comp002', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 'dataanalyst1.pdf', '4년', '학사', '6000만 이하', '부산', '정규직', 4),
+('AI 엔지니어 모집', 'comp002', NOW(), DATE_ADD(NOW(), INTERVAL 35 DAY), 'ai1.pdf', '5년 이상', '석사', '7000만 이하', '서울', '정규직', 3),
+
+-- 네이버 공고
+('프론트엔드 엔지니어 모집', 'comp003', NOW(), DATE_ADD(NOW(), INTERVAL 40 DAY), 'frontend2.pdf', '1년', '학사', '4800만 이하', '경기', '정규직', 1),
+('백엔드 엔지니어 모집', 'comp003', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'backend2.pdf', '2년', '석사', '5500만 이하', '서울', '정규직', 2),
+('데이터 과학자 모집', 'comp003', NOW(), DATE_ADD(NOW(), INTERVAL 50 DAY), 'datascientist1.pdf', '5년 이상', '박사', '9000만 이하', '부산', '정규직', 4),
+
+-- 카카오 공고
+('클라우드 엔지니어 모집', 'comp004', NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY), 'cloud1.pdf', '2년', '석사', '8000만 이하', '서울', '정규직', 3),
+('UI/UX 디자이너 모집', 'comp004', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'uiux1.pdf', '1년', '준학사', '3500만 이하', '제주', '계약직', 5),
+('모바일 앱 개발자 모집', 'comp004', NOW(), DATE_ADD(NOW(), INTERVAL 25 DAY), 'mobile1.pdf', '3년', '학사', '5000만 이하', '대구', '정규직', 1),
+
+-- 현대자동차 공고
+('자동차 소프트웨어 개발자 모집', 'comp005', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 'autosw1.pdf', '4년', '학사', '6500만 이하', '울산', '정규직', 2),
+('임베디드 소프트웨어 엔지니어 모집', 'comp005', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'embedded1.pdf', '2년', '석사', '7000만 이하', '서울', '정규직', 3),
+('자율주행 소프트웨어 엔지니어 모집', 'comp005', NOW(), DATE_ADD(NOW(), INTERVAL 40 DAY), 'autonomous1.pdf', '5년 이상', '박사', '10000만 이하', '부산', '정규직', 4),
+
+-- 추가 공고
+('DevOps 엔지니어 모집', 'comp002', NOW(), DATE_ADD(NOW(), INTERVAL 20 DAY), 'devops1.pdf', '3년', '학사', '7500만 이하', '서울', '정규직', 3),
+('게임 개발자 모집', 'comp003', NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY), 'gamedev1.pdf', '5년 이상', '석사', '8500만 이하', '경기', '정규직', 5),
+('로봇 소프트웨어 엔지니어 모집', 'comp001', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 'robot1.pdf', '1년', '학사', '5000만 이하', '대구', '정규직', 3),
+('QA 엔지니어 모집', 'comp005', NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY), 'qa1.pdf', '6개월', '학사', '4000만 이하', '경남', '정규직', 4),
+('프론트엔드 엔지니어 (React) 모집', 'comp004', NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY), 'reactfrontend1.pdf', '2년', '학사', '5500만 이하', '인천', '정규직', 1);
+
 INSERT INTO Companys (companyId, companyPassword, companyName, companyEmail, businessRegistrationCertificate, companyAddress, companyPostalCode, companyTel, establishmentDate, webSite, ceo, employees, annualRevenue, companyRegistDate) 
 VALUES
 ('comp006', 'compPass001', 'SK텔레콤', 'contact@skt.com', '345-67-89012', '서울특별시 중구 을지로', 12346, '02-1234-5444', '1984-03-29', 'https://www.sktelecom.com', '유영상', 5000, 1700000000, NOW()),
@@ -52,16 +209,4 @@ INSERT INTO Boards (boardTitle, boardContent, boardWriter, fileName, views, crea
 
 
 
--- [6] Resumes 테이블
--- [6] Resumes 테이블
-INSERT INTO `Resumes` (userId, resumeTitle, resumePhone, resumeContent, portfolioName, personalPhotoName, education, school, address, roleId, militaryService, createdDate, updatedDate) VALUES
-('user001', '프론트엔드 이력서 1', '010-1234-5678', '신입', 'portfolio1_1.pdf', 'photo1_1.jpg', '대학교 졸업 (학사)', '서울대학교', '서울특별시 강남구', 1, 'Completed', NOW(), NOW()),
-('user001', '백엔드 이력서 2', '010-1234-5678', '경력 1년', 'portfolio1_2.pdf', 'photo1_2.jpg', '대학교 졸업 (학사)', '고려대학교', '서울특별시 송파구', 2, 'Completed', NOW(), NOW()),
-('user001', '데이터 분석가 이력서 3', '010-1234-5678', '경력 2년', 'portfolio1_3.pdf', 'photo1_3.jpg', '대학원 졸업 (석사)', '연세대학교', '서울특별시 관악구', 4, 'Completed', NOW(), NOW()),
-('user001', '데이터 엔지니어 이력서 4', '010-1234-5678', '경력 3년', 'portfolio1_4.pdf', 'photo1_4.jpg', '대학교 졸업 (학사)', '서울대학교', '서울특별시 은평구', 3, 'Completed', NOW(), NOW()),
-('user001', 'AI 엔지니어 이력서 5', '010-1234-5678', '경력 5년', 'portfolio1_5.pdf', 'photo1_5.jpg', '대학원 졸업 (석사)', 'KAIST', '서울특별시 중구', 3, 'Completed', NOW(), NOW()),
-('user001', '풀스택 개발자 이력서 6', '010-1234-5678', '경력 2년', 'portfolio1_6.pdf', 'photo1_6.jpg', '대학교 졸업 (학사)', '성균관대학교', '서울특별시 종로구', 2, 'Completed', NOW(), NOW()),
-('user001', '프로덕트 매니저 이력서 7', '010-1234-5678', '경력 1년', 'portfolio1_7.pdf', 'photo1_7.jpg', '대학교 졸업 (학사)', '서강대학교', '서울특별시 노원구', 5, 'Completed', NOW(), NOW()),
-('user001', '프론트엔드 이력서 8', '010-1234-5678', '경력 4년', 'portfolio1_8.pdf', 'photo1_8.jpg', '대학교 졸업 (학사)', '한양대학교', '서울특별시 강동구', 1, 'Completed', NOW(), NOW()),
-('user001', '백엔드 이력서 9', '010-1234-5678', '경력 3년', 'portfolio1_9.pdf', 'photo1_9.jpg', '대학교 졸업 (학사)', '부산대학교', '부산광역시 해운대구', 2, 'Completed', NOW(), NOW()),
-('user001', '데이터 분석가 이력서 10', '010-1234-5678', '경력 5년', 'portfolio1_10.pdf', 'photo1_10.jpg', '대학원 졸업 (석사)', '포항공과대학교', '경상북도 포항시', 4, 'Completed', NOW(), NOW());
+
